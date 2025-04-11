@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import galleryData from '../../data/galleryData'; 
+import galleryData from '../src/data/galleryData'; 
 import Image from 'next/image';
 import { useState } from 'react';
 
