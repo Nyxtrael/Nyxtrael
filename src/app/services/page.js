@@ -26,21 +26,21 @@ export default function ServicesPage() {
           <div className="bg-[#1a0e2a] p-6 rounded-xl border border-white/10 shadow-md hover:shadow-lg transition">
             <h2 className="text-xl font-semibold mb-2">🎨 Illustrations</h2>
             <p className="text-sm text-neutral-300 mb-1">From cozy slices of life to divine goddess visions.</p>
-            <p className="text-sm text-neutral-400 italic mb-4">Starting at 15 PLN / image</p>
+            <p className="text-sm text-neutral-400 italic mb-4">Starting at 2,50 € / image</p>
             <Link href="/services/illustrations" className="text-fuchsia-400 hover:underline">View Details →</Link>
           </div>
 
           <div className="bg-[#100717] p-6 rounded-xl border border-white/10 shadow-md hover:shadow-lg transition">
             <h2 className="text-xl font-semibold mb-2">🌐 Web Design</h2>
             <p className="text-sm text-neutral-300 mb-1">Functional beauty. Aesthetic-first portfolio sites.</p>
-            <p className="text-sm text-neutral-400 italic mb-4">Starting at 100 PLN</p>
+            <p className="text-sm text-neutral-400 italic mb-4">Starting at 90 €</p>
             <Link href="/services/web-design" className="text-fuchsia-400 hover:underline">View Details →</Link>
           </div>
 
           <div className="bg-[#0d0d0d] p-6 rounded-xl border border-white/10 shadow-md hover:shadow-lg transition">
             <h2 className="text-xl font-semibold mb-2">🎞️ Video Editing</h2>
             <p className="text-sm text-neutral-300 mb-1">Rhythmic, moody, cinematic cuts that breathe.</p>
-            <p className="text-sm text-neutral-400 italic mb-4">Starting at 50 PLN</p>
+            <p className="text-sm text-neutral-400 italic mb-4">Starting at 30 €</p>
             <Link href="/services/video-editing" className="text-fuchsia-400 hover:underline">View Details →</Link>
           </div>
         </div>

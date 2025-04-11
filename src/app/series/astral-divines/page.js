@@ -1,149 +1,68 @@
-'use client';
+// src/app/series/astral-divines/page.js
+'use client'
 
-import Link from 'next/link';
-import galleryData from '../src/data/galleryData'; 
-import Image from 'next/image';
-import { useState } from 'react';
+import Image from "next/image";
+import Link from "next/link";
 
-export default function SeriesPage() {
-  const [activeTag, setActiveTag] = useState('All');
-  const [email, setEmail] = useState('');
-  const [notified, setNotified] = useState(false);
-  const [error, setError] = useState('');
+const gallery = [1, 2, 3, 4];
 
-  const handleNotifySubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-
-    if (!email.trim() || !email.includes('@')) {
-      setError('Please enter a valid email address.');
-      return;
-    }
-
-    try {
-      const res = await fetch('/api/notify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, series: 'dreamless-machines' }),
-      });
-
-      if (!res.ok) {
-        const { message } = await res.json();
-        setError(message || 'Something went wrong');
-        return;
-      }
-
-      setNotified(true);
-      setEmail('');
-      setTimeout(() => setNotified(false), 5000);
-    } catch (error) {
-      console.error('Notify error:', error);
-      setError('Server error. Please try again later.');
-    }
-  };
-
-  const allTags = [
-    'All',
-    ...Array.from(
-      new Set(
-        galleryData.flatMap(series => series.tags.map(tag => tag.label))
-      )
-    ),
-  ];
-
-  const filteredSeries = galleryData.filter(series =>
-    activeTag === 'All' || series.tags.some(tag => tag.label === activeTag)
-  );
-
+export default function AstralDivines() {
   return (
-    <main className="min-h-screen px-6 py-24 md:px-16 text-white bg-gradient-to-b from-[#1a0e2a] to-[#0c0f1e]">
-      <section className="max-w-6xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">🖼 Gallery of Series</h1>
-        <p className="text-center text-neutral-400 max-w-2xl mx-auto mb-8">
-          A curated collection of AI-generated series — each a world of its own.
+    <div className="min-h-screen bg-black text-white px-4 md:px-8 py-12">
+      <div className="max-w-4xl mx-auto text-center">
+        <h1 className="text-4xl font-bold mb-2">Astral Divines</h1>
+        <p className="italic text-lg text-purple-300 mb-4">
+          &quot;Golden silence, carved in cosmic light.&quot;
         </p>
-
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {allTags.map(tag => (
-            <button
-              key={tag}
-              onClick={() => setActiveTag(tag)}
-              className={`px-3 py-1 rounded-full text-sm transition-all border border-purple-500 hover:bg-purple-700/30 ${
-                activeTag === tag ? 'bg-purple-600 text-white' : 'text-purple-300'
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
+        <p className="text-neutral-400 mb-6">
+          Golden-haired deities woven from stardust, guardians of cosmic balance draped in light. Created with SDXL + ComfyUI.
+        </p>
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          <span className="bg-purple-800/40 text-purple-300 text-xs px-3 py-1 rounded-full">#divineRadiance</span>
+          <span className="bg-purple-800/40 text-purple-300 text-xs px-3 py-1 rounded-full">#spacegoddess</span>
+          <span className="bg-purple-800/40 text-purple-300 text-xs px-3 py-1 rounded-full">#mythicalAI</span>
         </div>
+      </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredSeries.map(series => (
-            <Link
-              key={series.slug}
-              href={`/series/${series.slug}`}
-              className="bg-[#15111f] rounded-xl overflow-hidden shadow-lg hover:shadow-purple-700/20 transition-all transform hover:-translate-y-1 block"
-            >
-              <Image
-                src={series.image}
-                alt={series.title}
-                width={800}
-                height={600}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h2 className="text-xl font-semibold mb-1">{series.title}</h2>
-                <p className="text-sm text-neutral-400 mb-3">{series.description}</p>
-                <div className="flex flex-wrap gap-1 text-xs text-purple-400 italic">
-                  {(series.tags || []).map(tag => (
-                    <span
-                      key={tag.label}
-                      title={tag.description}
-                      className="hover:underline hover:text-purple-300 transition"
-                    >
-                      #{tag.label.replace(/[#]/g, '')}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <section className="mt-20 text-center">
-          <h3 className="text-xl font-semibold mb-2">🔮 What’s Next?</h3>
-          <p className="text-neutral-400 italic">
-            Upcoming: <strong>"Dreamless Machines"</strong> — chrome temples, synthetic memory,
-            and silence between pulses.
-          </p>
-
-          <form
-            onSubmit={handleNotifySubmit}
-            className="mt-6 flex flex-col md:flex-row gap-4 items-center justify-center"
-          >
-            <input
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-              placeholder="Enter your email"
-              className="px-4 py-2 rounded-full bg-[#2d223e] text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        {gallery.map((n) => (
+          <div key={n} className="rounded-lg overflow-hidden hover:scale-105 transition duration-300">
+            <Image
+              src={`/images/astral-divines/${n}.jpg`}
+              alt={`Astral Divines ${n}`}
+              width={1200}
+              height={800}
+              className="w-full h-auto rounded"
             />
-            <button
-              type="submit"
-              disabled={notified}
-              className={`px-4 py-2 rounded-full transition-all shadow-md ${
-                notified
-                  ? 'bg-green-600 text-white cursor-default'
-                  : 'bg-purple-600 hover:bg-purple-500 text-white hover:shadow-purple-600/50'
-              }`}
-            >
-              {notified ? '✅ You’ll be notified!' : '🔔 Notify Me'}
+          </div>
+        ))}
+      </div>
+
+      <div className="max-w-3xl mx-auto mt-12">
+        <details className="mt-6 text-sm text-purple-300">
+          <summary className="cursor-pointer">🔮 Reveal Invocation</summary>
+          <pre className="bg-neutral-900 text-green-400 p-4 mt-2 rounded-md overflow-auto text-xs">
+cosmic goddess floating in space, golden flowing hair like solar flares, white silk robe adorned with stars, ethereal elegance, galaxy background, radiant expression, SDXL + ComfyUI, anime celestial style
+          </pre>
+        </details>
+
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold text-pink-400 mb-2">📜 Devlog</h2>
+          <ul className="list-disc list-inside text-sm space-y-1 text-neutral-300">
+            <li>🪐 March 17: Starfire inspiration – generated galactic backdrops using SDXL with LoRA blending.</li>
+            <li>🌌 March 18: Iterated goddess poses for symbolic symmetry and divine posture.</li>
+            <li>🌟 March 19: Finalized palette with radiant gold, celestial blues, and silken whites.</li>
+          </ul>
+        </div>
+
+        <div className="mt-10 text-center">
+          <Link href="/order">
+            <button className="bg-purple-700 hover:bg-purple-600 text-white px-6 py-2 rounded-full transition">
+              ✨ Request a Vision Like This
             </button>
-          </form>
-          {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
-        </section>
-      </section>
-    </main>
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

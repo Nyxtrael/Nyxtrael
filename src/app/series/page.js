@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import galleryData from '../../data/galleryData'; 
+import galleryData from '@/data/galleryData'; 
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -46,13 +46,13 @@ export default function SeriesPage() {
     'All',
     ...Array.from(
       new Set(
-        galleryData.flatMap(series => series.tags.map(tag => tag.label))
+        galleryData.flatMap(series => series.tags.map(tag => tag.label.replace(/^#/, '')))
       )
     ),
   ];
 
   const filteredSeries = galleryData.filter(series =>
-    activeTag === 'All' || series.tags.some(tag => tag.label === activeTag)
+    activeTag === 'All' || series.tags.some(tag => tag.label.replace(/^#/, '') === activeTag)
   );
 
   return (
@@ -84,13 +84,15 @@ export default function SeriesPage() {
               href={`/series/${series.slug}`}
               className="bg-[#15111f] rounded-xl overflow-hidden shadow-lg hover:shadow-purple-700/20 transition-all transform hover:-translate-y-1 block"
             >
-              <Image
-                src={series.image}
-                alt={series.title}
-                width={800}
-                height={600}
-                className="w-full h-48 object-cover"
-              />
+              <div className="relative w-full h-48">
+                <Image
+                  src={series.image}
+                  alt={series.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-t-xl"
+                />
+              </div>
               <div className="p-4">
                 <h2 className="text-xl font-semibold mb-1">{series.title}</h2>
                 <p className="text-sm text-neutral-400 mb-3">{series.description}</p>
