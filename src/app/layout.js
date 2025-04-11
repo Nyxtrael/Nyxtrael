@@ -13,13 +13,13 @@ export default function RootLayout({ children }) {
       <body className="bg-black text-white flex flex-col min-h-screen">
         <Navbar />
         <div className="flex-grow">{children}</div>
-        <footer className="pt-10 pb-6 border-t border-purple-900 text-sm text-neutral-500 text-center">
+        <footer className="pt-10 pb-6 px-4 border-t border-purple-900 text-sm text-neutral-500 text-center">
           © 2025 Nyxtrael |{' '}
           <Link href="/faq" className="hover:text-white underline">FAQ</Link>{' '}
           |{' '}
           <Link href="/terms" className="hover:text-white underline">Terms of Service</Link>{' '}
           |{' '}
-          <Link href="/terms" className="hover:text-white underline">Refund Policy</Link>{' '}
+          <Link href="/refund" className="hover:text-white underline">Refund Policy</Link>{' '}
           |{' '}
           <Link href="/contact" className="hover:text-white underline">Contact</Link>
         </footer>

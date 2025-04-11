@@ -16,12 +16,21 @@ export default function TermsPage() {
           <h2 className="text-xl font-semibold mb-2">🎨 2. License & Usage</h2>
           <p className="text-neutral-300">
             Unless explicitly agreed otherwise, all commissioned artworks are <strong>for personal use only</strong>.
-            Commercial use, resale, or redistribution is <strong>prohibited</strong> without written permission.
+            Commercial use, resale, or redistribution is <strong>prohibited</strong> without written permission or purchase of a commercial license.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-2">🌀 3. Liability & Magic Disclaimer</h2>
+          <h2 className="text-xl font-semibold mb-2">💼 3. Commercial Use Option</h2>
+          <p className="text-neutral-300">
+            For commercial rights, please request a commercial license during the order process.
+            This includes usage in branding, products, promotional materials, and monetized content.
+            Fees will vary depending on scope and intended use.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold mb-2">🌀 4. Liability & Magic Disclaimer</h2>
           <p className="text-neutral-300">
             Nyxtrael is not responsible for delays caused by incorrect contact information, unclear project
             descriptions, or external factors beyond control (e.g. internet outage, planetary alignment, etc.).
@@ -29,14 +38,29 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-2">🔁 4. Policy Updates</h2>
+          <h2 className="text-xl font-semibold mb-2">🌍 5. Tax Responsibilities</h2>
+          <p className="text-neutral-300">
+            You are responsible for any local taxes, customs duties, or digital service fees applicable in your country.
+            Prices listed do not include VAT unless explicitly stated.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold mb-2">🧠 6. Age Requirements</h2>
+          <p className="text-neutral-300">
+            You must be at least <strong>16 years old</strong> to place an order. By proceeding, you confirm that you are of legal age to enter into this agreement.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold mb-2">🔁 7. Policy Updates</h2>
           <p className="text-neutral-300">
             We reserve the right to update these policies at any time. Updates will be reflected on this page and apply to all future orders.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-2">📬 5. Contact & Issue Resolution</h2>
+          <h2 className="text-xl font-semibold mb-2">📬 8. Contact & Issue Resolution</h2>
           <p className="text-neutral-300">
             If you experience any issues with your order, please contact us via <a
               href="https://mail.google.com/mail/?view=cm&fs=1&to=nyxtrael@gmail.com&su=Regarding%20my%20order&body=Hi%20Nyxtrael," 
@@ -48,7 +72,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-2">💸 6. Refund & Cancellation Policy</h2>
+          <h2 className="text-xl font-semibold mb-2">💸 9. Refund & Cancellation Policy</h2>
           <p className="text-neutral-300">
             Refunds are not issued once work has started, unless due to major technical failure on our side.
             You may cancel your order before receiving a confirmation, and receive a full refund.
@@ -56,14 +80,14 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-2">🧾 7. Payment Processing</h2>
+          <h2 className="text-xl font-semibold mb-2">🧾 10. Payment Processing</h2>
           <p className="text-neutral-300">
             All payments are securely handled by Stripe. We do not store or process any payment data directly.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-2">🔐 8. Privacy Note</h2>
+          <h2 className="text-xl font-semibold mb-2">🔐 11. Privacy Note</h2>
           <p className="text-neutral-300">
             Contact details are only used to complete your order and are not shared with third parties.
           </p>

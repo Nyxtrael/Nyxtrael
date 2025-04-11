@@ -82,7 +82,6 @@ export default function VideoEditingPage() {
         </div>
       </section>
 
-      {/* Add-ons Section */}
       <section className="max-w-4xl mx-auto mt-20 text-white">
         <h2 className="text-2xl font-semibold mb-4">🎁 Optional Add-ons</h2>
         <table className="w-full text-sm text-left text-neutral-300 border border-purple-800">
@@ -102,7 +101,6 @@ export default function VideoEditingPage() {
         </table>
       </section>
 
-      {/* How it Works + FAQ */}
       <section className="mt-20 max-w-5xl mx-auto relative z-10 flex flex-col md:flex-row justify-between gap-12 text-white">
         <div className="w-full md:w-1/2">
           <h2 className="text-2xl font-semibold mb-4">🛠️ How It Works</h2>

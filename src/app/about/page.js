@@ -1,10 +1,22 @@
 'use client'
 
+import Head from 'next/head'
+import Link from 'next/link'
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a0e2a] to-[#0c0f1e] text-white px-6 py-24 md:px-16 relative overflow-hidden">
+      <Head>
+        <title>About – Nyxtrael</title>
+        <meta name="description" content="A digital alchemist crafting mythic visuals through code and emotion." />
+      </Head>
+
       {/* Subtle animated background effect */}
-      <div className="absolute inset-0 pointer-events-none bg-[url('/textures/stardust.png')] opacity-10 animate-pulse" />
+      <div
+        className="absolute inset-0 pointer-events-none bg-[url('/textures/stardust.png')] opacity-10 animate-pulse"
+        aria-hidden="true"
+        role="presentation"
+      />
 
       <section className="max-w-4xl mx-auto text-center relative z-10">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">🪄 The Storyteller Behind the Stillness</h1>
@@ -44,9 +56,11 @@ export default function AboutPage() {
       </section>
 
       <section className="text-center mt-20 relative z-10">
-        <a href="/contact" className="inline-block px-6 py-3 bg-fuchsia-600 hover:bg-fuchsia-500 rounded-full text-white text-md transition shadow-md hover:shadow-lg">
-          📬 Contact Me
-        </a>
+        <Link href="/contact">
+          <span className="inline-block px-6 py-3 bg-fuchsia-600 hover:bg-fuchsia-500 rounded-full text-white text-md transition shadow-md hover:shadow-lg">
+            📬 Contact Me
+          </span>
+        </Link>
         <p className="text-sm text-neutral-400 mt-2 italic">Let’s Talk</p>
       </section>
     </main>

@@ -3,7 +3,7 @@ import Link from "next/link"
 const seriesData = {
   "sunroom-diaries": {
     title: "Sunroom Diaries",
-    quote: `"In the stillness of sunlight, thoughts drift like dust."`,
+    quote: "In the stillness of sunlight, thoughts drift like dust.",
     description:
       "A warm, cozy series inspired by early morning light and reflective solitude. Created using SDXL and ComfyUI.",
     cover: "/images/sunroom-diaries/cover.jpg",
@@ -28,7 +28,7 @@ const seriesData = {
   },
   "red-requiem": {
     title: "Red Requiem",
-    quote: `"Cyber monks chant in silence. Neon destiny begins."`,
+    quote: "Cyber monks chant in silence. Neon destiny begins.",
     description:
       "Dark, gothic cyberpunk vibes fused with monastic mystery. Created with ComfyUI and SDXL.",
     cover: "/images/red-requiem/cover.jpg",

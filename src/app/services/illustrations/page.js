@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function IllustrationsPage() {
   return (
@@ -13,7 +14,6 @@ export default function IllustrationsPage() {
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 relative z-10">
-        {/* Mini Package */}
         <div className="bg-[#20112d] backdrop-blur-lg p-6 rounded-xl shadow-md hover:shadow-lg hover:ring-1 hover:ring-fuchsia-500/40 transition-all transform hover:-translate-y-1">
           <h3 className="text-xl font-bold mb-2 text-white">🌱 Mini</h3>
           <ul className="text-sm text-neutral-300 space-y-1">
@@ -28,13 +28,12 @@ export default function IllustrationsPage() {
           </Link>
         </div>
 
-        {/* Scene Package */}
         <div className="bg-[#261634] backdrop-blur-lg p-6 rounded-xl shadow-md hover:shadow-lg hover:ring-1 hover:ring-fuchsia-500/40 transition-all transform hover:-translate-y-1 relative">
           <div className="absolute top-2 right-2 bg-fuchsia-700 text-xs text-white px-2 py-1 rounded-full">⭐ Recommended</div>
           <h3 className="text-xl font-bold mb-2 text-white">🌟 Scene</h3>
           <ul className="text-sm text-neutral-300 space-y-1">
             <li>🖼️ 4 Artworks</li>
-            <li>✨ Upscaled + Prompt <span title="Receive optimized resolution and a custom-written prompt.">ⓘ</span></li>
+            <li>✨ Upscaled + Prompt <span title={'Receive optimized resolution and a custom-written prompt.'}>ⓘ</span></li>
             <li>♻️ 1 Revision</li>
             <li>🎨 Style Selection</li>
           </ul>
@@ -44,12 +43,11 @@ export default function IllustrationsPage() {
           </Link>
         </div>
 
-        {/* Divine Bundle */}
         <div className="bg-[#2d1b3f] backdrop-blur-lg p-6 rounded-xl shadow-md hover:shadow-lg hover:ring-1 hover:ring-fuchsia-500/40 transition-all transform hover:-translate-y-1">
           <h3 className="text-xl font-bold mb-2 text-white">🌌 Divine Bundle</h3>
           <ul className="text-sm text-neutral-300 space-y-1">
             <li>🖼️ 8 Artworks</li>
-            <li>🧠 Prompt + Style consult <span title="Tailored artistic direction, prompt writing and stylistic cohesion.">ⓘ</span></li>
+            <li>🧠 Prompt + Style consult <span title={'Tailored artistic direction, prompt writing and stylistic cohesion.'}>ⓘ</span></li>
             <li>♻️ 2 Revisions</li>
             <li>🧬 Full Concept Styling</li>
           </ul>
@@ -60,17 +58,15 @@ export default function IllustrationsPage() {
         </div>
       </section>
 
-      {/* Example Previews */}
       <section className="mt-20 max-w-5xl mx-auto text-center relative z-10">
         <h2 className="text-2xl font-semibold mb-6 text-white">🖼️ Example Works</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <img src="/images/preview-cozy.jpg" alt="Cozy Style Example" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
-          <img src="/images/preview-divine.jpg" alt="Divine Style Example" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
-          <img src="/images/preview-gothic.jpg" alt="Gothic Style Example" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
+          <Image src="/images/preview-cozy.jpg" alt="Cozy Style Example" width={400} height={300} className="rounded-lg shadow-md hover:scale-105 transition-transform" />
+          <Image src="/images/preview-divine.jpg" alt="Divine Style Example" width={400} height={300} className="rounded-lg shadow-md hover:scale-105 transition-transform" />
+          <Image src="/images/preview-gothic.jpg" alt="Gothic Style Example" width={400} height={300} className="rounded-lg shadow-md hover:scale-105 transition-transform" />
         </div>
       </section>
 
-      {/* How it Works + FAQ side-by-side */}
       <section className="mt-20 max-w-6xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 text-white">
         <div>
           <h2 className="text-2xl font-semibold mb-4">🛠️ How It Works</h2>

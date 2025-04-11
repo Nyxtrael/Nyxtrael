@@ -7,7 +7,7 @@ export default function ContactPage() {
 
       <section className="max-w-4xl mx-auto text-center relative z-10 fade-in">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">📩 Contact</h1>
-        <p className="text-lg italic text-purple-300 mb-2">Interested in a collaboration or commission? Let's connect.</p>
+        <p className="text-lg italic text-purple-300 mb-2">Interested in a collaboration or commission? Let&apos;s connect.</p>
         <p className="text-sm text-neutral-400 mb-12">Use the form below. I’ll respond within 24 hours.</p>
         <div className="w-12 h-[2px] bg-gradient-to-r from-fuchsia-500 via-purple-400 to-pink-500 mx-auto rounded-full mb-8" />
       </section>

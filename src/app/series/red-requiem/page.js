@@ -1,78 +1,149 @@
-'use client'
-import Image from 'next/image'
-import Link from 'next/link'
+'use client';
 
-export default function RedRequiemPage() {
+import Link from 'next/link';
+import galleryData from '../../data/galleryData'; 
+import Image from 'next/image';
+import { useState } from 'react';
+
+export default function SeriesPage() {
+  const [activeTag, setActiveTag] = useState('All');
+  const [email, setEmail] = useState('');
+  const [notified, setNotified] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleNotifySubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (!email.trim() || !email.includes('@')) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, series: 'dreamless-machines' }),
+      });
+
+      if (!res.ok) {
+        const { message } = await res.json();
+        setError(message || 'Something went wrong');
+        return;
+      }
+
+      setNotified(true);
+      setEmail('');
+      setTimeout(() => setNotified(false), 5000);
+    } catch (error) {
+      console.error('Notify error:', error);
+      setError('Server error. Please try again later.');
+    }
+  };
+
+  const allTags = [
+    'All',
+    ...Array.from(
+      new Set(
+        galleryData.flatMap(series => series.tags.map(tag => tag.label))
+      )
+    ),
+  ];
+
+  const filteredSeries = galleryData.filter(series =>
+    activeTag === 'All' || series.tags.some(tag => tag.label === activeTag)
+  );
+
   return (
-    <div className="min-h-screen bg-black text-white">
-      <section className="text-center py-12 px-4">
-        <h1 className="text-4xl font-bold mb-2 text-red-500">Red Requiem</h1>
-        <p className="italic text-neutral-300 mb-4">
-          "When red is the only prayer left."
+    <main className="min-h-screen px-6 py-24 md:px-16 text-white bg-gradient-to-b from-[#1a0e2a] to-[#0c0f1e]">
+      <section className="max-w-6xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">🖼 Gallery of Series</h1>
+        <p className="text-center text-neutral-400 max-w-2xl mx-auto mb-8">
+          A curated collection of AI-generated series — each a world of its own.
         </p>
-        <p className="max-w-2xl mx-auto text-sm text-neutral-400">
-          A gothic-futurist journey through neon cathedrals and divine silence. Created using SDXL and ComfyUI.
-        </p>
-        <div className="mt-4 flex flex-wrap justify-center gap-2 text-sm">
-          <span className="bg-red-900 text-red-300 px-2 py-1 rounded">#neonRitual</span>
-          <span className="bg-red-900 text-red-300 px-2 py-1 rounded">#gothicFate</span>
-          <span className="bg-red-900 text-red-300 px-2 py-1 rounded">#divineReflection</span>
-        </div>
-      </section>
 
-      <section className="mx-auto max-w-6xl px-4">
-        <Image
-          src="/images/red-requiem/cover.jpg"
-          alt="Red Requiem Cover"
-          width={1200}
-          height={600}
-          className="rounded-xl shadow-xl object-cover mb-8"
-        />
-
-        <h2 className="text-xl font-semibold mb-4">Gallery</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {[1, 2, 3, 4, 5, 6].map((num) => (
-            <Image
-              key={num}
-              src={`/images/red-requiem/${num}.jpg`}
-              alt={`Red Requiem ${num}`}
-              width={600}
-              height={400}
-              className="rounded-lg hover:scale-105 transition-transform duration-300 object-cover"
-            />
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {allTags.map(tag => (
+            <button
+              key={tag}
+              onClick={() => setActiveTag(tag)}
+              className={`px-3 py-1 rounded-full text-sm transition-all border border-purple-500 hover:bg-purple-700/30 ${
+                activeTag === tag ? 'bg-purple-600 text-white' : 'text-purple-300'
+              }`}
+            >
+              {tag}
+            </button>
           ))}
         </div>
 
-        <details className="mt-8">
-          <summary className="cursor-pointer text-sm text-red-400">Reveal Invocation</summary>
-          <pre className="bg-black text-red-300 p-4 mt-2 rounded border border-red-800 whitespace-pre-wrap text-sm">
-“gothic anime girl in a black Victorian dress, long black hair with red rose accessories, standing in a dark candle-lit cathedral, surrounded by red roses, elegant baroque atmosphere, dramatic lighting, stained glass windows, shadows and soft glow, symmetrical composition, ultra-detailed, 4k
-”
-
-          </pre>
-        </details>
-
-        <div className="mt-6 space-y-1 text-sm text-neutral-300">
-          <p>🧠 Engine: <strong>ComfyUI</strong></p>
-          <p>🧬 Model: <strong>SDXL</strong></p>
-          <p>🖼 Works: <strong>6</strong></p>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredSeries.map(series => (
+            <Link
+              key={series.slug}
+              href={`/series/${series.slug}`}
+              className="bg-[#15111f] rounded-xl overflow-hidden shadow-lg hover:shadow-purple-700/20 transition-all transform hover:-translate-y-1 block"
+            >
+              <Image
+                src={series.image}
+                alt={series.title}
+                width={800}
+                height={600}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h2 className="text-xl font-semibold mb-1">{series.title}</h2>
+                <p className="text-sm text-neutral-400 mb-3">{series.description}</p>
+                <div className="flex flex-wrap gap-1 text-xs text-purple-400 italic">
+                  {(series.tags || []).map(tag => (
+                    <span
+                      key={tag.label}
+                      title={tag.description}
+                      className="hover:underline hover:text-purple-300 transition"
+                    >
+                      #{tag.label.replace(/[#]/g, '')}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
 
-        <h3 className="mt-10 text-lg font-semibold text-red-400">📜 Devlog</h3>
-        <ul className="list-disc ml-6 mt-2 text-sm text-neutral-400 space-y-1">
-          <li>🗓 March 11: Silence broken by neon echoes. Testing urban textures and soft decay.</li>
-          <li>🗓 March 12: Generated mythic figures. Cloaked in starlight and divine geometry.</li>
-          <li>🗓 March 14: Cathedral rendered. Candelabras lit. Shadows asked no questions.</li>
-        </ul>
+        <section className="mt-20 text-center">
+          <h3 className="text-xl font-semibold mb-2">🔮 What’s Next?</h3>
+          <p className="text-neutral-400 italic">
+            Upcoming: <strong>&quot;Dreamless Machines&quot;</strong> — chrome temples, synthetic memory,
+            and silence between pulses.
+          </p>
 
-        <div className="text-center mt-10">
-          <Link href="/order">
-            <button className="bg-red-700 hover:bg-red-800 text-white font-semibold px-6 py-3 rounded-lg transition shadow-lg">
-              🕯 Summon something like this
+          <form
+            onSubmit={handleNotifySubmit}
+            className="mt-6 flex flex-col md:flex-row gap-4 items-center justify-center"
+          >
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              placeholder="Enter your email"
+              className="px-4 py-2 rounded-full bg-[#2d223e] text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
+            />
+            <button
+              type="submit"
+              disabled={notified}
+              className={`px-4 py-2 rounded-full transition-all shadow-md ${
+                notified
+                  ? 'bg-green-600 text-white cursor-default'
+                  : 'bg-purple-600 hover:bg-purple-500 text-white hover:shadow-purple-600/50'
+              }`}
+            >
+              {notified ? '✅ You’ll be notified!' : '🔔 Notify Me'}
             </button>
-          </Link>
-        </div>
+          </form>
+          {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
+        </section>
       </section>
-    </div>
-  )
+    </main>
+  );
 }

@@ -7,21 +7,17 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#1a0e2a] to-[#0c0f1e] text-white px-6 py-12 md:px-16">
       {/* HERO SECTION */}
-      <section className="text-center max-w-3xl mx-auto mb-16">
+      <section className="text-center max-w-3xl mx-auto mb-16 relative">
         <h1 className="text-5xl font-bold mb-4">Where AI Meets Myth</h1>
         <p className="text-neutral-400 mb-8">
           Explore illustrations forged from silence and starlight.
         </p>
         <div className="flex justify-center gap-4">
           <Link href="/series">
-            <button className="px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-500 transition">
-              Enter Series
-            </button>
+            <button className="btn-nyx">Enter Series</button>
           </Link>
           <Link href="/services">
-            <button className="px-6 py-3 rounded-full bg-pink-600 hover:bg-pink-500 transition">
-              Explore Services
-            </button>
+            <button className="btn-nyx bg-pink-600 hover:bg-pink-500">Explore Services</button>
           </Link>
         </div>
       </section>
@@ -39,7 +35,7 @@ export default function Home() {
             <p className="text-sm">Web Design – Elegant, fast, animated portfolio pages</p>
           </div>
           <div>
-            <div className="text-4xl mb-2">🎬</div>
+            <div className="text-4xl mb-2">🎮</div>
             <p className="text-sm">Video Edits – Cinematic, rhythmic edits for reels or storytelling</p>
           </div>
         </div>
@@ -51,28 +47,34 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <Link href="/series/sunroom-diaries">
             <div className="overflow-hidden rounded-lg">
-              <img
+              <Image
                 src="/images/sunroom-diaries/cover.jpg"
-                alt="Sunroom Diaries"
-                className="h-[300px] w-full object-cover hover:scale-105 transition"
+                alt="Cover of Sunroom Diaries – a cozy sunlight-themed illustration"
+                width={800}
+                height={600}
+                className="h-[300px] w-full object-cover hover:scale-105 transition rounded"
               />
             </div>
           </Link>
           <Link href="/series/red-requiem">
             <div className="overflow-hidden rounded-lg">
-              <img
+              <Image
                 src="/images/red-requiem/cover.jpg"
-                alt="Red Requiem"
-                className="h-[300px] w-full object-cover hover:scale-105 transition"
+                alt="Cover of Red Requiem – a gothic futuristic cathedral scene"
+                width={800}
+                height={600}
+                className="h-[300px] w-full object-cover hover:scale-105 transition rounded"
               />
             </div>
           </Link>
           <Link href="/series/astral-divines">
             <div className="overflow-hidden rounded-lg">
-              <img
+              <Image
                 src="/images/astral-divines/cover.jpg"
-                alt="Astral Divines"
-                className="h-[300px] w-full object-cover hover:scale-105 transition"
+                alt="Cover of Astral Divines – cosmic golden goddess in space"
+                width={800}
+                height={600}
+                className="h-[300px] w-full object-cover hover:scale-105 transition rounded"
               />
             </div>
           </Link>

@@ -17,10 +17,8 @@ export default function OrderForm({ prefill = {} }) {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  // Image count to price mapping (index = image count)
   const imagePrices = [
-    0,  // Test
-    6, 10, 13, 18, 22, 25, 28, 30, 34, 37, 40, 43, 46, 48, 50,
+    0, 6, 10, 13, 18, 22, 25, 28, 30, 34, 37, 40, 43, 46, 48, 50,
   ];
 
   const handleChange = (e) => {
@@ -36,9 +34,7 @@ export default function OrderForm({ prefill = {} }) {
     try {
       const res = await fetch('/api/order', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
           images: parseInt(formData.images),
@@ -47,10 +43,8 @@ export default function OrderForm({ prefill = {} }) {
       });
 
       const data = await res.json();
-
       if (!res.ok) throw new Error(data.message || 'Something went wrong');
 
-      // Redirect to PayPal (or thanks page)
       router.push(data.redirectUrl || '/thanks');
     } catch (err) {
       setError(err.message);
@@ -59,7 +53,11 @@ export default function OrderForm({ prefill = {} }) {
     }
   };
 
-  const price = imagePrices[parseInt(formData.images)] || 0;
+  const rawPrice = imagePrices[parseInt(formData.images)] || 0;
+  const price = new Intl.NumberFormat('pl-PL', {
+    style: 'currency',
+    currency: 'PLN',
+  }).format(rawPrice);
 
   return (
     <form
@@ -67,7 +65,7 @@ export default function OrderForm({ prefill = {} }) {
       className="bg-[#1a1525] p-6 rounded-xl space-y-4 max-w-2xl mx-auto"
     >
       <h2 className="text-pink-400 font-semibold text-center">
-        Estimated price: {price} PLN
+        Estimated price: {price}
       </h2>
 
       <input
@@ -96,7 +94,7 @@ export default function OrderForm({ prefill = {} }) {
         required
         className="w-full px-4 py-2 rounded bg-[#2d223e] text-white"
       >
-        <option value="">Select style / project type</option>
+        <option value="" disabled hidden>Select style / project type</option>
         <option value="sunroom">Sunroom Diaries</option>
         <option value="redrequiem">Red Requiem</option>
         <option value="divines">Astral Divines</option>
@@ -130,6 +128,7 @@ export default function OrderForm({ prefill = {} }) {
         placeholder="Describe your request, mood, themes..."
         value={formData.message}
         onChange={handleChange}
+        minLength={10}
         rows={4}
         className="w-full px-4 py-2 rounded bg-[#2d223e] text-white"
       />
