@@ -26,7 +26,7 @@ export default function ServicesPage() {
           <div className="bg-[#1a0e2a] p-6 rounded-xl border border-white/10 shadow-md hover:shadow-lg transition">
             <h2 className="text-xl font-semibold mb-2">🎨 Illustrations</h2>
             <p className="text-sm text-neutral-300 mb-1">From cozy slices of life to divine goddess visions.</p>
-            <p className="text-sm text-neutral-400 italic mb-4">Starting at 2,50 € / image</p>
+            <p className="text-sm text-neutral-400 italic mb-4">Starting at 5 € / image</p>
             <Link href="/services/illustrations" className="text-fuchsia-400 hover:underline">View Details →</Link>
           </div>
 
