@@ -85,13 +85,19 @@ export default function SeriesPage() {
               className="bg-[#15111f] rounded-xl overflow-hidden shadow-lg hover:shadow-purple-700/20 transition-all transform hover:-translate-y-1 block"
             >
               <div className="relative w-full h-48">
-                <Image
-                  src={series.image}
-                  alt={series.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-t-xl"
-                />
+                {series.cover ? (
+                  <Image
+                    src={series.cover}
+                    alt={series.title}
+                    fill
+                    className="rounded-t-xl object-cover"
+                    priority
+                  />
+                ) : (
+                  <div className="w-full h-full bg-neutral-800 text-center flex items-center justify-center text-sm text-neutral-500">
+                    No image
+                  </div>
+                )}
               </div>
               <div className="p-4">
                 <h2 className="text-xl font-semibold mb-1">{series.title}</h2>
@@ -113,9 +119,9 @@ export default function SeriesPage() {
         </div>
 
         <section className="mt-20 text-center">
-          <h3 className="text-xl font-semibold mb-2">🔮 What’s Next?</h3>
+          <h3 className="text-xl font-semibold mb-2">🔮 What&rsquo;s Next?</h3>
           <p className="text-neutral-400 italic">
-            Upcoming: <strong>"Dreamless Machines"</strong> — chrome temples, synthetic memory,
+            Upcoming: <strong>&quot;Dreamless Machines&quot;</strong> — chrome temples, synthetic memory,
             and silence between pulses.
           </p>
 

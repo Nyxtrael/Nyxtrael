@@ -61,9 +61,15 @@ export default function IllustrationsPage() {
       <section className="mt-20 max-w-5xl mx-auto text-center relative z-10">
         <h2 className="text-2xl font-semibold mb-6 text-white">🖼️ Example Works</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <Image src="/images/preview-cozy.jpg" alt="Cozy Style Example" width={400} height={300} className="rounded-lg shadow-md hover:scale-105 transition-transform" />
-          <Image src="/images/preview-divine.jpg" alt="Divine Style Example" width={400} height={300} className="rounded-lg shadow-md hover:scale-105 transition-transform" />
-          <Image src="/images/preview-gothic.jpg" alt="Gothic Style Example" width={400} height={300} className="rounded-lg shadow-md hover:scale-105 transition-transform" />
+          <div className="aspect-[4/3] relative w-full">
+            <Image src="/images/sunroom-diaries/preview.jpg" alt="Cozy Style Example" fill className="rounded-lg shadow-md hover:scale-105 transition-transform object-cover" />
+          </div>
+          <div className="aspect-[4/3] relative w-full">
+            <Image src="/images/astral-divines/preview.jpg" alt="Divine Style Example" fill className="rounded-lg shadow-md hover:scale-105 transition-transform object-cover" />
+          </div>
+          <div className="aspect-[4/3] relative w-full">
+            <Image src="/images/red-requiem/preview.jpg" alt="Gothic Style Example" fill className="rounded-lg shadow-md hover:scale-105 transition-transform object-cover" />
+          </div>
         </div>
       </section>
 
