@@ -19,8 +19,8 @@ export default function PayContent() {
       <section className="max-w-2xl mx-auto text-center">
         <h1 className="text-4xl font-bold mb-6">💳 Complete Your Payment</h1>
         <p className="text-neutral-400 mb-4">
-          You're just one step away from confirming your order.
-        </p>
+  {"You're just one step away from confirming your order."}
+</p>
 
         <div className="bg-[#1a1525] p-6 rounded-xl space-y-6">
           <h2 className="text-2xl font-semibold">
