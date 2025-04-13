@@ -1,9 +1,16 @@
+'use client';
+
+import Head from 'next/head';
+
 export default function ThanksPage() {
   return (
     <>
       <Head>
         <title>🎉 Thank You | Nyxtrael</title>
-        <meta name="description" content="Your order has been received and is being processed. Thank you for trusting Nyxtrael." />
+        <meta
+          name="description"
+          content="Your order has been received and is being processed. Thank you for trusting Nyxtrael."
+        />
       </Head>
 
       <main className="min-h-screen px-6 py-24 md:px-16 text-white bg-gradient-to-b from-[#1a0e2a] to-[#0c0f1e]">
@@ -24,10 +31,14 @@ export default function ThanksPage() {
           </a>
 
           <p className="text-sm mt-6 text-neutral-400">
-            Need help? <a href="/contact" className="underline hover:text-white">Contact me here</a>.
+            Need help?{' '}
+            <a href="/contact" className="underline hover:text-white">
+              Contact me here
+            </a>
+            .
           </p>
         </section>
       </main>
     </>
-  )
+  );
 }
