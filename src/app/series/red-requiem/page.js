@@ -1,6 +1,7 @@
-'use client'
-import Image from 'next/image'
-import Link from 'next/link'
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function RedRequiemPage() {
   return (
@@ -8,7 +9,7 @@ export default function RedRequiemPage() {
       <section className="text-center py-12 px-4">
         <h1 className="text-4xl font-bold mb-2 text-red-500">Red Requiem</h1>
         <p className="italic text-neutral-300 mb-4">
-          "When red is the only prayer left."
+          &quot;When red is the only prayer left.&quot;
         </p>
         <p className="max-w-2xl mx-auto text-sm text-neutral-400">
           A gothic-futurist journey through neon cathedrals and divine silence. Created using SDXL and ComfyUI.
@@ -46,9 +47,7 @@ export default function RedRequiemPage() {
         <details className="mt-8">
           <summary className="cursor-pointer text-sm text-red-400">Reveal Invocation</summary>
           <pre className="bg-black text-red-300 p-4 mt-2 rounded border border-red-800 whitespace-pre-wrap text-sm">
-“gothic anime girl in a black Victorian dress, long black hair with red rose accessories, standing in a dark candle-lit cathedral, surrounded by red roses, elegant baroque atmosphere, dramatic lighting, stained glass windows, shadows and soft glow, symmetrical composition, ultra-detailed, 4k
-”
-
+{`gothic anime girl in a black Victorian dress, long black hair with red rose accessories, standing in a dark candle-lit cathedral, surrounded by red roses, elegant baroque atmosphere, dramatic lighting, stained glass windows, shadows and soft glow, symmetrical composition, ultra-detailed, 4k`}
           </pre>
         </details>
 
@@ -74,5 +73,5 @@ export default function RedRequiemPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

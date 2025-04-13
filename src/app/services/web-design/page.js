@@ -11,7 +11,7 @@ export default function WebDesignPage() {
 
       <section className="max-w-4xl mx-auto text-center relative z-10">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">🌐 Web Design</h1>
-        <p className="text-lg italic text-purple-300 mb-12">Gothic elegance meets functional magic. Let's conjure your site.</p>
+        <p className="text-lg italic text-purple-300 mb-12">Gothic elegance meets functional magic. Let&rsquo;s conjure your site.</p>
       </section>
 
       <section className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 relative z-10">
@@ -34,7 +34,7 @@ export default function WebDesignPage() {
           <h3 className="text-xl font-bold mb-2 text-white">📁 Mini Portfolio</h3>
           <ul className="text-sm text-neutral-300 space-y-1">
             <li>🔒 Custom domain setup</li>
-            <li>🎨 Typography & colors</li>
+            <li>🎨 Typography &amp; colors</li>
             <li>📱 Responsive layout</li>
             <li>⚡ Subtle animations</li>
           </ul>
@@ -48,7 +48,7 @@ export default function WebDesignPage() {
           <h3 className="text-xl font-bold mb-2 text-white">🧙‍♂️ Custom Magic Site</h3>
           <ul className="text-sm text-neutral-300 space-y-1">
             <li>🧠 Creative briefing</li>
-            <li>🎥 Custom animations & effects</li>
+            <li>🎥 Custom animations &amp; effects</li>
             <li>🧬 Multi-page immersive site</li>
             <li>✉️ Ongoing collaboration</li>
           </ul>
@@ -63,7 +63,7 @@ export default function WebDesignPage() {
         <h2 className="text-2xl font-semibold mb-6">🧰 What You Get</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm text-neutral-300">
           <div className="hover:scale-105 transition-transform">🔒 Custom domain setup</div>
-          <div className="hover:scale-105 transition-transform">🎨 Typography & colors</div>
+          <div className="hover:scale-105 transition-transform">🎨 Typography &amp; colors</div>
           <div className="hover:scale-105 transition-transform">📱 Responsive layout</div>
           <div className="hover:scale-105 transition-transform">✨ Tailored animations</div>
           <div className="hover:scale-105 transition-transform">🧪 No-code or custom code</div>
@@ -77,9 +77,9 @@ export default function WebDesignPage() {
           <ol className="space-y-2 text-sm text-neutral-300 list-decimal list-inside">
             <li>📦 Choose your web package</li>
             <li>📝 Share your project goals</li>
-            <li>🎨 Receive initial concept & layout</li>
-            <li>🧪 Revisions & polish</li>
-            <li>🚀 Launch & delivery</li>
+            <li>🎨 Receive initial concept &amp; layout</li>
+            <li>🧪 Revisions &amp; polish</li>
+            <li>🚀 Launch &amp; delivery</li>
           </ol>
         </div>
 
@@ -87,15 +87,15 @@ export default function WebDesignPage() {
           <h2 className="text-2xl font-semibold mb-4">❓ FAQ</h2>
           <ul className="space-y-4 text-sm text-neutral-300">
             <li><strong className="text-white">Can I edit the site myself?</strong> — Yes! I can set up an editable version for you.</li>
-            <li><strong className="text-white">Do you offer domain + hosting?</strong> — I’ll guide you through setup or provide support.</li>
-            <li><strong className="text-white">Can I upgrade later?</strong> — Absolutely. Let’s grow it together.</li>
+            <li><strong className="text-white">Do you offer domain + hosting?</strong> — I&rsquo;ll guide you through setup or provide support.</li>
+            <li><strong className="text-white">Can I upgrade later?</strong> — Absolutely. Let&rsquo;s grow it together.</li>
           </ul>
         </div>
       </section>
 
       <div className="text-center mt-20">
         <Link href="/order?type=web">
-          <span className="inline-block px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-500 text-sm font-semibold shadow-md">🌐 Let’s Build Your Site</span>
+          <span className="inline-block px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-500 text-sm font-semibold shadow-md">🌐 Let&rsquo;s Build Your Site</span>
         </Link>
       </div>
     </main>
