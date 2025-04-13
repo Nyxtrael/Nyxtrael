@@ -1,0 +1,16 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[context.production.environment]
+  NEXT_PUBLIC_SUPABASE_URL = "https://okuodmjrwqplrxqvqhko.supabase.co"
+  SUPABASE_SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  RESEND_API_KEY = "twoj_klucz_api_z_resend"
+  EMAIL_FROM = "no-reply@twojadomena.com"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+[dev]
+  command = "next dev"
