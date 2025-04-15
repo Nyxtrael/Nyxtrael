@@ -25,7 +25,7 @@ export default function VideoEditingPage() {
                 <li>⏱️ 24–48h delivery</li>
               </ul>
               <p className="font-semibold text-fuchsia-400 mt-2">Price: 30€</p>
-              <p className="text-xs text-neutral-400">To nie jest TikTok na kolanie. Krótko, ale z klasą.</p>
+              
               <p className="text-xs text-neutral-500 mt-1">Best for: Reels / YouTube / Music Video / Product Demo</p>
             </div>
             <Link href="/order?type=video&package=shortspark">
@@ -47,7 +47,7 @@ export default function VideoEditingPage() {
                 <li>🛠️ 3 Revisions</li>
               </ul>
               <p className="font-semibold text-fuchsia-400 mt-2">Price: 60€</p>
-              <p className="text-xs text-neutral-400">Solidny middle-tier, z voiceover cue, pacingiem, emocją.</p>
+              
               <p className="text-xs text-neutral-500 mt-1">Best for: Reels / YouTube / Music Video / Product Demo</p>
             </div>
             <Link href="/order?type=video&package=narrative">
@@ -69,7 +69,7 @@ export default function VideoEditingPage() {
                 <li>🧠 Visual storytelling consult</li>
               </ul>
               <p className="font-semibold text-fuchsia-400 mt-2">Price: 95–110€</p>
-              <p className="text-xs text-neutral-400">Za 6 minut ciętego materiału, jesteś wciąż taniej niż freelancer z USA.</p>
+              
               <p className="text-xs text-neutral-500 mt-1">Includes licensed music support, storyboard guidance, pacing feedback.</p>
               <p className="text-xs text-neutral-500">Best for: Reels / YouTube / Music Video / Product Demo</p>
             </div>

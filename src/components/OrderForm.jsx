@@ -153,7 +153,12 @@ function OrderForm() {
       <section className="max-w-3xl mx-auto text-left">
         <h1 className="text-4xl font-bold mb-4">🛒 Start Your Project</h1>
         <form onSubmit={handleSubmit} className="space-y-6 bg-[#1a1525] p-6 rounded-xl">
-          {/* ...rest of form UI stays unchanged... */}
+          <div className="text-neutral-300 italic">
+            {projectType === '' && <p>Select a project type to begin.</p>}
+          </div>
+          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+          {errors.images && <p className="text-red-500 text-sm">{errors.images}</p>}
+          {errors.prompt && <p className="text-red-500 text-sm">{errors.prompt}</p>}
         </form>
       </section>
     </main>
