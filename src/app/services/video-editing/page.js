@@ -26,7 +26,7 @@ export default function VideoEditingPage() {
               </ul>
               <p className="font-semibold text-fuchsia-400 mt-2">Price: 30€</p>
               
-              <p className="text-xs text-neutral-500 mt-1">Best for: Reels / YouTube / Music Video / Product Demo</p>
+              <p className="text-xs text-neutral-500 mt-1">Best for: Reels / YouTube </p>
             </div>
             <Link href="/order?type=video&package=shortspark">
               <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-full hover:bg-purple-700 transition mt-4">
@@ -48,7 +48,7 @@ export default function VideoEditingPage() {
               </ul>
               <p className="font-semibold text-fuchsia-400 mt-2">Price: 60€</p>
               
-              <p className="text-xs text-neutral-500 mt-1">Best for: Reels / YouTube / Music Video / Product Demo</p>
+              <p className="text-xs text-neutral-500 mt-1">Best for: YouTube / Music Video / Product Demo</p>
             </div>
             <Link href="/order?type=video&package=narrative">
               <button className="w-full bg-purple-600 text-white py-2 px-4 rounded-full hover:bg-purple-700 transition mt-4">
