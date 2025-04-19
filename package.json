@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^5.10.7",
     "@supabase/supabase-js": "^2.49.4",
     "@tabler/icons-react": "^3.31.0",
     "aos": "^2.3.4",
