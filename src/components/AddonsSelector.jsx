@@ -49,7 +49,7 @@ const addonsData = {
       label: '🧠 CMS Integration – Add blogs, portfolios, or editable content.',
       description: 'Update your site without bugging your dev (aka me).',
       price: 50,
-      tooltip: 'CMS = system do zarządzania treścią. Możesz samodzielnie dodawać wpisy, zmieniać teksty itd.'
+      tooltip: 'CMS = content management system. Lets you edit content like blogs, portfolios, and text blocks yourself.',
     },
     {
       key: 'domain',
@@ -62,7 +62,7 @@ const addonsData = {
       label: '🛒 E-commerce Ready – Everything you need to sell weird merch.',
       description: 'Stripe-ready storefront, shopping cart, product handling, and checkout.',
       price: 100,
-      tooltip: 'Pełna obsługa sklepu internetowego – produkty, koszyk, płatności, checkout.'
+      tooltip: 'Full e-commerce setup – products, cart, payments, and checkout ready to go.',
     },
   ],
   image: [

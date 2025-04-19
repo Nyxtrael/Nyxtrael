@@ -1,0 +1,77 @@
+{
+  "illustrations": [
+    {
+      "id": "mini",
+      "title": "Mini",
+      "artworks": "2 AI-generated artworks",
+      "features": ["Upscaled to 4K", "24h delivery", "No revisions"],
+      "price": "5€",
+      "button": "Get This Artwork"
+    },
+    {
+      "id": "scene",
+      "title": "Scene",
+      "artworks": "4 Artworks",
+      "features": ["Upscaled + Prompt", "1 Revision", "Style Selection"],
+      "price": "9€",
+      "button": "Commission Now",
+      "recommended": true
+    },
+    {
+      "id": "divine-bundle",
+      "title": "Divine Bundle",
+      "artworks": "8 Artworks",
+      "features": ["Prompt + Style consult", "2 Revisions", "Full Concept Styling"],
+      "price": "16€",
+      "button": "Summon Vision"
+    }
+  ],
+  "webDesign": [
+    {
+      "id": "one-pager",
+      "title": "One-Pager",
+      "features": ["Single page site", "Mobile responsive", "Animated sections", "Fast delivery"],
+      "price": "from 90€",
+      "button": "Start with One-Pager"
+    },
+    {
+      "id": "mini-portfolio",
+      "title": "Mini Portfolio",
+      "features": ["Custom domain setup", "Typography & colors", "Responsive layout", "Subtle animations"],
+      "price": "from 140€",
+      "recommended": true,
+      "button": "Get Mini Portfolio"
+    },
+    {
+      "id": "custom-magic",
+      "title": "Custom Magic Site",
+      "features": ["Creative briefing", "Custom animations & effects", "Multi-page immersive site", "Ongoing collaboration"],
+      "price": "Starting from 220€",
+      "button": "Build from Scratch"
+    }
+  ],
+  "videoEditing": [
+    {
+      "id": "short-spark",
+      "title": "Short Spark",
+      "features": ["Up to 60 seconds", "Sound design & pacing", "2 Revisions", "24–48h delivery"],
+      "price": "30€",
+      "button": "Start with this package"
+    },
+    {
+      "id": "narrative-flow",
+      "title": "Narrative Flow",
+      "features": ["2–3 mins cinematic edit", "Music sync, transitions, rhythm cuts", "Script polishing", "3 Revisions"],
+      "price": "60€",
+      "recommended": true,
+      "button": "Start with this package"
+    },
+    {
+      "id": "full-feature",
+      "title": "Full Feature Bundle",
+      "features": ["Up to 6 minutes", "Complete storytelling", "Licensed audio support", "4 Revisions", "Visual storytelling consult"],
+      "price": "95–110€",
+      "button": "Start with this package"
+    }
+  ]
+}
