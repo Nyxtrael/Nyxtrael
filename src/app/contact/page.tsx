@@ -1,3 +1,4 @@
+// NOTE: This file uses 'use client' so it must NOT export any server functions
 'use client';
 
 import Head from 'next/head';

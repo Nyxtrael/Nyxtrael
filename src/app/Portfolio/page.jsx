@@ -21,7 +21,7 @@ export default function PortfolioPage() {
   return (
     <main className="min-h-screen w-full bg-gradient-to-b from-[#1A1A2E] to-[#2A2A3E] text-white overflow-hidden relative px-6 py-24 md:px-16">
 
-      {/* Tło video */}
+      {/* Background video */}
       <video
         autoPlay
         muted
@@ -34,20 +34,25 @@ export default function PortfolioPage() {
         <source src="/videos/6917331_Motion Graphics_Motion Graphic_1280x720.mp4" type="video/mp4" />
       </video>
 
-      {/* Migoczące gwiazdki */}
-      <div className="absolute inset-0 z-0">
+      {/* Sparkling stars */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         {stars.map((star, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full bg-gradient-to-r from-pink-400 to-purple-500"
-            style={{ width: '8px', height: '8px', top: star.top, left: star.left }}
+            style={{
+              width: '8px',
+              height: '8px',
+              top: star.top,
+              left: star.left,
+            }}
             animate={{ opacity: [0, 1, 0] }}
             transition={{ duration: 2, repeat: Infinity, delay: star.delay }}
           />
         ))}
       </div>
 
-      {/* Główna treść */}
+      {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto">
 
         {/* Skip link */}
@@ -65,28 +70,21 @@ export default function PortfolioPage() {
           </p>
         </div>
 
-        {/* Galeria */}
+        {/* Gallery */}
         <GalleryGrid data={gallery} />
 
         {/* What's Next */}
         <div className="mt-24 text-center">
           <h2 className="text-2xl font-bold mb-4 flex justify-center items-center gap-2">
-            <motion.div
-              className="w-6 h-6"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <svg viewBox="0 0 24 24" fill="url(#gradient)">
-                <defs>
-                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#FF69B4" />
-                    <stop offset="100%" stopColor="#8B5CF6" />
-                  </linearGradient>
-                </defs>
-                <circle cx="12" cy="12" r="10" />
-              </svg>
-            </motion.div>
+            <svg className="w-6 h-6" viewBox="0 0 24 24">
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#FF69B4" />
+                  <stop offset="100%" stopColor="#8B5CF6" />
+                </linearGradient>
+              </defs>
+              <circle cx="12" cy="12" r="10" fill="url(#gradient)" />
+            </svg>
             What's Next?
           </h2>
           <p className="italic text-neutral-400 mb-6">
@@ -113,16 +111,9 @@ export default function PortfolioPage() {
         {/* Other Works */}
         <div className="mt-32 text-center border-t border-[#3A3A4E] pt-10">
           <h2 className="text-2xl font-bold mb-4 flex justify-center items-center gap-2">
-            <motion.div
-              className="w-6 h-6"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <svg viewBox="0 0 24 24" fill="url(#gradient)">
-                <polygon points="12,2 2,22 22,22 12,2" />
-              </svg>
-            </motion.div>
+            <svg className="w-6 h-6" viewBox="0 0 24 24">
+              <polygon points="12,2 2,22 22,22 12,2" fill="url(#gradient)" />
+            </svg>
             Other Works
           </h2>
           <ul className="text-neutral-400 text-sm space-y-2">
@@ -147,7 +138,6 @@ export default function PortfolioPage() {
           </div>
           <p className="mt-4">© 2025 Nyxtrael</p>
         </footer>
-
       </div>
     </main>
   );

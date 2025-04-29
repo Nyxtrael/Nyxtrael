@@ -1,17 +1,19 @@
-'use client';
-
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import galleryData from '@/data/gallery.json';
 
-// SEO metadata dynamiczne
+// === IMPORTANT ===
+// This file should NOT be marked with 'use client'
+// because it includes a server function: generateMetadata
+
 export function generateMetadata({ params }) {
   const series = galleryData.find((s) => s.slug === params.slug);
   if (!series) return {};
 
   return {
     title: `${series.title} – Illustration Series by Nyxtrael`,
-    description: "Explore Nyxtrael's portfolio of illustration series, featuring anime, gothic, and celestial styles for personal and commercial use.",
+    description:
+      "Explore Nyxtrael's portfolio of illustration series, featuring anime, gothic, and celestial styles for personal and commercial use.",
   };
 }
 
@@ -34,14 +36,14 @@ export default function SeriesDetailPage({ params }) {
         className={`min-h-screen ${series.backgroundColor || 'bg-black'} ${series.textColor || 'text-white'} px-6 py-12`}
       >
         <div className="max-w-4xl mx-auto space-y-10">
-          {/* Nagłówek */}
+          {/* Header */}
           <header>
             <h1 className="text-4xl font-bold mb-2">{series.title}</h1>
             <p className="italic text-[#CCCCCC] mb-4">“{series.quote}”</p>
             <p className="text-white leading-[1.6]">{series.description}</p>
           </header>
 
-          {/* Obraz główny */}
+          {/* Cover Image */}
           <div className="group overflow-hidden rounded-lg">
             <Image
               src={series.cover}
@@ -53,7 +55,7 @@ export default function SeriesDetailPage({ params }) {
             />
           </div>
 
-          {/* Miniatury */}
+          {/* Thumbnails */}
           <section>
             <h2 className="text-2xl font-semibold mb-4">Gallery</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -71,7 +73,7 @@ export default function SeriesDetailPage({ params }) {
             </div>
           </section>
 
-          {/* Dane techniczne */}
+          {/* Technical Info */}
           <section>
             <h2 className="text-2xl font-semibold mb-2">Technical Info</h2>
             <ul className="text-sm text-[#BBBBBB] space-y-1">
@@ -92,7 +94,7 @@ export default function SeriesDetailPage({ params }) {
             </ul>
           </section>
 
-          {/* Tagi */}
+          {/* Tags */}
           <footer>
             <div className="mt-8">
               <h3 className="text-sm font-semibold uppercase text-[#AAAAAA] mb-2">Tags</h3>
