@@ -2,19 +2,15 @@
   command = "npm run build"
   publish = ".next"
 
-[context.production.environment]
-  NEXT_PUBLIC_SUPABASE_URL = "https://okuodmjrwqplrxqvqhko.supabase.co"
-  SUPABASE_SERVICE_ROLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9rdW9kbWpyd3FwbHJ4cXZxaGtvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NDEzMDMyOSwiZXhwIjoyMDU5NzA2MzI5fQ.dpcAvH5UvB9ORfV3R1C2DBFutULExmju2XRZQwaLorI"
-  RESEND_API_KEY = "re_apA2giYc_J5qJnKHDzAeRrPsjTf61Cggv"
-  EMAIL_FROM = "onboarding@resend.dev"
+[build.environment]
+  NODE_VERSION = "18"
+  NEXT_PRIVATE_TARGET = "server"
+  NEXT_PUBLIC_NODE_ENV = "production"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-[dev]
-  command = "next dev"
-  
 
-[[plugins]]
+[plugins]
   package = "@netlify/plugin-nextjs"
