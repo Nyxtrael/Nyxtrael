@@ -1,26 +1,23 @@
 [
   {
     "id": 1,
-    "title": "Gothic Illustration Pack",
-    "description": "10 hauntingly beautiful gothic illustrations. Perfect for dark branding, game development, or fantasy covers.",
-    "price": 25,
-    "image": "/images/products/gothic-pack.jpg",
-    "category": "illustrations"
+    "name": "Sunroom Diaries Art Print",
+    "description": "A serene digital art print of an anime character in a sunlit room.",
+    "price": 15,
+    "image": "/images/sunroom-diaries/cover.png"
   },
   {
     "id": 2,
-    "title": "Midnight Magic Web Template",
-    "description": "Dark aesthetic responsive template.",
+    "name": "Portfolio Website Template",
+    "description": "A responsive website template for artists and creatives.",
     "price": 50,
-    "image": "/images/products/midnight-template.jpg",
-    "category": "web"
+    "image": "/images/web-design-sample.jpg"
   },
   {
     "id": 3,
-    "title": "Cinematic Video Presets",
-    "description": "10 cinematic color grading presets.",
-    "price": 15,
-    "image": "/images/products/video-presets.jpg",
-    "category": "video"
+    "name": "Cinematic Intro Video",
+    "description": "A professional video intro for your brand or project.",
+    "price": 30,
+    "image": "/images/video-editing-sample.jpg"
   }
 ]

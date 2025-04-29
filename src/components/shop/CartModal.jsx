@@ -2,103 +2,96 @@
 
 import { useContext, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
-import { X, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 
-export default function CartModal({ open, onClose }) {
-  const { cartItems, removeFromCart, updateQuantity, clearCart } = useContext(CartContext);
-  const [closing, setClosing] = useState(false);
+export default function CartModal({ items = [] }) { // Domyślna wartość dla items
+  const { removeFromCart, updateQuantity, clearCart } = useContext(CartContext);
+  const [isOpen, setIsOpen] = useState(false);
 
-  if (!open && !closing) return null;
-
-  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-  const handleClose = () => {
-    setClosing(true);
-    setTimeout(() => {
-      setClosing(false);
-      onClose();
-    }, 300); // czas trwania animacji slide-out
-  };
+  const total = (items || []).reduce((sum, item) => sum + item.price * item.quantity, 0); // Bezpieczne użycie reduce
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-end z-50" role="dialog" aria-modal="true">
-      <div className={`w-full max-w-md bg-[#1e162f] h-full p-6 relative overflow-y-auto ${closing ? 'animate-slide-out-right' : 'animate-slide-in-right'} fade-in`}>
-        
-        {/* Close button */}
-        <button
-          onClick={handleClose}
-          className="absolute top-4 right-4 text-neutral-400 hover:text-pink-400 transition"
-          aria-label="Close cart"
-        >
-          <X size={28} />
-        </button>
+    <>
+      <button
+        onClick={() => setIsOpen(true)}
+        className="fixed bottom-6 right-6 bg-pink-600 text-white font-semibold px-4 py-2 rounded-full shadow hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:scale-105 transition-all duration-300 z-50"
+      >
+        Cart ({items.length || 0})
+      </button>
 
-        {/* Cart Title */}
-        <h2 className="text-2xl font-bold mb-6">🛒 Your Cart</h2>
-
-        {cartItems.length === 0 ? (
-          <p className="text-neutral-400">Your cart is empty.</p>
-        ) : (
-          <>
-            <ul className="space-y-6">
-              {cartItems.map(item => (
-                <li key={item.id} className="flex items-center gap-4 border-b border-white/10 pb-4 fade-in-bottom">
-                  <div className="relative w-20 h-20 shrink-0">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover rounded-md"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold leading-snug">{item.title}</h3>
-                    <p className="text-sm text-neutral-400">{item.price}€</p>
-                    <div className="flex items-center gap-2 mt-2">
-                      <button 
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)} 
-                        disabled={item.quantity === 1}
-                        className="px-2 bg-neutral-700 hover:bg-pink-500 rounded transition transform hover:scale-110"
-                      >
-                        -
-                      </button>
-                      <span className="text-sm">{item.quantity}</span>
-                      <button 
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)} 
-                        className="px-2 bg-neutral-700 hover:bg-pink-500 rounded transition transform hover:scale-110"
-                      >
-                        +
-                      </button>
-                      <button 
-                        onClick={() => removeFromCart(item.id)}
-                        className="flex items-center gap-1 text-pink-400 hover:text-pink-500 ml-3 text-sm transition"
-                      >
-                        <Trash2 size={16} /> Remove
-                      </button>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            {/* Total */}
-            <div className="mt-8">
-              <p className="text-lg font-bold">Total: {total.toFixed(2)}€</p>
+      {isOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-[#2A2A3E] p-6 rounded-lg max-w-md w-full max-h-[80vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold text-white">Your Cart</h2>
               <button
-                onClick={() => {
-                  alert('🛒 Demo only! No real checkout.');
-                  clearCart();
-                  handleClose();
-                }}
-                className="mt-4 w-full py-3 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-semibold rounded-lg transition hover:scale-105"
+                onClick={() => setIsOpen(false)}
+                className="text-neutral-400 hover:text-pink-400 transition"
               >
-                Checkout
+                ✕
               </button>
             </div>
-          </>
-        )}
-      </div>
-    </div>
+
+            {items.length === 0 ? (
+              <p className="text-neutral-400">Your cart is empty.</p>
+            ) : (
+              <>
+                {items.map((item) => (
+                  <div key={item.id} className="flex items-center gap-4 mb-4 border-b border-[#3A3A4E] pb-4">
+                    <Image
+                      src={item.image}
+                      alt={item.name || 'Cart item image'}
+                      width={80}
+                      height={80}
+                      className="w-20 h-20 object-cover rounded"
+                    />
+                    <div className="flex-1">
+                      <h3 className="text-white font-semibold">{item.name}</h3>
+                      <p className="text-neutral-400">€{item.price} x {item.quantity}</p>
+                      <div className="flex items-center gap-2 mt-2">
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          className="text-pink-400 hover:text-pink-300"
+                        >
+                          -
+                        </button>
+                        <span className="text-white">{item.quantity}</span>
+                        <button
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          className="text-pink-400 hover:text-pink-300"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-red-400 hover:text-red-300"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+                <div className="text-right">
+                  <p className="text-white font-semibold mb-4">Total: €{total.toFixed(2)}</p>
+                  <button
+                    onClick={clearCart}
+                    className="text-red-400 hover:text-red-300 mb-4"
+                  >
+                    Clear Cart
+                  </button>
+                  <button
+                    className="w-full bg-pink-600 font-semibold px-4 py-2 rounded-full shadow hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:scale-105 transition-all duration-300"
+                    onClick={() => alert('Proceeding to checkout...')}
+                  >
+                    Checkout
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
