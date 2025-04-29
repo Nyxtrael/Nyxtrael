@@ -1,10 +1,8 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import galleryData from '../../data/gallery.json';
+import galleryData from '@/data/gallery.json';
 
-// === IMPORTANT ===
-// This file should NOT be marked with 'use client'
-// because it includes a server function: generateMetadata
+
 
 export function generateMetadata({ params }) {
   const series = galleryData.find((s) => s.slug === params.slug);
