@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Gothic Illustration Pack",
+    "description": "10 hauntingly beautiful gothic illustrations. Perfect for dark branding, game development, or fantasy covers.",
+    "price": 25,
+    "image": "/images/products/gothic-pack.jpg",
+    "category": "illustrations"
+  },
+  {
+    "id": 2,
+    "title": "Midnight Magic Web Template",
+    "description": "Dark aesthetic responsive template.",
+    "price": 50,
+    "image": "/images/products/midnight-template.jpg",
+    "category": "web"
+  },
+  {
+    "id": 3,
+    "title": "Cinematic Video Presets",
+    "description": "10 cinematic color grading presets.",
+    "price": 15,
+    "image": "/images/products/video-presets.jpg",
+    "category": "video"
+  }
+]

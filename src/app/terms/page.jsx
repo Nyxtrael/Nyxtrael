@@ -1,98 +1,110 @@
+"use client";
+
+import { useState } from "react";
+import Head from "next/head";
+import { motion } from "framer-motion";
+
 export default function TermsPage() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const sections = [
+    { id: "definitions", title: "📖 0. Definitions", content: "'Service' refers to the Nyxtrael website and all associated services. 'User' refers to any individual or entity accessing the Service. 'Content' includes all designs, illustrations, and materials created by Nyxtrael." },
+    { id: "completion", title: "⏳ 1. Completion & Contact", content: "All orders are typically completed within 1–3 business days unless otherwise stated. You will receive confirmation and updates via email or the contact method you provide." },
+    { id: "license", title: "🎨 2. License & Usage", content: "Unless explicitly agreed otherwise, all commissioned artworks are for personal use only. Commercial use, resale, or redistribution is prohibited without written permission or purchase of a commercial license. Learn more in the [Commercial Use Option](#commercial-use)." },
+    { id: "commercial-use", title: "💼 3. Commercial Use Option", content: "For commercial rights, please request a commercial license during the order process. This includes usage in branding, products, promotional materials, and monetized content. Fees vary based on intended use." },
+    { id: "liability", title: "🔀 4. Liability & Magic Disclaimer", content: "Nyxtrael is not responsible for delays caused by incorrect contact information, unclear project descriptions, or external factors (e.g., internet outage, planetary alignment, etc.)." },
+    { id: "tax", title: "🌍 5. Tax Responsibilities", content: "You are responsible for any local taxes, customs duties, or digital service fees applicable in your country. Prices listed exclude VAT unless otherwise stated." },
+    { id: "age", title: "🧠 6. Age Requirements", content: "You must be at least 16 years old to place an order. By proceeding, you confirm you are of legal age to enter into this agreement." },
+    { id: "policy-updates", title: "🔁 7. Policy Updates", content: "We reserve the right to update these policies anytime. Updates will be reflected on this page, and significant changes will be communicated via email or a notice on the Service. Updates apply to all future orders." },
+    { id: "contact", title: "📬 8. Contact & Issue Resolution", content: "If you experience issues, contact us at nyxtrael@gmail.com within 7 days of delivery. We'll resolve it professionally." },
+    { id: "refund", title: "💸 9. Refund & Cancellation Policy", content: "Refunds are not issued once work has started unless due to technical failure. Partial refunds may apply if work is incomplete." },
+    { id: "payment", title: "🧾 10. Payment Processing", content: "Payments are securely handled by Stripe. No payment data is stored on our servers." },
+    { id: "privacy", title: "🔐 11. Privacy Note", content: "Contact details are used solely to complete your order and are not shared with third parties. Under GDPR and CCPA, you have the right to access, correct, or delete your personal data. To exercise these rights, contact us at nyxtrael@gmail.com." },
+    { id: "ip", title: "📜 12. Intellectual Property", content: "All content including designs and logos are property of Nyxtrael and protected by copyright law. Unauthorized use is prohibited." },
+    { id: "termination", title: "⛔ 13. Termination of Service", content: "Nyxtrael reserves the right to terminate or suspend access to users violating these Terms at our sole discretion." },
+    { id: "governing-law", title: "⚖️ 14. Governing Law", content: "These Terms are governed by Polish law. Disputes will be resolved through arbitration in Warsaw, Poland." }
+  ];
+
+  const filteredSections = sections.filter(section =>
+    section.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <main className="min-h-screen text-white px-6 py-24 md:px-16 bg-gradient-to-b from-[#1a0e2a] to-[#0c0f1e]">
-      <div className="max-w-3xl mx-auto space-y-10">
-        <h1 className="text-4xl font-bold mb-6">📜 Terms & Refund Policy</h1>
+    <>
+      <Head>
+        <title>Terms of Service & Refund Policy - Nyxtrael</title>
+        <meta name="description" content="Review Nyxtrael's Terms of Service, Refund Policy, Privacy Note, and Commercial License terms." />
+      </Head>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-2">⏳ 1. Completion & Contact</h2>
-          <p className="text-neutral-300">
-            All orders are typically completed within <strong>1–3 business days</strong> unless otherwise stated.
-            You will receive confirmation and updates via email or the contact method you provide.
-          </p>
-        </section>
+      <a href="#terms-section" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-pink-600 text-white p-2 rounded">Skip to content</a>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-2">🎨 2. License & Usage</h2>
-          <p className="text-neutral-300">
-            Unless explicitly agreed otherwise, all commissioned artworks are <strong>for personal use only</strong>.
-            Commercial use, resale, or redistribution is <strong>prohibited</strong> without written permission or purchase of a commercial license.
-          </p>
-        </section>
+      <main className="relative min-h-screen px-6 py-24 md:px-16 text-white bg-[#0a0a23] overflow-hidden scroll-smooth">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-10 z-0"
+          poster="/images/stars-fallback.png"
+          aria-hidden="true"
+        >
+          <source src="/videos/6917331_Motion Graphics_Motion Graphic_1280x720.mp4" type="video/mp4" />
+        </video>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-2">💼 3. Commercial Use Option</h2>
-          <p className="text-neutral-300">
-            For commercial rights, please request a commercial license during the order process.
-            This includes usage in branding, products, promotional materials, and monetized content.
-            Fees will vary depending on scope and intended use.
-          </p>
-        </section>
+        <div className="relative z-10 max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center fade-in flex items-center justify-center gap-2">
+            <img src="/icons/scroll.svg" alt="Scroll icon" width={28} height={28} />
+            Terms of Service & Refund Policy
+          </h1>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-2">🌀 4. Liability & Magic Disclaimer</h2>
-          <p className="text-neutral-300">
-            Nyxtrael is not responsible for delays caused by incorrect contact information, unclear project
-            descriptions, or external factors beyond control (e.g. internet outage, planetary alignment, etc.).
-          </p>
-        </section>
+          <p className="text-neutral-400 text-center mb-8">By accessing or using the Nyxtrael website ("Service"), you agree to these Terms. If you do not agree, please do not use the Service. Last Updated: April 26, 2025.</p>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-2">🌍 5. Tax Responsibilities</h2>
-          <p className="text-neutral-300">
-            You are responsible for any local taxes, customs duties, or digital service fees applicable in your country.
-            Prices listed do not include VAT unless explicitly stated.
-          </p>
-        </section>
+          <div className="mb-12 fade-in sticky top-16 bg-[#0a0a23] py-2">
+            <label htmlFor="tos-search" className="block text-sm mb-2 text-neutral-400">Find a Section Quickly 🔍</label>
+            <input
+              id="tos-search"
+              type="text"
+              placeholder="Search terms..."
+              aria-label="Search within Terms of Service"
+              className="w-full p-3 rounded-md bg-[#2A2A3E] text-white placeholder-[#CCCCCC] focus:ring-2 focus:ring-pink-400"
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-2">🧠 6. Age Requirements</h2>
-          <p className="text-neutral-300">
-            You must be at least <strong>16 years old</strong> to place an order. By proceeding, you confirm that you are of legal age to enter into this agreement.
-          </p>
-        </section>
+          <section id="terms-section" className="space-y-10 fade-in">
+            {filteredSections.map((section, index) => (
+              <motion.div
+                key={section.id}
+                id={section.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="border-t border-[#3A3A4E] pt-6"
+              >
+                <h2 className="text-2xl font-semibold text-pink-400 mb-2 hover:text-pink-300 section-title">{section.title}</h2>
+                <p className="text-neutral-300 leading-relaxed text-base md:text-lg">{section.content}</p>
+              </motion.div>
+            ))}
+          </section>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-2">🔁 7. Policy Updates</h2>
-          <p className="text-neutral-300">
-            We reserve the right to update these policies at any time. Updates will be reflected on this page and apply to all future orders.
-          </p>
-        </section>
+          <section className="max-w-4xl mx-auto mt-16 text-center fade-in">
+            <h2 className="text-2xl font-semibold mb-4">Explore More</h2>
+            <div className="flex justify-center gap-4">
+              <a href="/portfolio" className="text-pink-400 hover:text-pink-300">See My Portfolio 🌟</a>
+              <a href="/order" className="text-pink-400 hover:text-pink-300">Start a Project 🚀</a>
+            </div>
+          </section>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-2">📬 8. Contact & Issue Resolution</h2>
-          <p className="text-neutral-300">
-            If you experience any issues with your order, please contact us via <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=nyxtrael@gmail.com&su=Regarding%20my%20order&body=Hi%20Nyxtrael," 
-              target="_blank" rel="noopener noreferrer" 
-              className="underline text-purple-400">
-              nyxtrael@gmail.com
-            </a> within <strong>7 days of delivery</strong>.
-          </p>
-        </section>
+          <div className="flex justify-center mt-12">
+            <a href="#terms-section" className="fixed bottom-4 right-4 px-4 py-2 rounded-full bg-pink-600 hover:bg-pink-500 text-sm font-semibold shadow-md hover:shadow-pink-500/50 transition flex items-center gap-2">
+              <img src="/icons/arrow-up.svg" alt="Arrow up icon" width="16" height="16" />
+              Back to Top ✨
+            </a>
+          </div>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-2">💸 9. Refund & Cancellation Policy</h2>
-          <p className="text-neutral-300">
-            Refunds are not issued once work has started, unless due to major technical failure on our side.
-            You may cancel your order before receiving a confirmation, and receive a full refund.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="text-xl font-semibold mb-2">🧾 10. Payment Processing</h2>
-          <p className="text-neutral-300">
-            All payments are securely handled by Stripe. We do not store or process any payment data directly.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="text-xl font-semibold mb-2">🔐 11. Privacy Note</h2>
-          <p className="text-neutral-300">
-            Contact details are only used to complete your order and are not shared with third parties.
-          </p>
-        </section>
-      </div>
-    </main>
+          
+        </div>
+      </main>
+    </>
   );
 }

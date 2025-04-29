@@ -1,101 +1,205 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function WebDesignPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#1a0e2a] to-[#0c0f1e] text-white px-6 py-24 md:px-16 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none bg-[url('/textures/stardust.png')] opacity-10 animate-pulse" />
+    <main className="relative min-h-screen bg-gradient-to-b from-[#1A1A2E] to-[#2A2A3E] text-white overflow-hidden">
+      <Head>
+        <title>Web Design – Responsive & SEO-Optimized Websites – Nyxtrael</title>
+        <meta
+          name="description"
+          content="Get responsive, SEO-optimized websites by Nyxtrael. From single-page sites to custom portfolios, starting at €90."
+        />
+      </Head>
 
-      <section className="max-w-4xl mx-auto text-center relative z-10">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">🌐 Web Design</h1>
-        <p className="text-lg italic text-purple-300 mb-12">Gothic elegance meets functional magic. Let&rsquo;s conjure your site.</p>
+      <a href="#web-design-section" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-pink-600 text-white p-2 rounded">
+        Skip to content
+      </a>
+
+      <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-10 z-0" poster="/images/stars-fallback.jpg" aria-hidden="true">
+        <source src="/videos/6917331_Motion Graphics_Motion Graphic_1280x720.mp4" type="video/mp4" />
+      </video>
+
+      <section id="web-design-section" className="relative z-10 max-w-6xl mx-auto px-6 py-32 text-center">
+        <h1 className="text-5xl font-bold mb-8">🌐 Web Design</h1>
+        <p className="text-neutral-400 text-lg mb-24">Crafting elegance and usability — websites that truly perform.</p>
+
+        
+		<section className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-24 fade-in">
+  {[
+    {
+      title: '🖥️ Landing Spark',
+      features: ['🌐 1-page website', '📱 Responsive design', '🎨 Custom colors & fonts', '🛠️ 1 Revision'],
+      price: '90€',
+      link: '/order?type=web&package=landing',
+    },
+    {
+      title: '📖 Storytelling Site',
+      features: ['🖼️ 3-5 pages', '⚡ Animations included', '✍️ Copy support', '🔁 2 Revisions'],
+      price: '180€',
+      link: '/order?type=web&package=storytelling',
+      badge: '⭐ Popular',
+    },
+    {
+      title: '🏛️ Full Custom Website',
+      features: ['🖥️ 5+ pages', '🎨 Custom UI/UX design', '🚀 SEO optimization', '🛠️ 3 Revisions + support'],
+      price: '250–350€',
+      link: '/order?type=web&package=fullcustom',
+    },
+  ].map((pkg, idx) => (
+    <div key={idx} className="relative bg-[#2A2A3E]/50 p-8 rounded-xl shadow-md hover:shadow-pink-500/30 transition flex flex-col border border-[#3A3A4E]">
+  {/* Wewnątrz diva robisz badge */}
+  {pkg.badge && (
+    <div className="absolute top-2 right-2 text-xs bg-purple-700 px-2 py-1 rounded-full">
+      {pkg.badge}
+    </div>
+  )}
+  <h2 className="text-2xl font-bold mb-4">{pkg.title}</h2>
+  <ul className="text-sm text-neutral-400 space-y-2 mb-6">
+    {pkg.features.map((feature, idx2) => (
+      <li key={idx2}>{feature}</li>
+    ))}
+  </ul>
+  <p className="text-fuchsia-400 font-bold mb-4">{pkg.price}</p>
+  <Link href={pkg.link} className="w-full">
+    <button className="w-full bg-gradient-to-r from-purple-600 to-pink-500 py-3 rounded-full hover:from-purple-500 hover:to-pink-400 transition font-semibold">
+      Start with this package
+    </button>
+  </Link>
+</div>
+  ))}
+</section>
+
       </section>
 
-      <section className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 relative z-10">
-        <div className="bg-[#20112d] backdrop-blur-lg p-6 rounded-xl shadow-md hover:shadow-lg hover:ring-1 hover:ring-purple-500/40 transition-all transform hover:-translate-y-1">
-          <h3 className="text-xl font-bold mb-2 text-white">📄 One-Pager</h3>
-          <ul className="text-sm text-neutral-300 space-y-1">
-            <li>🎯 Single page site</li>
-            <li>📱 Mobile responsive</li>
-            <li>✨ Animated sections</li>
-            <li>🚀 Fast delivery</li>
-          </ul>
-          <p className="mt-4 text-fuchsia-400 font-semibold">from 90€</p>
-          <Link href="/order?type=web&package=onepager">
-            <span className="block mt-4 w-full px-4 py-2 text-sm rounded-full bg-purple-600 hover:bg-purple-500 transition shadow-md text-center">🛠️ Start with One-Pager</span>
-          </Link>
-        </div>
+<div className="my-32 border-t border-white/10"></div>
 
-        <div className="bg-[#261634] backdrop-blur-lg p-6 rounded-xl shadow-md hover:shadow-lg hover:ring-1 hover:ring-purple-500/40 transition-all transform hover:-translate-y-1 relative min-h-[280px]">
-          <div className="absolute top-2 right-2 bg-purple-700 text-xs text-white px-2 py-1 rounded-full animate-pulse">⭐ Recommended</div>
-          <h3 className="text-xl font-bold mb-2 text-white">📁 Mini Portfolio</h3>
-          <ul className="text-sm text-neutral-300 space-y-1">
-            <li>🔒 Custom domain setup</li>
-            <li>🎨 Typography &amp; colors</li>
-            <li>📱 Responsive layout</li>
-            <li>⚡ Subtle animations</li>
-          </ul>
-          <p className="mt-4 text-fuchsia-400 font-semibold">from 140€</p>
-          <Link href="/order?type=web&package=portfolio">
-            <span className="block mt-4 w-full px-4 py-2 text-sm rounded-full bg-purple-600 hover:bg-purple-500 transition shadow-md text-center">📁 Get Mini Portfolio</span>
-          </Link>
-        </div>
+<section className="relative z-10 max-w-6xl mx-auto fade-in">
+  <h2 className="text-2xl font-semibold mb-8 flex items-center gap-2">
+    🛠️ Optional Add-ons
+  </h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {[
+    { name: 'Extra page design', price: '+50€' },
+    { name: 'Blog CMS integration', price: '+80€' },
+    { name: 'Priority 5-day delivery', price: '+100€' },
+    { name: 'Basic SEO setup', price: '+40€' },
+    { name: 'Advanced animations', price: '+60€' },
+  ].map(({ name, price }, idx) => (
+    <div key={idx} className="flex items-center justify-between bg-[#2A2A3E]/50 p-4 rounded-lg border border-[#3A3A4E] hover:shadow-pink-500/20 transition">
+      <label className="flex items-center gap-3 text-neutral-300">
+        <input type="checkbox" className="accent-pink-500" />
+        {name}
+      </label>
+      <span className="text-green-400 font-semibold">{price}</span>
+    </div>
+  ))}
+</div>
+  <p className="text-neutral-400 text-xs mt-6 text-center">
+    Learn more about optional features in our{' '}
+    <Link href="/terms#addons" className="text-pink-400 hover:text-pink-300 underline">
+      Terms of Service
+    </Link>.
+  </p>
+</section>
 
-        <div className="bg-[#2d1b3f] backdrop-blur-lg p-6 rounded-xl shadow-md hover:shadow-lg hover:ring-1 hover:ring-purple-500/40 transition-all transform hover:-translate-y-1 min-h-[280px]">
-          <h3 className="text-xl font-bold mb-2 text-white">🧙‍♂️ Custom Magic Site</h3>
-          <ul className="text-sm text-neutral-300 space-y-1">
-            <li>🧠 Creative briefing</li>
-            <li>🎥 Custom animations &amp; effects</li>
-            <li>🧬 Multi-page immersive site</li>
-            <li>✉️ Ongoing collaboration</li>
-          </ul>
-          <p className="mt-4 text-fuchsia-400 font-semibold">Starting from 220€</p>
-          <Link href="/order?type=web&package=magic">
-            <span className="block mt-4 w-full px-4 py-2 text-sm rounded-full bg-purple-600 hover:bg-purple-500 transition shadow-md text-center">🌟 Build from Scratch</span>
-          </Link>
-        </div>
-      </section>
 
-      <section className="max-w-5xl mx-auto mt-20 text-white relative z-10">
-        <h2 className="text-2xl font-semibold mb-6">🧰 What You Get</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm text-neutral-300">
-          <div className="hover:scale-105 transition-transform">🔒 Custom domain setup</div>
-          <div className="hover:scale-105 transition-transform">🎨 Typography &amp; colors</div>
-          <div className="hover:scale-105 transition-transform">📱 Responsive layout</div>
-          <div className="hover:scale-105 transition-transform">✨ Tailored animations</div>
-          <div className="hover:scale-105 transition-transform">🧪 No-code or custom code</div>
-          <div className="hover:scale-105 transition-transform">🚀 Hosting assistance</div>
+
+
+      <section className="relative z-10 max-w-6xl mx-auto fade-in">
+        <h2 className="text-2xl font-semibold mb-8 flex items-center gap-2">🖼️ Portfolio Showcase</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+          {[
+            { img: 'artist-x.webp', name: 'Mystic Studio Website' },
+            { img: 'ecommerce.webp', name: 'Celestial E-Commerce' },
+            { img: 'personal-site.webp', name: 'Dark Academia Portfolio' },
+          ].map(({ img, name }, idx) => (
+            <div key={idx} className="relative bg-[#2A2A3E]/50 p-4 rounded-xl hover:shadow-pink-500/30 transition shadow-md overflow-hidden border border-[#3A3A4E]">
+
+              <Image src={`/images/web/${img}`} alt={name} fill loading="lazy" className="object-cover rounded-lg" />
+              <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition flex items-center justify-center text-white text-lg font-semibold">{name}</div>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="mt-20 max-w-6xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 text-white">
+      <div className="my-32 border-t border-white/10"></div>
+
+      <section className="relative z-10 max-w-6xl mx-auto fade-in">
+        <h2 className="text-2xl font-semibold mb-8 flex items-center gap-2">🧰 What You Get</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm text-neutral-300 text-center">
+          {[
+            { icon: '🔒', label: 'Custom domain setup' },
+            { icon: '🎨', label: 'Typography & colors' },
+            { icon: '📱', label: 'Responsive layout' },
+            { icon: '✨', label: 'Tailored animations' },
+            { icon: '🧪', label: 'No-code or custom code' },
+            { icon: '🚀', label: 'Hosting assistance' },
+          ].map(({ icon, label }, idx) => (
+            <div key={idx} className="flex items-center justify-between bg-[#2A2A3E]/50 p-4 rounded-lg border border-[#3A3A4E] hover:shadow-pink-500/20 transition">
+              <div className="text-2xl">{icon}</div>
+              <div>{label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="my-32 border-t border-white/10"></div>
+
+      <section className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 fade-in">
         <div>
-          <h2 className="text-2xl font-semibold mb-4">🛠️ How It Works</h2>
-          <ol className="space-y-2 text-sm text-neutral-300 list-decimal list-inside">
-            <li>📦 Choose your web package</li>
-            <li>📝 Share your project goals</li>
-            <li>🎨 Receive initial concept &amp; layout</li>
-            <li>🧪 Revisions &amp; polish</li>
-            <li>🚀 Launch &amp; delivery</li>
-          </ol>
-        </div>
-
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">❓ FAQ</h2>
-          <ul className="space-y-4 text-sm text-neutral-300">
-            <li><strong className="text-white">Can I edit the site myself?</strong> — Yes! I can set up an editable version for you.</li>
-            <li><strong className="text-white">Do you offer domain + hosting?</strong> — I&rsquo;ll guide you through setup or provide support.</li>
-            <li><strong className="text-white">Can I upgrade later?</strong> — Absolutely. Let&rsquo;s grow it together.</li>
+          <h2 className="text-2xl font-semibold mb-8 flex items-center gap-2">🛠️ How It Works</h2>
+          <ul className="space-y-8">
+            {['Choose your web package', 'Share your project goals', 'Receive initial concept & layout', 'Revisions & polish', 'Launch & delivery'].map((step, idx) => (
+              <li key={idx} className="flex gap-4 text-neutral-300 items-start">
+                <img src={`/icons/step${idx+1}.svg`} alt="Step" width="24" height="24" />
+                <span>{step}</span>
+              </li>
+            ))}
           </ul>
         </div>
+        <div>
+          <h2 className="text-2xl font-semibold mb-8 flex items-center gap-2">❓ FAQ</h2>
+          <div className="space-y-4">
+            {[
+              { q: 'Can I update text/images myself after delivery?', a: 'Yes, I can set up an easy editor for you.' },
+              { q: 'Is domain registration included?', a: 'Domain purchase guidance is included, domain cost is separate.' },
+              { q: 'What platform do you build sites on?', a: 'Usually Next.js or Webflow, based on project needs.' },
+              { q: 'Can I upgrade the site later?', a: 'Absolutely, scalability is considered from the start.' },
+            ].map(({ q, a }, idx) => (
+              <details key={idx} className="bg-[#2A2A3E]/50 p-4 rounded-lg border border-[#3A3A4E] transition-all">
+                <summary className="font-semibold text-neutral-200 cursor-pointer">{q}</summary>
+                <p className="text-neutral-400 mt-2">{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+		
       </section>
 
-      <div className="text-center mt-20">
-        <Link href="/order?type=web">
-          <span className="inline-block px-6 py-3 rounded-full bg-purple-600 hover:bg-purple-500 text-sm font-semibold shadow-md">🌐 Let&rsquo;s Build Your Site</span>
+      <div className="my-32 border-t border-white/10"></div>
+
+      <section className="relative z-10 max-w-3xl mx-auto text-center fade-in">
+        <h3 className="text-xl font-semibold mb-8">💬 What Clients Say</h3>
+        {[
+          { text: 'The website design was exactly what I needed!', client: '– Alex K., USA' },
+          { text: 'Nyxtrael delivered a stunning portfolio site on time!', client: '– Marina L., UK' },
+          { text: 'The animations made my site stand out!', client: '– Daniel R., Germany' },
+        ].map(({ text, client }, idx) => (
+          <blockquote key={idx} className="italic text-neutral-300 leading-relaxed border-t border-white/10 pt-6">
+            “{text}” <br /><span className="text-pink-400 text-sm">{client}</span>
+          </blockquote>
+        ))}
+      </section>
+
+      <div className="text-center mt-32">
+        <Link href="https://nyxtrael.com/start-a-project">
+          <span className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-base font-semibold shadow-md hover:shadow-pink-500/30 transition">
+            🚀 Start Your Dream Site
+          </span>
         </Link>
       </div>
     </main>
