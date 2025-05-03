@@ -100,7 +100,7 @@ export default function About() {
         <video
           autoPlay muted loop playsInline
           className="absolute inset-0 w-full h-full object-cover opacity-10"
-          poster="/images/hero-fallback.jpg"
+         
         >
           <source src="/videos/hero-background.mp4" type="video/mp4" />
         </video>
@@ -364,7 +364,7 @@ export default function About() {
              type="email"
              value={formData.email}
              onChange={handleFormChange}
-             placeholder="Your Email"
+             placeholder="Your Ema il"
              className="w-full p-3 rounded bg-white text-black placeholder-gray-400 focus:ring-2 focus:ring-pink-400 focus:outline-none"
           />
            <textarea

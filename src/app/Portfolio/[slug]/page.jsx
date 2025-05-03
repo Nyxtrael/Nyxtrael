@@ -1,91 +1,104 @@
+'use client';
+
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import Image from 'next/image';
 import galleryData from '../../../data/gallery.json';
 
-
-
+// metadata for SEO
 export function generateMetadata({ params }) {
   const series = galleryData.find((s) => s.slug === params.slug);
   if (!series) return {};
-
   return {
     title: `${series.title} – Illustration Series by Nyxtrael`,
     description:
-      "Explore Nyxtrael's portfolio of illustration series, featuring anime, gothic, and celestial styles for personal and commercial use.",
+      "Explore Nyxtrael’s portfolio of illustration series—anime, gothic & celestial styles for personal & commercial use.",
+    alternates: { canonical: `https://nyxtrael.com/portfolio/${series.slug}` },
   };
 }
 
 export default function SeriesDetailPage({ params }) {
   const series = galleryData.find((s) => s.slug === params.slug);
-
   if (!series) notFound();
 
   return (
     <>
-      <a
+      {/* Skip link for screenreaders */}
+      <Link
         href="#main"
-        className="sr-only focus:not-sr-only absolute top-2 left-2 bg-black text-white p-2 z-50"
+        className="sr-only focus:not-sr-only absolute top-4 left-4 bg-black text-white px-3 py-2 rounded"
       >
         Skip to content
-      </a>
+      </Link>
 
       <main
         id="main"
-        className={`min-h-screen ${series.backgroundColor || 'bg-black'} ${series.textColor || 'text-white'} px-6 py-12`}
+        className="min-h-screen bg-black text-white px-6 py-12 md:px-16"
       >
         <div className="max-w-4xl mx-auto space-y-10">
+
           {/* Header */}
-          <header>
-            <h1 className="text-4xl font-bold mb-2">{series.title}</h1>
-            <p className="italic text-[#CCCCCC] mb-4">“{series.quote}”</p>
-            <p className="text-white leading-[1.6]">{series.description}</p>
+          <header className="space-y-4">
+            <h1 className="text-4xl md:text-5xl font-bold">
+              {series.title}
+            </h1>
+            {series.quote && (
+              <p className="italic text-neutral-400">“{series.quote}”</p>
+            )}
+            <p className="leading-relaxed">{series.description}</p>
           </header>
 
-          {/* Cover Image */}
-          <div className="group overflow-hidden rounded-lg">
+          {/* Cover image */}
+          <figure className="overflow-hidden rounded-lg shadow-lg group">
             <Image
               src={series.cover}
-              alt={`Cover illustration from ${series.title} series`}
+              alt={`Cover of ${series.title}`}
               width={1200}
               height={600}
-              className="rounded-lg object-cover w-full max-h-[500px] transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-auto object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
               priority
             />
-          </div>
+          </figure>
 
-          {/* Thumbnails */}
+          {/* Gallery thumbnails */}
           <section>
             <h2 className="text-2xl font-semibold mb-4">Gallery</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {series.thumbnails.map((thumb, i) => (
-                <figure key={i} className="overflow-hidden group rounded-lg">
+              {series.thumbnails.map((thumb, idx) => (
+                <figure
+                  key={idx}
+                  className="overflow-hidden rounded-lg shadow group"
+                >
                   <Image
                     src={thumb}
-                    alt={`Illustration ${i + 1} from ${series.title} series`}
+                    alt={`${series.title} illustration ${idx + 1}`}
                     width={600}
                     height={400}
-                    className="rounded object-cover w-full transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-auto object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
                   />
                 </figure>
               ))}
             </div>
           </section>
 
-          {/* Technical Info */}
+          {/* Technical info */}
           <section>
             <h2 className="text-2xl font-semibold mb-2">Technical Info</h2>
-            <ul className="text-sm text-[#BBBBBB] space-y-1">
+            <ul className="text-sm text-neutral-400 space-y-1">
               <li><strong>Model:</strong> {series.model}</li>
               <li><strong>Engine:</strong> {series.engine}</li>
               <li><strong>Prompts used:</strong> {series.prompts}</li>
-              <li><strong>Prompt sample:</strong> <span className="italic text-white">{series.promptText}</span></li>
+              <li>
+                <strong>Sample prompt:</strong>{' '}
+                <span className="italic text-white">{series.promptText}</span>
+              </li>
             </ul>
           </section>
 
           {/* Devlog */}
           <section>
             <h2 className="text-2xl font-semibold mb-2">Development Log</h2>
-            <ul className="list-disc list-inside text-sm text-[#CCCCCC]">
+            <ul className="list-disc list-inside text-sm text-neutral-400 space-y-1">
               {series.devlog.map((entry, i) => (
                 <li key={i}>{entry}</li>
               ))}
@@ -94,15 +107,18 @@ export default function SeriesDetailPage({ params }) {
 
           {/* Tags */}
           <footer>
-            <div className="mt-8">
-              <h3 className="text-sm font-semibold uppercase text-[#AAAAAA] mb-2">Tags</h3>
-              <div className="flex flex-wrap gap-2 text-xs text-[#B0B0D0]">
-                {series.tags.map((tag) => (
-                  <span key={tag} className="bg-[#1F1F2A] px-2 py-1 rounded">
-                    #{tag}
-                  </span>
-                ))}
-              </div>
+            <h3 className="text-sm font-semibold uppercase text-neutral-500 mb-2">
+              Tags
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {series.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="bg-[#1A1A2E] px-2 py-1 rounded-full text-xs text-neutral-300"
+                >
+                  #{tag}
+                </span>
+              ))}
             </div>
           </footer>
         </div>
