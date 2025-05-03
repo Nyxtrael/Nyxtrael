@@ -1,7 +1,6 @@
-// src/app/Portfolio/[slug]/metadata.js
-import galleryData from '../../../data/gallery.json';
+// /src/app/Portfolio/[slug]/metadata.js
+import galleryData from '../../../../data/gallery.json';
 
-/** @type {import('next').MetadataGenerator} */
 export function generateMetadata({ params }) {
   const series = galleryData.find((s) => s.slug === params.slug);
   if (!series) return {};

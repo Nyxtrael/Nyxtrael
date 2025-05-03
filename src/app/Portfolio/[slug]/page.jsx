@@ -1,22 +1,4 @@
-/* src/app/Portfolio/[slug]/metadata.js */
-import galleryData from '../../../data/gallery.json';
-
-/**
- * Generates metadata for each series detail page.
- * @param {{ params: { slug: string } }} context
- */
-export function generateMetadata({ params }) {
-  const series = galleryData.find((s) => s.slug === params.slug);
-  if (!series) return {};
-  return {
-    title: `${series.title} – Illustration Series by Nyxtrael`,
-    description: "Explore Nyxtrael’s portfolio of illustration series—anime, gothic & celestial styles for personal & commercial use.",
-    alternates: { canonical: `https://nyxtrael.com/portfolio/${series.slug}` },
-  };
-}
-
-
-/* src/app/Portfolio/[slug]/page.jsx */
+// /src/app/Portfolio/[slug]/page.jsx
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -28,7 +10,6 @@ export default function SeriesDetailPage({ params }) {
 
   return (
     <>
-      {/* Skip link for screen readers */}
       <Link
         href="#main"
         className="sr-only focus:not-sr-only absolute top-4 left-4 bg-black text-white px-3 py-2 rounded"
@@ -36,12 +17,16 @@ export default function SeriesDetailPage({ params }) {
         Skip to content
       </Link>
 
-      <main id="main" className="min-h-screen bg-black text-white px-6 py-12 md:px-16">
+      <main
+        id="main"
+        className="min-h-screen bg-black text-white px-6 py-12 md:px-16"
+      >
         <div className="max-w-4xl mx-auto space-y-10">
-
           {/* Header */}
           <header className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold">{series.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold">
+              {series.title}
+            </h1>
             {series.quote && (
               <p className="italic text-neutral-400">“{series.quote}”</p>
             )}
@@ -65,7 +50,10 @@ export default function SeriesDetailPage({ params }) {
             <h2 className="text-2xl font-semibold mb-4">Gallery</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {series.thumbnails.map((thumb, idx) => (
-                <figure key={idx} className="overflow-hidden rounded-lg shadow group">
+                <figure
+                  key={idx}
+                  className="overflow-hidden rounded-lg shadow group"
+                >
                   <Image
                     src={thumb}
                     alt={`${series.title} illustration ${idx + 1}`}
@@ -104,7 +92,9 @@ export default function SeriesDetailPage({ params }) {
 
           {/* Tags */}
           <footer>
-            <h3 className="text-sm font-semibold uppercase text-neutral-500 mb-2">Tags</h3>
+            <h3 className="text-sm font-semibold uppercase text-neutral-500 mb-2">
+              Tags
+            </h3>
             <div className="flex flex-wrap gap-2">
               {series.tags.map((tag) => (
                 <span
