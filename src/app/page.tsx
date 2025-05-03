@@ -167,7 +167,7 @@ export default function Home() {
                 autoPlay muted loop playsInline
                 style={{ y }}
                 className="absolute inset-0 object-cover w-full h-full opacity-10 z-0"
-                poster="/images/hero-fallback.jpg"
+                poster="/images/hero-fallback.png"
                 aria-hidden="true"
               >
                 <source src="/videos/hero-background.mp4" type="video/mp4" />
