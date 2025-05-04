@@ -84,22 +84,14 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-sm text-neutral-400 mb-4"
+            className="text-sm text-neutral-400 mb-12"
           >
             I’ll get back to you within 24 hours – let’s make something extraordinary! ✨
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xs text-neutral-500 mb-12"
-          >
-            (Expect a reply within 24h after submission)
           </motion.p>
         </section>
 
         {/* Form Section */}
-        <section id="contact-form" className="max-w-md mx-auto bg-[#2A2A3E]/50 p-8 rounded-xl shadow-lg border border-[#3A3A4E] relative z-10">
+        <section id="contact-form" className="max-w-md mx-auto bg-[#2A2A3E]/50 p-8 rounded-xl shadow-md border border-[#3A3A4E] relative z-10">
           <AnimatePresence>
             {submitted && (
               <motion.div
@@ -110,16 +102,15 @@ export default function ContactPage() {
                 transition={{ duration: 0.5 }}
                 role="status"
                 aria-live="polite"
-                className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg z-50 flex items-center gap-2"
+                className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg z-50"
               >
-                <CheckCircle className="w-5 h-5" />
                 Message sent! I’ll get back to you soon 🌌
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="ml-4 text-white"
+                  className="absolute top-1 right-2 text-white"
                   aria-label="Dismiss"
                 >
-                  Dismiss
+                  <CheckCircle className="w-5 h-5" />
                 </button>
               </motion.div>
             )}
@@ -137,7 +128,9 @@ export default function ContactPage() {
                   <input
                     id="name" type="text"
                     placeholder="Enter your name or studio name"
-                    className={`w-full p-3 pl-10 rounded-md bg-[#2A2A3E] text-white placeholder-[#CCCCCC] focus:ring-2 focus:ring-pink-400 focus:shadow-lg transition`}                    {...register('name')}
+                    className={`w-full p-3 pl-10 rounded-md bg-[#2A2A3E] text-white placeholder-[#CCCCCC] 
+                      ${errors.name ? 'ring-2 ring-pink-500' : 'focus:ring-2 focus:ring-pink-400'}`}
+                    {...register('name')}
                   />
                 </div>
                 {errors.name && <p className="text-pink-400 text-sm mt-1">{errors.name.message}</p>}
@@ -151,7 +144,8 @@ export default function ContactPage() {
                   <input
                     id="email" type="email"
                     placeholder="Your contact email address"
-                    className={`w-full p-3 pl-10 rounded-md bg-[#2A2A3E] text-white placeholder-[#CCCCCC] focus:ring-2 focus:ring-pink-400 focus:shadow-lg transition`}
+                    className={`w-full p-3 pl-10 rounded-md bg-[#2A2A3E] text-white placeholder-[#CCCCCC] 
+                      ${errors.email ? 'ring-2 ring-pink-500' : 'focus:ring-2 focus:ring-pink-400'}`}
                     {...register('email')}
                   />
                 </div>
@@ -163,7 +157,7 @@ export default function ContactPage() {
                 <label htmlFor="service" className="block text-sm mb-1">Service</label>
                 <select
                   id="service"
-                  className="w-full p-3 rounded-md bg-[#2A2A3E] text-white focus:ring-2 focus:ring-pink-400 focus:shadow-lg transition"
+                  className="w-full p-3 rounded-md bg-[#2A2A3E] text-white focus:ring-2 focus:ring-pink-400"
                   {...register('service')}
                   onChange={e => setSelectedService(e.target.value)}
                 >
@@ -186,7 +180,8 @@ export default function ContactPage() {
                   <textarea
                     id="message" rows={5}
                     placeholder="Tell me about your idea, vision or any details you'd like to include"
-                    className={`w-full p-3 rounded-md bg-[#2A2A3E] text-white placeholder-[#CCCCCC] resize-y min-h-[140px] focus:ring-2 focus:ring-pink-400 focus:shadow-lg transition`}
+                    className={`w-full p-3 rounded-md bg-[#2A2A3E] text-white placeholder-[#CCCCCC] resize-y min-h-[140px] 
+                      ${errors.message ? 'ring-2 ring-pink-500' : 'focus:ring-2 focus:ring-pink-400'}`}
                     {...register('message')}
                   />
                   {errors.message && <p className="text-pink-400 text-sm mt-1">{errors.message.message}</p>}
@@ -210,13 +205,13 @@ export default function ContactPage() {
         >
           <h2 className="text-xl font-semibold mb-2">Prefer Direct Contact?</h2>
           <div className="flex justify-center gap-6 text-2xl">
-            <a href="mailto:nyxtrael@example.com" className="hover:text-pink-400 transition" aria-label="Email">
+            <a href="mailto:nyxtrael@example.com" className="hover:text-pink-400" aria-label="Email">
               <Mail />
             </a>
-            <a href="https://instagram.com/nyxtrael" target="_blank" rel="noreferrer" className="hover:text-pink-400 transition" aria-label="Instagram">
+            <a href="https://instagram.com/nyxtrael" target="_blank" rel="noreferrer" className="hover:text-pink-400" aria-label="Instagram">
               <Instagram />
             </a>
-            <a href="https://x.com/nyxtrael" target="_blank" rel="noreferrer" className="hover:text-pink-400 transition" aria-label="X">
+            <a href="https://x.com/nyxtrael" target="_blank" rel="noreferrer" className="hover:text-pink-400" aria-label="X">
               <X />
             </a>
           </div>
@@ -235,7 +230,7 @@ export default function ContactPage() {
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.2 }}
-                className="group bg-white/10 backdrop-blur-md rounded-lg p-6 flex flex-col items-center text-center hover:scale-105 transition"                
+                className="bg-white/10 backdrop-blur-md rounded-lg p-6 flex flex-col items-center text-center"
               >
                 <Image src={t.logo} alt={t.author} width={60} height={60} className="mb-4" />
                 <p className="italic text-neutral-300 mb-2">“{t.quote}”</p>
@@ -250,24 +245,24 @@ export default function ContactPage() {
           <div>
             <h3 className="mb-2 font-semibold">Quick Links</h3>
             <div className="flex justify-center gap-6 text-sm">
-              <a href="/faq" className="hover:text-pink-400 transition">FAQ</a>
-              <a href="/terms" className="hover:text-pink-400 transition">Terms of Service</a>
-              <a href="/privacy" className="hover:text-pink-400 transition">Privacy Policy</a>
-              <a href="/refund" className="hover:text-pink-400 transition">Refund Policy</a>
-              <a href="/contact" className="hover:text-pink-400 transition">Contact</a>
+              <a href="/faq" className="hover:text-pink-400">FAQ</a>
+              <a href="/terms" className="hover:text-pink-400">Terms of Service</a>
+              <a href="/privacy" className="hover:text-pink-400">Privacy Policy</a>
+              <a href="/refund" className="hover:text-pink-400">Refund Policy</a>
+              <a href="/contact" className="hover:text-pink-400">Contact</a>
             </div>
           </div>
           <div>
             <h3 className="mb-2 font-semibold">Newsletter</h3>
-            <form className="inline-flex" onSubmit={e => { e.preventDefault(); alert('Thank you for subscribing!'); }}>
-              <input type="email" placeholder="Your email" className="px-4 py-2 rounded-l-full bg-neutral-800 text-white focus:outline-none focus:shadow-lg transition" required />
-              <button type="submit" className="px-6 py-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-r-full text-white hover:scale-105 transition-all">Subscribe</button>
+            <form className="inline-flex">
+              <input type="email" placeholder="Your email" className="px-4 py-2 rounded-l-full bg-neutral-800 text-white focus:outline-none" />
+              <button className="px-6 py-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-r-full text-white hover:scale-105 transition-all">Subscribe</button>
             </form>
           </div>
           <div className="flex justify-center gap-6 text-2xl">
-            <a href="mailto:nyxtrael@example.com" aria-label="Email" className="hover:text-pink-400 transition"><Mail /></a>
-            <a href="https://instagram.com/nyxtrael" target="_blank" rel="noreferrer" aria-label="Instagram" className="hover:text-pink-400 transition"><Instagram /></a>
-            <a href="https://x.com/nyxtrael" target="_blank" rel="noreferrer" aria-label="X" className="hover:text-pink-400 transition"><X /></a>
+            <a href="mailto:nyxtrael@example.com" aria-label="Email" className="hover:text-pink-400"><Mail /></a>
+            <a href="https://instagram.com/nyxtrael" target="_blank" rel="noreferrer" aria-label="Instagram" className="hover:text-pink-400"><Instagram /></a>
+            <a href="https://x.com/nyxtrael" target="_blank" rel="noreferrer" aria-label="X" className="hover:text-pink-400"><X /></a>
           </div>
           <p className="text-xs">© 2025 Nyxtrael</p>
         </footer>
