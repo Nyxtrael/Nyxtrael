@@ -1,20 +1,38 @@
-// src/app/api/contact/route.js
 import { NextResponse } from 'next/server';
+import Resend from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request) {
   try {
-    const { name, email, message } = await request.json();
-    // tu logika zapisu/wysłania maila – np. do Netlify Functions, Supabase, Resend itp.
-    // np. await sendEmail({ name, email, message });
+    const { name, email, service, message } = await request.json();
 
-    return NextResponse.json(
-      { success: true, message: 'Message received' },
-      { status: 200 }
-    );
+    if (!name || !email || !service || !message) {
+      return NextResponse.json(
+        { error: 'Please fill in all fields.' },
+        { status: 400 }
+      );
+    }
+
+ 
+    await resend.emails.send({
+      from: 'nyxtrael@yourdomain.com',      
+      to: 'nyxtrael@yourdomain.com',        
+      subject: `New inquiry from ${name}`,
+      html: `
+        <h2>New contact request</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Service:</strong> ${service}</p>
+        <p><strong>Message:</strong><br/>${message.replace(/\n/g, '<br/>')}</p>
+      `
+    });
+
+    return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error(err);
+    console.error('Contact API error:', err);
     return NextResponse.json(
-      { success: false, error: 'Failed to process form' },
+      { error: 'Something went wrong. Please try again later.' },
       { status: 500 }
     );
   }
