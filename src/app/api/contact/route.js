@@ -1,21 +1,21 @@
 // src/app/api/contact/route.js
-export const runtime = 'edge'
-// deklarujemy pola wymagane przez Netlify Forms
-export const form = {
-  require: ['name', 'email', 'service', 'message'],
-}
+import { NextResponse } from 'next/server';
 
 export async function POST(request) {
-  // Netlify automatycznie zbiera dane z form
-  const formData = await request.formData()
-  const payload = Object.fromEntries(formData.entries())
+  try {
+    const { name, email, message } = await request.json();
+    // tu logika zapisu/wysłania maila – np. do Netlify Functions, Supabase, Resend itp.
+    // np. await sendEmail({ name, email, message });
 
-  // tu możesz dodać wysyłkę maila (Resend, Supabase, itp.)
-  // przykładowo:
-  // await resend.emails.send({ ... })
-
-  return new Response(
-    JSON.stringify({ success: true, data: payload }),
-    { status: 200 }
-  )
+    return NextResponse.json(
+      { success: true, message: 'Message received' },
+      { status: 200 }
+    );
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json(
+      { success: false, error: 'Failed to process form' },
+      { status: 500 }
+    );
+  }
 }
