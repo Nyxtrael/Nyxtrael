@@ -1,14 +1,10 @@
 [build]
-  command   = "npm run build"
-  publish   = ".next"
+  command = "npm run build"
+  publish = ".next"
   environment = { NEXT_PRIVATE_TARGET = "server" }
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-  [plugins.inputs]
-    # Używamy dedykowanego runtime’u dla Netlify + pomijamy middleware (jeśli nie używasz)
-    nextRuntime     = "@netlify/next-runtime"
-    skipMiddleware  = true
 
 [[redirects]]
   from   = "/*"
