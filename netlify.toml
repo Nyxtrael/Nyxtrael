@@ -1,12 +1,10 @@
-[build]
-  command   = "npm run build"
-  publish   = ".next"
-  environment = { NEXT_PRIVATE_TARGET = "server" }
-
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+  [plugins.inputs]
+    # jeśli chcesz pominąć middleware
+    skipMiddleware = true
 
-[[redirects]]
-  from   = "/*"
-  to     = "/index.html"
-  status = 200
+# definicja formularza Netlify
+[[forms]]
+  name = "contact"
+  path = "app/api/contact/route.js"
