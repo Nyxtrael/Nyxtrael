@@ -1,6 +1,6 @@
+// src/app/api/contact/route.js
 import { NextResponse } from 'next/server';
-import Resend from 'resend';
-
+import { Resend } from 'resend';                // ← tutaj zmiana
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request) {
@@ -14,17 +14,16 @@ export async function POST(request) {
       );
     }
 
- 
     await resend.emails.send({
-      from: 'nyxtrael@yourdomain.com',      
-      to: 'nyxtrael@yourdomain.com',        
+      from: 'nyxtrael@yourdomain.com',
+      to:   'nyxtrael@yourdomain.com',
       subject: `New inquiry from ${name}`,
       html: `
         <h2>New contact request</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Service:</strong> ${service}</p>
-        <p><strong>Message:</strong><br/>${message.replace(/\n/g, '<br/>')}</p>
+        <p><strong>Message:</strong><br/>${message.replace(/\n/g,'<br/>')}</p>
       `
     });
 
