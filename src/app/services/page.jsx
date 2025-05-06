@@ -300,9 +300,9 @@ export default function ServicesPage() {
             className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl space-y-4"
             name="contact-services"
             method="POST"
-            data-netlify="true"
+            
           >
-            <input type="hidden" name="form-name" value="contact-services" />
+           
             <input
               name="name" placeholder="Your Name"
               value={formData.name} onChange={handleFormChange}
