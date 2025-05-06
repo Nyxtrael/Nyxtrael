@@ -160,12 +160,12 @@ export default function ContactPage() {
           <form
             action="/api/contact"
             method="POST"
-            data-netlify="true"
+            
             name="contact"
             className="space-y-6"
           >
             {/* Netlify Forms hidden field */}
-            <input type="hidden" name="form-name" value="contact" />
+           
 
             <fieldset className="space-y-6">
               <legend className="sr-only">Contact Form</legend>
