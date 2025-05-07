@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
@@ -32,7 +32,7 @@ export default function Home() {
     return () => clearTimeout(t);
   }, []);
 
-  // Parallax effecta
+  // Parallax effect
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [0, 50]);
 
@@ -127,16 +127,15 @@ export default function Home() {
           </a>
 
           {/* Dark mode toggle */}
-     <motion.button
-  onClick={() => setDarkMode(!darkMode)}
-  className="fixed bottom-4 right-4 z-50 p-3 rounded-full bg-[#3b2c5e] hover:bg-[#5d3aa6] text-white backdrop-blur-md shadow-lg transition-all"
-  whileHover={{ scale: 1.1 }}
-  whileTap={{ scale: 0.95 }}
-  aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
->
-  {darkMode ? '🌞' : '🌙'}
-</motion.button>
-
+          <motion.button
+            onClick={toggleDarkMode}
+            className="fixed bottom-4 right-4 z-50 p-3 rounded-full bg-[#3b2c5e] hover:bg-[#5d3aa6] text-white backdrop-blur-md shadow-lg transition-all"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {darkMode ? '🌞' : '🌙'}
+          </motion.button>
 
           {/* Stars (only in dark mode) */}
           {darkMode && (
@@ -197,7 +196,7 @@ export default function Home() {
           {/* CTA */}
           <section className="relative z-10 text-center max-w-xl mx-auto mb-20">
             <h2 className="text-3xl font-bold font-playfair mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-               Ready for a Stand-Out Website?
+              Ready for a Stand-Out Website?
             </h2>
             <p className="text-neutral-300 font-inter mb-6">Let's create something magical together!</p>
             <MotionLink
@@ -223,16 +222,14 @@ export default function Home() {
                   required
                   aria-required="true"
                 />
-                <MotionLink
-                  href="#"
+                <motion.button
                   type="submit"
                   className="bg-pink-600 text-white px-6 py-2 rounded-full font-semibold font-inter"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={(e) => e.preventDefault() || handleNewsletterSubmit(e)}
                 >
                   Subscribe
-                </MotionLink>
+                </motion.button>
               </div>
             </form>
 
