@@ -1,4 +1,4 @@
-// /src/app/Portfolio/[slug]/metadata.js
+// /src/app/portfolio/[slug]/metadata.js
 import galleryData from '../../../../data/gallery.json';
 
 export function generateMetadata({ params }) {

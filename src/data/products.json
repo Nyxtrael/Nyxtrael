@@ -11,13 +11,13 @@
     "name": "Portfolio Website Template",
     "description": "A responsive website template for artists and creatives.",
     "price": 50,
-    "image": "/images/web-design-sample.jpg"
+    "image": "/images/web-design-sample.png"
   },
   {
     "id": 3,
     "name": "Cinematic Intro Video",
     "description": "A professional video intro for your brand or project.",
     "price": 30,
-    "image": "/images/video-editing-sample.jpg"
+    "image": "/images/video-editing-sample.png"
   }
 ]

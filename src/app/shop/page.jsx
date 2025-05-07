@@ -324,17 +324,61 @@ export default function ShopPage() {
               </button>
             </form>
           </div>
-          <div className="flex justify-center gap-8">
-            <Link href="/faq" className="hover:text-pink-400">FAQ</Link>
-            <Link href="/terms" className="hover:text-pink-400">Terms</Link>
-            <Link href="/privacy" className="hover:text-pink-400">Privacy</Link>
-            <Link href="/contact" className="hover:text-pink-400">Contact</Link>
-          </div>
-          <div className="flex justify-center gap-6">
-            <a href="mailto:nyxtrael@example.com" aria-label="Email" className="hover:text-pink-400">📧</a>
-            <a href="https://instagram.com/nyxtrael" aria-label="Instagram" className="hover:text-pink-400">📷</a>
-            <a href="https://x.com/nyxtrael" aria-label="X" className="hover:text-pink-400">🐦</a>
-          </div>
+         
+        <div className="flex justify-center space-x-6 mb-4">
+              <a
+                href="mailto:nyxtrael@example.com"
+                aria-label="Email Nyxtrael"
+                className="p-2 rounded-full hover:scale-110 transition-transform"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6 text-white hover:text-pink-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 12.713l-11.5-7.5V19h23V5.213L12 12.713zM23 4H1v1.213l11 7.287 11-7.287V4z"/>
+                </svg>
+              </a>
+              <a
+                href="https://instagram.com/nyxtrael"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Nyxtrael on Instagram"
+                className="p-2 rounded-full hover:scale-110 transition-transform"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6 text-white hover:text-pink-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5a4.25 4.25 0 00-4.25-4.25h-8.5zm9.25 2.25a1 1 0 110 2 1 1 0 010-2zm-5 1.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 1.5a3 3 0 100 6 3 3 0 000-6z"/>
+                </svg>
+              </a>
+              <a
+                href="https://x.com/nyxtrael"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Nyxtrael on X"
+                className="p-2 rounded-full hover:scale-110 transition-transform"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6 text-white hover:text-pink-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M18.9 2h3.6l-7.9 9.2 9.3 12.3h-7.2l-5.6-7.4-6.4 7.4H2l8.5-9.9L1.5 2h7.4l5.1 6.8L18.9 2zM16.8 19.5h2L7.2 4.5H5.1l11.7 15z"/>
+                </svg>
+              </a>
+            </div>
           <p>© 2025 Nyxtrael</p>
         </footer>
       </div>

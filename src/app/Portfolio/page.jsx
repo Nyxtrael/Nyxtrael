@@ -233,44 +233,61 @@ export default function PortfolioPage() {
         </section>
 
         {/* ===== FOOTER ===== */}
-        <footer className="mt-16 text-center text-neutral-400 space-y-4">
-          <div className="flex justify-center gap-6">
-            <a
-              href="mailto:nyxtrael@example.com"
-              aria-label="Email Nyxtrael"
-              className="hover:text-pink-400"
-            >
-              {/* Envelope SVG */}
-              <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
-                <path d="M2 4h20v16H2V4zm2 2v12h16V6H4zm8 5L4 6h16l-8 5z" />
-              </svg>
-            </a>
-            <a
-              href="https://instagram.com/nyxtrael"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="hover:text-pink-400"
-            >
-              {/* Instagram SVG */}
-              <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
-                <path d="M7.5 2h9A5.5 5.5 0 0122 7.5v9A5.5 5.5 0 0116.5 22h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2zm0 1.5A4 4 0 003.5 7.5v9a4 4 0 004 4h9a4 4 0 004-4v-9a4 4 0 00-4-4h-9z" />
-                <circle cx="12" cy="12" r="3.5" />
-              </svg>
-            </a>
-            <a
-              href="https://twitter.com/nyxtrael"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Twitter"
-              className="hover:text-pink-400"
-            >
-              {/* Twitter SVG */}
-              <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
-                <path d="M22 5.5a8.3 8.3 0 01-2.4.7 4.2 4.2 0 001.8-2.3 8.4 8.4 0 01-2.7 1 4.2 4.2 0 00-7.2 3.9A12 12 0 013 4.6a4.2 4.2 0 001.3 5.6 4 4 0 01-1.9-.5v.1a4.2 4.2 0 003.4 4.1 4.2 4.2 0 01-1.9.1 4.2 4.2 0 003.9 2.9A8.5 8.5 0 012 19.5a12 12 0 006.5 1.9c7.8 0 12-6.5 12-12v-.5A8.6 8.6 0 0024 5.2a8.3 8.3 0 01-2.4.6z" />
-              </svg>
-            </a>
-          </div>
+       <footer className="text-center py-8 text-neutral-400 space-x-4">
+          <div className="flex justify-center space-x-6 mb-4">
+              <a
+                href="mailto:nyxtrael@example.com"
+                aria-label="Email Nyxtrael"
+                className="p-2 rounded-full hover:scale-110 transition-transform"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6 text-white hover:text-pink-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 12.713l-11.5-7.5V19h23V5.213L12 12.713zM23 4H1v1.213l11 7.287 11-7.287V4z"/>
+                </svg>
+              </a>
+              <a
+                href="https://instagram.com/nyxtrael"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Nyxtrael on Instagram"
+                className="p-2 rounded-full hover:scale-110 transition-transform"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6 text-white hover:text-pink-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5a4.25 4.25 0 00-4.25-4.25h-8.5zm9.25 2.25a1 1 0 110 2 1 1 0 010-2zm-5 1.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 1.5a3 3 0 100 6 3 3 0 000-6z"/>
+                </svg>
+              </a>
+              <a
+                href="https://x.com/nyxtrael"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Nyxtrael on X"
+                className="p-2 rounded-full hover:scale-110 transition-transform"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-6 h-6 text-white hover:text-pink-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M18.9 2h3.6l-7.9 9.2 9.3 12.3h-7.2l-5.6-7.4-6.4 7.4H2l8.5-9.9L1.5 2h7.4l5.1 6.8L18.9 2zM16.8 19.5h2L7.2 4.5H5.1l11.7 15z"/>
+                </svg>
+              </a>
+            </div>
         </footer>
       </main>
     </>
