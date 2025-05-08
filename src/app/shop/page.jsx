@@ -75,7 +75,6 @@ export default function ShopPage() {
       {/* Background video */}
       <video
         autoPlay muted loop playsInline
-        poster="/images/stars-fallback.jpg"
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover opacity-10 z-0"
       >

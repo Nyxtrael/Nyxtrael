@@ -242,7 +242,7 @@ export default function Home() {
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  Dziękujemy za subskrypcję!
+                  Thank you for subscribing!
                 </motion.div>
               )}
             </AnimatePresence>

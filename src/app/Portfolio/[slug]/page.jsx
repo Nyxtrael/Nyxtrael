@@ -1,4 +1,4 @@
-// /src/app/Portfolio/[slug]/page.jsx
+// /src/app/portfolio/[slug]/page.jsx
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
