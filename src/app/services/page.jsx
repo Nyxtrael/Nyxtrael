@@ -44,9 +44,9 @@ export default function ServicesPage() {
 
   // 📸 Featured Works carousel
   const featuredWorks = [
-    { title: 'Sunroom Diaries Illustration', src: '/images/illustration-sample.jpg', alt: 'Sunroom Diaries' },
-    { title: 'Portfolio Website Design', src: '/images/web-design-sample.png', alt: 'Web Design Mockup' },
-    { title: 'Shop Website Design', src: '/images/shop-design-sample.jpg', alt: 'Shop design' },
+    { title: 'Astral Divines Illustration', src: '/images/astral-divines-sample.jpg', alt: 'Astral Divines' },
+    { title: 'Portfolio Website Design', src: '/images/web-design-sample.png', alt: 'Web Design Mockup', href: '/photographer' },
+    { title: 'Astral Divines', src: '/images/astral-divines-sample.jpg', alt: 'Astral Divines', href: '/astral-divines' },
   ];
   const [currentWork, setCurrentWork] = useState(0);
   const nextWork = () => setCurrentWork((i) => (i + 1) % featuredWorks.length);
@@ -212,13 +212,15 @@ export default function ServicesPage() {
                 transition={{ duration:0.5 }}
                 className="mx-auto max-w-md group overflow-hidden rounded-lg shadow-lg cursor-pointer"
               >
-                <Image
-                  src={featuredWorks[currentWork].src}
-                  alt={featuredWorks[currentWork].alt}
-                  width={640}
-                  height={400}
-                  className="w-full h-auto object-cover group-hover:scale-105 transition"
-                />
+                <Link href={featuredWorks[currentWork].href || '#'}>
+                  <Image
+                    src={featuredWorks[currentWork].src}
+                    alt={featuredWorks[currentWork].alt}
+                    width={640}
+                    height={400}
+                    className="w-full h-auto object-cover group-hover:scale-105 transition"
+                  />
+                </Link>
                 <div className="p-4 bg-black/60 text-white">
                   <p className="font-semibold">{featuredWorks[currentWork].title}</p>
                 </div>

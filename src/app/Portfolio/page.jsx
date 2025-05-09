@@ -196,7 +196,7 @@ export default function PortfolioPage() {
             </h2>
             <div className="flex flex-col gap-4">
               <Link
-                href="/case-studies/photographer-portfolio"
+                href="/photographer"
                 className="group block p-4 rounded-lg bg-black/50 hover:bg-black/40 transition"
               >
                 <div className="flex items-center gap-4">
