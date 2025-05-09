@@ -1,0 +1,16 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  safelist: [
+    'bg-[#fefae0]',
+    'text-neutral-900',
+    'bg-black',
+    'text-white',
+  ],
+  plugins: [],
+}
