@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 
@@ -126,17 +125,6 @@ export default function Home() {
             Skip to content
           </a>
 
-          {/* Dark mode toggle */}
-          <motion.button
-            onClick={toggleDarkMode}
-            className="fixed bottom-4 right-4 z-50 p-3 rounded-full bg-[#3b2c5e] hover:bg-[#5d3aa6] text-white backdrop-blur-md shadow-lg transition-all"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {darkMode ? '🌞' : '🌙'}
-          </motion.button>
-
           {/* Stars (only in dark mode) */}
           {darkMode && (
             <div className="absolute inset-0 z-0">
@@ -166,13 +154,10 @@ export default function Home() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <Image
+                <img
                   src="/images/Persona.png"
                   alt="Nyxtrael – Senior Web Designer"
-                  width={120}
-                  height={120}
-                  className="rounded-full border-4 border-pink-400 mx-auto"
-                  priority
+                  className="rounded-full border-4 border-pink-400 mx-auto w-[120px] h-[120px]"
                 />
               </motion.div>
               <h1 className="text-4xl md:text-6xl font-bold font-playfair mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -301,7 +286,7 @@ export default function Home() {
                 </svg>
               </a>
             </div>
-            <p>&copy; {new Date().getFullYear()} Nyxtrael. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Nyxtrael. All rights reserved.</p>
           </footer>
         </main>
       )}
