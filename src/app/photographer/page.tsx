@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Camera, Mail, Instagram } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 // Placeholder image URLs (replace with your own hosted images or CMS integration)
@@ -36,13 +35,10 @@ const PhotographerPortfolio: React.FC = () => {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/photographer/hero.jpg" // Replace with your hero image
+          <img
+            src="/photographer/hero.jpg"
             alt="Photographer Hero"
-            layout="fill"
-            objectFit="cover"
-            className="opacity-50"
-            priority
+            className="w-full h-full object-cover opacity-50"
           />
           <div className="absolute inset-0 bg-black bg-opacity-60" />
         </div>
@@ -90,12 +86,10 @@ const PhotographerPortfolio: React.FC = () => {
             viewport={{ once: true }}
             className="relative h-80"
           >
-            <Image
-              src="/photographer/artist.jpg" // Replace with artist portrait
+            <img
+              src="/photographer/artist.jpg"
               alt="Photographer"
-              layout="fill"
-              objectFit="cover"
-              className="rounded-lg"
+              className="w-full h-full object-cover rounded-lg"
             />
           </motion.div>
         </div>
@@ -115,12 +109,10 @@ const PhotographerPortfolio: React.FC = () => {
               onMouseEnter={() => setHoveredImage(index)}
               onMouseLeave={() => setHoveredImage(null)}
             >
-              <Image
+              <img
                 src={src}
                 alt={`Gallery Image ${index + 1}`}
-                layout="fill"
-                objectFit="cover"
-                className="transition-opacity"
+                className="w-full h-full object-cover transition-opacity"
               />
               <AnimatePresence>
                 {hoveredImage === index && (
@@ -162,8 +154,6 @@ const PhotographerPortfolio: React.FC = () => {
           </div>
         </div>
       </section>
-
-      
     </div>
   );
 };

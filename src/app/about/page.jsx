@@ -3,7 +3,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function About() {
@@ -126,8 +125,6 @@ export default function About() {
         `}} />
       </Head>
 
-      
-
       {/* HERO */}
       <section className="relative flex flex-col items-center justify-center text-center min-h-[80vh] overflow-hidden">
         <video
@@ -156,13 +153,10 @@ export default function About() {
           transition={{ duration: 1.2, repeat: Infinity, repeatType: 'mirror' }}
           className="relative z-10 mb-6 w-24 h-24"
         >
-          <Image
+          <img
             src="/images/persona.png"
             alt="Logo"
-            width={96}
-            height={96}
-            className="rounded-full border-4 border-pink-400"
-            loading="lazy"
+            className="rounded-full border-4 border-pink-400 w-full h-full"
           />
         </motion.div>
 
@@ -347,13 +341,10 @@ export default function About() {
                 className="mx-auto max-w-lg rounded-lg overflow-hidden shadow-lg"
               >
                 <Link href={projects[currentProject].href} className="block">
-                  <Image
+                  <img
                     src={projects[currentProject].src}
                     alt={projects[currentProject].alt}
-                    width={800}
-                    height={500}
                     className="w-full h-[300px] object-cover"
-                    loading="lazy"
                   />
                   <div className="p-4 bg-white/10 backdrop-blur-md">
                     <h3 className="font-semibold">{projects[currentProject].title}</h3>
@@ -496,7 +487,7 @@ export default function About() {
                 </svg>
               </a>
             </div>
-            <p>&copy; {new Date().getFullYear()} Nyxtrael. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Nyxtrael. All rights reserved.</p>
         </footer>
 
       </main>

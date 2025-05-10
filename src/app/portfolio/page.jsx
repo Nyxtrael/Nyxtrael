@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import GalleryGrid from '../../components/GalleryGrid';
 import galleryData from '../../data/gallery.json';
@@ -73,12 +72,10 @@ export default function PortfolioPage() {
           transition={{ duration: 1.2, repeat: Infinity, repeatType: 'mirror' }}
           className="relative z-10 mb-6 w-24 h-24"
         >
-          <Image
+          <img
             src="/images/persona.png"
             alt="Nyxtrael avatar"
-            width={96}
-            height={96}
-            className="rounded-full border-4 border-pink-400"
+            className="rounded-full border-4 border-pink-400 w-full h-full"
           />
         </motion.div>
 
@@ -233,7 +230,7 @@ export default function PortfolioPage() {
         </section>
 
         {/* ===== FOOTER ===== */}
-       <footer className="text-center py-8 text-neutral-400 space-x-4">
+        <footer className="text-center py-8 text-neutral-400 space-x-4">
           <div className="flex justify-center space-x-6 mb-4">
               <a
                 href="mailto:nyxtrael@example.com"

@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Paintbrush, Monitor, Film } from 'lucide-react';
 
@@ -110,7 +109,6 @@ export default function ServicesPage() {
         <video
           autoPlay muted loop playsInline
           className="absolute inset-0 w-full h-full object-cover opacity-10"
-          
           aria-hidden="true"
         >
           <source src="/videos/hero-background.mp4" type="video/mp4" />
@@ -213,11 +211,9 @@ export default function ServicesPage() {
                 className="mx-auto max-w-md group overflow-hidden rounded-lg shadow-lg cursor-pointer"
               >
                 <Link href={featuredWorks[currentWork].href || '#'}>
-                  <Image
+                  <img
                     src={featuredWorks[currentWork].src}
                     alt={featuredWorks[currentWork].alt}
-                    width={640}
-                    height={400}
                     className="w-full h-auto object-cover group-hover:scale-105 transition"
                   />
                 </Link>
@@ -259,12 +255,10 @@ export default function ServicesPage() {
                 transition={{ duration:0.5 }}
                 className="bg-white/10 backdrop-blur-md p-8 rounded-2xl mx-4 shadow-lg"
               >
-                <Image
+                <img
                   src={testimonials[currentTestimonial].logo}
                   alt={testimonials[currentTestimonial].author}
-                  width={64}
-                  height={64}
-                  className="mx-auto mb-4"
+                  className="mx-auto mb-4 w-16 h-16"
                 />
                 <p className="italic text-gray-300 mb-4">
                   {testimonials[currentTestimonial].quote}
@@ -302,9 +296,7 @@ export default function ServicesPage() {
             className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl space-y-4"
             name="contact-services"
             method="POST"
-            
           >
-           
             <input
               name="name" placeholder="Your Name"
               value={formData.name} onChange={handleFormChange}
@@ -332,7 +324,7 @@ export default function ServicesPage() {
               Send Message
             </button>
           </form>
-         <div className="flex justify-center space-x-6 mb-4">
+          <div className="flex justify-center space-x-6 mb-4">
               <a
                 href="mailto:nyxtrael@example.com"
                 aria-label="Email Nyxtrael"

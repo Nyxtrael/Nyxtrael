@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 import { ShoppingCart } from 'lucide-react';
 import { useContext, useState } from 'react';
 import { CartContext } from '../context/CartContext';
@@ -26,12 +25,10 @@ export default function Navbar() {
     <>
       <nav className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-black bg-opacity-60 backdrop-blur-md text-sm text-white sticky top-0 z-50">
         <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-purple-500">
-          <Image
+          <img
             src="/logo.png"
             alt="Nyxtrael logo"
-            width={32}
-            height={32}
-            className="rounded-sm"
+            className="rounded-sm w-8 h-8"
           />
           <span className="font-bold text-lg">Nyxtrael</span>
         </Link>
