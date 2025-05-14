@@ -272,10 +272,10 @@ const AgencyPage = () => {
               placeholder="Your Email"
               className="w-full max-w-md p-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-300"
             />
-            <textarea
+          <textarea
               placeholder="Your Message"
               className="w-full max-w-md p-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-300"
-              rows="4"
+              rows={4}
             ></textarea>
             <button className="px-6 py-3 bg-yellow-300 text-teal-600 font-semibold rounded-full hover:bg-yellow-400 transition">
               Send Message
