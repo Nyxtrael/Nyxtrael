@@ -1,8 +1,7 @@
 {
   "name": "site",
   "version": "0.1.0",
-  "private": true,
-  "type": "module", 
+  "private": true, 
   "scripts": {
     "dev": "next dev",
     "build": "next build",
