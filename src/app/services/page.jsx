@@ -1,389 +1,385 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Head from 'next/head';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Paintbrush, Monitor, Film } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 
-export default function ServicesPage() {
-  // ⭐ Parallax stars
+const services = [
+  {
+    title: 'Web Development',
+    desc: 'Custom websites, e-commerce solutions, and CMS integration. Boost your online presence with SEO-optimized sites.',
+    image: '/images/services/web-development.jpg',
+  },
+  {
+    title: 'Web Design',
+    desc: 'UI/UX design, responsive layouts, and animation integration to make your brand stand out.',
+    image: '/images/services/web-design.jpg',
+  },
+  {
+    title: 'Animations & Illustrations',
+    desc: 'Custom motion graphics and illustrations to bring your vision to life.',
+    image: '/images/services/animations-illustrations.jpg',
+  },
+];
+
+const featuredServices = [
+  {
+    title: 'Crafting Digital Experiences',
+    desc: 'Bespoke web development with a focus on performance and SEO.',
+    image: '/images/services/featured/web-development.jpg',
+  },
+  {
+    title: 'Designing the Future',
+    desc: 'Stunning UI/UX designs with seamless animations.',
+    image: '/images/services/featured/web-design.jpg',
+  },
+  {
+    title: 'Bringing Art to Life',
+    desc: 'Custom illustrations and motion graphics for your brand.',
+    image: '/images/services/featured/animations.jpg',
+  },
+];
+
+const testimonials = [
+  { text: 'Nyxtrael transformed our website with stunning designs!', author: 'Jane Doe, Creative Director' },
+  { text: 'Amazing development skills and quick turnaround!', author: 'John Smith, CEO' },
+];
+
+// JSON-LD schema
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Services by Nyxtrael',
+  url: 'https://nyxtrael.netlify.app/services',
+  description: 'Web Development Services by Nyxtrael - Custom sites, SEO optimization, animations, and illustrations.',
+  provider: {
+    '@type': 'Organization',
+    name: 'Nyxtrael',
+    url: 'https://nyxtrael.netlify.app',
+  },
+  serviceType: ['Web Development', 'Web Design', 'Animations', 'Illustrations'],
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
+};
+
+export default function Services() {
+  const { darkMode, toggleDarkMode } = useTheme();
   const [stars, setStars] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [useImageBackground, setUseImageBackground] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const heroRef = useRef(null);
+
+  // Check for prefers-reduced-motion to toggle video/image background
   useEffect(() => {
-    setStars(
-      Array.from({ length: 8 }, () => ({
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        delay: Math.random() * 2,
-      }))
-    );
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setUseImageBackground(mediaQuery.matches);
+    setIsClient(true); // For client-side rendering of stars
   }, []);
 
-  // 🛠 Services data
-  const services = [
-    {
-      title: 'Custom Illustrations',
-      desc: 'High-quality artwork for branding, games & fantasy projects—tailored to your vision.',
-      href: '/services/illustrations',
-      Icon: Paintbrush,
-    },
-    {
-      title: 'Web Design',
-      desc: 'Responsive, SEO-friendly websites to showcase your brand or portfolio with style.',
-      href: '/services/web-design',
-      Icon: Monitor,
-    },
-    {
-      title: 'Motion & Video',
-      desc: 'Cinematic video edits, reels & micro-interactions that elevate your storytelling.',
-      href: '/services/video-editing',
-      Icon: Film,
-    },
-  ];
-
-  // 📸 Featured Works carousel
-  const featuredWorks = [
-    { title: 'Astral Divines Illustration', src: '/images/astral-divines-sample.jpg', alt: 'Astral Divines' },
-    { title: 'Portfolio Website Design', src: '/images/web-design-sample.png', alt: 'Web Design Mockup', href: '/photographer' },
-    { title: 'Astral Divines', src: '/images/astral-divines-sample.jpg', alt: 'Astral Divines', href: '/astral-divines' },
-  ];
-  const [currentWork, setCurrentWork] = useState(0);
-  const nextWork = () => setCurrentWork((i) => (i + 1) % featuredWorks.length);
-  const prevWork = () => setCurrentWork((i) => (i - 1 + featuredWorks.length) % featuredWorks.length);
-
-  // 💬 Testimonials carousel
-  const testimonials = [
-    {
-      quote: '“The illustrations brought my game to life… process was smooth from start to finish.”',
-      author: 'Maria, Game Dev @PixelWitch',
-      logo: '/images/clients/pixelwitch-logo.png',
-    },
-    {
-      quote: '“My portfolio website looks amazing… delivered a design that exceeded my expectations.”',
-      author: 'John, Photographer @LumenEye',
-      logo: '/images/clients/lumeneye-logo.png',
-    },
-    {
-      quote: '“The video edit was cinematic and professional—boosted my brand’s visibility.”',
-      author: 'Alex, Small Business Owner',
-      logo: '/images/clients/alex-logo.png',
-    },
-  ];
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const nextTestimonial = () => setCurrentTestimonial((i) => (i + 1) % testimonials.length);
-  const prevTestimonial = () => setCurrentTestimonial((i) => (i - 1 + testimonials.length) % testimonials.length);
-
-  // 📬 Contact form
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [formError, setFormError] = useState('');
-  const [formSuccess, setFormSuccess] = useState('');
-  const handleFormChange = (e) => {
-    setFormData((p) => ({ ...p, [e.target.name]: e.target.value }));
-  };
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const { name, email, message } = formData;
-    if (!name || !email || !message) {
-      setFormError('Please fill in all fields.');
-      return;
+  // Generate stars on the client side
+  useEffect(() => {
+    if (isClient) {
+      setStars(
+        Array.from({ length: 15 }, () => ({
+          top: `${Math.random() * 100}%`,
+          left: `${Math.random() * 100}%`,
+          delay: Math.random() * 2,
+        }))
+      );
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setFormError('Please enter a valid email address.');
-      return;
-    }
-    setFormError('');
-    setFormSuccess('Message sent successfully! I’ll get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
-  };
+  }, [isClient]);
+
+  // Auto-scroll carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % featuredServices.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [featuredServices.length]);
+
+  // Parallax effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset;
+      if (heroRef.current) {
+        heroRef.current.style.backgroundPositionY = `${-scrollTop * 0.3}px`;
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <Head>
-        <title>Services – Nyxtrael | Web Design & Motion</title>
-        <meta name="description" content="Nyxtrael’s services: illustrations, web design & motion." />
-        <link rel="canonical" href="https://nyxtrael.com/services" />
-      </Head>
+      {/* JSON-LD for SEO */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <main className="relative min-h-screen bg-[radial-gradient(circle_at_top,rgba(255,105,180,0.2),transparent),linear-gradient(to_bottom,#1A1A2E,#2A2A3E)] overflow-hidden text-white">
-        {/* Background video */}
-        <video
-          autoPlay muted loop playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-10"
-          aria-hidden="true"
-        >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
-        </video>
+      <section
+        ref={heroRef}
+        className={`relative flex flex-col items-center justify-center text-center overflow-hidden min-h-screen px-6 md:px-16 ${
+          darkMode
+            ? 'bg-[radial-gradient(circle,rgba(45,212,191,0.1),transparent),linear-gradient(to_bottom,#1a0e2a,#0c0f1e)]'
+            : 'bg-gradient-to-b from-gray-200 to-gray-50'
+        } bg-fixed`}
+      >
+        {useImageBackground ? (
+          <div
+            className="absolute inset-0 w-full h-full bg-cover bg-center opacity-10"
+            style={{ backgroundImage: "url('/images/services-bg.jpg')" }}
+            aria-hidden="true"
+          />
+        ) : (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-10"
+            poster="/images/stars-fallback.png"
+            aria-hidden="true"
+          >
+            <source src="/videos/6917331_Motion Graphics_Motion Graphic_1280x720.mp4" type="video/mp4" />
+          </video>
+        )}
 
-        {/* Parallax stars */}
-        <div className="absolute inset-0 pointer-events-none">
-          {stars.map((s,i) => (
+        {isClient &&
+          stars.map((s, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-pink-400 to-purple-500"
-              style={{ top: s.top, left: s.left }}
-              animate={{ y: ['0%','5%','0%'], opacity: [0,1,0] }}
-              transition={{ duration:4, repeat:Infinity, delay:s.delay }}
+              className="absolute rounded-full bg-gradient-to-r from-teal-400 to-fuchsia-400"
+              style={{ top: s.top, left: s.left, width: 2, height: 2 }}
+              animate={{ opacity: [0, 1, 0] }}
+              transition={{ duration: 2, repeat: Infinity, delay: s.delay }}
             />
           ))}
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1, rotate: [0, 3, -3, 0] }}
+          transition={{ duration: 1.2, repeat: Infinity, repeatType: 'mirror' }}
+          className="relative z-10 mb-6 w-24 h-24"
+        >
+          <motion.img
+            src="/images/persona.png"
+            alt="Nyxtrael avatar"
+            className="rounded-full border-4 border-fuchsia-400 w-full h-full"
+            animate={{ scale: [1, 1.05, 1], rotate: 360 }}
+            transition={{ duration: 4, repeat: Infinity, repeatType: 'reverse' }}
+          />
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className={`relative z-10 font-bold text-5xl md:text-6xl mb-2 font-playfair ${
+            darkMode ? 'text-white' : 'text-gray-900'
+          }`}
+        >
+          Services by{' '}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-fuchsia-400">
+            Nyxtrael
+          </span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className={`relative z-10 text-lg font-inter max-w-2xl ${
+            darkMode ? 'text-neutral-300' : 'text-gray-700'
+          }`}
+        >
+          Elevate your brand with custom web solutions, stunning designs, and captivating animations.
+        </motion.p>
+
+        {/* Hero Carousel */}
+        <div className="relative w-full max-w-5xl mt-12 overflow-hidden rounded-2xl shadow-2xl">
+          <AnimatePresence initial={false} mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, x: 300 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -300 }}
+              transition={{ duration: 0.6, ease: 'easeInOut' }}
+              className="relative w-full h-72 md:h-96 rounded-2xl overflow-hidden"
+            >
+              <img
+                src={featuredServices[currentSlide].image}
+                alt={featuredServices[currentSlide].title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-center justify-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-center text-white p-6"
+                >
+                  <h2 className="text-2xl md:text-3xl font-bold font-playfair">{featuredServices[currentSlide].title}</h2>
+                  <p className="text-sm md:text-base font-inter">{featuredServices[currentSlide].desc}</p>
+                </motion.div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+          <button
+            onClick={() => setCurrentSlide((prev) => (prev - 1 + featuredServices.length) % featuredServices.length)}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
+            aria-label="Previous slide"
+          >
+            ‹
+          </button>
+          <button
+            onClick={() => setCurrentSlide((prev) => (prev + 1) % featuredServices.length)}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
+            aria-label="Next slide"
+          >
+            ›
+          </button>
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3">
+            {featuredServices.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                className={`w-3 h-3 rounded-full ${idx === currentSlide ? 'bg-fuchsia-400' : 'bg-white bg-opacity-60'} hover:bg-fuchsia-300 transition-colors`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* ===== HERO ===== */}
-        <section className="relative z-10 flex flex-col items-center text-center pt-24 pb-12 px-6 md:px-16">
-          <motion.h1
-            initial={{ opacity:0, y:-20 }}
-            animate={{ opacity:1, y:0 }}
-            transition={{ duration:0.8 }}
-            className="text-5xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400"
+        <motion.a
+          href="#main-content"
+          animate={{ opacity: 1, y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="absolute bottom-8 z-10 text-fuchsia-400"
+          aria-label="Scroll to main content"
+        >
+          <span className="sr-only">Scroll to main content</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-8 h-8"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            Services
-          </motion.h1>
-          <motion.p
-            initial={{ opacity:0, y:10 }}
-            animate={{ opacity:1, y:0 }}
-            transition={{ duration:0.8, delay:0.2 }}
-            className="text-lg text-gray-300 max-w-2xl mb-8"
-          >
-            Discover custom Illustrations, Responsive Web Design & Cinematic Motion—all crafted to bring your vision to life.
-          </motion.p>
-          <motion.div
-            initial={{ opacity:0, scale:0.9 }}
-            animate={{ opacity:1, scale:1 }}
-            transition={{ duration:0.8, delay:0.4 }}
-          >
-            <Link href="/order" className="bg-gradient-to-r from-purple-600 to-pink-500 px-8 py-3 rounded-full text-white font-semibold shadow-lg hover:scale-105 transform transition">
-              Hire Me Today
-            </Link>
-          </motion.div>
-        </section>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </motion.a>
+      </section>
 
-        {/* ===== SERVICES CARDS ===== */}
-        <section className="relative z-10 max-w-6xl mx-auto px-6 md:px-0 py-12">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once:true }}
-            variants={{
-              hidden: {},
-              visible:{ transition:{ staggerChildren:0.2 } }
-            }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-10"
-          >
-            {services.map(({ title, desc, href, Icon }) => (
+      <main
+        id="main-content"
+        className={`relative z-10 px-6 py-16 md:px-16 space-y-20 ${
+          darkMode
+            ? 'bg-[radial-gradient(circle,rgba(45,212,191,0.1),transparent),linear-gradient(to_bottom,#1a0e2a,#0c0f1e)] text-white'
+            : 'bg-gradient-to-b from-gray-200 to-gray-50 text-gray-900'
+        }`}
+      >
+        <motion.button
+          onClick={toggleDarkMode}
+          className="fixed top-4 right-4 p-2 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white shadow-md hover:shadow-lg transition-shadow"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          <span className="sr-only">{darkMode ? 'Switch to light mode' : 'Switch to dark mode'}</span>
+          {darkMode ? '🌞' : '🌙'}
+        </motion.button>
+
+        <section className="max-w-6xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-semibold mb-16 font-playfair bg-gradient-to-r from-teal-400 to-fuchsia-400 bg-clip-text text-transparent">
+            My Services
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {services.map((service, i) => (
               <motion.div
-                key={title}
-                variants={{
-                  hidden:{ opacity:0, y:20 },
-                  visible:{ opacity:1, y:0 }
-                }}
-                className="group bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 flex flex-col hover:shadow-pink-500/30 hover:scale-105 transition"
+                key={service.title}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="relative rounded-2xl overflow-hidden shadow-lg group"
               >
-                <Icon className="w-12 h-12 text-gray-200 mb-4 group-hover:text-pink-400 transition-colors" />
-                <h3 className="text-2xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
-                  {title}
-                </h3>
-                <p className="text-gray-300 flex-1 mb-4">{desc}</p>
-                <Link href={href} className="text-pink-400 font-medium hover:underline">
-                  View Details →
-                </Link>
+                <motion.img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-64 object-cover"
+                  initial={{ scale: 1 }}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 transition-opacity duration-300 group-hover:bg-opacity-80"
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                >
+                  <h3 className="text-xl md:text-2xl font-bold font-playfair text-white mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm md:text-base font-inter text-neutral-200 mb-4">
+                    {service.desc}
+                  </p>
+                  <Link
+                    href="/contact"
+                    className="inline-block px-6 py-2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white rounded-lg font-inter shadow-md hover:shadow-xl transition-all duration-300"
+                  >
+                    Hire Me Today →
+                  </Link>
+                </motion.div>
+                <motion.div
+                  className="absolute top-0 right-0 w-20 h-20 bg-purple-500 bg-opacity-20 rounded-bl-full transform translate-x-1/2 -translate-y-1/2"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <motion.div
+                  className="absolute inset-0 border-2 border-fuchsia-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={{ scale: 0.9 }}
+                  whileHover={{ scale: 1, borderWidth: 4 }}
+                />
               </motion.div>
             ))}
-          </motion.div>
-        </section>
-
-        {/* ===== FEATURED WORKS ===== */}
-        <section className="relative z-10 max-w-4xl mx-auto px-6 md:px-0 py-12 text-center">
-          <motion.h2
-            initial={{ opacity:0, y:20 }}
-            whileInView={{ opacity:1, y:0 }}
-            transition={{ duration:0.8 }}
-            className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400"
-          >
-            Featured Works
-          </motion.h2>
-          <div className="relative">
-            <AnimatePresence initial={false} mode="wait">
-              <motion.div
-                key={currentWork}
-                initial={{ opacity:0, x:50 }}
-                animate={{ opacity:1, x:0 }}
-                exit={{ opacity:0, x:-50 }}
-                transition={{ duration:0.5 }}
-                className="mx-auto max-w-md group overflow-hidden rounded-lg shadow-lg cursor-pointer"
-              >
-                <Link href={featuredWorks[currentWork].href || '#'}>
-                  <img
-                    src={featuredWorks[currentWork].src}
-                    alt={featuredWorks[currentWork].alt}
-                    className="w-full h-auto object-cover group-hover:scale-105 transition"
-                  />
-                </Link>
-                <div className="p-4 bg-black/60 text-white">
-                  <p className="font-semibold">{featuredWorks[currentWork].title}</p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-            <button
-              onClick={prevWork}
-              className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/10 p-2 rounded-full hover:bg-pink-500 hover:text-white transition"
-              aria-label="Previous work"
-            >←</button>
-            <button
-              onClick={nextWork}
-              className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/10 p-2 rounded-full hover:bg-pink-500 hover:text-white transition"
-              aria-label="Next work"
-            >→</button>
           </div>
         </section>
 
-        {/* ===== TESTIMONIALS ===== */}
-        <section className="relative z-10 max-w-3xl mx-auto px-6 md:px-0 py-12">
-          <motion.h2
-            initial={{ opacity:0, y:20 }}
-            whileInView={{ opacity:1, y:0 }}
-            transition={{ duration:0.8 }}
-            className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 text-center"
-          >
+        <section className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-semibold mb-12 font-playfair bg-gradient-to-r from-teal-400 to-fuchsia-400 bg-clip-text text-transparent">
             What Clients Say
-          </motion.h2>
-          <div className="relative">
-            <AnimatePresence initial={false} mode="wait">
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {testimonials.map((testimonial, i) => (
               <motion.div
-                key={currentTestimonial}
-                initial={{ opacity:0, x:50 }}
-                animate={{ opacity:1, x:0 }}
-                exit={{ opacity:0, x:-50 }}
-                transition={{ duration:0.5 }}
-                className="bg-white/10 backdrop-blur-md p-8 rounded-2xl mx-4 shadow-lg"
+                key={testimonial.text}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.2 }}
+                className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-md"
               >
-                <img
-                  src={testimonials[currentTestimonial].logo}
-                  alt={testimonials[currentTestimonial].author}
-                  className="mx-auto mb-4 w-16 h-16"
-                />
-                <p className="italic text-gray-300 mb-4">
-                  {testimonials[currentTestimonial].quote}
-                </p>
-                <span className="text-gray-400 block text-center">
-                  {testimonials[currentTestimonial].author}
-                </span>
+                <p className="text-neutral-300 mb-2 font-inter">{testimonial.text}</p>
+                <p className="text-fuchsia-400 font-semibold font-inter">{testimonial.author}</p>
               </motion.div>
-            </AnimatePresence>
-            <button
-              onClick={prevTestimonial}
-              className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/10 p-2 rounded-full hover:bg-pink-500 hover:text-white transition"
-              aria-label="Previous testimonial"
-            >←</button>
-            <button
-              onClick={nextTestimonial}
-              className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/10 p-2 rounded-full hover:bg-pink-500 hover:text-white transition"
-              aria-label="Next testimonial"
-            >→</button>
+            ))}
           </div>
         </section>
 
-        {/* ===== CONTACT ===== */}
-        <section className="relative z-10 max-w-md mx-auto px-6 md:px-0 py-12">
-          <motion.h2
-            initial={{ opacity:0, y:20 }}
-            whileInView={{ opacity:1, y:0 }}
-            transition={{ duration:0.8 }}
-            className="text-2xl font-semibold mb-6 text-center"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center"
+        >
+          <Link
+            href="/contact"
+            className="inline-block px-8 py-4 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white rounded-full font-playfair text-xl shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            Get in Touch
-          </motion.h2>
-          <form
-            onSubmit={handleFormSubmit}
-            className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl space-y-4"
-            name="contact-services"
-            method="POST"
-          >
-            <input
-              name="name" placeholder="Your Name"
-              value={formData.name} onChange={handleFormChange}
-              className="w-full p-3 bg-black/50 text-white placeholder-gray-500 rounded focus:ring-2 focus:ring-pink-400 transition"
-              required
-            />
-            <input
-              name="email" type="email" placeholder="Your Email"
-              value={formData.email} onChange={handleFormChange}
-              className="w-full p-3 bg-black/50 text-white placeholder-gray-500 rounded focus:ring-2 focus:ring-pink-400 transition"
-              required
-            />
-            <textarea
-              name="message" placeholder="Your Message"
-              value={formData.message} onChange={handleFormChange}
-              className="w-full p-3 bg-black/50 text-white placeholder-gray-500 rounded focus:ring-2 focus:ring-pink-400 transition h-32"
-              required
-            />
-            {formError && <motion.p initial={{opacity:0}} animate={{opacity:1}} className="text-red-400">{formError}</motion.p>}
-            {formSuccess && <motion.p initial={{opacity:0}} animate={{opacity:1}} className="text-green-400">{formSuccess}</motion.p>}
-            <button
-              type="submit"
-              className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full hover:scale-105 transition"
-            >
-              Send Message
-            </button>
-          </form>
-          <div className="flex justify-center space-x-6 mb-4">
-              <a
-                href="mailto:nyxtrael@example.com"
-                aria-label="Email Nyxtrael"
-                className="p-2 rounded-full hover:scale-110 transition-transform"
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-6 h-6 text-white hover:text-pink-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M12 12.713l-11.5-7.5V19h23V5.213L12 12.713zM23 4H1v1.213l11 7.287 11-7.287V4z"/>
-                </svg>
-              </a>
-              <a
-                href="https://instagram.com/nyxtrael"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Nyxtrael on Instagram"
-                className="p-2 rounded-full hover:scale-110 transition-transform"
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-6 h-6 text-white hover:text-pink-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5a4.25 4.25 0 00-4.25-4.25h-8.5zm9.25 2.25a1 1 0 110 2 1 1 0 010-2zm-5 1.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 1.5a3 3 0 100 6 3 3 0 000-6z"/>
-                </svg>
-              </a>
-              <a
-                href="https://x.com/nyxtrael"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Nyxtrael on X"
-                className="p-2 rounded-full hover:scale-110 transition-transform"
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-6 h-6 text-white hover:text-pink-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M18.9 2h3.6l-7.9 9.2 9.3 12.3h-7.2l-5.6-7.4-6.4 7.4H2l8.5-9.9L1.5 2h7.4l5.1 6.8L18.9 2zM16.8 19.5h2L7.2 4.5H5.1l11.7 15z"/>
-                </svg>
-              </a>
-            </div>
-        </section>
-
-        {/* ===== FOOTER ===== */}
-        <footer className="relative z-10 text-center text-gray-500 py-8">
-          © 2025 Nyxtrael. All rights reserved.
-        </footer>
+            Get Started Now
+          </Link>
+        </motion.div>
       </main>
     </>
   );

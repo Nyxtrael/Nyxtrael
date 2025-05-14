@@ -23,12 +23,42 @@ export default function PortfolioPage() {
   }, []);
 
   const sections = [
-    { title: 'Art Gallery', href: '/portfolio/gallery', desc: 'Explore my illustration series in Anime, Gothic, and Celestial styles.' },
-    { title: 'Shop', href: '/portfolio/shop', desc: 'Purchase digital assets, templates, and prints.' },
-    { title: 'Photographer Portfolio', href: '/portfolio/photographer', desc: 'A responsive website designed for a photographer.' },
-    { title: 'Agency Project', href: '/portfolio/agency', desc: 'Branding and web design for a creative agency.' },
-    { title: 'Blog', href: '/portfolio/blog', desc: 'Insights, tutorials, and project updates.' },
-    { title: 'Case Studies', href: '/portfolio/case-studies', desc: 'Detailed case studies of selected projects.' },
+    { 
+      title: 'Art Gallery', 
+      href: '/portfolio/gallery', 
+      desc: 'Explore my illustration series in Anime, Gothic, and Celestial styles.', 
+      image: '/images/art-gallery/preview.jpg' 
+    },
+    { 
+      title: 'Shop', 
+      href: '/portfolio/shop', 
+      desc: 'Purchase digital assets, templates, and prints.', 
+      image: '/images/shop/preview.jpg' 
+    },
+    { 
+      title: 'Photographer Portfolio', 
+      href: '/portfolio/photographer', 
+      desc: 'A responsive website designed for a photographer.', 
+      image: '/images/photographer/preview.jpg' 
+    },
+    { 
+      title: 'Agency Project', 
+      href: '/portfolio/agency', 
+      desc: 'Branding and web design for a creative agency.', 
+      image: '/images/agency/preview.jpg' 
+    },
+    { 
+      title: 'Blog', 
+      href: '/portfolio/blog', 
+      desc: 'Insights, tutorials, and project updates.', 
+      image: '/images/blog/preview.jpg' 
+    },
+    { 
+      title: 'Case Studies', 
+      href: '/portfolio/case-studies/promo-video', 
+      desc: 'Detailed case studies of selected projects.', 
+      image: '/images/case-studies/preview.jpg' 
+    },
   ];
 
   const featuredProjects = [
@@ -267,22 +297,29 @@ export default function PortfolioPage() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                whileHover={{ scale: 1.05, rotate: 2 }}
-                className="relative bg-gray-800 bg-opacity-70 p-6 rounded-2xl overflow-hidden shadow-lg group"
+                whileHover={{ scale: 1.05 }}
+                className="relative rounded-2xl overflow-hidden shadow-lg group"
               >
+                <img
+                  src={section.image}
+                  alt={section.title}
+                  className="w-full h-64 object-cover"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6 transition-opacity duration-300 group-hover:bg-opacity-60">
+                  <h3 className="text-xl md:text-2xl font-bold font-playfair text-white mb-2">
+                    {section.title}
+                  </h3>
+                  <p className="text-sm md:text-base font-inter text-neutral-200 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {section.desc}
+                  </p>
+                  <Link
+                    href={section.href}
+                    className="inline-block px-6 py-2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white rounded-lg font-inter shadow-md hover:shadow-xl transition-all duration-300"
+                  >
+                    View Details →
+                  </Link>
+                </div>
                 <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500 bg-opacity-20 rounded-bl-full transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-300" />
-                <h3 className="text-xl md:text-2xl font-bold mb-3 font-playfair bg-gradient-to-r from-purple-400 to-fuchsia-400 bg-clip-text text-transparent z-10 relative">
-                  {section.title}
-                </h3>
-                <p className={`text-sm md:text-base mb-4 font-inter ${darkMode ? 'text-neutral-400' : 'text-gray-600'} z-10 relative`}>
-                  {section.desc}
-                </p>
-                <Link
-                  href={section.href}
-                  className="inline-block px-6 py-2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white rounded-lg font-inter shadow-md hover:shadow-xl transition-all duration-300 z-10 relative"
-                >
-                  View Details →
-                </Link>
               </motion.div>
             ))}
           </div>
