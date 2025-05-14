@@ -1,11 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  output: 'export', // Enable static export for Netlify
+  reactStrictMode: true, 
+  output: 'export',
   images: {
-    domains: ['res.cloudinary.com'],
-    unoptimized: true, // Disable image optimization for static export
+    domains: ['res.cloudinary.com'], 
+    unoptimized: true, 
   },
-};
-
-export default nextConfig;
+  trailingSlash: true, 
+  experimental: {
+   
+  },
+ 
+  webpack: (config,

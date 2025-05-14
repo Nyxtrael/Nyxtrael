@@ -2,8 +2,8 @@
 
 import { useEffect, useState, useRef } from 'react';
 import Head from 'next/head';
-import Image from 'next/image'; // For optimized image loading
-import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { motion } from 'framer-motion'; // Updated import
 import { useTheme } from '../../../context/ThemeContext';
 import { useCart } from '../../../context/CartContext';
 import { useWishlist } from '../../../context/WishlistContext';
@@ -33,7 +33,6 @@ export default function Shop() {
     { id: 8, name: 'Blog Theme', price: 45, description: 'Elegant blog template.', category: 'template', image: '/images/shop/blog-theme.jpg', reviews: [{ rating: 4.3, text: 'Great for writers!' }] },
   ];
 
-  // Filter, sort, and paginate products
   const filteredProducts = products
     .filter((product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -51,7 +50,6 @@ export default function Shop() {
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-  // Parallax effect
   useEffect(() => {
     const handleScroll = () => {
       if (heroRef.current) {
@@ -62,7 +60,6 @@ export default function Shop() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Reset filters
   const resetFilters = () => {
     setSearchTerm('');
     setSortOption('price-asc');
@@ -155,7 +152,6 @@ export default function Shop() {
           {darkMode ? '🌞' : '🌙'}
         </motion.button>
 
-        {/* Filters and Search */}
         <div className="flex flex-col md:flex-row gap-4 mb-8 items-center justify-between">
           <div className="w-full md:w-1/3">
             <label htmlFor="search" className="sr-only">
@@ -229,7 +225,6 @@ export default function Shop() {
           </div>
         </div>
 
-        {/* Cart and Wishlist Summary */}
         <div className="mb-8 flex gap-4 justify-center">
           <motion.div
             className={`p-3 rounded-lg shadow-md transition-colors ${
@@ -251,7 +246,6 @@ export default function Shop() {
           </motion.div>
         </div>
 
-        {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {currentProducts.map((product) => (
             <motion.div
@@ -329,7 +323,6 @@ export default function Shop() {
           ))}
         </div>
 
-        {/* Pagination */}
         <div className="mt-10 flex justify-center gap-3">
           {Array.from({ length: totalPages }, (_, i) => (
             <motion.button
@@ -350,7 +343,6 @@ export default function Shop() {
           ))}
         </div>
 
-        {/* Product Details Modal */}
         {selectedProduct && (
           <motion.div
             initial={{ opacity: 0 }}
