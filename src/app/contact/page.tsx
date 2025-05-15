@@ -59,7 +59,7 @@ export default function ContactPage() {
       setCurrentSlide((prev) => (prev + 1) % testimonialsList.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [testimonialsList.length]);
+  }, []);
 
   // Parallax effect
   useEffect(() => {
@@ -135,16 +135,17 @@ export default function ContactPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className={`relative z-10 font-bold text-5xl md:text-6xl mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 flex justify-center items-center gap-2`}
+          className="relative z-10 flex items-center gap-2 text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400"
         >
-          <Mail className="text-pink-400" aria-hidden /> Contact
+          <Mail className="text-pink-400" aria-hidden />
+          Contact
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className={`relative z-10 text-lg italic text-purple-300 mb-2 ${darkMode ? 'text-neutral-300' : 'text-gray-700'}`}
+          className="relative z-10 text-lg italic text-purple-300 mb-2"
         >
           Ready to bring your vision to life?
         </motion.p>
@@ -153,13 +154,13 @@ export default function ContactPage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className={`relative z-10 text-sm text-neutral-400 mb-12`}
+          className="relative z-10 text-sm text-neutral-400 mb-12"
         >
           I’ll get back to you within 24 hours.
         </motion.p>
 
         {/* Hero Carousel */}
-        <div className="relative w-full max-w-5xl mt-12 overflow-hidden rounded-2xl shadow-2xl">
+        <div className="relative w-full max-w-5xl mt-12 overflow-hidden rounded-2xl shadow-2xl mb-16">
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={currentSlide}
@@ -182,21 +183,27 @@ export default function ContactPage() {
                   transition={{ delay: 0.2 }}
                   className="text-center text-white p-6"
                 >
-                  <p className="text-lg md:text-xl font-inter mb-2">&quot;{testimonialsList[currentSlide].quote}&quot;</p>
-                  <p className="text-sm md:text-base font-semibold text-fuchsia-400">{testimonialsList[currentSlide].author}</p>
+                  <p className="text-lg md:text-xl font-inter mb-2">
+                    &quot;{testimonialsList[currentSlide].quote}&quot;
+                  </p>
+                  <p className="text-sm md:text-base font-semibold text-fuchsia-400">
+                    {testimonialsList[currentSlide].author}
+                  </p>
                 </motion.div>
               </div>
             </motion.div>
           </AnimatePresence>
           <button
             onClick={() => setCurrentSlide((prev) => (prev - 1 + testimonialsList.length) % testimonialsList.length)}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
+            aria-label="Previous testimonial"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:scale-110 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 transition-transform"
           >
             ‹
           </button>
           <button
             onClick={() => setCurrentSlide((prev) => (prev + 1) % testimonialsList.length)}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
+            aria-label="Next testimonial"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:scale-110 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 transition-transform"
           >
             ›
           </button>
@@ -205,18 +212,23 @@ export default function ContactPage() {
               <button
                 key={idx}
                 onClick={() => setCurrentSlide(idx)}
-                className={`w-3 h-3 rounded-full ${idx === currentSlide ? 'bg-fuchsia-400' : 'bg-white bg-opacity-60'} hover:bg-fuchsia-300 transition-colors`}
+                className={`w-3 h-3 rounded-full ${idx === currentSlide ? 'bg-fuchsia-400' : 'bg-white bg-opacity-60'} hover:bg-fuchsia-300 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 transition-colors`}
               />
             ))}
           </div>
         </div>
 
+        {/* Scroll arrow smooth */}
         <motion.a
-          href="#main-content"
+          href="#contact-form"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+          }}
           animate={{ opacity: 1, y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
           className="absolute bottom-8 z-10 text-fuchsia-400"
-          aria-label="Scroll to main content"
+          aria-label="Scroll to contact form"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -249,7 +261,7 @@ export default function ContactPage() {
         </motion.button>
 
         <section className="max-w-md mx-auto">
-          <section id="contact-form" className="bg-[#2A2A3E]/50 p-8 rounded-xl shadow-lg border border-[#3A3A4E] relative z-10">
+          <section id="contact-form" className="bg-[#2A2A3E]/50 p-8 rounded-xl shadow-lg border-t-2 border-fuchsia-500/30 pt-16 relative z-10">
             <AnimatePresence>
               {submitted && (
                 <motion.div
@@ -263,7 +275,7 @@ export default function ContactPage() {
                   className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg z-50 flex items-center gap-2"
                 >
                   <CheckCircle className="w-5 h-5" /> Message sent!
-                  <button onClick={() => setSubmitted(false)} className="ml-4 text-white" aria-label="Dismiss">
+                  <button onClick={() => setSubmitted(false)} className="ml-4 text-white focus:outline-none focus:ring-2 focus:ring-white" aria-label="Dismiss notification">
                     <XIcon className="w-5 h-5" />
                   </button>
                 </motion.div>
@@ -283,6 +295,7 @@ export default function ContactPage() {
                       name="name"
                       type="text"
                       placeholder="Your name or studio"
+                      autoComplete="name"
                       className={`w-full p-3 pl-10 rounded-md bg-[#2A2A3E] text-white placeholder-[#CCCCCC] focus:ring-2 focus:ring-pink-400 transition ${errors.name ? 'ring-2 ring-pink-500' : ''}`}
                       {...register('name')}
                       initial={{ opacity: 0, x: -20 }}
@@ -302,6 +315,7 @@ export default function ContactPage() {
                       name="email"
                       type="email"
                       placeholder="Your contact email"
+                      autoComplete="email"
                       className={`w-full p-3 pl-10 rounded-md bg-[#2A2A3E] text-white placeholder-[#CCCCCC] focus:ring-2 focus:ring-pink-400 transition ${errors.email ? 'ring-2 ring-pink-500' : ''}`}
                       {...register('email')}
                       initial={{ opacity: 0, x: -20 }}
@@ -366,8 +380,6 @@ export default function ContactPage() {
             </form>
           </section>
         </section>
-
-      
       </main>
     </>
   );

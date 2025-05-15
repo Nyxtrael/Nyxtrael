@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Leaf, Clock, Check } from 'lucide-react';
+import { ArrowRight, Clock, Check, Star } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const caseStudies = [
   {
@@ -14,7 +15,7 @@ const caseStudies = [
     duration: '4 months',
     result: '200% growth in eco-conscious sales',
     image: '/case-studies/cs1.jpg',
-    description: 'Developed a sustainable brand identity with organic packaging.',
+    description: 'Crafted a sustainable brand identity with eco-friendly packaging, driving significant market impact.',
   },
   {
     id: 2,
@@ -24,7 +25,7 @@ const caseStudies = [
     duration: '3 months',
     result: '50% increase in user retention',
     image: '/case-studies/cs2.jpg',
-    description: 'Created a serene website design reflecting natural beauty.',
+    description: 'Designed a visually stunning website that enhanced user engagement and brand loyalty.',
   },
   {
     id: 3,
@@ -34,165 +35,251 @@ const caseStudies = [
     duration: '2 months',
     result: '150% attendance boost',
     image: '/case-studies/cs3.jpg',
-    description: 'Designed a campaign promoting environmental awareness.',
+    description: 'Developed a high-impact campaign to promote environmental awareness and community engagement.',
   },
 ];
 
 const timeline = [
-  { step: 'Research', time: 'Week 1', content: 'Gathering client insights and nature inspiration.' },
-  { step: 'Concept', time: 'Weeks 2-3', content: 'Sketching organic design ideas.' },
-  { step: 'Execution', time: 'Weeks 4-8', content: 'Building and refining the project.' },
-  { step: 'Launch', time: 'Week 9', content: 'Final delivery with a green touch.' },
+  { step: 'Discovery', time: 'Week 1', content: 'Understanding your vision and goals.' },
+  { step: 'Strategy', time: 'Weeks 2-3', content: 'Crafting a tailored plan for success.' },
+  { step: 'Development', time: 'Weeks 4-8', content: 'Building and refining your solution.' },
+  { step: 'Launch', time: 'Week 9', content: 'Delivering a polished, impactful product.' },
+];
+
+const testimonials = [
+  {
+    name: 'Sarah M.',
+    role: 'CEO, GreenLeaf Co.',
+    content: 'Their expertise transformed our brand, delivering results beyond expectations.',
+    rating: 5,
+  },
+  {
+    name: 'James T.',
+    role: 'Founder, WildHaven',
+    content: 'A seamless process with stunning outcomes. Highly recommend!',
+    rating: 5,
+  },
 ];
 
 const CaseStudiesPage = () => {
   const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 300], [1, 0.6]);
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const [isClient, setIsClient] = useState(false);
-
-  // Ensure leaf particles are only rendered on the client
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0.8]);
 
   return (
-    <div className="min-h-screen bg-cream-100 text-forest-900 font-serif relative overflow-hidden">
+    <div className="min-h-screen bg-gray-900 text-white font-sans">
       <style>
         {`
-          @keyframes watercolor {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
+          .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
           }
-          .watercolor-bg {
-            background: linear-gradient(135deg, #d4a373, #a3bffa, #8bc34a);
-            background-size: 200% 200%;
-            animation: watercolor 15s ease infinite;
-            opacity: 0.3;
+          .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.2);
           }
-          .leaf-particle {
-            position: absolute;
-            background: rgba(139, 195, 74, 0.5);
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            animation: drift 8s infinite;
+          .accent-gradient {
+            background: linear-gradient(135deg, #06B6D4, #3B82F6);
           }
-          @keyframes drift {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(45deg); }
-            100% { transform: translateY(0) rotate(0deg); }
-          }
-          .ripple-hover {
-            transform-origin: center;
-            transition: transform 0.5s ease;
-          }
-          .ripple-hover:hover {
-            transform: scale(1.05) rotate(2deg);
-          }
-          .vine-line {
+          .timeline-connector {
             position: absolute;
             height: 2px;
-            background: linear-gradient(to right, transparent, #8bc34a, transparent);
-            animation: grow 1.5s ease-out forwards;
-          }
-          @keyframes grow {
-            from { width: 0; }
-            to { width: 100%; }
+            background: #06B6D4;
+            width: 100%;
+            top: 20px;
           }
         `}
       </style>
-      <div className="absolute inset-0 watercolor-bg pointer-events-none z-0" />
-      {isClient && [...Array(15)].map((_, i) => (
-        <div
-          key={i}
-          className="leaf-particle"
-          style={{
-            width: `${Math.random() * 10 + 5}px`,
-            height: `${Math.random() * 10 + 5}px`,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 5}s`,
-          }}
-        />
-      ))}
 
-      {/* Header */}
-      <header className="relative z-10 py-16 text-center">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-md py-4">
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          <Link href="/" className="text-2xl font-bold font-poppins text-cyan-400">
+            [Your Brand Name]
+          </Link>
+          <div className="space-x-6 font-inter">
+            <Link href="/" className="hover:text-cyan-400 transition-colors">Home</Link>
+            <Link href="/services" className="hover:text-cyan-400 transition-colors">Services</Link>
+            <Link href="/about" className="hover:text-cyan-400 transition-colors">About</Link>
+            <Link href="/contact" className="hover:text-cyan-400 transition-colors">Contact</Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <header className="relative py-20 text-center bg-gradient-to-b from-gray-800 to-gray-900">
         <motion.h1
-          initial={{ opacity: 0, y: -50 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-5xl md:text-7xl font-bold text-forest-800"
+          transition={{ duration: 0.8 }}
+          className="text-4xl md:text-6xl font-bold font-poppins text-white"
         >
-          Nature Crafted Cases
+          Transforming Visions into Success
         </motion.h1>
-        <p className="mt-4 text-lg md:text-xl text-earth-600">
-          Growing success through organic design solutions.
-        </p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mt-4 text-lg md:text-xl text-gray-300 font-inter max-w-2xl mx-auto"
+        >
+          Discover how we empower businesses with innovative, tailored solutions.
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <Link
+            href="/contact"
+            className="mt-6 inline-block px-6 py-3 text-white font-inter rounded-md accent-gradient hover:brightness-110 transition"
+          >
+            Get Started <ArrowRight className="inline ml-2" />
+          </Link>
+        </motion.div>
       </header>
 
       {/* Case Studies Grid */}
-      <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-center font-poppins text-white mb-8">
+          Our Success Stories
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {caseStudies.map((study) => (
             <motion.div
               key={study.id}
-              className="bg-earth-50/80 rounded-lg overflow-hidden shadow-md ripple-hover"
-              whileHover={{ scale: 1.05, rotate: 2 }}
+              className="glass-card rounded-lg overflow-hidden"
+              whileHover={{ scale: 1.03 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <img src={study.image} alt={study.title} className="w-full h-48 object-cover" />
-              <div className="p-4">
-                <h2 className="text-xl font-semibold text-forest-700 mb-2">{study.title}</h2>
-                <p className="text-earth-600 text-sm mb-2">Client: {study.client}</p>
-                <p className="text-moss-500 text-xs flex items-center"><Clock className="w-4 h-4 mr-1" /> {study.duration}</p>
-                <Link href={`/case-studies/${study.id}`} className="mt-4 inline-block text-forest-600 hover:text-forest-500 underline">
-                  Explore Case <ArrowRight className="inline ml-1" />
+              <Image
+                src={study.image}
+                alt={study.title}
+                width={400}
+                height={200}
+                className="w-full h-48 object-cover"
+                loading="lazy"
+              />
+              <div className="p-5">
+                <h3 className="text-xl font-semibold font-poppins text-white mb-2">{study.title}</h3>
+                <p className="text-gray-400 text-sm font-inter mb-2">Client: {study.client}</p>
+                <p className="text-cyan-400 text-sm font-inter flex items-center mb-3">
+                  <Clock className="w-4 h-4 mr-1" /> {study.duration}
+                </p>
+                <p className="text-gray-300 text-sm font-inter mb-4">{study.description}</p>
+                <Link
+                  href={`/case-studies/${study.id}`}
+                  className="text-cyan-400 font-inter hover:text-cyan-300 transition-colors"
+                >
+                  View Case Study <ArrowRight className="inline ml-1" />
                 </Link>
               </div>
             </motion.div>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* Timeline Section */}
-      <div className="relative z-10 container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold text-center text-forest-800 mb-8">Growth Timeline</h2>
-        <div className="relative overflow-hidden">
-          <div className="flex space-x-8">
+      <section className="container mx-auto px-4 py-12">
+        <h2 className="text-3xl font-bold text-center font-poppins text-white mb-8">
+          Our Proven Process
+        </h2>
+        <div className="relative">
+          <div className="timeline-connector" />
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {timeline.map((item, index) => (
               <motion.div
                 key={item.step}
-                className="flex-1"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                className="glass-card p-5 rounded-lg text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
               >
-                <div className="relative">
-                  <div className="vine-line absolute left-1/2 transform -translate-x-1/2 top-0 h-2 w-full" />
-                  <div className="bg-earth-50/80 p-4 rounded-lg shadow-md text-center">
-                    <div className="w-6 h-6 bg-moss-500 rounded-full mx-auto mb-2 flex items-center justify-center">
-                      <Check className="w-4 h-4 text-cream-100" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-forest-700">{item.step}</h3>
-                    <p className="text-earth-600 text-sm">{item.time}</p>
-                    <p className="text-moss-500 mt-2">{item.content}</p>
-                  </div>
+                <div className="w-8 h-8 bg-cyan-400 rounded-full mx-auto mb-3 flex items-center justify-center">
+                  <Check className="w-5 h-5 text-white" />
                 </div>
+                <h3 className="text-lg font-semibold font-poppins text-white">{item.step}</h3>
+                <p className="text-gray-400 text-sm font-inter">{item.time}</p>
+                <p className="text-gray-300 mt-2 text-sm font-inter">{item.content}</p>
               </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="container mx-auto px-4 py-12 bg-gray-800">
+        <h2 className="text-3xl font-bold text-center font-poppins text-white mb-8">
+          What Our Clients Say
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={index}
+              className="glass-card p-6 rounded-lg"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+            >
+              <div className="flex mb-3">
+                {Array.from({ length: testimonial.rating }).map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-300 font-inter mb-4">{testimonial.content}</p>
+              <p className="text-white font-semibold font-poppins">{testimonial.name}</p>
+              <p className="text-gray-400 text-sm font-inter">{testimonial.role}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="container mx-auto px-4 py-16 text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-bold font-poppins text-white mb-4"
+        >
+          Ready to Elevate Your Business?
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-gray-300 text-lg font-inter mb-6"
+        >
+          Let’s create something extraordinary together.
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <Link
+            href="/contact"
+            className="inline-block px-6 py-3 text-white font-inter rounded-md accent-gradient hover:brightness-110 transition"
+          >
+            Contact Us Today <ArrowRight className="inline ml-2" />
+          </Link>
+        </motion.div>
+      </section>
 
       {/* Footer */}
-      <footer className="relative z-10 py-6 text-center bg-earth-900/50">
-        <p className="text-earth-400 text-sm">
-          © {new Date().getFullYear()} SparkVibe Agency |{' '}
-          <Link href="/contact" className="hover:text-forest-500">Connect With Us</Link>
+      <footer className="py-6 text-center bg-gray-800">
+        <p className="text-gray-400 text-sm font-inter">
+          © {new Date().getFullYear()} [Your Brand Name]. All rights reserved.{' '}
+          <Link href="/contact" className="text-cyan-400 hover:text-cyan-300">
+            Get in Touch
+          </Link>
         </p>
       </footer>
     </div>

@@ -1,57 +1,37 @@
 // src/components/NewsletterFooter.jsx
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Mail } from 'lucide-react';
 
 export default function NewsletterFooter() {
-  const [toastVisible, setToastVisible] = useState(false);
-
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    setToastVisible(true);
-    setTimeout(() => setToastVisible(false), 3000);
-  };
-
   return (
-    <footer className="relative z-10 text-center text-neutral-400 pb-10">
-      <form onSubmit={handleNewsletterSubmit} className="mb-6 max-w-md mx-auto">
-        <label htmlFor="newsletter-email" className="sr-only">
-          Subscribe to newsletter
-        </label>
-        <div className="flex flex-col sm:flex-row gap-3">
+    <section className="relative z-10 text-center max-w-xl mx-auto mb-20">
+      <h2 className="text-2xl font-bold font-playfair mb-4 bg-gradient-to-r from-teal-400 to-coral-500 bg-clip-text text-transparent">
+        Stay Updated
+      </h2>
+      <form className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <div className="relative w-full sm:w-auto">
+          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400" />
           <input
             type="email"
-            id="newsletter-email"
             placeholder="Enter your email"
-            className="flex-1 px-4 py-2 rounded-full bg-white/10 text-white placeholder-neutral-400 border border-fuchsia-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
-            required
-            aria-required="true"
+            className="w-full sm:w-64 pl-10 p-3 rounded-full bg-white/10 text-white placeholder-neutral-400"
+            aria-label="Email for newsletter"
           />
-          <motion.button
-            type="submit"
-            className="bg-fuchsia-500 text-white px-6 py-2 rounded-full font-semibold font-inter"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Subscribe
-          </motion.button>
         </div>
+        <button
+          type="submit"
+          className="bg-fuchsia-500 text-white px-6 py-3 rounded-full font-semibold font-inter shadow hover:bg-fuchsia-400"
+        >
+          Subscribe
+        </button>
       </form>
-
-      <AnimatePresence>
-        {toastVisible && (
-          <motion.div
-            className="fixed bottom-4 right-4 bg-fuchsia-500 text-white px-4 py-2 rounded-lg shadow-lg z-50"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
-          >
-            Thank you for subscribing!
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </footer>
+      <p className="text-neutral-400 text-sm mt-4">
+        You'll receive a confirmation email to verify your subscription.{' '}
+        <a href="/privacy" className="text-fuchsia-400 underline">
+          Privacy Policy
+        </a>
+      </p>
+    </section>
   );
 }

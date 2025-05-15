@@ -1,9 +1,8 @@
-// src/app/page.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { useTheme } from '../context/ThemeContext';
 import NewsletterFooter from '../components/NewsletterFooter';
@@ -78,6 +77,7 @@ export default function Home() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </Head>
 
+      {/* Preloader */}
       {!isLoaded && (
         <motion.div
           className="fixed inset-0 bg-[#1a0e2a] flex items-center justify-center z-50"
@@ -96,18 +96,24 @@ export default function Home() {
         </motion.div>
       )}
 
+      {/* Main Content */}
       {isLoaded && (
-        <main
-          className={`relative min-h-screen overflow-hidden px-6 py-12 md:px-16 ${
+        <motion.main
+          id="main-content"
+          className={`relative min-h-screen overflow-x-hidden px-6 py-12 md:px-16 ${
             darkMode
               ? 'bg-[radial-gradient(circle,rgba(45,212,191,0.1),transparent),linear-gradient(to_bottom,#1a0e2a,#0c0f1e)] text-white'
               : 'bg-gradient-to-b from-gray-200 to-gray-50 text-gray-900'
           }`}
+          style={{ y }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
         >
-          {/* Dark Mode Toggle Button */}
+          {/* Dark Mode Toggle */}
           <motion.button
             onClick={toggleDarkMode}
-            className="fixed top-4 right-4 p-2 rounded-full bg-fuchsia-500 text-white"
+            className="fixed top-4 right-4 p-2 rounded-full bg-fuchsia-500 text-white shadow-lg"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -115,7 +121,7 @@ export default function Home() {
             {darkMode ? '🌞' : '🌙'}
           </motion.button>
 
-          {/* Stars background */}
+          {/* Stars in Background */}
           <div className="absolute inset-0 z-0">
             {stars.map((s, i) => (
               <motion.div
@@ -128,61 +134,59 @@ export default function Home() {
             ))}
           </div>
 
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-fuchsia-500 text-white p-2 rounded"
-          >
-            Skip to content
-          </a>
-
-          {/* HERO + USP + Avatar + Mini Bio */}
-          <section id="main-content" className="relative z-10 flex flex-col items-center justify-center text-center min-h-[80vh] mb-20">
-            <motion.div
-              className="relative z-10 max-w-4xl px-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-            >
-              <motion.div
-                className="mb-6"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <img
-                  src="/images/Persona.png"
-                  alt="Nyxtrael – Senior Web Designer and Developer"
-                  className="rounded-full border-4 border-fuchsia-400 mx-auto w-[120px] h-[120px]"
-                />
-              </motion.div>
-              <h1 className="text-4xl md:text-6xl font-bold font-playfair mb-4 bg-gradient-to-r from-teal-400 to-coral-500 bg-clip-text text-transparent">
-                Hello, I’m Nyxtrael
-              </h1>
-              <p
-                className={`mb-2 text-lg md:text-xl font-inter ${
-                  darkMode ? 'text-neutral-300' : 'text-gray-700'
-                }`}
-              >
-                Freelance Web Designer & Developer offering custom websites, animations, and illustrations.
-              </p>
-              <p
-                className={`mb-6 text-lg md:text-xl font-inter ${
-                  darkMode ? 'text-neutral-300' : 'text-gray-700'
-                }`}
-              >
-                I craft spaces that breathe your brand with passion, style, and animation magic.
-              </p>
-              <MotionLink
-                href="/contact"
-                className="inline-block bg-fuchsia-500 text-white px-6 py-3 rounded-full font-semibold font-inter shadow hover:bg-fuchsia-400"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label="Get in touch with Nyxtrael"
-              >
-                Contact Me
-              </MotionLink>
-            </motion.div>
-          </section>
+          {/* Hero Section */}
+          <section className="relative z-10 flex flex-col items-center justify-center text-center min-h-[80vh] mb-20">
+  <motion.div
+    className="max-w-4xl px-6"
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1, delay: 0.5 }}
+  >
+    <motion.img
+      src="/images/Persona.png"
+      alt="Nyxtrael – Senior Web Designer and Developer"
+      className="rounded-full border-4 border-fuchsia-400 mx-auto w-[120px] h-[120px] mb-6"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.6 }}
+    />
+    <motion.h1
+      className="text-4xl md:text-6xl font-bold font-playfair mb-4 bg-gradient-to-r from-teal-400 to-coral-500 bg-clip-text text-transparent"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.7 }}
+    >
+      Hello, I’m Nyxtrael
+    </motion.h1>
+    <motion.p
+      className={`mb-2 text-lg md:text-xl font-inter ${darkMode ? 'text-neutral-300' : 'text-gray-700'}`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.8 }}
+    >
+      Freelance Web Designer & Developer offering custom websites, animations, and illustrations.
+    </motion.p>
+    <motion.p
+      className={`mb-6 text-lg md:text-xl font-inter ${darkMode ? 'text-neutral-300' : 'text-gray-700'}`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.9 }}
+    >
+      I craft spaces that breathe your brand with passion, style, and animation magic.
+    </motion.p>
+    <MotionLink
+      href="/contact"
+      className="inline-block bg-fuchsia-500 text-white px-6 py-3 rounded-full font-semibold font-inter shadow hover:shadow-lg transform transition-transform hover:scale-105"
+      whileTap={{ scale: 0.95 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 1.0 }}
+      aria-label="Get in touch with Nyxtrael"
+    >
+      Contact Me
+    </MotionLink>
+  </motion.div>
+</section>
 
           {/* Recent Projects */}
           <section className="relative z-10 text-center max-w-5xl mx-auto mb-20">
@@ -190,38 +194,29 @@ export default function Home() {
               Recent Projects
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <motion.div
-                className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-md"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <h3 className="text-xl font-semibold mb-2 text-white">E-Commerce Demo Shop</h3>
-                <p className="text-neutral-400 mb-4">Custom Next.js store with cart functionality, optimized for SEO.</p>
-                <MotionLink
-                  href="/portfolio/ecommerce"
-                  className="text-fuchsia-400 font-medium hover:underline"
-                  whileHover={{ scale: 1.05 }}
+              {[
+                { title: 'E-Commerce Demo Shop', desc: 'Custom Next.js store with cart functionality, optimized for SEO.', href: '/portfolio/ecommerce' },
+                { title: 'Photographer Portfolio', desc: 'A responsive website designed for a photographer.', href: '/portfolio/photographer' },
+              ].map((proj, idx) => (
+                <motion.div
+                  key={proj.title}
+                  className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-md hover:shadow-lg transform hover:scale-103 transition-transform"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: idx * 0.2 }}
                 >
-                  View Project →
-                </MotionLink>
-              </motion.div>
-              <motion.div
-                className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-md"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <h3 className="text-xl font-semibold mb-2 text-white">Portfolio Website Template</h3>
-                <p className="text-neutral-400 mb-4">Fully customizable Next.js template, available in my shop.</p>
-                <MotionLink
-                  href="/shop/portfolio-template"
-                  className="text-fuchsia-400 font-medium hover:underline"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  View in Shop →
-                </MotionLink>
-              </motion.div>
+                  <h3 className="text-xl font-semibold mb-2 text-white">{proj.title}</h3>
+                  <p className="text-neutral-400 mb-4">{proj.desc}</p>
+                  <MotionLink
+                    href={proj.href}
+                    className="text-fuchsia-400 font-medium hover:underline"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    View Project →
+                  </MotionLink>
+                </motion.div>
+              ))}
             </div>
           </section>
 
@@ -238,21 +233,19 @@ export default function Home() {
             <h2 className="text-3xl font-bold font-playfair mb-4 bg-gradient-to-r from-teal-400 to-coral-500 bg-clip-text text-transparent">
               Ready for a Stand-Out Website?
             </h2>
-            <p className={`font-inter mb-6 ${darkMode ? 'text-neutral-300' : 'text-gray-700'}`}>
-              Let's create something magical together!
-            </p>
+            <p className={`font-inter mb-6 ${darkMode ? 'text-neutral-300' : 'text-gray-700'}`}>Let's create something magical together!</p>
             <MotionLink
               href="/contact"
-              className="inline-block bg-fuchsia-500 text-white px-6 py-3 rounded-full font-semibold font-inter shadow hover:bg-fuchsia-400"
-              whileHover={{ scale: 1.05 }}
+              className="inline-block bg-fuchsia-500 text-white px-6 py-3 rounded-full font-semibold font-inter shadow hover:shadow-lg transform transition-transform hover:scale-105"
               whileTap={{ scale: 0.95 }}
             >
               Contact
             </MotionLink>
           </section>
 
+          {/* Newsletter Footer */}
           <NewsletterFooter />
-        </main>
+        </motion.main>
       )}
     </>
   );
