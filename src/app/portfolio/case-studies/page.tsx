@@ -92,20 +92,7 @@ const CaseStudiesPage = () => {
         `}
       </style>
 
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-md py-4">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold font-poppins text-cyan-400">
-            [Your Brand Name]
-          </Link>
-          <div className="space-x-6 font-inter">
-            <Link href="/" className="hover:text-cyan-400 transition-colors">Home</Link>
-            <Link href="/services" className="hover:text-cyan-400 transition-colors">Services</Link>
-            <Link href="/about" className="hover:text-cyan-400 transition-colors">About</Link>
-            <Link href="/contact" className="hover:text-cyan-400 transition-colors">Contact</Link>
-          </div>
-        </div>
-      </nav>
+     
 
       {/* Hero Section */}
       <header className="relative py-20 text-center bg-gradient-to-b from-gray-800 to-gray-900">
