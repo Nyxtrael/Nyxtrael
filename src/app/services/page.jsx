@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 
 // Define services with slugs for dynamic routing
+// Ensure images exist in /public/images/services/ directory
 const services = [
   {
     title: 'Web Development',
@@ -24,7 +25,7 @@ const services = [
     category: 'Design',
   },
   {
-    title: 'Animations & Illustrationsatious',
+    title: 'Animations & Illustrations',
     slug: 'animations-illustrations',
     desc: 'Custom motion graphics and illustrations to bring your vision to life.',
     image: '/images/services/animations-illustrations.jpg',
@@ -32,6 +33,7 @@ const services = [
   },
 ];
 
+// Ensure images exist in /public/images/services/ directory
 const featuredServices = [
   {
     title: 'Crafting Digital Experiences',
@@ -50,11 +52,13 @@ const featuredServices = [
   },
 ];
 
+// Testimonials data
 const testimonials = [
   { text: 'Nyxtrael transformed our website with stunning designs!', author: 'Jane Doe, Creative Director' },
   { text: 'Amazing development skills and quick turnaround!', author: 'John Smith, CEO' },
 ];
 
+// Ensure images exist in /public/images/portfolio/ directory
 const portfolioProjects = [
   {
     title: 'E-Commerce Platform',
@@ -191,6 +195,9 @@ export default function Services() {
             fill
             className="object-cover opacity-10"
             priority
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/images/fallback.jpg'; // Fallback image
+            }}
             aria-hidden="true"
           />
         ) : (
@@ -231,6 +238,9 @@ export default function Services() {
             height={112}
             className="rounded-full border-4 border-fuchsia-500"
             priority
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/images/fallback.jpg'; // Fallback image
+            }}
           />
         </motion.div>
 
@@ -276,6 +286,9 @@ export default function Services() {
                 fill
                 className="object-cover"
                 loading="lazy"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/images/fallback.jpg'; // Fallback image
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-center justify-center">
                 <motion.div
@@ -374,7 +387,7 @@ export default function Services() {
             className="flex items-center px-6 py-3 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 transition-all"
             aria-label="Contact us"
           >
-            <span className="hi font-inter text-base">Contact Us</span>
+            <span className="font-inter text-base">Contact Us</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-5 h-5 ml-2"
@@ -412,7 +425,7 @@ export default function Services() {
                     : 'bg-gray-100 text-gray-700 border-gray-300'
                 } hover:bg-gradient-to-br hover:from-fuchsia-500 hover:to-purple-500 hover:text-white hover:border-transparent focus:outline-none focus:ring-2 focus:ring-fuchsia-500 transition-all`}
                 whileHover={{ scale: 1.05 }}
-               whileTap={{ scale: 0.95 }}
+                whileTap={{ scale: 0.95 }}
                 aria-label={`Filter by ${category}`}
               >
                 {category}
@@ -437,6 +450,9 @@ export default function Services() {
                   height={256}
                   className="w-full h-64 object-cover"
                   loading="lazy"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/images/fallback.jpg'; // Fallback image
+                  }}
                 />
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 transition-opacity duration-300 group-hover:bg-black/90"
@@ -514,6 +530,9 @@ export default function Services() {
                   height={256}
                   className="w-full h-64 object-cover"
                   loading="lazy"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/images/fallback.jpg'; // Fallback image
+                  }}
                 />
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 transition-opacity duration-300 group-hover:bg-black/90"
