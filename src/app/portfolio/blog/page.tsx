@@ -158,7 +158,7 @@ const BlogPage = () => {
                   className="rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                   loading="lazy"
                   onError={(e) => {
-                    e.target.src = '/images/fallback.png'; // Fallback image if the original fails to load
+                    (e.target as HTMLImageElement).src = '/images/fallback.png'; // Fallback image if the original fails to load
                   }}
                 />
               </div>
