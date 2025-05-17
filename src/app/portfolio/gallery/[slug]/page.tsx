@@ -1,8 +1,8 @@
-// src/app/portfolio/gallery/[slug]/page.jsx
 'use client';
 
 import { useTheme } from '@/context/ThemeContext';
 import Head from 'next/head';
+import { motion } from 'framer-motion';
 
 export default function GalleryPage({ params }) {
   const { darkMode, toggleDarkMode } = useTheme();
