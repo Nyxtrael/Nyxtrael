@@ -15,18 +15,44 @@ export default function GalleryPage({ params }) {
         <meta name="robots" content="noindex, follow" />
       </Head>
       <div
-        className={`min-h-screen p-6 transition-colors duration-300 ${
-          darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'
+        className={`min-h-screen p-8 transition-colors duration-300 ${
+          darkMode
+            ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white'
+            : 'bg-gradient-to-br from-white to-gray-100 text-gray-900'
         }`}
       >
-        <h1 className="text-3xl font-bold mb-4">Gallery: {params.slug}</h1>
-        <button
-          onClick={toggleDarkMode}
-          className="px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600"
-        >
-          Toggle {darkMode ? 'Light' : 'Dark'} Mode
-        </button>
-        {/* Gallery content goes here */}
+        <header className="max-w-4xl mx-auto">
+          <motion.button
+            onClick={toggleDarkMode}
+            className="fixed top-6 right-6 p-2 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition-colors"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {darkMode ? '🌞' : '🌙'}
+          </motion.button>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 font-playfair text-gray-200">
+            Gallery: <span className="text-teal-400">{params.slug}</span>
+          </h1>
+          <p className="text-lg font-lora text-gray-400 mb-10">
+            Explore the curated collection for {params.slug}.
+          </p>
+        </header>
+        <main className="max-w-6xl mx-auto">
+          {/* Gallery content goes here */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Placeholder for gallery items */}
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div
+                key={i}
+                className="aspect-[4/3] bg-gray-300 dark:bg-gray-700 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                {/* Replace with actual image */}
+                <div className="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 animate-pulse" />
+              </div>
+            ))}
+          </div>
+        </main>
       </div>
     </>
   );

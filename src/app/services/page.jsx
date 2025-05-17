@@ -36,17 +36,17 @@ const featuredServices = [
   {
     title: 'Crafting Digital Experiences',
     desc: 'Bespoke web development with a focus on performance and SEO.',
-    image: '/images/services/featured/web-development.jpg',
+    image: '/images/services/web-development.jpg',
   },
   {
     title: 'Designing the Future',
     desc: 'Stunning UI/UX designs with seamless animations.',
-    image: '/images/services/featured/web-design.jpg',
+    image: '/images/services/web-design.jpg',
   },
   {
     title: 'Bringing Art to Life',
     desc: 'Custom illustrations and motion graphics for your brand.',
-    image: '/images/services/featured/animations.jpg',
+    image: '/images/services/animations-illustrations.jpg',
   },
 ];
 

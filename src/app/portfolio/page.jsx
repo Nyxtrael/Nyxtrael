@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
@@ -24,7 +24,6 @@ export default function PortfolioPage() {
 
   const sections = [
     { title: 'Art Gallery', href: '/portfolio/gallery', desc: 'Explore my illustration series in Anime, Gothic, and Celestial styles.' },
-    { title: 'Shop', href: '/portfolio/shop', desc: 'Purchase digital assets, templates, and prints.' },
     { title: 'Photographer Portfolio', href: '/portfolio/photographer', desc: 'A responsive website designed for a photographer.' },
     { title: 'Agency Project', href: '/portfolio/agency', desc: 'Branding and web design for a creative agency.' },
     { title: 'Blog', href: '/portfolio/blog', desc: 'Insights, tutorials, and project updates.' },

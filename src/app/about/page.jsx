@@ -55,14 +55,14 @@ export default function About() {
       title: 'Anime Character – Sunroom Diaries, 2025',
       description: 'A serene anime character in a sunlit room, created for a client’s personal portfolio.',
       src: '/images/sunroom-diaries/cover.png',
-      href: '/portfolio/sunroom-diaries',
+      href: '/portfolio/gallery/sunroom-diaries',
       alt: 'Sunroom Diaries cover',
     },
     {
       title: 'Gothic Figure – Red Requiem, 2025',
       description: 'A gothic figure in a dark, mystical setting, designed for a music project.',
       src: '/images/red-requiem/cover.png',
-      href: '/portfolio/red-requiem',
+      href: '/portfolio/gallery/red-requiem',
       alt: 'Red Requiem cover',
     },
   ];

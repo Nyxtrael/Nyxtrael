@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react'; // Added useState
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Clock, Check, Star } from 'lucide-react';
 import Link from 'next/link';
@@ -14,7 +14,7 @@ const caseStudies = [
     date: 'March 2023',
     duration: '4 months',
     result: '200% growth in eco-conscious sales',
-    image: '/case-studies/cs1.jpg',
+    image: '/images/case-studies/cs1.png',
     description: 'Crafted a sustainable brand identity with eco-friendly packaging, driving significant market impact.',
   },
   {
@@ -24,7 +24,7 @@ const caseStudies = [
     date: 'July 2024',
     duration: '3 months',
     result: '50% increase in user retention',
-    image: '/case-studies/cs2.jpg',
+    image: '/images/case-studies/cs2.png',
     description: 'Designed a visually stunning website that enhanced user engagement and brand loyalty.',
   },
   {
@@ -34,7 +34,7 @@ const caseStudies = [
     date: 'February 2025',
     duration: '2 months',
     result: '150% attendance boost',
-    image: '/case-studies/cs3.jpg',
+    image: '/images/case-studies/cs3.png',
     description: 'Developed a high-impact campaign to promote environmental awareness and community engagement.',
   },
 ];
@@ -63,134 +63,193 @@ const testimonials = [
 
 const CaseStudiesPage = () => {
   const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 300], [1, 0.8]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0.7]);
+  const scale = useTransform(scrollY, [0, 300], [1, 0.95]);
+
+  // State to store particle data, initialized on client side
+  const [particles, setParticles] = useState([]);
+
+  useEffect(() => {
+    // Generate particle data only on client side
+    setParticles(
+      Array.from({ length: 15 }, (_, i) => ({
+        id: i,
+        width: `${Math.random() * 6 + 3}px`,
+        height: `${Math.random() * 6 + 3}px`,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 3}s`,
+      }))
+    );
+  }, []); // Empty dependency array ensures this runs once on mount
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-purple-950 to-black text-white font-sans relative overflow-hidden">
       <style>
         {`
+          @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.6; }
+          }
+          .particle {
+            position: absolute;
+            background: radial-gradient(circle, #00CED1, #3B82F6);
+            border-radius: 50%;
+            animation: pulse 6s infinite;
+            box-shadow: 0 0 20px rgba(0, 206, 209, 0.5);
+          }
           .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(20, 20, 30, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 206, 209, 0.2);
+            border-radius: 1.5rem;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
           }
           .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 20px rgba(0, 255, 255, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 206, 209, 0.3), 0 0 20px rgba(59, 130, 246, 0.2);
           }
           .accent-gradient {
-            background: linear-gradient(135deg, #06B6D4, #3B82F6);
+            background: linear-gradient(135deg, #00CED1, #3B82F6, #FFD700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(0, 206, 209, 0.7);
           }
           .timeline-connector {
             position: absolute;
             height: 2px;
-            background: #06B6D4;
+            background: linear-gradient(to right, #00CED1, #3B82F6);
             width: 100%;
-            top: 20px;
+            top: 25px;
+            z-index: 0;
+          }
+          .section-bg {
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.8), rgba(30, 30, 40, 0.9));
           }
         `}
       </style>
 
-     
+      {/* Particles */}
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="particle"
+          style={{
+            width: particle.width,
+            height: particle.height,
+            left: particle.left,
+            top: particle.top,
+            animationDelay: particle.animationDelay,
+          }}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
+        />
+      ))}
 
       {/* Hero Section */}
-      <header className="relative py-20 text-center bg-gradient-to-b from-gray-800 to-gray-900">
+      <header className="relative z-10 py-28 text-center section-bg">
         <motion.h1
-          initial={{ opacity: 0, y: -20 }}
+          style={{ opacity, scale }}
+          initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-bold font-poppins text-white"
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          className="text-5xl md:text-7xl font-bold font-poppins accent-gradient leading-tight"
         >
           Transforming Visions into Success
         </motion.h1>
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          style={{ opacity }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-4 text-lg md:text-xl text-gray-300 font-inter max-w-2xl mx-auto"
+          transition={{ duration: 1.2, delay: 0.3, ease: 'easeOut' }}
+          className="mt-6 text-xl md:text-2xl text-gray-200 font-light font-inter max-w-3xl mx-auto"
         >
           Discover how we empower businesses with innovative, tailored solutions.
         </motion.p>
         <motion.div
+          style={{ opacity }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 1.2, delay: 0.6, ease: 'easeOut' }}
         >
           <Link
             href="/contact"
-            className="mt-6 inline-block px-6 py-3 text-white font-inter rounded-md accent-gradient hover:brightness-110 transition"
+            className="mt-8 inline-flex items-center px-8 py-4 text-white font-semibold font-inter rounded-xl accent-gradient hover:brightness-110 transition-all duration-300"
           >
-            Get Started <ArrowRight className="inline ml-2" />
+            Get Started <ArrowRight className="ml-3 w-5 h-5" />
           </Link>
         </motion.div>
       </header>
 
       {/* Case Studies Grid */}
-      <section className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold text-center font-poppins text-white mb-8">
+      <section className="container mx-auto px-6 py-16">
+        <h2 className="text-4xl font-extrabold text-center font-poppins text-white mb-12 tracking-wide">
           Our Success Stories
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {caseStudies.map((study) => (
             <motion.div
               key={study.id}
-              className="glass-card rounded-lg overflow-hidden"
-              whileHover={{ scale: 1.03 }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              className="glass-card p-6 rounded-xl overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <Image
-                src={study.image}
-                alt={study.title}
-                width={400}
-                height={200}
-                className="w-full h-48 object-cover"
-                loading="lazy"
-              />
-              <div className="p-5">
-                <h3 className="text-xl font-semibold font-poppins text-white mb-2">{study.title}</h3>
-                <p className="text-gray-400 text-sm font-inter mb-2">Client: {study.client}</p>
-                <p className="text-cyan-400 text-sm font-inter flex items-center mb-3">
-                  <Clock className="w-4 h-4 mr-1" /> {study.duration}
-                </p>
-                <p className="text-gray-300 text-sm font-inter mb-4">{study.description}</p>
-                <Link
-                  href={`/case-studies/${study.id}`}
-                  className="text-cyan-400 font-inter hover:text-cyan-300 transition-colors"
-                >
-                  View Case Study <ArrowRight className="inline ml-1" />
-                </Link>
+              <div className="relative w-full h-60 mb-6">
+                <Image
+                  src={study.image}
+                  alt={study.title}
+                  fill
+                  className="rounded-lg object-cover transition-transform duration-300 hover:scale-110"
+                  loading="lazy"
+                />
               </div>
+              <h3 className="text-2xl font-semibold font-poppins text-teal-300 mb-3">{study.title}</h3>
+              <p className="text-gray-400 text-sm font-inter mb-2">Client: {study.client}</p>
+              <p className="text-cyan-400 text-sm font-inter flex items-center mb-3">
+                <Clock className="w-4 h-4 mr-2" /> {study.duration}
+              </p>
+              <p className="text-gray-300 text-base font-inter mb-4 line-clamp-2">{study.description}</p>
+              <p className="text-green-400 font-medium text-sm">Result: {study.result}</p>
+              <Link
+                href={`/case-studies/${study.id}`}
+                className="mt-4 inline-block text-teal-400 font-semibold font-inter hover:text-teal-300 transition-colors underline decoration-2 decoration-teal-400/50"
+              >
+                View Case Study <ArrowRight className="inline ml-1 w-4 h-4" />
+              </Link>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Timeline Section */}
-      <section className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold text-center font-poppins text-white mb-8">
+      <section className="container mx-auto px-6 py-16 section-bg">
+        <h2 className="text-4xl font-extrabold text-center font-poppins text-white mb-12 tracking-wide">
           Our Proven Process
         </h2>
         <div className="relative">
           <div className="timeline-connector" />
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
             {timeline.map((item, index) => (
               <motion.div
                 key={item.step}
-                className="glass-card p-5 rounded-lg text-center"
-                initial={{ opacity: 0, y: 20 }}
+                className="glass-card p-6 rounded-xl text-center"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.2, ease: 'easeOut' }}
               >
-                <div className="w-8 h-8 bg-cyan-400 rounded-full mx-auto mb-3 flex items-center justify-center">
-                  <Check className="w-5 h-5 text-white" />
+                <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <Check className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold font-poppins text-white">{item.step}</h3>
-                <p className="text-gray-400 text-sm font-inter">{item.time}</p>
-                <p className="text-gray-300 mt-2 text-sm font-inter">{item.content}</p>
+                <h3 className="text-xl font-semibold font-poppins text-white">{item.step}</h3>
+                <p className="text-gray-400 text-sm font-inter mt-2">{item.time}</p>
+                <p className="text-gray-300 mt-3 text-base font-inter">{item.content}</p>
               </motion.div>
             ))}
           </div>
@@ -198,27 +257,27 @@ const CaseStudiesPage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="container mx-auto px-4 py-12 bg-gray-800">
-        <h2 className="text-3xl font-bold text-center font-poppins text-white mb-8">
+      <section className="container mx-auto px-6 py-16">
+        <h2 className="text-4xl font-extrabold text-center font-poppins text-white mb-12 tracking-wide">
           What Our Clients Say
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
-              className="glass-card p-6 rounded-lg"
-              initial={{ opacity: 0, y: 20 }}
+              className="glass-card p-6 rounded-xl"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.2, ease: 'easeOut' }}
             >
-              <div className="flex mb-3">
+              <div className="flex mb-4">
                 {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  <Star key={i} className="w-6 h-6 text-yellow-400 fill-current mr-1" />
                 ))}
               </div>
-              <p className="text-gray-300 font-inter mb-4">{testimonial.content}</p>
-              <p className="text-white font-semibold font-poppins">{testimonial.name}</p>
+              <p className="text-gray-300 font-inter text-lg italic mb-4">"{testimonial.content}"</p>
+              <p className="text-white font-semibold font-poppins text-base">{testimonial.name}</p>
               <p className="text-gray-400 text-sm font-inter">{testimonial.role}</p>
             </motion.div>
           ))}
@@ -226,22 +285,22 @@ const CaseStudiesPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="container mx-auto px-4 py-16 text-center">
+      <section className="container mx-auto px-6 py-20 text-center section-bg">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-3xl font-bold font-poppins text-white mb-4"
+          transition={{ duration: 0.6 }}
+          className="text-4xl font-extrabold font-poppins text-white mb-6 tracking-wide"
         >
           Ready to Elevate Your Business?
         </motion.h2>
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-gray-300 text-lg font-inter mb-6"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-gray-200 text-xl font-inter mb-8 max-w-2xl mx-auto"
         >
           Let’s create something extraordinary together.
         </motion.p>
@@ -249,22 +308,22 @@ const CaseStudiesPage = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
         >
           <Link
             href="/contact"
-            className="inline-block px-6 py-3 text-white font-inter rounded-md accent-gradient hover:brightness-110 transition"
+            className="inline-flex items-center px-8 py-4 text-white font-semibold font-inter rounded-xl accent-gradient hover:brightness-110 transition-all duration-300"
           >
-            Contact Us Today <ArrowRight className="inline ml-2" />
+            Contact Us Today <ArrowRight className="ml-3 w-5 h-5" />
           </Link>
         </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="py-6 text-center bg-gray-800">
+      <footer className="py-8 text-center bg-gray-900/80 backdrop-blur-md">
         <p className="text-gray-400 text-sm font-inter">
-          © {new Date().getFullYear()} [Your Brand Name]. All rights reserved.{' '}
-          <Link href="/contact" className="text-cyan-400 hover:text-cyan-300">
+          © {new Date().getFullYear()} Nyxtrael. All rights reserved.{' '}
+          <Link href="/contact" className="text-cyan-400 hover:text-cyan-300 font-medium">
             Get in Touch
           </Link>
         </p>

@@ -6,12 +6,12 @@ import { ArrowRight, Palette, Globe, Sparkles, Send, Star } from 'lucide-react';
 import Link from 'next/link';
 
 const portfolioItems = [
-  { id: 1, category: 'branding', title: 'Minimalist Logo', image: '/agency/branding1.jpg', description: 'A clean logo design for a tech startup.' },
-  { id: 2, category: 'branding', title: 'Organic Packaging', image: '/agency/branding2.jpg', description: 'Eco-friendly packaging with earthy tones.' },
-  { id: 3, category: 'web', title: 'Bold Website', image: '/agency/web1.jpg', description: 'A vibrant website for a fashion brand.' },
-  { id: 4, category: 'web', title: 'Modern UI', image: '/agency/web2.jpg', description: 'Sleek and modern UI for a SaaS product.' },
-  { id: 5, category: 'campaign', title: 'Retro Campaign', image: '/agency/campaign1.jpg', description: 'A nostalgic ad campaign with 80s vibes.' },
-  { id: 6, category: 'campaign', title: 'Playful Poster', image: '/agency/campaign2.jpg', description: 'A fun poster for a children’s event.' },
+  { id: 1, category: 'branding', title: 'Minimalist Logo', image: '/images/agency/branding1.png', description: 'A clean logo design for a tech startup.' },
+  { id: 2, category: 'branding', title: 'Organic Packaging', image: '/images/agency/branding2.png', description: 'Eco-friendly packaging with earthy tones.' },
+  { id: 3, category: 'web', title: 'Bold Website', image: '/images/agency/web1.png', description: 'A vibrant website for a fashion brand.' },
+  { id: 4, category: 'web', title: 'Modern UI', image: '/images/agency/web2.png', description: 'Sleek and modern UI for a SaaS product.' },
+  { id: 5, category: 'campaign', title: 'Retro Campaign', image: '/images/agency/campaign1.png', description: 'A nostalgic ad campaign with 80s vibes.' },
+  { id: 6, category: 'campaign', title: 'Playful Poster', image: '/images/agency/campaign2.png', description: 'A fun poster for a children’s event.' },
 ];
 
 const testimonials = [
@@ -111,7 +111,7 @@ const AgencyPage = () => {
               </p>
             </div>
             <div className="md:w-1/2">
-              <img src="/agency/branding-sample.jpg" alt="Branding Sample" className="w-full rounded-lg shadow-lg" />
+              <img src="/images/agency/branding-sample.png" alt="Branding Sample" className="w-full rounded-lg shadow-lg" />
             </div>
           </div>
         </motion.div>
@@ -136,7 +136,7 @@ const AgencyPage = () => {
               </p>
             </div>
             <div className="md:w-1/2">
-              <img src="/agency/web-sample.jpg" alt="Web Design Sample" className="w-full rounded-lg shadow-lg" />
+              <img src="/images/agency/web-sample.png" alt="Web Design Sample" className="w-full rounded-lg shadow-lg" />
             </div>
           </div>
         </motion.div>
@@ -161,7 +161,7 @@ const AgencyPage = () => {
               </p>
             </div>
             <div className="md:w-1/2">
-              <img src="/agency/campaign-sample.jpg" alt="Campaign Sample" className="w-full rounded-lg shadow-lg" />
+              <img src="/images/agency/campaign-sample.png" alt="Campaign Sample" className="w-full rounded-lg shadow-lg" />
             </div>
           </div>
         </motion.div>

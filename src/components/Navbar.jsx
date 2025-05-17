@@ -1,15 +1,9 @@
-// src/components/Navbar.jsx
 'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useCart } from '../context/CartContext';
-import { useWishlist } from '../context/WishlistContext';
-import { ShoppingCart, Heart } from 'lucide-react';
 
 export default function Navbar() {
-  const { cart } = useCart();
-  const { wishlist } = useWishlist();
   const pathname = usePathname();
 
   const navLinks = [
@@ -43,34 +37,6 @@ export default function Navbar() {
             {link.label}
           </Link>
         ))}
-
-        {/* Wishlist and Cart icons */}
-        <Link
-          href="/wishlist"
-          aria-label="View Wishlist"
-          title="View Wishlist"
-          className="relative p-2 text-white hover:text-fuchsia-400 transition-transform"
-        >
-          <Heart className="w-6 h-6" />
-          {wishlist.length > 0 && (
-            <span className="absolute -top-1 -right-1 inline-flex items-center justify-center h-5 w-5 bg-pink-600 text-xs rounded-full">
-              {wishlist.length}
-            </span>
-          )}
-        </Link>
-        <Link
-          href="/cart"
-          aria-label="View Cart"
-          title="View Cart"
-          className="relative p-2 text-white hover:text-fuchsia-400 transition-transform"
-        >
-          <ShoppingCart className="w-6 h-6" />
-          {cart.length > 0 && (
-            <span className="absolute -top-1 -right-1 inline-flex items-center justify-center h-5 w-5 bg-pink-600 text-xs rounded-full">
-              {cart.length}
-            </span>
-          )}
-        </Link>
       </div>
     </nav>
   );
