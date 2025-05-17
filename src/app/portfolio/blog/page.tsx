@@ -6,6 +6,7 @@ import { Search, Tag, Clock, Eye } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// Ensure images exist in /public/images/blog/ directory
 const blogPosts = [
   { id: 1, title: 'The Future of Web Design', category: 'Tech', date: 'May 10, 2025', views: 1200, excerpt: 'Exploring the latest trends shaping the digital landscape.', image: '/images/blog/post1.png' },
   { id: 2, title: 'Holographic UI Trends', category: 'Design', date: 'May 8, 2025', views: 950, excerpt: 'How holographic interfaces are revolutionizing user experience.', image: '/images/blog/post2.png' },
@@ -156,6 +157,9 @@ const BlogPage = () => {
                   fill
                   className="rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                   loading="lazy"
+                  onError={(e) => {
+                    e.target.src = '/images/fallback.png'; // Fallback image if the original fails to load
+                  }}
                 />
               </div>
               <span className="inline-block px-3 py-1 bg-pink-500/20 text-pink-300 text-sm font-medium rounded-full mb-3">
@@ -174,8 +178,7 @@ const BlogPage = () => {
                 Read More
               </Link>
             </motion.div>
-          ))
-          }
+          ))}
         </main>
       </div>
 
