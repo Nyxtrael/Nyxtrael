@@ -7,6 +7,7 @@ import Analytics from '../components/Analytics';
 import { ThemeProvider, useTheme } from '../context/ThemeContext';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaInstagram, FaX, FaLinkedin } from 'react-icons/fa';
 
 function Footer() {
   const { darkMode } = useTheme();
@@ -50,6 +51,17 @@ function Footer() {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
             <path d="M18.9 2h3.6l-7.9 9.2 9.3 12.3h-7.2l-5.6-7.4-6.4 7.4H2l8.5-9.9L1.5 2h7.4l5.1 6.8L18.9 2zM16.8 19.5h2L7.2 4.5H5.1l11.7 15z" />
           </svg>
+        </motion.a>
+        <motion.a
+          href="https://linkedin.com/in/nyxtrael"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Nyxtrael on LinkedIn"
+          className="p-3 rounded-full hover:bg-[#F5EDE4]/20 hover:text-[#8A4A21] transition-colors"
+          whileHover={{ scale: 1.2, rotate: 5 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <FaLinkedin />
         </motion.a>
       </div>
       <p className={darkMode ? 'text-gray-400' : 'text-gray-600'}>

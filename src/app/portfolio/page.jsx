@@ -1,52 +1,38 @@
-"use client";
+'use client';
 
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
+import PortfolioHero from '../../components/PortfolioHero';
+import PortfolioCarousel from '../../components/PortfolioCarousel';
+import PortfolioGrid from '../../components/PortfolioGrid';
+import PortfolioTestimonial from '../../components/PortfolioTestimonial';
+import PortfolioProcess from '../../components/PortfolioProcess';
+import { sections, featuredProjects } from '../../data/portfolio';
 
 export default function PortfolioPage() {
   const { darkMode, toggleDarkMode } = useTheme();
   const [stars, setStars] = useState([]);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [useImageBackground, setUseImageBackground] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Limit stars on mobile
+    const starCount = window.innerWidth < 768 ? 6 : 12;
     setStars(
-      Array.from({ length: 12 }, () => ({
+      Array.from({ length: starCount }, () => ({
         top: `${Math.random() * 100}%`,
         left: `${Math.random() * 100}%`,
         delay: Math.random() * 2,
       }))
     );
+
+    // Handle adaptive background
+    setReduceMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    setIsMobile(window.innerWidth < 768);
   }, []);
-
-  const sections = [
-    { title: 'Art Gallery', href: '/portfolio/gallery', desc: 'Explore my illustration series in Anime, Gothic, and Celestial styles.' },
-    { title: 'Photographer Portfolio', href: '/portfolio/photographer', desc: 'A responsive website designed for a photographer.' },
-    { title: 'Agency Project', href: '/portfolio/agency', desc: 'Branding and web design for a creative agency.' },
-    { title: 'Blog', href: '/portfolio/blog', desc: 'Insights, tutorials, and project updates.' },
-    { title: 'Case Studies', href: '/portfolio/case-studies', desc: 'Detailed case studies of selected projects.' },
-  ];
-
-  const featuredProjects = [
-    {
-      title: 'Sunroom Diaries',
-      desc: 'A tranquil series inspired by nature and cozy mornings.',
-      image: '/images/sunroom-diaries/cover.png',
-    },
-    {
-      title: 'Red Requiem',
-      desc: 'A gothic sci-fi series with cathedral silhouettes and neon.',
-      image: '/images/red-requiem/cover.png',
-    },
-    {
-      title: 'Astral Divines',
-      desc: 'Celestial-themed illustrations blending mythology and cosmos.',
-      image: '/images/astral-divines/cover.png',
-    },
-  ];
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -55,14 +41,6 @@ export default function PortfolioPage() {
     url: 'https://nyxtrael.com/portfolio',
     description: 'Explore Nyxtrael’s diverse portfolio, including illustrations, web design, and more.',
   };
-
-  // Auto-scroll carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % featuredProjects.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [featuredProjects.length]);
 
   return (
     <>
@@ -89,134 +67,32 @@ export default function PortfolioPage() {
       </Head>
 
       <section
-        className={`relative flex flex-col items-center justify-center text-center overflow-hidden min-h-screen px-6 md:px-16 ${
+        className={`relative overflow-hidden min-h-screen ${
           darkMode
-            ? 'bg-[radial-gradient(circle,rgba(45,212,191,0.1),transparent),linear-gradient(to_bottom,#1a0e2a,#0c0f1e)]'
-            : 'bg-gradient-to-b from-gray-200 to-gray-50'
+            ? 'bg-gradient-to-br from-[#1a0e2a] to-[#111827]'
+            : 'bg-gradient-to-br from-gray-200 to-gray-50'
         }`}
       >
-        {useImageBackground ? (
-          <div
-            className="absolute inset-0 w-full h-full bg-cover bg-center opacity-10"
-            style={{ backgroundImage: "url('/images/portfolio-bg.jpg')" }}
-            aria-hidden="true"
-          />
-        ) : (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-10"
-            poster="/images/stars-fallback.png"
-            aria-hidden="true"
-          >
-            <source
-              src="/videos/6917331_Motion Graphics_Motion Graphic_1280x720.mp4"
-              type="video/mp4"
-            />
-          </video>
-        )}
-
-        {stars.map((s, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-gradient-to-r from-teal-400 to-fuchsia-400"
-            style={{ top: s.top, left: s.left, width: 2, height: 2 }}
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 2, repeat: Infinity, delay: s.delay }}
-          />
-        ))}
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.7 }}
-          animate={{ opacity: 1, scale: 1, rotate: [0, 3, -3, 0] }}
-          transition={{ duration: 1.2, repeat: Infinity, repeatType: 'mirror' }}
-          className="relative z-10 mb-6 w-24 h-24"
+        {/* Adaptive Background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          poster="/images/stars-fallback.png"
+          preload="metadata"
+          style={{
+            display: reduceMotion || isMobile ? 'none' : 'block',
+            opacity: 0.1,
+          }}
+          aria-hidden="true"
         >
-          <img
-            src="/images/persona.png"
-            alt="Nyxtrael avatar"
-            className="rounded-full border-4 border-fuchsia-400 w-full h-full"
-          />
-        </motion.div>
+          <source src="/videos/portfolio-bg.webm" type="video/webm" />
+        </video>
 
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className={`relative z-10 font-bold text-5xl md:text-6xl mb-2 font-playfair ${
-            darkMode ? 'text-white' : 'text-gray-900'
-          }`}
-        >
-          Portfolio by{' '}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-fuchsia-400">
-            Nyxtrael
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className={`relative z-10 text-lg font-inter max-w-2xl ${
-            darkMode ? 'text-neutral-300' : 'text-gray-700'
-          }`}
-        >
-          Discover my creative projects, from illustrations to web design.
-        </motion.p>
-
-        {/* Hero Carousel */}
-        <div className="relative w-full max-w-5xl mt-12 overflow-hidden rounded-2xl shadow-2xl">
-          <AnimatePresence initial={false} mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, x: 300 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -300 }}
-              transition={{ duration: 0.6, ease: 'easeInOut' }}
-              className="relative w-full h-72 md:h-96 rounded-2xl overflow-hidden"
-            >
-              <img
-                src={featuredProjects[currentSlide].image}
-                alt={featuredProjects[currentSlide].title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-center text-white p-6"
-                >
-                  <h2 className="text-2xl md:text-3xl font-bold font-playfair">{featuredProjects[currentSlide].title}</h2>
-                  <p className="text-sm md:text-base font-inter">{featuredProjects[currentSlide].desc}</p>
-                </motion.div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-          <button
-            onClick={() => setCurrentSlide((prev) => (prev - 1 + featuredProjects.length) % featuredProjects.length)}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
-          >
-            ‹
-          </button>
-          <button
-            onClick={() => setCurrentSlide((prev) => (prev + 1) % featuredProjects.length)}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform"
-          >
-            ›
-          </button>
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3">
-            {featuredProjects.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                className={`w-3 h-3 rounded-full ${idx === currentSlide ? 'bg-fuchsia-400' : 'bg-white bg-opacity-60'} hover:bg-fuchsia-300 transition-colors`}
-              />
-            ))}
-          </div>
-        </div>
+        <PortfolioHero stars={stars} />
+        <PortfolioCarousel featuredProjects={featuredProjects} />
 
         <motion.a
           href="#main-content"
@@ -241,80 +117,17 @@ export default function PortfolioPage() {
         id="main-content"
         className={`relative z-10 px-6 py-16 md:px-16 space-y-20 ${
           darkMode
-            ? 'bg-[radial-gradient(circle,rgba(45,212,191,0.1),transparent),linear-gradient(to_bottom,#1a0e2a,#0c0f1e)] text-white'
-            : 'bg-gradient-to-b from-gray-200 to-gray-50 text-gray-900'
+            ? 'bg-gradient-to-br from-[#1a0e2a] to-[#111827] text-white'
+            : 'bg-gradient-to-br from-gray-200 to-gray-50 text-gray-900'
         }`}
       >
-        <motion.button
-          onClick={toggleDarkMode}
-          className="fixed top-4 right-4 p-2 rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white shadow-md hover:shadow-lg transition-shadow"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {darkMode ? '🌞' : '🌙'}
-        </motion.button>
+   
 
-        <section className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-semibold mb-16 font-playfair bg-gradient-to-r from-teal-400 to-fuchsia-400 bg-clip-text text-transparent">
-            Explore My Work
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {sections.map((section, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                whileHover={{ scale: 1.05, rotate: 2 }}
-                className="relative bg-gray-800 bg-opacity-70 p-6 rounded-2xl overflow-hidden shadow-lg group"
-              >
-                <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500 bg-opacity-20 rounded-bl-full transform translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-300" />
-                <h3 className="text-xl md:text-2xl font-bold mb-3 font-playfair bg-gradient-to-r from-purple-400 to-fuchsia-400 bg-clip-text text-transparent z-10 relative">
-                  {section.title}
-                </h3>
-                <p className={`text-sm md:text-base mb-4 font-inter ${darkMode ? 'text-neutral-400' : 'text-gray-600'} z-10 relative`}>
-                  {section.desc}
-                </p>
-                <Link
-                  href={section.href}
-                  className="inline-block px-6 py-2 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white rounded-lg font-inter shadow-md hover:shadow-xl transition-all duration-300 z-10 relative"
-                >
-                  View Details →
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+        
 
-        <section className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-semibold mb-12 font-playfair bg-gradient-to-r from-teal-400 to-fuchsia-400 bg-clip-text text-transparent">
-            Creative Process
-          </h2>
-          <ul className={`list-disc list-inside space-y-6 font-inter ${darkMode ? 'text-neutral-300' : 'text-gray-700'} text-lg md:text-xl`}>
-            <motion.li
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              We discuss your vision and project needs.
-            </motion.li>
-            <motion.li
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              I create visual concepts and mockups for approval.
-            </motion.li>
-            <motion.li
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              I deliver final files and support integration.
-            </motion.li>
-          </ul>
-        </section>
+        <PortfolioGrid sections={sections} />
+        <PortfolioTestimonial />
+        <PortfolioProcess />
       </main>
     </>
   );
