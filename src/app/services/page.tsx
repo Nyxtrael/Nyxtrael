@@ -1,6 +1,6 @@
 import { FaCode, FaPaintBrush, FaBusinessTime } from 'react-icons/fa';
 
-import ServiceCard from '@/components/ServiceCard';
+import ServiceCard from '../../components/ServiceCard';
 
 const services = [
   {

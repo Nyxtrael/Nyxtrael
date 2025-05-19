@@ -1,6 +1,6 @@
 import { FaTwitter, FaInstagram, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiFiverr } from 'react-icons/si';
-import ContactForm from '@/components/ContactForm';
+import ContactForm from '../../components/ContactForm';
 
 export default function Contact() {
   return (

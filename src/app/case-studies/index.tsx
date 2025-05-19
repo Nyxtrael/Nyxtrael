@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CaseStudyCard from "@/components/CaseStudyCard";
+import CaseStudyCard from "../../components/CaseStudyCard";
 import { caseStudies } from "./data";
 
 export default function CaseStudies() {

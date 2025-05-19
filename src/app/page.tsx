@@ -1,8 +1,8 @@
-import Hero from '@/components/Hero';
-import AboutSnippet from '@/components/AboutSnippet';
-import ServiceCard from '@/components/ServiceCard';
-import CaseStudyCard from '@/components/CaseStudyCard';
-import FinalCTA from '@/components/FinalCTA';
+import Hero from '../components/Hero';
+import AboutSnippet from '../components/AboutSnippet';
+import ServiceCard from '../components/ServiceCard';
+import CaseStudyCard from '../components/CaseStudyCard';
+import FinalCTA from '../components/FinalCTA';
 
 const services = [
   {
