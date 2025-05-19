@@ -6,71 +6,36 @@ import Image from 'next/image';
 import Head from 'next/head';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../../context/ThemeContext';
+import { useReducedMotion } from 'framer-motion';
 
 // Service data
 const service = {
   title: 'Web Development',
-  desc: 'Transform your online presence with custom websites, e-commerce platforms, and CMS solutions. Our SEO-optimized, high-performance sites are tailored to your brand and built for success.',
+  desc: 'Elevate your online presence with bespoke web solutions tailored to your brand. We deliver high-performance sites optimized for SEO and responsiveness, ensuring success in a competitive digital landscape. Key benefits include:',
+  benefits: ['Enhanced performance for faster load times', 'SEO optimization for better visibility', 'Full responsiveness across all devices'],
   image: '/images/services/web-development.jpg',
 };
 
 // Features data
 const features = [
-  {
-    title: 'Custom Websites',
-    desc: 'Bespoke designs and functionality tailored to your brand’s unique needs.',
-    icon: '/images/icons/custom.svg',
-  },
-  {
-    title: 'E-Commerce Solutions',
-    desc: 'Secure, scalable online stores with seamless payment integration.',
-    icon: '/images/icons/ecommerce.svg',
-  },
-  {
-    title: 'CMS Integration',
-    desc: 'User-friendly content management systems like WordPress or headless CMS.',
-    icon: '/images/icons/cms.svg',
-  },
-  {
-    title: 'SEO Optimization',
-    desc: 'Boost your visibility with search-engine-friendly code and strategies.',
-    icon: '/images/icons/seo.svg',
-  },
+  { title: 'Custom Websites', desc: 'Bespoke designs tailored to your brand’s unique needs.', icon: '/images/icons/custom.svg' },
+  { title: 'E-Commerce Solutions', desc: 'Secure, scalable stores with seamless payment integration.', icon: '/images/icons/ecommerce.svg' },
+  { title: 'CMS Integration', desc: 'User-friendly systems like WordPress or headless CMS.', icon: '/images/icons/cms.svg' },
+  { title: 'SEO Optimization', desc: 'Search-engine-friendly code and strategies for visibility.', icon: '/images/icons/seo.svg' },
 ];
 
 // Project showcase data
 const projects = [
-  {
-    title: 'Luxury Retail Store',
-    desc: 'A responsive e-commerce platform with advanced filtering and payment gateways.',
-    image: '/images/projects/luxury-retail.jpg',
-  },
-  {
-    title: 'Corporate Website',
-    desc: 'A sleek, SEO-optimized site for a tech startup with CMS integration.',
-    image: '/images/projects/corporate.jpg',
-  },
-  {
-    title: 'Portfolio Platform',
-    desc: 'A dynamic portfolio site with custom animations and responsive design.',
-    image: '/images/projects/portfolio.jpg',
-  },
+  { title: 'Luxury Retail Store', desc: 'Responsive e-commerce with advanced filtering.', image: '/images/projects/luxury-retail.jpg' },
+  { title: 'Corporate Website', desc: 'SEO-optimized site with CMS integration.', image: '/images/projects/corporate.jpg' },
+  { title: 'Portfolio Platform', desc: 'Dynamic site with custom animations.', image: '/images/projects/portfolio.jpg' },
 ];
 
 // FAQ data
 const faqs = [
-  {
-    question: 'What types of websites do you build?',
-    answer: 'We build custom websites, e-commerce platforms, blogs, portfolios, and corporate sites, all tailored to your needs.',
-  },
-  {
-    question: 'How long does a web development project take?',
-    answer: 'Timelines vary, but most projects take 4-8 weeks, depending on complexity and requirements.',
-  },
-  {
-    question: 'Do you provide ongoing support?',
-    answer: 'Yes, we offer maintenance, updates, and support packages to keep your site running smoothly.',
-  },
+  { question: 'What types of websites do you build?', answer: 'Custom sites, e-commerce, blogs, portfolios, and corporate solutions.' },
+  { question: 'How long does a project take?', answer: '4-8 weeks, depending on complexity.' },
+  { question: 'Do you offer support?', answer: 'Yes, with maintenance and update packages.' },
 ];
 
 // JSON-LD schema
@@ -79,100 +44,85 @@ const jsonLd = {
   '@type': 'Service',
   name: 'Web Development by Nyxtrael',
   url: 'https://nyxtrael.com/services/web-development',
-  description: 'Custom web development services including websites, e-commerce, CMS integration, and SEO optimization.',
-  provider: {
-    '@type': 'Organization',
-    name: 'Nyxtrael',
-    url: 'https://nyxtrael.com',
-    logo: 'https://nyxtrael.com/images/logo.png',
-  },
+  description: 'Custom web development services including websites, e-commerce, and SEO optimization.',
+  provider: { '@type': 'Organization', name: 'Nyxtrael', url: 'https://nyxtrael.com', logo: 'https://nyxtrael.com/images/logo.png' },
   serviceType: 'Web Development',
   areaServed: 'Global',
-  offers: {
-    '@type': 'Offer',
-    priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
-  },
+  offers: { '@type': 'Offer', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
 };
 
 export default function WebDevelopment() {
   const { darkMode } = useTheme();
+  const prefersReducedMotion = useReducedMotion();
   const [stars, setStars] = useState([]);
   const [isClient, setIsClient] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [useImageBackground, setUseImageBackground] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   const heroRef = useRef(null);
 
-  // Check for prefers-reduced-motion
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setUseImageBackground(mediaQuery.matches);
     setIsClient(true);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Generate stars for background
+  // Generate stars with reduced motion consideration
   useEffect(() => {
-    if (isClient) {
+    if (isClient && !prefersReducedMotion) {
+      const count = isMobile ? 5 : 15;
       setStars(
-        Array.from({ length: 15 }, () => ({
+        Array.from({ length: count }, () => ({
           top: `${Math.random() * 100}%`,
           left: `${Math.random() * 100}%`,
           delay: Math.random() * 2,
         }))
       );
     }
-  }, [isClient]);
+  }, [isClient, prefersReducedMotion, isMobile]);
 
-  // Parallax effect
+  // Simple fade effect instead of parallax
   useEffect(() => {
-    const handleScroll = () => {
-      if (heroRef.current) {
-        const scrollTop = window.pageYOffset;
-        heroRef.current.style.backgroundPositionY = `${-scrollTop * 0.3}px`;
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    if (heroRef.current && !prefersReducedMotion) {
+      heroRef.current.style.transition = 'opacity 0.3s ease';
+      const handleScroll = () => {
+        const opacity = 1 - window.scrollY / 500;
+        heroRef.current.style.opacity = Math.max(0.7, opacity);
+      };
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [prefersReducedMotion]);
 
-  // Toggle FAQ
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
+  const toggleFaq = (index) => setOpenFaq(openFaq === index ? null : index);
 
   return (
     <>
-      {/* SEO Metadata */}
       <Head>
         <title>Web Development | Nyxtrael</title>
-        <meta
-          name="description"
-          content="Custom web development services by Nyxtrael, including websites, e-commerce, CMS integration, and SEO optimization."
-        />
+        <meta name="description" content="Custom web development by Nyxtrael, including websites, e-commerce, and SEO." />
         <meta property="og:title" content="Web Development | Nyxtrael" />
-        <meta
-          property="og:description"
-          content="Transform your online presence with tailored, high-performance web solutions."
-        />
+        <meta property="og:description" content="Elevate your online presence with tailored web solutions." />
         <meta property="og:image" content="/images/og-web-development.jpg" />
         <meta property="og:url" content="https://nyxtrael.com/services/web-development" />
         <meta name="twitter:card" content="summary_large_image" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <link rel="preload" href="/images/web-development-bg.jpg" as="image" />
       </Head>
 
       {/* Hero Section */}
-      <section
+      <header
         ref={heroRef}
         className={`relative flex flex-col items-center justify-center text-center overflow-hidden min-h-screen px-6 md:px-16 ${
           darkMode
             ? 'bg-[radial-gradient(circle,rgba(45,212,191,0.15),transparent),linear-gradient(to_bottom,#1F2937,#111827)]'
             : 'bg-gradient-to-b from-gray-200 to-gray-50'
-        } bg-fixed`}
-        role="region"
+        }`}
+        role="banner"
         aria-label="Web Development Hero"
       >
         {useImageBackground ? (
@@ -193,12 +143,15 @@ export default function WebDevelopment() {
             className="absolute inset-0 w-full h-full object-cover opacity-15"
             poster="/images/stars-fallback.png"
             aria-hidden="true"
+            data-src-mobile="/videos/web-development-bg-mobile.webm"
           >
             <source src="/videos/web-development-bg.webm" type="video/webm" />
+            <source src="/videos/web-development-bg.mp4" type="video/mp4" />
           </video>
         )}
 
-        {isClient &&
+        {!prefersReducedMotion &&
+          isClient &&
           stars.map((s, i) => (
             <motion.div
               key={i}
@@ -208,6 +161,22 @@ export default function WebDevelopment() {
               transition={{ duration: 2, repeat: Infinity, delay: s.delay }}
             />
           ))}
+
+        <nav className="w-full py-4 bg-gray-900/80 backdrop-blur-md">
+          <div className="container mx-auto flex justify-between items-center">
+            <Link href="/" className="text-xl font-bold font-playfair text-white">
+              Nyxtrael
+            </Link>
+            <ol className="flex space-x-2 text-sm font-inter text-gray-400">
+              <li>
+                <Link href="/services" className="hover:text-cyan-400">
+                  Services
+                </Link>
+              </li>
+              <li className="before:content-['/'] before:mx-2">Web Development</li>
+            </ol>
+          </div>
+        </nav>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -226,48 +195,55 @@ export default function WebDevelopment() {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: prefersReducedMotion ? 0.5 : 0.8 }}
           className={`relative z-10 font-bold text-5xl md:text-6xl mb-4 font-playfair tracking-wide ${
-            darkMode ? 'text-white text-shadow-md' : 'text-gray-900'
+            darkMode ? 'text-white' : 'text-gray-900'
           }`}
         >
           {service.title}
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: prefersReducedMotion ? 0.5 : 0.8, delay: 0.2 }}
           className={`relative z-10 text-lg font-inter max-w-3xl leading-relaxed ${
-            darkMode ? 'text-gray-300' : 'text-gray-700'
+            darkMode ? 'text-gray-300' : 'text-gray-800'
           }`}
         >
           {service.desc}
+          <ul className="list-disc list-inside mt-2 text-gray-500">
+            {service.benefits.map((benefit, i) => (
+              <li key={i} className="mt-1">
+                {benefit}
+              </li>
+            ))}
+          </ul>
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: prefersReducedMotion ? 0.5 : 0.8, delay: 0.4 }}
           className="mt-8"
         >
           <Link
             href="/contact"
             className="inline-block px-8 py-4 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white rounded-full font-playfair text-xl shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 transition-all"
-            aria-label="Navigate to contact page for a web development quote"
+            aria-label="Get a quote for web development"
+            whileHover={{ scale: 1.05 }}
+            animate={{ scale: [1, 1.02, 1], transition: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' } }}
           >
             Get a Quote
           </Link>
         </motion.div>
-      </section>
+      </header>
 
       <main
         className={`relative z-10 px-6 py-24 md:px-16 space-y-32 ${
-          darkMode
-            ? 'bg-[radial-gradient(circle,rgba(45,212,191,0.15),transparent),linear-gradient(to_bottom,#1F2937,#111827)] text-white'
-            : 'bg-gradient-to-b from-gray-200 to-gray-50 text-gray-900'
+          darkMode ? 'bg-[radial-gradient(circle,rgba(45,212,191,0.15),transparent),linear-gradient(to_bottom,#1F2937,#111827)] text-white' : 'bg-gradient-to-b from-gray-200 to-gray-50 text-gray-900'
         }`}
         role="main"
       >
@@ -276,23 +252,17 @@ export default function WebDevelopment() {
           <h2 className="text-4xl md:text-5xl font-semibold mb-12 font-playfair bg-gradient-to-r from-fuchsia-500 to-purple-500 bg-clip-text text-transparent tracking-wide">
             Why Choose Our Web Development?
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {features.map((feature, i) => (
               <motion.article
                 key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                transition={{ duration: prefersReducedMotion ? 0.3 : 0.6, delay: i * 0.1 }}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                 className="p-6 rounded-xl bg-white/10 backdrop-blur-md shadow-lg"
               >
-                <Image
-                  src={feature.icon}
-                  alt={`${feature.title} icon`}
-                  width={48}
-                  height={48}
-                  className="mb-4"
-                />
+                <Image src={feature.icon} alt={`${feature.title} icon`} width={48} height={48} className="mb-4" loading="lazy" />
                 <h3 className="text-xl font-bold font-playfair text-white mb-2">{feature.title}</h3>
                 <p className="text-base font-inter text-gray-300">{feature.desc}</p>
               </motion.article>
@@ -309,10 +279,10 @@ export default function WebDevelopment() {
             {projects.map((project, i) => (
               <motion.article
                 key={project.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                transition={{ duration: prefersReducedMotion ? 0.3 : 0.6, delay: i * 0.1 }}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                 className="relative rounded-xl overflow-hidden shadow-lg group bg-white/10 backdrop-blur-md"
               >
                 <Image
@@ -352,9 +322,9 @@ export default function WebDevelopment() {
             {faqs.map((faq, i) => (
               <motion.div
                 key={faq.question}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
+                transition={{ duration: prefersReducedMotion ? 0.3 : 0.6, delay: i * 0.1 }}
                 className="bg-white/10 backdrop-blur-md rounded-xl p-4"
               >
                 <button
@@ -380,7 +350,7 @@ export default function WebDevelopment() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: prefersReducedMotion ? 0.2 : 0.3 }}
                       className="mt-4 text-base font-inter text-gray-300"
                     >
                       {faq.answer}
@@ -394,20 +364,40 @@ export default function WebDevelopment() {
 
         {/* Call to Action */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: prefersReducedMotion ? 0.5 : 0.8 }}
           className="text-center"
         >
           <Link
             href="/contact"
             className="inline-block px-10 py-4 bg-gradient-to-br from-fuchsia-500 to-purple-500 text-white rounded-full font-playfair text-xl shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-fuchsia-500 transition-all"
-            aria-label="Navigate to contact page to start your web development project"
+            aria-label="Start your web development project"
+            whileHover={{ scale: 1.05 }}
+            animate={{ scale: [1, 1.02, 1], transition: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' } }}
           >
             Start Your Project
           </Link>
         </motion.div>
       </main>
+
+      <footer
+        className={`py-10 text-center ${
+          darkMode ? 'bg-gray-900/90 text-gray-400' : 'bg-gray-100 text-gray-600'
+        } backdrop-blur-md border-t border-gray-200`}
+        role="contentinfo"
+      >
+        <p className="text-sm font-inter mb-4">
+          © 2025 Nyxtrael. All rights reserved. |{' '}
+          <Link href="/contact" className="hover:text-cyan-400">
+            Contact
+          </Link>{' '}
+          |{' '}
+          <Link href="/portfolio" className="hover:text-cyan-400">
+            Portfolio
+          </Link>
+        </p>
+      </footer>
     </>
   );
 }
