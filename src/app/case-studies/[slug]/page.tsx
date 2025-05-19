@@ -1,14 +1,53 @@
-"use client";
-
 import { caseStudies } from "../data";
 import Head from "next/head";
-import HeroSection from "@/components/HeroSection";
+import HeroSection from "./HeroSection";
 
-export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const caseStudy = caseStudies.find((cs) => cs.slug === params.slug);
+// Generowanie statycznych parametrów dla dynamicznych tras
+export async function generateStaticParams() {
+  return caseStudies.map((caseStudy) => ({
+    slug: caseStudy.slug,
+  }));
+}
+
+export default async function CaseStudyPage({ params }: { params: { slug?: string } }) {
+  // Debug params
+  console.log("Received params:", params);
+
+  // Zabezpieczenie przed undefined
+  const slug = params?.slug || "";
+  if (!slug) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center text-text-primary py-24">
+          <h1 className="text-4xl font-bold mb-4">Invalid Case Study URL</h1>
+          <p className="text-text-secondary">No slug provided in the URL.</p>
+          <a href="/case-studies" className="mt-6 inline-block text-accent hover:underline">
+            Back to Case Studies
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  console.log("Searching for slug:", slug);
+  console.log("Available slugs:", caseStudies.map((cs) => cs.slug));
+  const caseStudy = caseStudies.find((cs) => cs.slug === slug.toLowerCase());
 
   if (!caseStudy) {
-    return <div className="text-center text-text-primary py-24">Case study not found.</div>;
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center text-text-primary py-24">
+          <h1 className="text-4xl font-bold mb-4">Case Study Not Found</h1>
+          <p className="text-text-secondary">The requested case study with slug "{slug}" was not found.</p>
+          <p className="text-text-secondary mt-4">
+            Available slugs: {caseStudies.map((cs) => cs.slug).join(", ")}
+          </p>
+          <a href="/case-studies" className="mt-6 inline-block text-accent hover:underline">
+            Back to Case Studies
+          </a>
+        </div>
+      </div>
+    );
   }
 
   return (
