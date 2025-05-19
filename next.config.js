@@ -6,10 +6,11 @@ const nextConfig = {
   trailingSlash: true,
 
   images: {
-    domains: ['localhost'], // + res.cloudinary.com gdy używasz Cloudinary
+    domains: ['localhost'], // + inne domeny jak res.cloudinary.com
   },
 
   webpack(config) {
+    // doklejamy aliasy do domyślnych
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       '@': path.resolve(__dirname, 'src'),
