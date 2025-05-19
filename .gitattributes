@@ -1,13 +1,13 @@
-
+# Ustaw automatyczne zarządzanie zakończeniami linii dla plików tekstowych
 * text=auto
 
-
+# Wymagaj LF dla plików TypeScript, JSX, JSON itp.
 *.ts text eol=lf
 *.tsx text eol=lf
-*.js text eol=lf
 *.json text eol=lf
+*.css text eol=lf
 
-
+# Pliki binarne (np. obrazy) nie powinny być modyfikowane
 *.jpg binary
 *.png binary
 *.jpeg binary

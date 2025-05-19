@@ -1,9 +1,11 @@
+"use client";
+
 import { caseStudies } from "../data";
 import Head from "next/head";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
+export default function CaseStudyPage({ params }: { params: { slug: string } }) {
   const caseStudy = caseStudies.find((cs) => cs.slug === params.slug);
 
   if (!caseStudy) {
