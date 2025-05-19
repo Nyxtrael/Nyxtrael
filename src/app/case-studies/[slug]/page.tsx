@@ -2,7 +2,7 @@
 
 import { caseStudies } from "../data";
 import Head from "next/head";
-import HeroSection from "./HeroSection";
+import HeroSection from "@/components/HeroSection";
 
 export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
   const caseStudy = caseStudies.find((cs) => cs.slug === params.slug);
