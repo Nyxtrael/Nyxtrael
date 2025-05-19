@@ -1,6 +1,7 @@
 [build]
   command = "npm run build"
   publish = "out"
+  environment = { NODE_VERSION = "20" }  # Ustawiamy Node.js 20, który jest kompatybilny z Next.js 15.2.4
 
 [build.environment]
   NEXT_PUBLIC_BASE_URL = "https://your-portfolio-site.netlify.app"
