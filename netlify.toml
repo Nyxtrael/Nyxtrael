@@ -1,9 +1,16 @@
+# netlify.toml
 [build]
   command = "npm run build"
+
 [build.environment]
   NODE_ENV = "production"
   NEXT_PUBLIC_BASE_URL = "https://your-portfolio-site.netlify.app"
   NPM_CONFIG_PRODUCTION = "false"
 
 [[plugins]]
-  package = "@netlify/plugin-nextjs"
+package = "@netlify/plugin-nextjs"
+  [plugins.inputs]
+    # gdzie plugin wrzuca publiczne pliki
+    publish = ".netlify/output/public"
+    # gdzie wrzuca serverless functions
+    functions = ".netlify/output/functions"
