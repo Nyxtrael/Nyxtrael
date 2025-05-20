@@ -1,9 +1,9 @@
 import { caseStudies } from "../case-studies/data";
-import CaseStudyCard from "@/components/CaseStudyCard";
+import CaseStudyCard from "../../components/CaseStudyCard";
 
 export default async function Home() {
-  // Pobierz dane z caseStudies i ogranicz do 3 pozycji
-  const featuredCaseStudies = caseStudies.slice(0, 3);
+  // Użyj caseStudies jako źródła danych
+  const featuredCaseStudies = caseStudies.slice(0, 3); // Ogranicz do 3 pozycji
 
   return (
     <main className="min-h-screen bg-background">
@@ -18,7 +18,7 @@ export default async function Home() {
                 title={caseStudy.title}
                 description={caseStudy.description}
                 slug={caseStudy.slug}
-                thumbnail={caseStudy.thumbnail || caseStudy.image} // Fallback na image, jeśli thumbnail brak
+                thumbnail={caseStudy.thumbnail || caseStudy.image} // Fallback na image
               />
             ))}
           </div>
