@@ -3,6 +3,7 @@ import AboutSnippet from '../components/AboutSnippet';
 import ServiceCard from '../components/ServiceCard';
 import CaseStudyCard from '../components/CaseStudyCard';
 import FinalCTA from '../components/FinalCTA';
+import { caseStudies } from "./case-studies/data"; // Import danych
 
 const services = [
   {
@@ -19,25 +20,9 @@ const services = [
   },
 ];
 
-const featuredCaseStudies = [
-  {
-    title: 'E-Commerce Platform Revamp',
-    description: 'Redesigned an e-commerce platform, increasing conversions by 30%.',
-    slug: 'ecommerce-revamp',
-  },
-  {
-    title: 'Corporate Dashboard',
-    description: 'Built a data-driven dashboard for real-time business insights.',
-    slug: 'corporate-dashboard',
-  },
-  {
-    title: 'Startup Landing Page',
-    description: 'Created a sleek landing page to boost user engagement.',
-    slug: 'startup-landing',
-  },
-];
-
 export default function Home() {
+  const featuredCaseStudies = caseStudies.slice(0, 3); // Użyj danych z data.ts
+
   return (
     <>
       <Hero />
@@ -70,6 +55,7 @@ export default function Home() {
                 title={caseStudy.title}
                 description={caseStudy.description}
                 slug={caseStudy.slug}
+                thumbnail={caseStudy.thumbnail || caseStudy.image} // Dodaj thumbnail z fallbackiem
               />
             ))}
           </div>
