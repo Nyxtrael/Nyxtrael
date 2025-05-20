@@ -1,16 +1,14 @@
 # netlify.toml
-
 [build]
-  # tylko budujemy – plugin sam zajmie się publikacją
+
   command = "npm run build"
-  # usuń albo zakomentuj tę linię:
-  # publish = "out"
+
 
 [build.environment]
   NODE_VERSION = "20"
   NODE_ENV = "production"
   NEXT_PUBLIC_BASE_URL = "https://your-portfolio-site.netlify.app"
-  # pozwala instalować devDependencies (TS, typy itp.)
+
   NPM_CONFIG_PRODUCTION = "false"
 
 [[plugins]]
