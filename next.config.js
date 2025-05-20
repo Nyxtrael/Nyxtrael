@@ -1,16 +1,16 @@
-// next.config.js
 const path = require('path');
 
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
-
+  
+  output: 'export', // TO JEST KLUCZOWE - generuje pliki statyczne zamiast next export
+  
   images: {
-    domains: ['localhost'], // + inne domeny jak res.cloudinary.com
+    domains: ['localhost', 'res.cloudinary.com'], // Dodaj inne domeny, jeżeli potrzebujesz
   },
 
   webpack(config) {
-    // doklejamy aliasy do domyślnych
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       '@': path.resolve(__dirname, 'src'),

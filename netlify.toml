@@ -1,12 +1,11 @@
-# Netlify będzie uruchamiać `npm run build && next export`
-# i publikować katalog `out/`
-
 [build]
   command = "npm run build"
   publish = "out"
 
 [build.environment]
   NODE_ENV = "production"
-  # dzięki temu Netlify zainstaluje też devDependencies (TypeScript, typy itp.)
   NPM_CONFIG_PRODUCTION = "false"
   NEXT_PUBLIC_BASE_URL = "https://your-portfolio-site.netlify.app"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
