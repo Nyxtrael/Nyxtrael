@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Define CSS custom properties (variables) for theming */
+:root {
+  --background: #0D0D0D;
+  --text-primary: #F0F0F0;
+  --text-secondary: #B0B0B0;
+  --accent: #1ABC9C;
+}
+
+/* Custom Tailwind layer for components */
+@layer components {
+  .card {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .card:hover {
+    @apply transform -translate-y-[5px] shadow-lg;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .heading-underline {
+    @apply relative inline-block;
+  }
+
+  .heading-underline::after {
+    content: '';
+    @apply absolute bottom-[-8px] left-1/2 -translate-x-1/2 w-[60px] h-[3px];
+    background-color: var(--accent);
+  }
+
+  .glow-hover {
+    @apply transition-shadow duration-300 ease-in-out;
+  }
+
+  .glow-hover:hover {
+    box-shadow: 0 0 15px rgba(26, 188, 156, 0.5);
+  }
+}
+
+/* Custom Tailwind layer for utilities */
+@layer utilities {
+  .pattern-grid {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  @media (max-width: 640px) {
+    .pattern-grid {
+      background-size: 10px 10px; /* Reduce pattern density on mobile */
+    }
+  }
+}
+
+/* Base styles */
+@layer base {
+  body {
+    @apply m-0 p-0;
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  a {
+    @apply transition-colors duration-300 ease-in-out;
+  }
+
+  /* Video background styling */
+  video {
+    @apply object-cover w-full h-full;
+  }
+}
+
+/* Motion preferences for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .glow-hover,
+  a {
+    @apply transition-none;
+  }
+}
