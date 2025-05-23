@@ -5,12 +5,7 @@
 [build.environment]
   NODE_ENV = "production"
   NPM_CONFIG_PRODUCTION = "false"
-  NEXT_PUBLIC_BASE_URL = "https://nyxtrael.com" # Zaktualizowana domena
+  NEXT_PUBLIC_BASE_URL = "https://nyxtrael.com"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-
-[[plugins]]
-  package = "@netlify/plugin-functions"
-  [plugins.inputs]
-    forms = true
