@@ -1,0 +1,5 @@
+[
+  { "name": "Women's Fashion", "icon": "Shirt", "image": "/images/women.jpg" },
+  { "name": "Men's Accessories", "icon": "Watch", "image": "/images/men.jpg" },
+  { "name": "Gift Ideas", "icon": "Gift", "image": "/images/gifts.jpg" }
+]

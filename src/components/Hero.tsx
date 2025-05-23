@@ -1,39 +1,53 @@
 'use client';
 
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="hero-section relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background */}
       <video
         autoPlay
         loop
         muted
         playsInline
+        poster="/images/video-poster.jpg"
         className="absolute top-0 left-0 w-full h-full object-cover"
-        poster="/images/abstract-lines-poster.jpg"
+        loading="lazy"
       >
-        <source src="/videos/abstract-lines-3d.webm" type="video/webm" />
+        <source src="/videos/background-video.webm" type="video/webm" />
       </video>
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black opacity-70" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-neutral-mid/80 backdrop-blur-sm" />
 
       {/* Hero Content */}
-      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-bold text-text-primary mb-6 tracking-tight leading-tight">
+      <div className="relative z-10 text-center px-6 container mx-auto">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in heading-underline font-montserrat">
           Building Modern Web Experiences
         </h1>
-        <p className="text-xl md:text-3xl text-text-secondary mb-10 font-light tracking-wide">
+        <p className="text-lg md:text-2xl text-[#F5F5F5] mb-10 animate-fade-in-delay font-inter">
           Front-end developer specializing in sleek, high-performance web applications.
         </p>
-        <Link
-          href="/case-studies"
-          className="inline-block bg-accent text-white px-10 py-5 rounded-lg text-xl font-semibold glow-hover transition-colors duration-300 shadow-xl"
-        >
-          View Case Studies
-        </Link>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <motion.a
+            href="/case-studies"
+            className="btn-primary"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            View Case Studies
+          </motion.a>
+          <motion.a
+            href="/contact"
+            className="btn-outline"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            Get in Touch
+          </motion.a>
+        </div>
       </div>
     </section>
   );

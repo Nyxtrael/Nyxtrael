@@ -1,169 +1,221 @@
+"use client";
+
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Code, Paintbrush, Lightbulb } from 'lucide-react';
+import Section from '../../components/Section';
+
+const expertiseItems = [
+  {
+    title: 'Web Development',
+    description: 'I create fast, responsive websites using modern technologies like Next.js and React, ensuring clean code and optimal performance.',
+    icon: <Code className="h-12 w-12 text-accent" />,
+  },
+  {
+    title: 'UI/UX Design',
+    description: 'I design intuitive interfaces with a focus on user experience, delivering sleek prototypes and visually appealing layouts.',
+    icon: <Paintbrush className="h-12 w-12 text-accent" />,
+  },
+  {
+    title: 'Consulting',
+    description: 'I offer expert guidance on digital projects, helping you optimize performance and plan scalable solutions.',
+    icon: <Lightbulb className="h-12 w-12 text-accent" />,
+  },
+];
+
+const whyWorkWithMeItems = [
+  {
+    title: 'Direct Communication',
+    description: 'Work directly with me—no middlemen. I ensure clear, transparent updates at every stage.',
+  },
+  {
+    title: 'Tailored Solutions',
+    description: 'I focus on your unique goals, delivering customized results that align with your vision.',
+  },
+  {
+    title: 'Timely Delivery',
+    description: 'I prioritize deadlines, ensuring your project is completed on time without compromising quality.',
+  },
+];
+
+const techStack = ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Figma'];
+
 export default function About() {
+  // Parallax effect for hero background
+  const parallax = {
+    initial: { backgroundPositionY: '0%' },
+    whileInView: { backgroundPositionY: '20%' },
+    viewport: { once: true },
+    transition: { duration: 1, ease: 'easeOut' },
+  };
+
   return (
     <main>
-      {/* About Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center bg-background pattern-grid">
-        <div className="max-w-5xl mx-auto px-4 text-center z-10">
-          <h1 className="text-5xl md:text-6xl font-bold text-text-primary mb-6 heading-underline">
-            About NyxCorp
-          </h1>
-          <p className="text-xl md:text-2xl text-text-secondary mb-10 leading-relaxed">
-            Discover the expertise, passion, and innovation driving our world-class web solutions.
-          </p>
+      {/* About Hero Section with Parallax */}
+      <section role="banner" className="relative min-h-[60vh] flex items-center section-spacing bg-gradient-to-b from-neutral-dark to-neutral-mid">
+        <motion.div
+          className="absolute inset-0"
+          variants={parallax}
+          initial="initial"
+          whileInView="whileInView"
+          style={{ zIndex: 0 }}
+        >
+          <Image
+            src="/images/stars.png"
+            alt="Stars background"
+            fill
+            className="object-cover object-center opacity-20"
+            priority
+          />
+        </motion.div>
+
+        <div className="container mx-auto text-center relative z-10">
+          <motion.h1
+            aria-label="About Me"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-5xl md:text-6xl font-montserrat font-bold text-white mb-4 heading-underline"
+          >
+            About Me
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl md:text-2xl text-[#F5F5F5] max-w-3xl mx-auto font-inter leading-relaxed"
+          >
+            I’m Nyxtrael—a front-end freelancer passionate about crafting modern, user-friendly web solutions.
+          </motion.p>
         </div>
-        <div className="absolute inset-0 bg-black opacity-30" />
+
+        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       </section>
 
-      {/* Our Story Section */}
-      <section className="py-24 bg-surface">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-text-primary text-center mb-12 heading-underline">
-            Our Story
-          </h2>
-          <p className="text-lg md:text-xl text-text-secondary leading-relaxed mb-8">
-            NyxCorp was founded in 2020 with a vision to redefine web development through
-            innovation and excellence. Starting as a small team of passionate developers, we’ve
-            grown into a respected name in the industry, serving over 50 clients across diverse
-            sectors. Our journey is marked by a relentless pursuit of quality, from crafting our
-            first high-performance website to delivering complex enterprise solutions.
-          </p>
-          <p className="text-lg md:text-xl text-text-secondary leading-relaxed mb-12">
-            Based in a dynamic hub of technology, we draw inspiration from the modern office
-            environment—clean lines, collaborative spaces, and cutting-edge tools. This ethos
-            shapes our work, ensuring every project reflects precision and creativity.
-          </p>
-        </div>
-      </section>
+      {/* My Story Section */}
+      <Section title="My Story">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+          <motion.div
+            className="aspect-square w-full max-w-xs mx-auto"
+            initial={{ opacity: 0, x: -50, scale: 0.9 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: 'spring', stiffness: 100, duration: 0.6 }}
+          >
+            <Image
+              src="/images/profile-photo.jpg"
+              alt="Nyxtrael – Front-end Developer"
+              width={300}
+              height={300}
+              className="rounded-full border-4 border-accent shadow-card hover:shadow-card-hover transition-shadow duration-300"
+              priority
+            />
+          </motion.div>
 
-      {/* Our Expertise Section */}
-      <section className="py-24 bg-background pattern-grid">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-text-primary text-center mb-12 heading-underline">
-            Our Expertise
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div className="bg-surface p-6 rounded-lg card">
-              <h3 className="text-2xl md:text-3xl font-semibold text-text-primary mb-4">
-                Web Development
-              </h3>
-              <p className="text-text-secondary leading-relaxed">
-                Leveraging Next.js, React, and TypeScript, we build scalable websites with load
-                times under 2 seconds, optimized for SEO and user experience.
-              </p>
-            </div>
-            <div className="bg-surface p-6 rounded-lg card">
-              <h3 className="text-2xl md:text-3xl font-semibold text-text-primary mb-4">
-                UI/UX Design
-              </h3>
-              <p className="text-text-secondary leading-relaxed">
-                Our designs boost user engagement by 30% on average, crafted with Figma and
-                validated through user testing for intuitive navigation.
-              </p>
-            </div>
-            <div className="bg-surface p-6 rounded-lg card">
-              <h3 className="text-2xl md:text-3xl font-semibold text-text-primary mb-4">
-                Consulting
-              </h3>
-              <p className="text-text-secondary leading-relaxed">
-                We provide strategic insights, helping clients increase digital ROI by up to 40%
-                through tailored technology roadmaps.
-              </p>
-            </div>
+          <div className="md:col-span-2 prose prose-invert prose-headings:text-white prose-p:text-[#F5F5F5]">
+            <p>
+              Hi, I’m Nyxtrael—a front-end freelancer specializing in React and Next.js,
+              with a strong portfolio of modern, responsive web applications and clean,
+              maintainable code.
+            </p>
+            <p>
+              I prioritize transparent communication and meticulous attention to detail
+              at every stage of a project. From sleek landing pages and interactive
+              prototypes to full-featured SaaS dashboards, I collaborate closely with
+              clients to understand their goals and consistently deliver on time.
+            </p>
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* Team Highlights Section */}
-      <section className="py-24 bg-surface">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-text-primary text-center mb-12 heading-underline">
-            Meet Our Team
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div className="bg-background p-6 rounded-lg text-center card">
-              <div className="h-32 bg-accent rounded-full mb-4 mx-auto"></div> {/* Placeholder for image */}
-              <h3 className="text-xl md:text-2xl font-semibold text-text-primary">Alex Carter</h3>
-              <p className="text-text-secondary">Lead Developer</p>
-              <p className="text-sm text-text-secondary mt-2">
-                8+ years in front-end development, specializing in React ecosystems.
-              </p>
-            </div>
-            <div className="bg-background p-6 rounded-lg text-center card">
-              <div className="h-32 bg-accent rounded-full mb-4 mx-auto"></div> {/* Placeholder for image */}
-              <h3 className="text-xl md:text-2xl font-semibold text-text-primary">Sara Mendes</h3>
-              <p className="text-text-secondary">UI/UX Designer</p>
-              <p className="text-sm text-text-secondary mt-2">
-                Expert in user-centered design with 5+ years of experience.
-              </p>
-            </div>
-            <div className="bg-background p-6 rounded-lg text-center card">
-              <div className="h-32 bg-accent rounded-full mb-4 mx-auto"></div> {/* Placeholder for image */}
-              <h3 className="text-xl md:text-2xl font-semibold text-text-primary">Mark Ellis</h3>
-              <p className="text-text-secondary">Strategy Consultant</p>
-              <p className="text-sm text-text-secondary mt-2">
-                10+ years advising tech firms on digital transformation.
-              </p>
-            </div>
-          </div>
+      {/* My Expertise Section */}
+      <Section title="My Expertise" pattern>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {expertiseItems.map((item, index) => (
+            <motion.div
+              key={item.title}
+              className="card hover:shadow-card-hover flex flex-col items-center text-center p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              whileHover={{ scale: 1.03 }}
+            >
+              <div className="mb-4">
+                <span aria-hidden="true">{item.icon}</span>
+              </div>
+              <h3 className="text-2xl font-semibold text-white mb-2">{item.title}</h3>
+              <p className="text-[#F5F5F5]">{item.description}</p>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* Client Testimonials Section */}
-      <section className="py-24 bg-background pattern-grid">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-text-primary text-center mb-12 heading-underline">
-            What Our Clients Say
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div className="bg-surface p-6 rounded-lg">
-              <p className="text-lg text-text-secondary italic mb-4">
-                “NyxCorp transformed our e-commerce platform, boosting sales by 35%. Their
-                attention to detail is unmatched!”
-              </p>
-              <p className="text-text-primary font-semibold">- Jane Doe, CEO, ShopTrend</p>
-            </div>
-            <div className="bg-surface p-6 rounded-lg">
-              <p className="text-lg text-text-secondary italic mb-4">
-                “The dashboard they built gave us real-time insights, saving us hours weekly.
-                Highly recommend their expertise!”
-              </p>
-              <p className="text-text-primary font-semibold">- John Smith, CTO, DataSync</p>
-            </div>
-          </div>
+      {/* Why Work With Me Section */}
+      <Section title="Why Work With Me?">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {whyWorkWithMeItems.map((item, index) => (
+            <motion.div
+              key={item.title}
+              className="card hover:shadow-card-hover p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              whileHover={{ scale: 1.03 }}
+            >
+              <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
+              <p className="text-[#F5F5F5]">{item.description}</p>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      {/* Achievements Section */}
-      <section className="py-24 bg-surface">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-text-primary text-center mb-12 heading-underline">
-            Our Achievements
-          </h2>
-          <ul className="text-lg md:text-xl text-text-secondary space-y-6">
-            <li>Completed 75+ projects with a 98% client satisfaction rate.</li>
-            <li>Awarded “Best Web Development Firm” by Tech Innovate Awards 2023.</li>
-            <li>Grown our client base by 150% since our inception in 2020.</li>
-          </ul>
-        </div>
-      </section>
+      {/* Tech Stack Section */}
+      <Section title="My Tech Stack" pattern>
+        <ul role="list" className="flex flex-wrap justify-center gap-3">
+          {techStack.map((tech, index) => (
+            <motion.li
+              key={tech}
+              className="bg-accent text-neutral-dark px-4 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-accent"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              whileHover={{ scale: 1.1 }}
+            >
+              {tech}
+            </motion.li>
+          ))}
+        </ul>
+      </Section>
 
       {/* Call to Action Section */}
-      <section className="py-24 bg-background pattern-grid text-center">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-8 heading-underline">
-            Ready to Collaborate?
-          </h2>
-          <p className="text-lg md:text-xl text-text-secondary mb-10 leading-relaxed">
-            Let’s build something extraordinary together. Get in touch to discuss your project.
-          </p>
-          <a
+      <Section title="Let’s Work Together">
+        <motion.p
+          className="text-center text-xl text-[#F5F5F5] mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Ready to bring your project to life? Let’s collaborate and create something amazing.
+        </motion.p>
+        <div className="text-center">
+          <motion.a
             href="/contact"
-            className="inline-block bg-accent text-white px-8 py-4 rounded-lg text-xl font-semibold glow-hover transition-colors duration-300 shadow-lg"
+            role="button"
+            className="btn-primary text-white"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.3 }}
+            aria-label="Go to contact page"
           >
-            Contact Us
-          </a>
+            Get in Touch
+          </motion.a>
         </div>
-      </section>
+      </Section>
     </main>
   );
 }

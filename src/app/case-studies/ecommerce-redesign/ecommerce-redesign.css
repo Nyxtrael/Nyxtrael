@@ -1,0 +1,50 @@
+/* Custom styles for EcommerceRedesignCaseStudy */
+@tailwind utilities;
+
+@layer utilities {
+  .ecom-redesign {
+    background: linear-gradient(180deg, #0D0D0D 0%, #1A1A1A 50%, #0D0D0D 100%);
+    color: #FFFFFF;
+  }
+
+  .ecom-redesign h1,
+  .ecom-redesign h2,
+  .ecom-redesign h3 {
+    color: #FFFFFF;
+  }
+
+  .ecom-redesign p {
+    color: #FFFFFF;
+  }
+
+  .ecom-redesign button,
+  .ecom-redesign a {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .ecom-redesign button:hover,
+  .ecom-redesign a:hover {
+    transform: scale(1.05);
+  }
+
+  .ecom-redesign .bg-shoptrend-bg {
+    background-color: #0D0D0D;
+  }
+
+  .ecom-redesign .text-shoptrend-text {
+    color: #FFFFFF;
+  }
+
+  .ecom-redesign .text-shoptrend-gold {
+    color: #D4AF37;
+  }
+
+  .ecom-redesign .border-shoptrend-brown {
+    border-color: #A67C52;
+    box-shadow: 0 0 5px rgba(166, 124, 82, 0.3);
+  }
+
+  .ecom-redesign .bg-gradient-to-r.from-shoptrend-gold.to-shoptrend-brown {
+    background: linear-gradient(to right, #D4AF37, #A67C52);
+  }
+}

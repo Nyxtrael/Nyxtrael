@@ -1,45 +1,36 @@
-// src/components/ServiceCard.tsx
-import React from 'react';
+"use client";
 
-export interface ServiceCardProps {
-  icon?: React.ReactNode;
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
+
+interface ServiceCardProps {
+  icon: ReactNode;
   title: string;
   description: string;
-  benefits?: string[];
+  benefits: string[];
+  className?: string;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({
-  icon,
-  title,
-  description,
-  benefits = [],
-}) => {
+export default function ServiceCard({ icon, title, description, benefits, className }: ServiceCardProps) {
   return (
-    <div className="relative bg-surface p-8 rounded-xl border border-gray-800 card overflow-hidden">
-      {/* Gradient Border Overlay */}
-      <div className="absolute inset-0 border-2 border-transparent rounded-xl bg-gradient-to-r from-transparent via-accent to-transparent opacity-20" />
-      <div className="relative flex flex-col items-center text-center">
-        {/* Ikona (opcjonalna) */}
-        {icon && <div className="mb-4">{icon}</div>}
-
-        <h3 className="text-2xl md:text-3xl font-semibold text-text-primary mb-2">
-          {title}
-        </h3>
-        <p className="text-text-secondary leading-relaxed mb-4">
-          {description}
-        </p>
-
-        {/* Lista korzyści (opcjonalna) */}
-        {benefits.length > 0 && (
-          <ul className="list-disc list-inside text-text-secondary space-y-1">
-            {benefits.map((b, i) => (
-              <li key={i}>{b}</li>
-            ))}
-          </ul>
-        )}
+    <motion.div
+      tabIndex={0}
+      role="button"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ duration: 0.3 }}
+      className={`bg-neutral-mid p-6 rounded-2xl card border border-accent/50 shadow-card hover:shadow-card-hover hover:bg-opacity-95 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${className || ''}`}
+    >
+      <div className="flex justify-center mb-4">
+        <span aria-hidden="true">{icon}</span>
       </div>
-    </div>
+      <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4 text-center">{title}</h3>
+      <p className="text-[#F5F5F5] leading-relaxed text-center mb-6">{description}</p>
+      <ul className="list-disc list-inside space-y-2 text-[#F5F5F5]">
+        {benefits.map((benefit, index) => (
+          <li key={index}>{benefit}</li>
+        ))}
+      </ul>
+    </motion.div>
   );
-};
-
-export default ServiceCard;
+}
