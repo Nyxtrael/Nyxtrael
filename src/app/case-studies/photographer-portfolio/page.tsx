@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useCallback } from 'react';
 import { Instagram, Twitter, Mail } from 'lucide-react';
 import Gallery from './Gallery';
 import FullscreenModal from './FullscreenModal';
@@ -17,10 +16,17 @@ const photos = [
   { src: '/images/portraitpro/photo6.jpg', alt: 'Man with a guitar', width: 600, height: 400 },
 ];
 
-export default function PortraitPro() {
-  const [fullscreenImage, setFullscreenImage] = useState(null);
+interface Photo {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
 
-  const openFullscreen = useCallback((photo) => {
+export default function PortraitPro() {
+  const [fullscreenImage, setFullscreenImage] = useState<Photo | null>(null);
+
+  const openFullscreen = useCallback((photo: Photo) => {
     setFullscreenImage(photo);
   }, []);
 
@@ -29,12 +35,14 @@ export default function PortraitPro() {
   }, []);
 
   const handleNextImage = useCallback(() => {
+    if (!fullscreenImage) return;
     const currentIndex = photos.findIndex((p) => p.src === fullscreenImage.src);
     const nextIndex = (currentIndex + 1) % photos.length;
     setFullscreenImage(photos[nextIndex]);
   }, [fullscreenImage]);
 
   const handlePrevImage = useCallback(() => {
+    if (!fullscreenImage) return;
     const currentIndex = photos.findIndex((p) => p.src === fullscreenImage.src);
     const prevIndex = (currentIndex - 1 + photos.length) % photos.length;
     setFullscreenImage(photos[prevIndex]);
@@ -57,47 +65,29 @@ export default function PortraitPro() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50" />
         </div>
         <div className="relative z-10 text-center">
-          <motion.h1
+          <h1
             id="hero-title"
-            className="text-5xl md:text-7xl font-bold text-white mb-6 font-cinzel"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            className="text-5xl md:text-7xl font-bold text-white mb-6 font-cinzel animate-fade-in"
           >
             PortraitPro
-          </motion.h1>
-          <motion.p
-            className="text-xl md:text-2xl text-[#F5F5F5] mb-10 leading-relaxed"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          >
+          </h1>
+          <p className="text-xl md:text-2xl text-[#F5F5F5] mb-10 leading-relaxed animate-fade-in-delay">
             Where Every Frame Tells a Story
-          </motion.p>
+          </p>
         </div>
       </section>
 
       {/* About Section */}
       <section role="region" aria-labelledby="about-title" className="section bg-beige">
         <div className="container">
-          <motion.h2
+          <h2
             id="about-title"
-            className="text-4xl md:text-5xl font-bold text-portraitText text-center mb-12 font-cinzel"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            className="text-4xl md:text-5xl font-bold text-portraitText text-center mb-12 font-cinzel animate-fade-in"
           >
             The Artist Behind the Lens
-          </motion.h2>
+          </h2>
           <div className="flex flex-col md:flex-row items-center gap-8">
-            <motion.div
-              className="w-full md:w-1/3 flex justify-center"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
-            >
+            <div className="w-full md:w-1/3 flex justify-center animate-slide-left">
               <Image
                 src="/images/portraitpro/photographer.jpg"
                 alt="Photographer portrait"
@@ -108,21 +98,15 @@ export default function PortraitPro() {
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQgJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFREBAQAAAAAAAAAAAAAAAAAAAAH/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                 loading="lazy"
               />
-            </motion.div>
-            <motion.div
-              className="w-full md:w-2/3 text-center md:text-left"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
+            </div>
+            <div className="w-full md:w-2/3 text-center md:text-left animate-slide-up">
               <p className="text-lg md:text-xl text-[#4B4B4B] leading-relaxed mb-6">
                 I am a seeker of light and shadow, weaving emotions into every frame. With a decade of capturing fleeting moments, my lens tells stories of joy, love, and quiet reflection.
               </p>
               <p className="text-lg md:text-xl text-[#4B4B4B] leading-relaxed">
                 PortraitPro is my canvas—a gallery where each portrait breathes life, inviting you to see the world through my eyes. Let us craft a visual poem together.
               </p>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -130,61 +114,39 @@ export default function PortraitPro() {
       {/* Gallery Section */}
       <section role="region" aria-labelledby="gallery-title" className="section bg-gray-900">
         <div className="container">
-          <motion.h2
+          <h2
             id="gallery-title"
-            className="text-4xl md:text-5xl font-bold text-gold text-center mb-12 font-cinzel"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            className="text-4xl md:text-5xl font-bold text-gold text-center mb-12 font-cinzel animate-fade-in"
           >
             Moments Frozen in Time
-          </motion.h2>
+          </h2>
           <Gallery photos={photos} onImageClick={openFullscreen} />
         </div>
       </section>
 
       {/* Fullscreen Modal */}
-      <AnimatePresence>
-        {fullscreenImage && (
-          <FullscreenModal
-            image={fullscreenImage}
-            onClose={closeFullscreen}
-            onNext={handleNextImage}
-            onPrev={handlePrevImage}
-          />
-        )}
-      </AnimatePresence>
+      {fullscreenImage && (
+        <FullscreenModal
+          image={fullscreenImage}
+          onClose={closeFullscreen}
+          onNext={handleNextImage}
+          onPrev={handlePrevImage}
+        />
+      )}
 
       {/* Contact Section */}
       <section role="region" aria-labelledby="contact-title" className="section bg-beige text-center">
         <div className="container">
-          <motion.h2
+          <h2
             id="contact-title"
-            className="text-4xl md:text-5xl font-bold text-portraitText mb-8 font-cinzel"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            className="text-4xl md:text-5xl font-bold text-portraitText mb-8 font-cinzel animate-fade-in"
           >
             Let’s Capture Your Story
-          </motion.h2>
-          <motion.p
-            className="text-lg md:text-xl text-[#4B4B4B] mb-10 leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+          </h2>
+          <p className="text-lg md:text-xl text-[#4B4B4B] mb-10 leading-relaxed animate-fade-in-delay">
             Every portrait is a chapter in the book of life. Contact me to weave yours into art.
-          </motion.p>
-          <motion.div
-            className="max-w-md mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
+          </p>
+          <div className="max-w-md mx-auto animate-slide-up">
             <div className="space-y-4">
               <div>
                 <label htmlFor="name" className="sr-only">Your Name</label>
@@ -213,13 +175,11 @@ export default function PortraitPro() {
                   className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gold transition-all duration-300 resize-none"
                 />
               </div>
-              <button
-                className="bg-gold text-portraitText px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-gold/50"
-              >
+              <button className="bg-gold text-portraitText px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-gold/50">
                 Begin the Journey
               </button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
