@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Instagram, Twitter, Mail, Github } from "lucide-react";
 
@@ -47,10 +45,12 @@ export default function Footer() {
               placeholder="Your Email"
               className="w-full p-3 rounded-lg bg-shoptrend-bg border border-shoptrend-brown focus:outline-none focus:ring-2 focus:ring-shoptrend-gold text-shoptrend-text font-lora"
               aria-label="Enter your email to join the newsletter"
+              disabled
             />
             <button
               className="bg-shoptrend-gold text-shoptrend-bg px-6 py-3 rounded-lg hover:scale-105 transition-all duration-300 font-lora shadow-md"
               aria-label="Subscribe to newsletter"
+              disabled
             >
               Subscribe
             </button>

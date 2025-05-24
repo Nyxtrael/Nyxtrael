@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 interface Illustration {
@@ -23,26 +20,18 @@ export default function Gallery({ illustrations }: GalleryProps) {
       className="section-spacing bg-gradient-to-br from-neon-dark to-gray-900"
     >
       <div className="container mx-auto text-center">
-        <motion.h2
+        <h2
           id="gallery-heading"
-          className="text-4xl md:text-5xl font-bebas font-bold text-neon-pink heading-underline mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          className="text-4xl md:text-5xl font-bebas font-bold text-neon-pink heading-underline mb-12 animate-fade-in"
         >
           The NeonRitual Gallery
-        </motion.h2>
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {illustrations.map((ill, i) => (
-            <motion.div
+            <div
               key={ill.id}
-              className="card hover:shadow-neon-blue/50 transition-all duration-300"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.2 }}
-              whileHover={{ scale: 1.05 }}
+              className="card hover:shadow-neon-blue/50 transition-all duration-300 animate-slide-up"
+              style={{ animationDelay: `${i * 0.2}s` }}
             >
               <Image
                 src={ill.path}
@@ -56,7 +45,7 @@ export default function Gallery({ illustrations }: GalleryProps) {
               />
               <h3 className="text-xl font-semibold text-neon-blue mb-2 text-center font-montserrat">{ill.alt}</h3>
               <p className="text-gray-400 text-center font-montserrat">{ill.description}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

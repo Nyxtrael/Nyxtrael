@@ -1,7 +1,4 @@
-'use client';
-
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
   return (
@@ -17,6 +14,7 @@ const Hero: React.FC = () => {
         loading="lazy"
       >
         <source src="/videos/background-video.webm" type="video/webm" />
+        <source src="/videos/background-video.mp4" type="video/mp4" />
       </video>
 
       {/* Overlay */}
@@ -31,22 +29,18 @@ const Hero: React.FC = () => {
           Front-end developer specializing in sleek, high-performance web applications.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <motion.a
+          <Link
             href="/case-studies"
-            className="btn-primary"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
+            className="btn-primary hover:scale-105 transition-transform duration-300"
           >
             View Case Studies
-          </motion.a>
-          <motion.a
+          </Link>
+          <Link
             href="/contact"
-            className="btn-outline"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
+            className="btn-outline hover:scale-105 transition-transform duration-300"
           >
             Get in Touch
-          </motion.a>
+          </Link>
         </div>
       </div>
     </section>

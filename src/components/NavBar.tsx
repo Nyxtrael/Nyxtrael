@@ -1,48 +1,29 @@
-"use client";
-
-import { useState, useEffect } from 'react';
-import { Menu, Transition } from '@headlessui/react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { Menu as MenuIcon, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const NavBar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const pathname = usePathname();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
-    {
-      href: '/case-studies',
-      label: 'Case Studies',
-      dropdown: [
-        { href: '/case-studies/startup-landing', label: 'BrightCRM' },
-        { href: '/case-studies/ecommerce-redesign', label: 'ShopTrend' },
-        { href: '/case-studies/saas-dashboard', label: 'DataSync' },
-        { href: '/case-studies/photographer-portfolio', label: 'PortraitPro' },
-        { href: '/case-studies/taskmaster-pwa', label: 'TaskMaster' },
-        { href: '/case-studies/neon-ritual', label: 'NeonRitual' },
-      ],
-    },
+    { href: '/case-studies', label: 'Case Studies' },
     { href: '/contact', label: 'Contact' },
+  ];
+
+  const caseStudyLinks = [
+    { href: '/case-studies/startup-landing', label: 'BrightCRM' },
+    { href: '/case-studies/ecommerce-redesign', label: 'ShopTrend' },
+    { href: '/case-studies/saas-dashboard', label: 'DataSync' },
+    { href: '/case-studies/photographer-portfolio', label: 'PortraitPro' },
+    { href: '/case-studies/taskmaster-pwa', label: 'TaskMaster' },
+    { href: '/case-studies/neon-ritual', label: 'NeonRitual' },
   ];
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-dark shadow-md' : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 w-full z-50 bg-dark shadow-md border-b border-gray-800"
+      role="navigation"
+      aria-label="Main navigation"
     >
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
@@ -52,68 +33,32 @@ const NavBar: React.FC = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
-          {navLinks.map((link, index) => (
-            link.dropdown ? (
-              <Menu key={index} as="div" className="relative inline-block text-left">
-                {({ open }) => (
-                  <>
-                    <Menu.Button
-                      as={Link}
-                      href={link.href}
-                      className={`text-light-gray hover:text-dark-accent transition-colors flex items-center space-x-1 ${
-                        pathname === link.href || pathname.startsWith('/case-studies/') ? 'text-dark-accent' : ''
-                      }`}
-                      onClick={(e) => {
-                        if (open) e.preventDefault(); // Prevent navigation if dropdown is open
-                      }}
+          {navLinks.map((link) => (
+            link.label === 'Case Studies' ? (
+              <div key={link.href} className="relative">
+                <Link
+                  href={link.href}
+                  className="text-light-gray hover:text-dark-accent transition-colors"
+                >
+                  {link.label}
+                </Link>
+                <div className="absolute left-0 mt-2 w-48 bg-dark rounded-md shadow-lg ring-1 ring-gray-800 py-2 hidden md:group-hover:block">
+                  {caseStudyLinks.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="block px-4 py-2 text-light-gray text-sm hover:bg-dark-accent hover:text-white"
                     >
-                      <span>{link.label}</span>
-                      <motion.div
-                        animate={{ rotate: open ? 180 : 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </motion.div>
-                    </Menu.Button>
-                    <Transition
-                      as="div"
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Menu.Items className="absolute mt-2 w-48 bg-dark rounded-md shadow-lg ring-1 ring-gray-800 py-2">
-                        {link.dropdown.map((item) => (
-                          <Menu.Item key={item.href}>
-                            {({ active, close }) => (
-                              <Link
-                                href={item.href}
-                                className={`block px-4 py-2 text-light-gray text-sm ${
-                                  active || pathname === item.href ? 'bg-dark-accent text-white' : ''
-                                }`}
-                                onClick={() => close()} // Close dropdown on click
-                              >
-                                {item.label}
-                              </Link>
-                            )}
-                          </Menu.Item>
-                        ))}
-                      </Menu.Items>
-                    </Transition>
-                  </>
-                )}
-              </Menu>
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ) : (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative text-light-gray hover:text-dark-accent transition-colors ${
-                  pathname === link.href ? 'text-dark-accent after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[2px] after:bg-dark-accent' : ''
-                }`}
+                className="text-light-gray hover:text-dark-accent transition-colors"
               >
                 {link.label}
               </Link>
@@ -128,98 +73,49 @@ const NavBar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Mobile Menu */}
-        <div className="md:hidden">
-          <Menu as="div" className="relative inline-block text-left">
-            {({ open, close }) => (
-              <div>
-                <Menu.Button
-                  className="text-light-gray focus:outline-none p-2"
-                  aria-label={open ? 'Close menu' : 'Open menu'}
+        {/* Mobile Navigation - Simplified */}
+        <div className="md:hidden flex items-center">
+          <div className="text-light-gray p-2">
+            <Menu className="h-8 w-8" aria-label="Open menu" />
+          </div>
+          <div className="absolute top-16 left-0 w-full bg-dark shadow-lg md:hidden">
+            {navLinks.map((link) => (
+              link.label === 'Case Studies' ? (
+                <div key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="block px-4 py-3 text-light-gray text-lg border-b border-gray-800"
+                  >
+                    {link.label}
+                  </Link>
+                  {caseStudyLinks.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="block px-6 py-2 text-light-gray text-base border-b border-gray-800"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block px-4 py-3 text-light-gray text-lg border-b border-gray-800"
                 >
-                  {open ? (
-                    <X className="h-8 w-8" />
-                  ) : (
-                    <MenuIcon className="h-8 w-8" />
-                  )}
-                </Menu.Button>
-                <Transition
-                  as="div"
-                  enter="transition ease-out duration-200"
-                  enterFrom="opacity-0 translate-x-full"
-                  enterTo="opacity-100 translate-x-0"
-                  leave="transition ease-in duration-150"
-                  leaveFrom="opacity-100 translate-x-0"
-                  leaveTo="opacity-0 translate-x-full"
-                >
-                  <Menu.Items className="absolute right-0 mt-2 w-56 bg-dark rounded-md shadow-lg ring-1 ring-gray-800 py-2 backdrop-blur-md">
-                    {navLinks.map((link) => (
-                      link.dropdown ? (
-                        <div key={link.label}>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                href={link.href}
-                                className={`block px-4 py-3 text-light-gray text-lg ${
-                                  active || pathname === link.href ? 'bg-dark-accent text-white' : ''
-                                }`}
-                                onClick={() => close()} // Close menu on click
-                              >
-                                {link.label}
-                              </Link>
-                            )}
-                          </Menu.Item>
-                          {link.dropdown.map((item) => (
-                            <Menu.Item key={item.href}>
-                              {({ active }) => (
-                                <Link
-                                  href={item.href}
-                                  className={`block px-6 py-2 text-light-gray text-base ${
-                                    active || pathname === item.href ? 'bg-dark-accent text-white' : ''
-                                  }`}
-                                  onClick={() => close()} // Close menu on click
-                                >
-                                  {item.label}
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          ))}
-                        </div>
-                      ) : (
-                        <Menu.Item key={link.href}>
-                          {({ active }) => (
-                            <Link
-                              href={link.href}
-                              className={`block px-4 py-3 text-light-gray text-lg ${
-                                active || pathname === link.href ? 'bg-dark-accent text-white' : ''
-                              }`}
-                              onClick={() => close()} // Close menu on click
-                            >
-                              {link.label}
-                            </Link>
-                          )}
-                        </Menu.Item>
-                      )
-                    ))}
-                    {/* Mobile CTA */}
-                    <Menu.Item>
-                      {({ active, close }) => (
-                        <Link
-                          href="/contact"
-                          className={`block px-4 py-3 text-lg border-t border-gray-800 ${
-                            active ? 'bg-dark-accent text-white' : 'text-light-gray'
-                          }`}
-                          onClick={() => close()} // Close menu on click
-                        >
-                          Let's Talk
-                        </Link>
-                      )}
-                    </Menu.Item>
-                  </Menu.Items>
-                </Transition>
-              </div>
-            )}
-          </Menu>
+                  {link.label}
+                </Link>
+              )
+            ))}
+            {/* Mobile CTA */}
+            <Link
+              href="/contact"
+              className="block px-4 py-3 text-lg border-t border-gray-800 text-light-gray"
+            >
+              Let's Talk
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

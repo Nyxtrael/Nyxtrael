@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Eye } from "lucide-react";
-import { motion } from 'framer-motion';
 
 interface CaseStudyCardProps {
   title: string;
@@ -13,7 +12,7 @@ interface CaseStudyCardProps {
 
 export default function CaseStudyCard({ title, description, slug, thumbnail, className }: CaseStudyCardProps) {
   return (
-    <motion.div
+    <div
       tabIndex={0}
       role="group"
       className={`flex flex-col h-full group relative overflow-hidden rounded-lg ${className || ''}`}
@@ -35,16 +34,14 @@ export default function CaseStudyCard({ title, description, slug, thumbnail, cla
       <div className="p-4 flex flex-col flex-grow border-t-2 border-accent group-hover:border-opacity-100 border-opacity-50 transition-all duration-300">
         <h3 className="text-xl font-semibold text-white mb-2 font-heading">{title}</h3>
         <p className="text-sm text-[#F5F5F5] flex-grow font-body">{description}</p>
-        <motion.a
+        <Link
           href={`/case-studies/${slug}`}
-          className="btn-secondary mt-4 inline-block text-white"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.3 }}
+          className="btn-secondary mt-4 inline-block text-white hover:scale-105 transition-transform duration-300"
           aria-label={`View case study: ${title}`}
         >
           See More
-        </motion.a>
+        </Link>
       </div>
-    </motion.div>
+    </div>
   );
 }

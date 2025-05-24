@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 
 interface ServiceCardProps {
@@ -13,17 +10,10 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ icon, title, description, benefits, className }: ServiceCardProps) {
   return (
-    <motion.div
-      tabIndex={0}
-      role="button"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ duration: 0.3 }}
-      className={`bg-neutral-mid p-6 rounded-2xl card border border-accent/50 shadow-card hover:shadow-card-hover hover:bg-opacity-95 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${className || ''}`}
+    <div
+      className={`bg-neutral-mid p-6 rounded-2xl card border border-accent/50 shadow-card hover:shadow-card-hover hover:bg-opacity-95 hover:scale-105 transition-all duration-300 ${className || ''}`}
     >
-      <div className="flex justify-center mb-4">
-        <span aria-hidden="true">{icon}</span>
-      </div>
+      <div className="flex justify-center mb-4" aria-hidden="true">{icon}</div>
       <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4 text-center">{title}</h3>
       <p className="text-[#F5F5F5] leading-relaxed text-center mb-6">{description}</p>
       <ul className="list-disc list-inside space-y-2 text-[#F5F5F5]">
@@ -31,6 +21,6 @@ export default function ServiceCard({ icon, title, description, benefits, classN
           <li key={index}>{benefit}</li>
         ))}
       </ul>
-    </motion.div>
+    </div>
   );
 }

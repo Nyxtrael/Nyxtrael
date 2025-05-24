@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 
 interface SectionProps {
@@ -14,15 +11,11 @@ export default function Section({ title, children, bgClass = 'bg-neutral-mid', p
   return (
     <section className={`section-spacing ${bgClass} ${pattern ? 'pattern-grid' : ''}`}>
       <div className="container">
-        <motion.h2
-          className="section-header text-4xl md:text-5xl font-bold text-white heading-underline"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+        <h2
+          className="section-header text-4xl md:text-5xl font-bold text-white heading-underline animate-fade-in"
         >
           {title}
-        </motion.h2>
+        </h2>
         <div>{children}</div>
       </div>
     </section>

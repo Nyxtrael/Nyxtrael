@@ -1,6 +1,4 @@
-"use client";
-
-import Link from 'next/link';
+import Link from "next/link";
 import { Instagram, Youtube, Twitter, Linkedin, Github, Briefcase, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
@@ -8,7 +6,7 @@ const Footer: React.FC = () => {
     { href: 'https://x.com/yourprofile', icon: Twitter, label: 'Twitter profile' },
     { href: 'https://linkedin.com/in/yourprofile', icon: Linkedin, label: 'LinkedIn profile' },
     { href: 'https://github.com/yourprofile', icon: Github, label: 'GitHub profile' },
-    { href: 'https://fiverr.com/yourprofile', icon: Briefcase, label: 'Fiverr profile' }, // Replaced FiverrLogo with Briefcase
+    { href: 'https://fiverr.com/yourprofile', icon: Briefcase, label: 'Fiverr profile' },
     { href: 'https://instagram.com/yourprofile', icon: Instagram, label: 'Instagram profile' },
     { href: 'https://youtube.com/yourprofile', icon: Youtube, label: 'YouTube profile' },
   ];
@@ -57,7 +55,7 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-semibold text-light-gray font-montserrat mb-4">Connect</h4>
             <div className="flex justify-center md:justify-start space-x-4 mb-4">
               {socialLinks.map((link) => {
-                const Icon = link.icon; // Capitalized variable to use as a component
+                const Icon = link.icon;
                 return (
                   <Link
                     key={link.href}

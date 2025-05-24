@@ -1,20 +1,22 @@
+import { ReactNode } from 'react';
+
 interface FeatureCardProps {
-  icon: React.ReactNode;
+  icon: ReactNode;
   title: string;
   description: string;
-  color: string;
+  color?: string;
   index: number;
 }
 
-export default function FeatureCard({ icon, title, description, color, index }: FeatureCardProps) {
+export default function FeatureCard({ icon, title, description, color = "border-gray-700", index }: FeatureCardProps) {
   return (
     <div
-      className={`relative p-6 rounded-xl shadow-lg border ${color} bg-gray-800 animate-slide-up`}
+      className={`relative card p-6 rounded-xl shadow-lg border hover:shadow-neon-green/50 transition-all duration-300 ${color} animate-slide-up`}
       style={{ animationDelay: `${index * 0.2}s` }}
       role="listitem"
     >
-      <div className="flex justify-center mb-4">{icon}</div>
-      <h3 className="text-2xl font-semibold text-gray-200 mb-4 text-center font-roboto">{title}</h3>
+      <div className="flex justify-center mb-4" aria-hidden="true">{icon}</div>
+      <h3 className="text-2xl font-semibold text-accent-green mb-4 text-center font-exo">{title}</h3>
       <p className="text-gray-400 text-center font-roboto">{description}</p>
     </div>
   );
