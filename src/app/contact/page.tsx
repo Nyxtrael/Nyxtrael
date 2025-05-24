@@ -1,37 +1,27 @@
-import ContactForm from "../../components/ContactForm";
-import { MessageCircle, Clock, CheckCircle } from "lucide-react";
+import ContactForm from './ContactForm';
+import { MessageCircle, Clock, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 const benefits = [
-  { icon: MessageCircle, title: "Prompt Reply", desc: "Expect a response within 24 hours to discuss your project needs." },
-  { icon: Clock, title: "Streamlined Workflow", desc: "Efficient collaboration to turn your vision into reality quickly." },
-  { icon: CheckCircle, title: "Impactful Designs", desc: "Modern solutions that boost engagement and conversions." },
+  { icon: MessageCircle, title: 'Prompt Reply', desc: 'Expect a response within 24 hours to discuss your project needs.' },
+  { icon: Clock, title: 'Streamlined Workflow', desc: 'Efficient collaboration to turn your vision into reality quickly.' },
+  { icon: CheckCircle, title: 'Impactful Designs', desc: 'Modern solutions that boost engagement and conversions.' },
 ];
 
 const faqs = [
-  { question: "What types of projects do you take on?", answer: "I focus on web development, UI/UX design, and SaaS applications, delivering tailored solutions for each." },
-  { question: "What’s the typical timeline for a project?", answer: "Timelines vary by scope, but most projects wrap up within 4-6 weeks with clear milestones." },
-  { question: "Can I view your previous work?", answer: "Yes! Explore my case studies to see examples of my projects and results." },
+  { question: 'What types of projects do you take on?', answer: 'I focus on web development, UI/UX design, and SaaS applications, delivering tailored solutions for each.' },
+  { question: 'What’s the typical timeline for a project?', answer: 'Timelines vary by scope, but most projects wrap up within 4-6 weeks with clear milestones.' },
+  { question: 'Can I view your previous work?', answer: 'Yes! Explore my case studies to see examples of my projects and results.' },
 ];
 
 export default function Contact() {
   return (
     <main role="main" className="min-h-screen bg-gradient-to-b from-neutral-dark to-neutral-mid font-body relative overflow-hidden">
-      {/* Animated background lines */}
+      {/* Static Background Gradient and Pattern */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="0" x2="100%" y2="100%" stroke="#D4AF37" strokeWidth="0.5" opacity="0.15">
-            <animate attributeName="x2" from="100%" to="0%" dur="20s" repeatCount="indefinite" />
-            <animate attributeName="y2" from="100%" to="0%" dur="20s" repeatCount="indefinite" />
-          </line>
-          <line x1="100%" y1="0" x2="0%" y2="100%" stroke="#D4AF37" strokeWidth="0.5" opacity="0.15">
-            <animate attributeName="x2" from="0%" to="100%" dur="25s" repeatCount="indefinite" />
-            <animate attributeName="y2" from="100%" to="0%" dur="25s" repeatCount="indefinite" />
-          </line>
-        </svg>
+        <div className="absolute inset-0 bg-gradient-to-br from-neutral-dark via-white/10 to-neutral-dark" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.05)_0%,transparent_70%)] opacity-50" />
       </div>
-      {/* Subtle geometric pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(212,175,55,0.05)_0%,transparent_70%)] opacity-50 pointer-events-none" aria-hidden="true" />
 
       {/* Hero Section */}
       <section
@@ -61,6 +51,7 @@ export default function Contact() {
           muted
           playsInline
           className="absolute inset-0 w-full h-full object-cover opacity-20"
+          aria-hidden="true"
         >
           <source src="/videos/abstract-lines-3d.webm" type="video/webm" />
         </video>

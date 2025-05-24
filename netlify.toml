@@ -1,10 +1,18 @@
 [build]
   command = "npm run build"
-
-[build.environment]
-  NODE_ENV = "production"
-  NPM_CONFIG_PRODUCTION = "false"
-  NEXT_PUBLIC_BASE_URL = "https://nyxtrael.com"
+  environment = { 
+    CLOUDINARY_API_KEY = "…",
+    CLOUDINARY_API_SECRET = "…",
+    CLOUDINARY_CLOUD_NAME = "…",
+    NEXT_PUBLIC_HCAPTCHA_SITE_KEY = "…",
+    NEXT_PUBLIC_SUPABASE_URL = "…",
+    RESEND_API_KEY = "…",
+    SUPABASE_ANON_KEY = "…",
+    SUPABASE_SERVICE_ROLE_KEY = "…",
+    NODE_ENV = "production",
+    NPM_CONFIG_PRODUCTION = "false"
+  }
+  publish = "out"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

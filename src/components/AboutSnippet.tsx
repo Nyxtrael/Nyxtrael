@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 
 const AboutSnippet: React.FC = () => {
   const techStack = ['React', 'Next.js', 'Tailwind', 'TypeScript'];
@@ -34,27 +33,22 @@ const AboutSnippet: React.FC = () => {
             {/* Tech Stack */}
             <ul className="flex justify-center md:justify-start gap-3 mb-6 flex-wrap">
               {techStack.map((tech, index) => (
-                <motion.li
+                <li
                   key={tech}
-                  className="bg-accent text-neutral-dark px-4 py-2 rounded-full text-sm font-medium"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  className="bg-accent text-neutral-dark px-4 py-2 rounded-full text-sm font-medium animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {tech}
-                </motion.li>
+                </li>
               ))}
             </ul>
-            <motion.a
+            <Link
               href="/about"
-              className="btn-primary inline-block font-medium text-white"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
+              className="btn-primary inline-block font-medium text-white hover:scale-105 transition-transform duration-300"
               aria-label="Learn more about Nyxtrael"
             >
               Learn More About Me
-            </motion.a>
+            </Link>
           </div>
         </div>
       </div>
