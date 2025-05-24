@@ -6,8 +6,9 @@ import Image from 'next/image';
 import { Instagram, Twitter, Mail } from 'lucide-react';
 import Gallery from './Gallery';
 import FullscreenModal from './FullscreenModal';
+import { Photo } from '@/types';
 
-const photos = [
+const photos: Photo[] = [
   { src: '/images/portraitpro/photo1.jpg', alt: 'Portrait of a woman in sunlight', width: 400, height: 600 },
   { src: '/images/portraitpro/photo2.jpg', alt: 'Black and white portrait of a man', width: 400, height: 600 },
   { src: '/images/portraitpro/photo3.jpg', alt: 'Child laughing in a park', width: 400, height: 600 },
@@ -15,13 +16,6 @@ const photos = [
   { src: '/images/portraitpro/photo5.jpg', alt: 'Elderly woman smiling', width: 600, height: 400 },
   { src: '/images/portraitpro/photo6.jpg', alt: 'Man with a guitar', width: 600, height: 400 },
 ];
-
-interface Photo {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-}
 
 export default function PortraitPro() {
   const [fullscreenImage, setFullscreenImage] = useState<Photo | null>(null);

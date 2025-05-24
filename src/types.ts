@@ -1,4 +1,3 @@
-// src/types.ts
 export interface CustomerStory {
   image: string;
   caption: string;
@@ -9,7 +8,7 @@ export interface CustomerStory {
 export interface Category {
   name: string;
   image: string;
-  icon: "Shirt" | "Watch" | "Gift";
+  icon: 'Shirt' | 'Watch' | 'Gift';
 }
 
 export interface Product {
@@ -24,4 +23,11 @@ export interface CaseStudy {
   description: string;
   thumbnail: string;
   path: string;
+}
+
+export interface Photo {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
 }

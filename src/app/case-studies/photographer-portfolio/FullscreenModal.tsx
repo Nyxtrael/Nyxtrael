@@ -2,13 +2,7 @@
 
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-
-interface Photo {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-}
+import { Photo } from '@/types';
 
 interface FullscreenModalProps {
   image: Photo;
