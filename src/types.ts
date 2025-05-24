@@ -31,3 +31,14 @@ export interface Photo {
   width: number;
   height: number;
 }
+
+export interface Particle {
+  cx: number;
+  cy: number;
+  r: number;
+  animateCxFrom: number;
+  animateCxTo: number;
+  animateCyFrom: number;
+  animateCyTo: number;
+  dur: number;
+}
