@@ -1,39 +1,33 @@
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { Resend } from 'resend';
+import { NextResponse } from 'next/server';
 
-const schema = z.object({
-  name: z.string().min(1, 'Proszę podać imię'),
-  email: z.string().email('Proszę podać poprawny email'),
-  message: z.string().min(10, 'Wiadomość musi mieć co najmniej 10 znaków'),
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default function ContactForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: zodResolver(schema),
-  });
+export async function POST(request: Request) {
+  try {
+    const { name, email, message } = await request.json();
 
-  const onSubmit = async (data) => {
-    await fetch('/api/contact', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' },
+    // Validate the incoming data
+    if (!name || !email || !message) {
+      return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
+    }
+
+    // Send email using Resend
+    await resend.emails.send({
+      from: 'contact@yourdomain.com', // Replace with your sender email
+      to: 'your-email@yourdomain.com', // Replace with your recipient email
+      subject: `New Contact Form Submission from ${name}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong> ${message}</p>
+      `,
     });
-    // Pokaż toast z sonner
-  };
 
-  return (
-    <form data-netlify="true" onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <div>
-        <input
-          {...register('name')}
-          placeholder="Imię"
-          className="w-full bg-neutral-200/50 border border-primary/50 focus:border-primary rounded-lg p-3"
-        />
-        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
-      </div>
-      {/* Pozostałe pola */}
-      <button type="submit" className="btn-primary">Wyślij</button>
-    </form>
-  );
+    return NextResponse.json({ message: 'Message sent successfully' }, { status: 200 });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return NextResponse.json({ error: 'Failed to send message' }, { status: 500 });
+  }
 }
