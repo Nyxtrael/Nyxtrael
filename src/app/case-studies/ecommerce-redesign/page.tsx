@@ -1,7 +1,3 @@
-"use client";
-
-import { useMemo, useRef, useEffect } from "react";
-import { useScroll, useTransform } from "framer-motion";
 import { caseStudies } from "../data";
 import productsData from "@/data/products.json";
 import categoriesData from "@/data/categories.json";
@@ -12,9 +8,23 @@ import HeroCarousel from "./HeroCarousel";
 import ProductGrid from "./ProductGrid";
 import PromoBanner from "./PromoBanner";
 import CategoryGrid from "./CategoryGrid";
-import { FeaturedProduct, CustomerStories } from "./dynamicImports.tsx";
+import FeaturedProduct from "./FeaturedProduct";
+import CustomerStories from "./CustomerStories";
 import Footer from "./Footer";
 import "./ecommerce-redesign.css";
+
+interface CustomerStory {
+  image: string;
+  caption: string;
+  customerName?: string;
+  initials?: string;
+}
+
+interface Category {
+  name: string;
+  image: string;
+  icon: "Shirt" | "Watch" | "Gift";
+}
 
 const caseStudy = caseStudies.find((cs) => cs.slug === "ecommerce-redesign");
 
@@ -27,32 +37,15 @@ export default function EcommerceRedesignCaseStudy() {
     );
   }
 
-  const products = useMemo(() => productsData, []);
-  const categories = useMemo(() => categoriesData, []);
-  const customerStories = useMemo(() => customerStoriesData.map(story => ({
+  const products = productsData;
+  const categoriesDataTyped = categoriesData as Category[];
+  const categories = categoriesDataTyped;
+  const customerStoriesDataTyped = customerStoriesData as CustomerStory[];
+  const customerStories = customerStoriesDataTyped.map(story => ({
     ...story,
     customerName: story.customerName || "Anonymous",
     initials: story.initials || "A.",
-  })), []);
-
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref });
-  const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const mockupY = useTransform(scrollYProgress, [0, 1], [0, 50]);
-
-  // Register Service Worker
-  useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/serviceWorker.js').then(
-        (registration) => {
-          console.log('Service Worker registered with scope:', registration.scope);
-        },
-        (error) => {
-          console.error('Service Worker registration failed:', error);
-        }
-      );
-    }
-  }, []);
+  }));
 
   return (
     <main role="main" className="ecom-redesign min-h-screen relative overflow-hidden font-lora space-y-12">
@@ -77,7 +70,7 @@ export default function EcommerceRedesignCaseStudy() {
       <ProductGrid products={products} />
       <PromoBanner />
       <CategoryGrid categories={categories} />
-      <FeaturedProduct mockupY={mockupY} />
+      <FeaturedProduct mockupY={0} />
       <CustomerStories customerStories={customerStories} />
       <Footer />
     </main>

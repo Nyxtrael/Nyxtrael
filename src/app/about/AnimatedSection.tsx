@@ -1,18 +1,23 @@
-// src/components/AnimatedSection.tsx
-   "use client";
+'use client';
 
-   import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
-   export default function AnimatedSection({ children, ...props }) {
-     return (
-       <motion.div
-         initial={{ opacity: 0, y: 20 }}
-         whileInView={{ opacity: 1, y: 0 }}
-         viewport={{ once: true }}
-         transition={{ duration: 0.5 }}
-         {...props}
-       >
-         {children}
-       </motion.div>
-     );
-   }
+interface AnimatedSectionProps {
+  children: ReactNode;
+  [key: string]: any; // For additional props passed to motion.div
+}
+
+export default function AnimatedSection({ children, ...props }: AnimatedSectionProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+}

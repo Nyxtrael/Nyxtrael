@@ -1,67 +1,47 @@
-"use client";
-
 import { useState, useEffect, useCallback, useRef } from "react";
 
-export default function useCarousel(totalSlides, delay = 5000) {
+interface UseCarouselReturn {
+  currentSlide: number;
+  handleNextSlide: () => void;
+  handlePrevSlide: () => void;
+  handlePause: () => void;
+  handleResume: () => void;
+}
+
+export default function useCarousel(totalSlides: number, delay: number = 5000): UseCarouselReturn {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const isPausedRef = useRef(false);
 
-  const startAutoAdvance = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(() => {
-      if (!isPausedRef.current) {
-        setCurrentSlide((prev) => (prev + 1) % totalSlides);
-      }
-    }, delay);
-  }, [totalSlides, delay]);
-
-  const stopAutoAdvance = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-  }, []);
-
   const handleNextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    isPausedRef.current = true;
-    stopAutoAdvance();
-    startAutoAdvance();
-  }, [totalSlides, stopAutoAdvance, startAutoAdvance]);
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % totalSlides);
+  }, [totalSlides]);
 
   const handlePrevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-    isPausedRef.current = true;
-    stopAutoAdvance();
-    startAutoAdvance();
-  }, [totalSlides, stopAutoAdvance, startAutoAdvance]);
+    setCurrentSlide((prevSlide) => (prevSlide - 1 + totalSlides) % totalSlides);
+  }, [totalSlides]);
 
   const handlePause = useCallback(() => {
     isPausedRef.current = true;
-    stopAutoAdvance();
-  }, [stopAutoAdvance]);
+  }, []);
 
   const handleResume = useCallback(() => {
     isPausedRef.current = false;
-    startAutoAdvance();
-  }, [startAutoAdvance]);
+  }, []);
 
   useEffect(() => {
-    startAutoAdvance();
-    return () => stopAutoAdvance();
-  }, [startAutoAdvance, stopAutoAdvance]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "ArrowRight") {
+    intervalRef.current = setInterval(() => {
+      if (!isPausedRef.current) {
         handleNextSlide();
-      } else if (event.key === "ArrowLeft") {
-        handlePrevSlide();
+      }
+    }, delay);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
     };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleNextSlide, handlePrevSlide]);
+  }, [delay, handleNextSlide]);
 
   return {
     currentSlide,

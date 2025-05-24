@@ -1,26 +1,18 @@
-"use client";
-
-import { motion, useTransform } from "framer-motion";
 import Image from "next/image";
 
-export default function FeaturedProduct({ mockupY }) {
+export default function FeaturedProduct({ mockupY }: { mockupY: number }) {
   return (
     <section id="featured" role="region" aria-labelledby="featured-heading" className="section">
       <div className="container">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
+        <h2
           id="featured-heading"
-          className="text-3xl xs:text-4xl font-playfair font-bold text-shoptrend-text mb-6 text-center heading-underline"
+          className="text-3xl xs:text-4xl font-playfair font-bold text-shoptrend-text mb-6 text-center heading-underline animate-fade-in"
         >
           Featured Product
-        </motion.h2>
+        </h2>
         <div className="flex flex-col md:flex-row bg-shoptrend-bg rounded-lg shadow-lg overflow-hidden border border-shoptrend-brown">
-          <motion.div
-            style={{ y: mockupY }}
-            className="relative w-full md:w-1/2 aspect-[4/3] md:aspect-auto"
+          <div
+            className="relative w-full md:w-1/2 aspect-[4/3] md:aspect-auto animate-slide-up"
           >
             <Image
               src="/images/featured.jpg"
@@ -28,10 +20,10 @@ export default function FeaturedProduct({ mockupY }) {
               fill
               className="object-cover rounded-l-lg"
               placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQgJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQ:::::::::::::::::::::AAAAAAAAAAAAAAAAAA/8QAFQABAQ:::::::::::::::::::::AAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFREBAQ:::::::::::::::::::::AAAAAAAAAAAAAAAAAH/xAAUEQE:::::::::::::::::::::AAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQgJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQ:::::::::::::::::::::AAAAAAAAAAAAAAAAAA/8QAFQABAQ:::::::::::::::::::::AAAAAAAAAAAAAAAAAAb/xAAUEAE:::::::::::::::::::::AAAAAAAAAAAAAAAAAA/8QAFREBAQ:::::::::::::::::::::AAAAAAAAAAAAAAAAAH/xAAUEQE:::::::::::::::::::::AAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
               loading="lazy"
             />
-          </motion.div>
+          </div>
           <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
             <h3 className="text-xl xs:text-2xl font-semibold font-playfair text-shoptrend-text mb-2">Luxury Handbag</h3>
             <p className="text-shoptrend-text mb-4 font-lora">$199.99</p>
