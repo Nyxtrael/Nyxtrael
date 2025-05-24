@@ -1,4 +1,3 @@
-// src/app/layout.tsx
 import type { Metadata } from 'next';
 import '../styles/globals.css';
 import NavBar from '../components/NavBar';
@@ -8,11 +7,11 @@ import ClientLayout from '../components/ClientLayout';
 export const metadata: Metadata = {
   title: 'Nyxtrael – Freelance Front-end Developer & Web Designer',
   description:
-    'Tworzę nowoczesne, responsywne strony i aplikacje webowe (React, Next.js). Zobacz moje portfolio i skontaktuj się!',
+    'I create modern, responsive websites and web applications (React, Next.js). Check out my portfolio and get in touch!',
   openGraph: {
     title: 'Nyxtrael – Freelance Front-end Developer & Web Designer',
     description:
-      'Specjalista front-end oferujący szybkie, estetyczne strony internetowe. Sprawdź moje projekty i porozmawiajmy o Twoim!',
+      'A front-end specialist offering fast, aesthetic websites. Check out my projects and let’s talk about yours!',
     url: 'https://nyxtrael.com',
     images: ['/og-image.jpg'],
   },
@@ -20,11 +19,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pl" className="dark">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" />
-      </head>
+    <html lang="en">
       <body className="bg-background text-text-primary font-body">
         <NavBar />
         <ClientLayout>{children}</ClientLayout>
