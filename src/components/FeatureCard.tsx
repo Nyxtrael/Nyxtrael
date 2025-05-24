@@ -1,25 +1,21 @@
-import { ReactNode } from 'react';
-import { motion } from 'framer-motion';
-
 interface FeatureCardProps {
-  icon: ReactNode;
+  icon: React.ReactNode;
   title: string;
-  desc: string;
+  description: string;
+  color: string;
   index: number;
 }
 
-export default function FeatureCard({ icon, title, desc, index }: FeatureCardProps) {
+export default function FeatureCard({ icon, title, description, color, index }: FeatureCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.2 }}
-      className="card p-6 hover:shadow-card-hover hover:border-accent border-2 border-transparent transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent"
-      tabIndex={0}
+    <div
+      className={`relative p-6 rounded-xl shadow-lg border ${color} bg-gray-800 animate-slide-up`}
+      style={{ animationDelay: `${index * 0.2}s` }}
+      role="listitem"
     >
-      {icon}
-      <h3 className="text-xl font-semibold text-primary font-montserrat">{title}</h3>
-      <p className="text-secondary font-inter">{desc}</p>
-    </motion.div>
+      <div className="flex justify-center mb-4">{icon}</div>
+      <h3 className="text-2xl font-semibold text-gray-200 mb-4 text-center font-roboto">{title}</h3>
+      <p className="text-gray-400 text-center font-roboto">{description}</p>
+    </div>
   );
 }
