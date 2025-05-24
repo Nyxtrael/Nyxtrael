@@ -1,11 +1,7 @@
-'use client';
-
-import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Instagram, Twitter, Mail } from 'lucide-react';
 import Gallery from './Gallery';
-import FullscreenModal from './FullscreenModal';
 import { Photo } from '@/types';
 
 const photos: Photo[] = [
@@ -18,30 +14,6 @@ const photos: Photo[] = [
 ];
 
 export default function PortraitPro() {
-  const [fullscreenImage, setFullscreenImage] = useState<Photo | null>(null);
-
-  const openFullscreen = useCallback((photo: Photo) => {
-    setFullscreenImage(photo);
-  }, []);
-
-  const closeFullscreen = useCallback(() => {
-    setFullscreenImage(null);
-  }, []);
-
-  const handleNextImage = useCallback(() => {
-    if (!fullscreenImage) return;
-    const currentIndex = photos.findIndex((p) => p.src === fullscreenImage.src);
-    const nextIndex = (currentIndex + 1) % photos.length;
-    setFullscreenImage(photos[nextIndex]);
-  }, [fullscreenImage]);
-
-  const handlePrevImage = useCallback(() => {
-    if (!fullscreenImage) return;
-    const currentIndex = photos.findIndex((p) => p.src === fullscreenImage.src);
-    const prevIndex = (currentIndex - 1 + photos.length) % photos.length;
-    setFullscreenImage(photos[prevIndex]);
-  }, [fullscreenImage]);
-
   return (
     <main role="main" className="portraitpro font-lora overflow-hidden">
       {/* Hero Section */}
@@ -114,19 +86,9 @@ export default function PortraitPro() {
           >
             Moments Frozen in Time
           </h2>
-          <Gallery photos={photos} onImageClick={openFullscreen} />
+          <Gallery photos={photos} />
         </div>
       </section>
-
-      {/* Fullscreen Modal */}
-      {fullscreenImage && (
-        <FullscreenModal
-          image={fullscreenImage}
-          onClose={closeFullscreen}
-          onNext={handleNextImage}
-          onPrev={handlePrevImage}
-        />
-      )}
 
       {/* Contact Section */}
       <section role="region" aria-labelledby="contact-title" className="section bg-beige text-center">
@@ -149,6 +111,7 @@ export default function PortraitPro() {
                   type="text"
                   placeholder="Your Name"
                   className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gold transition-all duration-300"
+                  disabled
                 />
               </div>
               <div>
@@ -158,6 +121,7 @@ export default function PortraitPro() {
                   type="email"
                   placeholder="Your Email"
                   className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gold transition-all duration-300"
+                  disabled
                 />
               </div>
               <div>
@@ -167,9 +131,10 @@ export default function PortraitPro() {
                   placeholder="Your Vision"
                   rows={4}
                   className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gold transition-all duration-300 resize-none"
+                  disabled
                 />
               </div>
-              <button className="bg-gold text-portraitText px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-gold/50">
+              <button className="bg-gold text-portraitText px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-gold/50" disabled>
                 Begin the Journey
               </button>
             </div>

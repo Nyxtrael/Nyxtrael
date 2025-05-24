@@ -42,3 +42,9 @@ export interface Particle {
   animateCyTo: number;
   dur: number;
 }
+
+export interface Task {
+  id: number;
+  title: string;
+  completed: boolean;
+}

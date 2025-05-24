@@ -4,12 +4,7 @@ import FeatureCard from '../../../components/FeatureCard';
 import AddTaskForm from './AddTaskForm';
 import TaskList from './TaskList';
 import { CheckCircle, Clock, Zap } from 'lucide-react';
-
-interface Task {
-  id: number;
-  text: string;
-  completed: boolean;
-}
+import { Task } from '@/types';
 
 const features = [
   {
@@ -34,9 +29,9 @@ const features = [
 
 // Static task list for demo purposes
 const demoTasks: Task[] = [
-  { id: 1, text: 'Complete project proposal', completed: false },
-  { id: 2, text: 'Schedule team meeting', completed: true },
-  { id: 3, text: 'Review client feedback', completed: false },
+  { id: 1, title: 'Complete project proposal', completed: false },
+  { id: 2, title: 'Schedule team meeting', completed: true },
+  { id: 3, title: 'Review client feedback', completed: false },
 ];
 
 export default function TaskMaster() {
