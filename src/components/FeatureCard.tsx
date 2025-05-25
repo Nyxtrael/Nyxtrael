@@ -7,41 +7,22 @@ interface FeatureCardProps {
   icon: ReactNode;
   title: string;
   description: string;
-  color?: string;
   index: number;
 }
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-export default function FeatureCard({ icon, title, description, color = 'border-accent', index }: FeatureCardProps) {
+export default function FeatureCard({ icon, title, description, index }: FeatureCardProps) {
   return (
-    <li role="listitem">
-      <motion.div
-        className={`relative card p-6 rounded-xl shadow-lg border hover:shadow-neon-green/50 transition-all duration-300 ${color}`}
-        variants={cardVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        transition={{ delay: index * 0.2 }}
-        role="group"
-        aria-labelledby={`feature-title-${index}`}
-      >
-        <div className="flex justify-center mb-4" aria-hidden="true">
-          {icon}
-        </div>
-        <h3
-          id={`feature-title-${index}`}
-          className="text-2xl font-semibold text-accent-green mb-4 text-center font-exo"
-        >
-          {title}
-        </h3>
-        <p className="text-gray-400 text-center font-roboto">
-          {description}
-        </p>
-      </motion.div>
-    </li>
+    <motion.li
+      role="listitem"
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: 'spring', stiffness: 100 }}
+      className="h-full"
+    >
+      <div className="bg-gray-100 text-gray-900 p-6 flex flex-col h-full rounded-lg shadow-sm">
+        <div className="flex justify-center mb-4" aria-hidden="true">{icon}</div>
+        <h3 className="font-semibold mb-3 font-serif text-xl">{title}</h3>
+        <p className="flex-grow font-sans text-gray-600 leading-relaxed">{description}</p>
+      </div>
+    </motion.li>
   );
 }
