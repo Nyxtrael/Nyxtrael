@@ -22,6 +22,7 @@ export interface CaseStudy {
   title: string;
   description: string;
   thumbnail: string;
+  image?: string; // Dodano opcjonalne pole image
   path: string;
 }
 

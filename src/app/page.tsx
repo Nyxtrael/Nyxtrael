@@ -1,5 +1,3 @@
-"use client";
-
 import Link from 'next/link';
 import Hero from '../components/Hero';
 import AboutSnippet from '../components/AboutSnippet';
