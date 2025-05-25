@@ -10,8 +10,8 @@ const Hero: React.FC = () => {
         muted
         playsInline
         poster="/images/video-poster.jpg"
+        preload="none"
         className="absolute top-0 left-0 w-full h-full object-cover"
-        loading="lazy"
       >
         <source src="/videos/background-video.webm" type="video/webm" />
         <source src="/videos/background-video.mp4" type="video/mp4" />
