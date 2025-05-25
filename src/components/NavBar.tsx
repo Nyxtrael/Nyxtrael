@@ -68,7 +68,6 @@ const NavBar: React.FC = () => {
                   {open && (
                     <HeadlessMenu.Items
                       as={motion.div}
-                      role="menu"
                       static
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
