@@ -10,20 +10,17 @@ const features = [
   {
     title: 'Offline Mode',
     description: 'Work seamlessly without internet—tasks sync automatically when you’re back online.',
-    icon: <Clock className="h-12 w-12 text-shoptrend-gold" />,
-    color: 'border-shoptrend-gold',
+    icon: <Clock className="h-12 w-12 text-shoptrend-gold" />, // color prop removed
   },
   {
     title: 'Task Management',
     description: 'Create, assign, and track tasks with ease, ensuring nothing slips through the cracks.',
-    icon: <CheckCircle className="h-12 w-12 text-shoptrend-brown" />,
-    color: 'border-shoptrend-brown',
+    icon: <CheckCircle className="h-12 w-12 text-shoptrend-brown" />, // color prop removed
   },
   {
     title: 'Progress Tracking',
     description: 'Visualize your productivity with real-time progress charts and smart notifications.',
-    icon: <Zap className="h-12 w-12 text-shoptrend-gold" />,
-    color: 'border-shoptrend-gold',
+    icon: <Zap className="h-12 w-12 text-shoptrend-gold" />, // color prop removed
   },
 ];
 
@@ -89,7 +86,6 @@ export default function TaskMaster() {
                 icon={feature.icon}
                 title={feature.title}
                 description={feature.description}
-                color={feature.color}
                 index={index}
               />
             ))}
