@@ -11,7 +11,7 @@ const services = [
   {
     title: 'Web Development',
     description: 'Fast, responsive websites tailored to your needs.',
-    icon: <CodeBracketIcon className="h-12 w-12 text-accent" />,
+    icon: <CodeBracketIcon className="h-12 w-12 text-accent" />, 
     benefits: [
       'Optimized for speed and SEO',
       'Mobile-first responsive design',
@@ -21,7 +21,7 @@ const services = [
   {
     title: 'UI/UX Design',
     description: 'Intuitive and aesthetic designs that boost user engagement.',
-    icon: <PaintBrushIcon className="h-12 w-12 text-accent" />,
+    icon: <PaintBrushIcon className="h-12 w-12 text-accent" />, 
     benefits: [
       'User-centered design process',
       'Interactive prototypes',
@@ -31,7 +31,7 @@ const services = [
   {
     title: 'Consulting',
     description: 'Expert guidance on digital strategy and project optimization.',
-    icon: <LightBulbIcon className="h-12 w-12 text-accent" />,
+    icon: <LightBulbIcon className="h-12 w-12 text-accent" />, 
     benefits: [
       'Technical audits and recommendations',
       'Performance optimization strategies',
@@ -83,7 +83,7 @@ export default function Home() {
                 title={caseStudy.title}
                 description={caseStudy.description}
                 slug={caseStudy.slug}
-                thumbnail={caseStudy.thumbnail || caseStudy.image}
+                thumbnail={caseStudy.thumbnail}
                 className="animate-fade-in-up"
               />
             ))}
