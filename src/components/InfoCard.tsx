@@ -2,14 +2,18 @@ import { ReactNode } from 'react';
 
 interface InfoCardProps {
   title: string;
-  content: string;
+  children: ReactNode;
 }
 
-export default function InfoCard({ title, content }: InfoCardProps) {
+export default function InfoCard({ title, children }: InfoCardProps) {
   return (
-    <div className="card p-4">
-      <h3 className="font-semibold text-primary font-montserrat">{title}</h3>
-      <p className="text-secondary font-inter">{content}</p>
-    </div>
+    <li role="listitem">
+      <div className="card space-y-2">
+        <h3 className="font-semibold text-primary font-montserrat">{title}</h3>
+        <div className="text-secondary font-inter">
+          {children}
+        </div>
+      </div>
+    </li>
   );
 }
