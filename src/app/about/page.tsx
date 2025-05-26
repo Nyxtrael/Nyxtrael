@@ -87,7 +87,7 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl md:text-2xl text-[#F5F5F5] max-w-3xl mx-auto font-inter leading-relaxed"
           >
-            I’m Nyxtrael—a front-end freelancer passionate about crafting modern, user-friendly web solutions.
+            I build sleek, fast, and scalable websites using React & Next.js — crafted for startups, creators and SaaS teams.
           </motion.p>
         </div>
 

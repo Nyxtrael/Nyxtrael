@@ -10,7 +10,7 @@ const benefits = [
 
 const faqs = [
   { question: 'What types of projects do you take on?', answer: 'I focus on web development, UI/UX design, and SaaS applications, delivering tailored solutions for each.' },
-  { question: 'What’s the typical timeline for a project?', answer: 'Timelines vary by scope, but most projects wrap up within 4-6 weeks with clear milestones.' },
+  { question: 'What’s the typical timeline for a project?', answer: 'Timelines vary by scope, but most projects wrap up within 2-3 weeks with clear milestones.' },
   { question: 'Can I view your previous work?', answer: 'Yes! Explore my case studies to see examples of my projects and results.' },
 ];
 

@@ -1,24 +1,24 @@
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu as MenuIcon, X as XIcon, ChevronDown } from 'lucide-react';
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/case-studies', label: 'Case Studies', hasSubmenu: true },
+  { href: '/contact', label: 'Contact' },
+];
+
+const caseStudyLinks = [
+  { href: '/case-studies/startup-landing', label: 'BrightCRM' },
+  { href: '/case-studies/ecommerce-redesign', label: 'ShopTrend' },
+  { href: '/case-studies/saas-dashboard', label: 'DataSync' },
+  { href: '/case-studies/photographer-portfolio', label: 'PortraitPro' },
+  { href: '/case-studies/taskmaster-pwa', label: 'TaskMaster' },
+  { href: '/case-studies/neon-ritual', label: 'NeonRitual' },
+];
 
 const NavBar: React.FC = () => {
-  const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/services', label: 'Services' },
-    { href: '/case-studies', label: 'Case Studies' },
-    { href: '/contact', label: 'Contact' },
-  ];
-
-  const caseStudyLinks = [
-    { href: '/case-studies/startup-landing', label: 'BrightCRM' },
-    { href: '/case-studies/ecommerce-redesign', label: 'ShopTrend' },
-    { href: '/case-studies/saas-dashboard', label: 'DataSync' },
-    { href: '/case-studies/photographer-portfolio', label: 'PortraitPro' },
-    { href: '/case-studies/taskmaster-pwa', label: 'TaskMaster' },
-    { href: '/case-studies/neon-ritual', label: 'NeonRitual' },
-  ];
-
   return (
     <nav
       className="fixed top-0 left-0 w-full z-50 bg-dark shadow-md border-b border-gray-800"
@@ -37,15 +37,16 @@ const NavBar: React.FC = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
-            link.label === 'Case Studies' ? (
+            link.hasSubmenu ? (
               <div key={link.href} className="relative group">
                 <Link
                   href={link.href}
-                  className="text-light-gray hover:text-dark-accent transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark"
+                  className="text-light-gray hover:text-dark-accent transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark flex items-center"
                 >
                   {link.label}
+                  <ChevronDown className="ml-1 h-4 w-4 text-accent" aria-hidden="true" />
                 </Link>
-                <div className="absolute left-0 mt-2 w-48 bg-dark rounded-md shadow-lg ring-1 ring-gray-800 py-2 hidden group-hover:block">
+                <div className="absolute left-0 mt-2 w-48 bg-dark rounded-md shadow-lg ring-1 ring-gray-800 py-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-all duration-200 ease-in-out group-hover:delay-0 delay-300">
                   {caseStudyLinks.map((item) => (
                     <Link
                       key={item.href}
@@ -76,26 +77,29 @@ const NavBar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Mobile Navigation - Simplified */}
+        {/* Mobile Navigation */}
         <div className="md:hidden flex items-center">
           <div className="text-light-gray p-2">
-            <Menu className="h-8 w-8" aria-label="Open menu" />
+            <MenuIcon className="h-8 w-8" aria-label="Open menu" />
           </div>
           <div className="absolute top-16 left-0 w-full bg-dark shadow-lg md:hidden">
             {navLinks.map((link) => (
-              link.label === 'Case Studies' ? (
+              link.hasSubmenu ? (
                 <div key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="block px-4 py-3 text-light-gray text-lg border-b border-gray-800 hover:bg-dark-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark"
-                  >
-                    {link.label}
-                  </Link>
+                  <div className="px-4 py-3 text-light-gray text-lg border-b border-gray-800 font-semibold flex items-center">
+                    <Link
+                      href={link.href}
+                      className="flex-1 hover:bg-dark-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark"
+                    >
+                      {link.label}
+                    </Link>
+                    <ChevronDown className="h-5 w-5 text-accent" aria-hidden="true" />
+                  </div>
                   {caseStudyLinks.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="block px-6 py-2 text-light-gray text-base border-b border-gray-800 hover:bg-dark-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark"
+                      className="block px-6 py-2 text-light-gray text-base border-b border-gray-800 hover:bg-dark-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark bg-gray-800"
                     >
                       {item.label}
                     </Link>
