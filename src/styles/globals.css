@@ -1,6 +1,5 @@
 /* Import Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500&family=Playfair+Display:wght@400;700&family=Lora:wght@400;500&family=Bebas+Neue&family=Roboto:wght@400;500&family=Exo:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500&display=swap');
 
 /* Tailwind Directives */
 @tailwind base;
@@ -117,48 +116,6 @@
     @apply section-spacing;
   }
 
-  /* PortraitPro Scoped Styles */
-  .portraitpro {
-    --portraitpro-beige: #F5F5E6;
-    --portraitpro-text: #333333;
-    --portraitpro-gold: #D4AF37;
-
-    background-color: var(--portraitpro-beige);
-    color: var(--portraitpro-text);
-  }
-
-  .portraitpro .bg-beige {
-    background-color: var(--portraitpro-beige);
-  }
-
-  .portraitpro .text-portraitText {
-    color: var(--portraitpro-text);
-  }
-
-  .portraitpro .text-gold {
-    color: var(--portraitpro-gold);
-  }
-
-  .portraitpro .border-gold {
-    border-color: var(--portraitpro-gold);
-  }
-
-  .portraitpro .hover\:shadow-gold\/50:hover {
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-  }
-
-  .portraitpro .focus\:ring-gold:focus {
-    --tw-ring-color: var(--portraitpro-gold);
-  }
-
-  .portraitpro .font-cinzel {
-    font-family: 'Cinzel', serif;
-  }
-
-  .portraitpro .btn-circle {
-    @apply w-10 h-10 rounded-full bg-gray-800/70 text-white flex items-center justify-center hover:bg-gray-800;
-  }
-
   /* CaseStudiesPage Scoped Styles */
   .case-studies {
     background-color: #212121;
@@ -183,113 +140,6 @@
 
   .case-studies .text-medium-gray {
     color: #F5F5F5;
-  }
-
-  /* BrightCRM Scoped Styles */
-  .bright-crm {
-    background-color: #F5F5F5;
-  }
-
-  .bright-crm .bg-background-light {
-    background-color: #F5F5F5;
-  }
-
-  .bright-crm h1,
-  .bright-crm h2,
-  .bright-crm h3 {
-    color: #333333;
-  }
-
-  .bright-crm p {
-    color: #666666;
-  }
-
-  .bright-crm .card {
-    background-color: #FFFFFF;
-    border: 1px solid #E0E0E0;
-  }
-
-  /* TaskMaster Scoped Styles */
-  .taskmaster {
-    background-color: #0D0D0D;
-    color: #FFFFFF;
-  }
-
-  .taskmaster .bg-black {
-    background-color: #0D0D0D;
-  }
-
-  .taskmaster .bg-gradient-to-br.from-black.to-gray-900 {
-    background: linear-gradient(to bottom right, #0D0D0D, #1A1A1A);
-  }
-
-  .taskmaster .bg-gradient-to-br.from-gray-900.to-black {
-    background: linear-gradient(to bottom right, #1A1A1A, #0D0D0D);
-  }
-
-  .taskmaster .bg-gray-800 {
-    background-color: #1A1A1A;
-  }
-
-  .taskmaster .text-gray-200 {
-    color: #FFFFFF;
-  }
-
-  .taskmaster .text-gray-400 {
-    color: #D4AF37;
-  }
-
-  .taskmaster .text-gray-900 {
-    color: #0D0D0D;
-  }
-
-  .taskmaster .text-accent-green {
-    color: #D4AF37;
-  }
-
-  .taskmaster .text-accent-purple {
-    color: #A67C52;
-  }
-
-  .taskmaster .bg-gradient-to-br.from-accent-green.to-accent-purple {
-    background: linear-gradient(to bottom right, #D4AF37, #A67C52);
-  }
-
-  .taskmaster .border-accent-green {
-    border-color: #D4AF37;
-  }
-
-  .taskmaster .border-accent-purple {
-    border-color: #A67C52;
-  }
-
-  .taskmaster .hover\:shadow-accent-purple\/50:hover {
-    box-shadow: 0 0 10px rgba(166, 124, 82, 0.5);
-  }
-
-  /* Hero Section Scoped Styles */
-  .hero-section {
-    background-color: #0D0D0D;
-  }
-
-  .hero-section .bg-neutral-mid\/80 {
-    background-color: rgba(33, 33, 33, 0.8);
-  }
-
-  .hero-section .text-white {
-    color: #FFFFFF;
-  }
-
-  .hero-section .text-[#F5F5F5] {
-    color: #D4AF37;
-  }
-
-  .hero-section .btn-primary {
-    @apply btn bg-shoptrend-gold text-shoptrend-bg hover:bg-opacity-90 hover:scale-105 hover:shadow-shoptrend-gold;
-  }
-
-  .hero-section .btn-outline {
-    @apply btn border border-shoptrend-gold text-shoptrend-gold hover:bg-shoptrend-gold hover:text-shoptrend-bg;
   }
 }
 

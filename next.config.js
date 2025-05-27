@@ -1,29 +1,28 @@
-const path = require('path');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable static export to generate a fully static site
-  output: 'export',
-
-  // Enables React Strict Mode to catch potential issues in development
   reactStrictMode: true,
-
-  // Configure image handling for Next.js Image component
+  output: 'standalone', // Używamy Build Output API dla optymalizacji deploymentu
   images: {
-    // Domains allowed for image sources
-    domains: ['localhost', 'res.cloudinary.com'],
-    // Disable image optimization for static export compatibility
-    unoptimized: true,
+    domains: ['localhost', 'nyxtrael.com'], // Dodajemy domeny dla obrazów
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
-
-  // Custom Webpack configuration
-  webpack(config) {
-    // Add alias for '@' to point to the 'src' directory
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@': path.resolve(__dirname, 'src'),
-    };
-    return config;
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, s-maxage=31536000, stale-while-revalidate=59',
+          },
+        ],
+      },
+    ];
   },
 };
 

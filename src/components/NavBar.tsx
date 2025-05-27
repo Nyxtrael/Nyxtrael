@@ -1,12 +1,13 @@
 import Link from 'next/link';
-import { Menu as MenuIcon, X as XIcon, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Services' },
   { href: '/case-studies', label: 'Case Studies', hasSubmenu: true },
-  { href: '/contact', label: 'Contact' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/templates', label: 'Templates' },
 ];
 
 const caseStudyLinks = [
@@ -21,7 +22,7 @@ const caseStudyLinks = [
 const NavBar: React.FC = () => {
   return (
     <nav
-      className="fixed top-0 left-0 w-full z-50 bg-dark shadow-md border-b border-gray-800"
+      className="fixed top-0 left-0 w-full z-50 bg-dark/80 backdrop-blur-md shadow-lg border-b border-gray-800/50 mb-4"
       role="navigation"
       aria-label="Main navigation"
     >
@@ -29,29 +30,29 @@ const NavBar: React.FC = () => {
         {/* Logo */}
         <Link
           href="/"
-          className="text-2xl font-heading font-bold text-light-gray hover:text-dark-accent glow-hover focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark transition-colors"
+          className="text-2xl font-heading font-bold text-white hover:text-teal-400 glow-hover focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors duration-300"
         >
           Nyxtrael
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="flex items-center space-x-6">
           {navLinks.map((link) => (
             link.hasSubmenu ? (
               <div key={link.href} className="relative group">
                 <Link
                   href={link.href}
-                  className="text-light-gray hover:text-dark-accent transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark flex items-center"
+                  className="text-white hover:text-teal-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900 flex items-center"
                 >
                   {link.label}
-                  <ChevronDown className="ml-1 h-4 w-4 text-accent" aria-hidden="true" />
+                  <ChevronDown className="ml-1 h-4 w-4 text-teal-400" aria-hidden="true" />
                 </Link>
-                <div className="absolute left-0 mt-2 w-48 bg-dark rounded-md shadow-lg ring-1 ring-gray-800 py-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-all duration-200 ease-in-out group-hover:delay-0 delay-300">
+                <div className="absolute left-0 mt-2 w-48 bg-dark/90 backdrop-blur-md rounded-md shadow-lg ring-1 ring-gray-800/50 py-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-all duration-200 ease-in-out group-hover:delay-0 delay-300">
                   {caseStudyLinks.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="block px-4 py-2 text-light-gray text-sm hover:bg-dark-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark"
+                      className="block px-4 py-2 text-white text-sm hover:bg-teal-500 hover:text-gray-900 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900"
                     >
                       {item.label}
                     </Link>
@@ -62,7 +63,7 @@ const NavBar: React.FC = () => {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-light-gray hover:text-dark-accent transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark"
+                className="text-white hover:text-teal-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900"
               >
                 {link.label}
               </Link>
@@ -71,58 +72,10 @@ const NavBar: React.FC = () => {
           {/* CTA Button */}
           <Link
             href="/contact"
-            className="rounded-xl px-4 py-2 border border-dark-accent text-light-gray hover:bg-dark-accent hover:text-black transition-all duration-300 glow-hover font-medium focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark"
+            className="rounded-xl px-4 py-2 bg-gradient-to-r from-purple-500 to-teal-500 text-white hover:from-purple-600 hover:to-teal-600 transform hover:scale-105 transition-all duration-300 glow-hover font-medium focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 focus:ring-offset-gray-900 shadow-md"
           >
             Contact
           </Link>
-        </div>
-
-        {/* Mobile Navigation */}
-        <div className="md:hidden flex items-center">
-          <div className="text-light-gray p-2">
-            <MenuIcon className="h-8 w-8" aria-label="Open menu" />
-          </div>
-          <div className="absolute top-16 left-0 w-full bg-dark shadow-lg md:hidden">
-            {navLinks.map((link) => (
-              link.hasSubmenu ? (
-                <div key={link.href}>
-                  <div className="px-4 py-3 text-light-gray text-lg border-b border-gray-800 font-semibold flex items-center">
-                    <Link
-                      href={link.href}
-                      className="flex-1 hover:bg-dark-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark"
-                    >
-                      {link.label}
-                    </Link>
-                    <ChevronDown className="h-5 w-5 text-accent" aria-hidden="true" />
-                  </div>
-                  {caseStudyLinks.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="block px-6 py-2 text-light-gray text-base border-b border-gray-800 hover:bg-dark-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark bg-gray-800"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="block px-4 py-3 text-light-gray text-lg border-b border-gray-800 hover:bg-dark-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark"
-                >
-                  {link.label}
-                </Link>
-              )
-            ))}
-            {/* Mobile CTA */}
-            <Link
-              href="/contact"
-              className="block px-4 py-3 text-lg border-t border-gray-800 text-light-gray hover:bg-dark-accent hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-dark-accent focus:ring-offset-2 focus:ring-offset-dark"
-            >
-              Contact
-            </Link>
-          </div>
         </div>
       </div>
     </nav>
