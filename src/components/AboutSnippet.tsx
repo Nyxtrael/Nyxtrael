@@ -3,6 +3,11 @@ import Image from 'next/image';
 
 const AboutSnippet: React.FC = () => {
   const techStack = ['React', 'Next.js', 'Tailwind', 'TypeScript'];
+  const stats = [
+    { label: 'Completed Projects', value: '12+' },
+    { label: 'Years Experience', value: '3' },
+    { label: 'On-Time Delivery', value: '100%' },
+  ];
 
   return (
     <section className="section-spacing bg-neutral-mid">
@@ -30,6 +35,15 @@ const AboutSnippet: React.FC = () => {
             <p className="text-lg text-[#F5F5F5] leading-relaxed animate-fade-in font-inter">
               I prioritize transparent communication and meticulous attention to detail at every stage of a project. From sleek landing pages and interactive prototypes to full-featured SaaS dashboards, I collaborate closely with clients to understand their goals and consistently deliver on time. Let’s partner to turn your ideas into engaging, user-friendly realities.
             </p>
+            {/* Stats */}
+            <div className="flex justify-center md:justify-start gap-6 mt-6">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <p className="text-3xl font-bold text-accent font-montserrat">{stat.value}</p>
+                  <p className="text-sm text-[#F5F5F5] font-inter">{stat.label}</p>
+                </div>
+              ))}
+            </div>
             {/* Tech Stack */}
             <ul className="flex justify-center md:justify-start gap-3 mb-6 flex-wrap">
               {techStack.map((tech, index) => (
@@ -44,10 +58,10 @@ const AboutSnippet: React.FC = () => {
             </ul>
             <Link
               href="/about"
-              className="btn-primary inline-block font-medium text-white hover:scale-105 transition-transform duration-300"
-              aria-label="Learn more about Nyxtrael"
+              className="btn-primary inline-block font-medium text-white hover:scale-105 hover:shadow-teal-500/50 transition-all duration-300"
+              aria-label="View Nyxtrael's full journey"
             >
-              Learn More About Me
+              View Full Journey
             </Link>
           </div>
         </div>

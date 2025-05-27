@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
         playsInline
         poster="/images/video-poster.jpg"
         preload="none"
-        className="absolute top-0 left-0 w-full h-full object-cover"
+        className="absolute top-0 left-0 w-full h-full object-cover parallax-bg"
       >
         <source src="/videos/background-video.webm" type="video/webm" />
         <source src="/videos/background-video.mp4" type="video/mp4" />
@@ -22,8 +22,9 @@ const Hero: React.FC = () => {
 
       {/* Hero Content */}
       <div className="relative z-10 text-center px-6 container mx-auto">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in heading-underline font-montserrat">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in heading-underline font-montserrat relative">
           Building Modern Web Experiences
+          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-0 h-1 bg-gradient-to-r from-purple-500 to-teal-500 animate-glow-line"></span>
         </h1>
         <p className="text-lg md:text-2xl text-[#F5F5F5] mb-10 animate-fade-in-delay font-inter">
           Front-end developer specializing in sleek, high-performance web applications.
