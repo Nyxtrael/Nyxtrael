@@ -1,5 +1,4 @@
 import React from 'react';
-import { Icon } from '@heroicons/react/24/outline';
 
 interface ServiceCardProps {
   title: string;
