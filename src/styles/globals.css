@@ -355,3 +355,14 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+@layer utilities {
+  .particles-bg {
+    background: url('/images/particles.png') repeat;
+    animation: particles 20s linear infinite;
+  }
+}
+
+@keyframes particles {
+  0% { background-position: 0 0; }
+  100% { background-position: 1000px 1000px; }
+}
