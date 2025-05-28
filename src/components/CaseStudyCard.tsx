@@ -17,7 +17,7 @@ import Image from 'next/image';
        <div
          tabIndex={0}
          role="group"
-         className={`flex flex-col h-full group relative overflow-hidden rounded-lg ${className || ''}`}
+         className={`flex flex-col h-full group relative overflow-hidden rounded-lg bg-gray-800/50 transition-all duration-300 hover:bg-gradient-to-b hover:from-gray-800/80 hover:to-gray-900/80 ${className || ''}`}
        >
          {/* Category Tag */}
          <div className="absolute top-4 left-4 bg-teal-500 text-white text-xs font-montserrat px-2 py-1 rounded-full">

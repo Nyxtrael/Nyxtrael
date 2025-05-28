@@ -199,7 +199,7 @@ import Link from 'next/link';
          <section className="section-spacing bg-neutral-mid pattern-grid">
            <div className="container mx-auto">
              <h2 className="section-header text-white animate-fade-in">Featured Projects</h2>
-             <CaseStudyFilters caseStudies={caseStudies} />
+             <CaseStudyFilters />
              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                {featuredCaseStudies.map((caseStudy, index) => (
                  <CaseStudyCard

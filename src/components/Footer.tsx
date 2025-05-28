@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-dark border-t border-gray-800 py-12 mt-16">
+    <footer className="bg-gradient-to-b from-neutral-dark to-gray-900 border-t border-gray-800 py-12 mt-16">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           {/* Column 1: Logo + Tagline */}
@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
                     href={link.href}
                     target="_blank"
                     aria-label={link.label}
-                    className="transform transition-all duration-200 hover:scale-110 hover:shadow-neon glow-hover"
+                    className="transform transition-all duration-300 hover:scale-110 hover:shadow-neon hover:animate-pulse glow-hover"
                   >
                     <Icon className="h-6 w-6 text-dark-accent hover:text-light-gray" />
                   </Link>
