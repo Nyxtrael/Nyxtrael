@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import ClientLayout from '../components/ClientLayout';
 
 export const metadata: Metadata = {
-  metadataBase: 'https://nyxtrael.com',
+  metadataBase: new URL('https://nyxtrael.com'),
   title: 'Nyxtrael – Freelance Front-end Developer & Web Designer',
   description:
     'I create modern, responsive websites and web applications (React, Next.js). Check out my portfolio and get in touch!',
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     images: ['/og-image.jpg'],
   },
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
