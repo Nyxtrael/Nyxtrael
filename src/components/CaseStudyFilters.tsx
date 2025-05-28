@@ -1,11 +1,4 @@
-interface CaseStudy {
-     slug: string;
-     title: string;
-     description: string;
-     thumbnail: string;
-     category: string;
-     year: number;
-   }
+import { CaseStudy } from '../types/CaseStudy';
 
    interface CaseStudyFiltersProps {
      caseStudies: CaseStudy[];

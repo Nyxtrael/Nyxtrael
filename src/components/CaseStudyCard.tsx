@@ -1,14 +1,9 @@
 import Image from 'next/image';
    import Link from 'next/link';
    import { Eye } from 'lucide-react';
+   import { CaseStudy } from '../types/CaseStudy';
 
-   interface CaseStudyCardProps {
-     title: string;
-     description: string;
-     slug: string;
-     thumbnail: string;
-     category: string;
-     year: number;
+   interface CaseStudyCardProps extends CaseStudy {
      className?: string;
    }
 
