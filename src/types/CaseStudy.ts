@@ -13,7 +13,7 @@ export interface CaseStudy {
      result?: string;
      isFeatured?: boolean;
      metrics?: {
-       [key: string]: number | string;
+       [key: string]: string | number | undefined;
      };
      [key: string]: any;
    }
