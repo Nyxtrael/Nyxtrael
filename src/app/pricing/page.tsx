@@ -7,41 +7,44 @@ import { Check, ChevronDown, Clock, Code, Headphones, HelpCircle, X, ShoppingCar
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-// Custom CSS for glow-ripple animation
-const glowRippleStyles = `
-  .glow-ripple {
+// Custom CSS for subtle animations and background effects
+const customStyles = `
+  .hero-bg {
+    background: linear-gradient(135deg, #0d1117 0%, #1f2937 100%);
     position: relative;
     overflow: hidden;
   }
-  .glow-ripple::before {
+  .hero-bg::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(56, 189, 248, 0.3) 0%, transparent 70%);
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    animation: ripple 3s infinite;
+    background: radial-gradient(circle at 30% 20%, rgba(96, 165, 250, 0.3) 0%, transparent 70%);
+    animation: pulse-slow 10s ease-in-out infinite;
   }
-  @keyframes ripple {
-    0% {
-      transform: translate(-50%, -50%) scale(0);
-      opacity: 1;
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    animation: pulse-slow 12s ease-in-out infinite;
+  }
+  .section-divider {
+    position: relative;
+    height: 80px;
+    background: linear-gradient(to bottom, #0d1117 0%, #1f2937 50%, #0d1117 100%);
+    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
+  }
+  @media (max-width: 768px) {
+    .swiper-slide {
+      width: 100% !important;
     }
-    100% {
-      transform: translate(-50%, -50%) scale(2);
-      opacity: 0;
-    }
-  }
-  .animate-wiggle {
-    animation: wiggle 0.5s ease-in-out infinite;
-  }
-  @keyframes wiggle {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-5deg); }
-    75% { transform: rotate(5deg); }
   }
 `;
 
@@ -158,75 +161,58 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen bg-[#0d1117]">
-      <style>{glowRippleStyles}</style>
+      <style>{customStyles}</style>
 
       {/* Hero Section */}
-      <section ref={heroRef} className="relative grain-overlay py-24 text-center overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover -z-10 opacity-50"
-          style={{ transform: `translateY(${scrollYParallax.get()}px)` }}
-          poster="/videos/hero-bg-placeholder.jpg"
-        >
-          <source src="/public/videos/hero-bg.webm" type="video/webm" />
-          <source src="/public/videos/hero-bg.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      <section ref={heroRef} className="hero-bg relative grain-overlay py-24 text-center overflow-hidden">
         <motion.div
           className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0d1117] opacity-70 -z-5"
         ></motion.div>
-        <motion.div
-          className="absolute inset-0 -z-5 opacity-20"
-          style={{
-            background: 'radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%)',
-            animation: 'pulse-slow 10s ease-in-out infinite',
-          }}
-        ></motion.div>
         <motion.h1
-          className="text-4xl md:text-6xl font-montserrat font-bold text-[#e5e7eb] mb-4 gradient-text relative z-10"
+          className="text-4xl md:text-6xl font-serif font-bold text-[#e5e7eb] mb-4 relative z-10"
           style={{ y: scrollYParallax }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           Flexible Plans for Projects Big or Small
         </motion.h1>
         <motion.p
           className="text-lg text-[#9ca3af] mb-12 max-w-3xl mx-auto font-inter relative z-10"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
         >
           High-quality design and development tailored to your needs, delivered with precision and care.
         </motion.p>
-        <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]"></div>
+        <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(96,165,250,0.5)]"></div>
       </section>
+
+      {/* Divider */}
+      <div className="section-divider"></div>
 
       {/* Pricing Cards */}
       <section className="section bg-[#0d1117] grain-overlay">
-        <div className="container">
+        <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {plans.map((plan, index) => (
               <motion.div
                 key={plan.name}
-                className={`relative card p-8 bg-[#1f2937] rounded-xl shadow-card hover:shadow-card-hover hover:bg-gradient-to-r hover:from-[#38bdf8]/10 hover:to-[#facc15]/10 hover:border-[#38bdf8]/30 hover:border-2 ${
-                  plan.isPopular ? 'ring-2 ring-[#facc15] glow-pulse' : ''
+                className={`relative p-8 bg-[#1f2937] rounded-xl shadow-card hover:shadow-md border border-transparent hover:border-[#60a5fa]/30 ${
+                  plan.isPopular ? 'ring-2 ring-[#60a5fa]' : ''
                 }`}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2, type: 'spring', stiffness: 100 }}
-                whileHover={{ scale: 1.03 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
               >
                 {plan.isPopular && (
-                  <span className="absolute top-0 right-0 bg-[#facc15] text-black text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
+                  <span className="absolute top-0 right-0 bg-[#1e3a8a] text-[#e5e7eb] text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
                     Most Popular
                   </span>
                 )}
-                <h3 className="text-2xl font-semibold text-[#e5e7eb] mb-4 font-montserrat">{plan.name}</h3>
-                <p className="text-3xl font-bold text-[#38bdf8] mb-4">{plan.price}</p>
+                <h3 className="text-2xl font-serif font-semibold text-[#e5e7eb] mb-4">{plan.name}</h3>
+                <p className="text-3xl font-bold text-[#60a5fa] mb-4">{plan.price}</p>
                 <p className="text-[#9ca3af] text-base mb-4 font-inter">{plan.description}</p>
                 <p className="text-[#e5e7eb] text-sm mb-2 font-inter">Delivery: {plan.duration}</p>
                 <p className="text-[#e5e7eb] text-sm mb-2 font-inter">Pages: {plan.pages}</p>
@@ -237,19 +223,20 @@ export default function PricingPage() {
                       key={feature.name}
                       className="flex items-center text-[#e5e7eb] text-base font-inter"
                       initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
                       transition={{ duration: 0.3, delay: idx * 0.1 }}
                     >
                       {typeof feature.value === 'boolean' ? (
-                        <span className={feature.value ? 'text-[#38bdf8]' : 'text-[#6b7280]'} aria-label={feature.tooltip}>
+                        <span className={feature.value ? 'text-[#60a5fa]' : 'text-[#6b7280]'} aria-label={feature.tooltip}>
                           {feature.value ? (
-                            <Check className="w-6 h-6 mr-3 hover:text-[#facc15] hover:scale-105 hover:animate-wiggle transition-transform" />
+                            <Check className="w-6 h-6 mr-3 text-slate-400 hover:text-[#60a5fa] transition-colors" />
                           ) : (
-                            <X className="w-6 h-6 mr-3 hover:text-[#facc15] hover:scale-105 hover:animate-wiggle transition-transform" />
+                            <X className="w-6 h-6 mr-3 text-slate-400 hover:text-[#60a5fa] transition-colors" />
                           )}
                         </span>
                       ) : (
-                        <span className="text-[#38bdf8]">{feature.value}</span>
+                        <span className="text-[#60a5fa]">{feature.value}</span>
                       )}
                       <span className="ml-3">{feature.name}</span>
                     </motion.li>
@@ -257,7 +244,7 @@ export default function PricingPage() {
                 </ul>
                 <Link
                   href={plan.link}
-                  className="block text-center btn-primary py-3 px-6 shimmer-effect animate-pulse-shadow glow-ripple hover-lift"
+                  className="block text-center bg-[#1e3a8a] text-[#e5e7eb] py-3 px-6 rounded-lg font-inter hover:bg-[#60a5fa] transition-colors"
                   aria-label={`Start ${plan.name} plan`}
                 >
                   {plan.cta}
@@ -268,29 +255,40 @@ export default function PricingPage() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="section-divider"></div>
+
       {/* Example Realizations */}
       <section className="section bg-[#0d1117] grain-overlay">
-        <div className="container">
+        <div className="container mx-auto px-4">
           <motion.h2
-            className="text-3xl font-bold text-[#e5e7eb] mb-8 text-center font-montserrat gradient-text"
+            className="text-3xl font-serif font-bold text-[#e5e7eb] mb-8 text-center"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
             See What We’ve Built
           </motion.h2>
-          <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]"></div>
+          <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(96,165,250,0.5)]"></div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {plans.map((plan) => (
-              <div key={plan.name}>
-                <h3 className="text-2xl font-semibold text-[#e5e7eb] mb-4 font-montserrat text-center">{plan.name} Plan</h3>
+              <motion.div
+                key={plan.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <h3 className="text-2xl font-serif font-semibold text-[#e5e7eb] mb-4 text-center">{plan.name} Plan</h3>
                 <div className="grid grid-cols-3 gap-4">
                   {plan.examples.map((example, idx) => (
                     <motion.div
                       key={example.title}
                       className="relative group"
                       initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: idx * 0.2 }}
                     >
                       <img
@@ -309,42 +307,46 @@ export default function PricingPage() {
                 <div className="text-center mt-4">
                   <Link
                     href="/case-studies"
-                    className="inline-flex items-center btn-primary py-2 px-5 hover-lift shimmer-effect glow-ripple"
+                    className="inline-flex items-center bg-[#1e3a8a] text-[#e5e7eb] py-2 px-5 rounded-lg font-inter hover:bg-[#60a5fa] transition-colors"
                   >
                     See Full Case Study
-                    <ArrowRight className="w-4 h-4 ml-2 text-[#38bdf8] hover:text-[#facc15] hover:scale-105 hover:animate-wiggle" />
+                    <ArrowRight className="w-4 h-4 ml-2 text-slate-400 hover:text-[#e5e7eb] transition-colors" />
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="section-divider"></div>
+
       {/* Comparison Table (Desktop) / Carousel (Mobile) */}
       <section className="section bg-[#0d1117] grain-overlay">
-        <div className="container">
+        <div className="container mx-auto px-4">
           <motion.h2
-            className="text-3xl font-bold text-[#e5e7eb] mb-8 text-center font-montserrat gradient-text"
+            className="text-3xl font-serif font-bold text-[#e5e7eb] mb-8 text-center"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
             Compare Plans
           </motion.h2>
-          <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]"></div>
+          <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(96,165,250,0.5)]"></div>
           
           {/* Desktop Table */}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-[#e5e7eb] border-collapse">
               <thead>
-                <tr className="bg-gradient-to-r from-[#38bdf8] to-[#facc15] text-black sticky top-0 shadow-md">
+                <tr className="bg-gradient-to-r from-[#1e3a8a] to-[#60a5fa] text-[#e5e7eb] sticky top-0 shadow-md">
                   <th className="p-4 text-left text-sm font-semibold font-inter">Feature</th>
                   {plans.map((plan) => (
                     <th
                       key={plan.name}
                       className={`p-4 text-center text-sm font-semibold font-inter ${
-                        plan.isPopular ? 'bg-[#facc15]/20' : ''
+                        plan.isPopular ? 'bg-[#60a5fa]/20' : ''
                       }`}
                     >
                       {plan.name}
@@ -356,9 +358,10 @@ export default function PricingPage() {
                 {plans[0].features.map((feature, index) => (
                   <motion.tr
                     key={feature.name}
-                    className={index % 2 === 0 ? 'bg-[#1f2937]/50' : 'bg-[#0d1117] hover:bg-[#38bdf8]/10'}
+                    className={index % 2 === 0 ? 'bg-[#1f2937]/50' : 'bg-[#0d1117] hover:bg-[#60a5fa]/10'}
                     initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
                     <td className="p-4 text-sm font-inter" title={feature.tooltip}>
@@ -368,17 +371,17 @@ export default function PricingPage() {
                       <td key={plan.name} className="p-4 text-center text-sm font-inter">
                         {typeof plan.features[index].value === 'boolean' ? (
                           <span
-                            className={plan.features[index].value ? 'text-[#38bdf8]' : 'text-[#6b7280]'}
+                            className={plan.features[index].value ? 'text-[#60a5fa]' : 'text-[#6b7280]'}
                             aria-label={feature.tooltip}
                           >
                             {plan.features[index].value ? (
-                              <Check className="w-6 h-6 mx-auto hover:text-[#facc15] hover:scale-105 hover:animate-wiggle transition-transform" />
+                              <Check className="w-6 h-6 mx-auto text-slate-400 hover:text-[#60a5fa] transition-colors" />
                             ) : (
-                              <X className="w-6 h-6 mx-auto hover:text-[#facc15] hover:scale-105 hover:animate-wiggle transition-transform" />
+                              <X className="w-6 h-6 mx-auto text-slate-400 hover:text-[#60a5fa] transition-colors" />
                             )}
                           </span>
                         ) : (
-                          <span className="text-[#38bdf8]">{plan.features[index].value}</span>
+                          <span className="text-[#60a5fa]">{plan.features[index].value}</span>
                         )}
                       </td>
                     ))}
@@ -393,29 +396,35 @@ export default function PricingPage() {
             <Swiper spaceBetween={20} slidesPerView={1} loop={true}>
               {plans.map((plan) => (
                 <SwiperSlide key={plan.name}>
-                  <div className="card p-6 bg-[#1f2937] rounded-xl shadow-card">
-                    <h3 className="text-2xl font-semibold text-[#e5e7eb] mb-4 font-montserrat text-center">{plan.name}</h3>
-                    <p className="text-3xl font-bold text-[#38bdf8] mb-4 text-center">{plan.price}</p>
+                  <motion.div
+                    className="p-6 bg-[#1f2937] rounded-xl shadow-card"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <h3 className="text-2xl font-serif font-semibold text-[#e5e7eb] mb-4 text-center">{plan.name}</h3>
+                    <p className="text-3xl font-bold text-[#60a5fa] mb-4 text-center">{plan.price}</p>
                     <p className="text-[#9ca3af] text-base mb-4 font-inter">{plan.description}</p>
                     <ul className="space-y-3 mb-8">
                       {plan.features.map((feature) => (
                         <li key={feature.name} className="flex items-center text-[#e5e7eb] text-base font-inter">
                           {typeof feature.value === 'boolean' ? (
-                            <span className={feature.value ? 'text-[#38bdf8]' : 'text-[#6b7280]'} aria-label={feature.tooltip}>
+                            <span className={feature.value ? 'text-[#60a5fa]' : 'text-[#6b7280]'} aria-label={feature.tooltip}>
                               {feature.value ? (
-                                <Check className="w-6 h-6 mr-3 hover:text-[#facc15] hover:scale-105 hover:animate-wiggle transition-transform" />
+                                <Check className="w-6 h-6 mr-3 text-slate-400 hover:text-[#60a5fa] transition-colors" />
                               ) : (
-                                <X className="w-6 h-6 mr-3 hover:text-[#facc15] hover:scale-105 hover:animate-wiggle transition-transform" />
+                                <X className="w-6 h-6 mr-3 text-slate-400 hover:text-[#60a5fa] transition-colors" />
                               )}
                             </span>
                           ) : (
-                            <span className="text-[#38bdf8]">{feature.value}</span>
+                            <span className="text-[#60a5fa]">{feature.value}</span>
                           )}
                           <span className="ml-3">{feature.name}</span>
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </motion.div>
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -423,19 +432,29 @@ export default function PricingPage() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="section-divider"></div>
+
       {/* Custom Plan Calculator */}
       <section className="section bg-[#0d1117] grain-overlay">
-        <div className="container">
+        <div className="container mx-auto px-4">
           <motion.h2
-            className="text-3xl font-bold text-[#e5e7eb] mb-8 text-center font-montserrat gradient-text"
+            className="text-3xl font-serif font-bold text-[#e5e7eb] mb-8 text-center"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
             Build Your Custom Plan
           </motion.h2>
-          <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]"></div>
-          <div className="max-w-2xl mx-auto bg-[#1f2937] p-8 rounded-xl shadow-card">
+          <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(96,165,250,0.5)]"></div>
+          <motion.div
+            className="max-w-2xl mx-auto bg-[#1f2937] p-8 rounded-xl shadow-card"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="space-y-6">
               <div>
                 <label className="block text-[#e5e7eb] font-inter mb-2">Number of Pages</label>
@@ -488,40 +507,45 @@ export default function PricingPage() {
                 <label htmlFor="cms" className="text-[#e5e7eb] font-inter">Add CMS (€50)</label>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold text-[#38bdf8] mb-4">Estimated Price: €{calculateCustomPrice()}</p>
+                <p className="text-2xl font-bold text-[#60a5fa] mb-4">Estimated Price: €{calculateCustomPrice()}</p>
                 <button
                   onClick={() => setShowModal(true)}
-                  className="btn-primary py-3 px-6 shimmer-effect animate-pulse-shadow glow-ripple hover-lift"
+                  className="bg-[#1e3a8a] text-[#e5e7eb] py-3 px-6 rounded-lg font-inter hover:bg-[#60a5fa] transition-colors"
                 >
                   Request Custom Plan
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="section-divider"></div>
+
       {/* Trust Badges */}
       <section className="section bg-[#0d1117] grain-overlay">
-        <div className="container">
+        <div className="container mx-auto px-4">
           <motion.h2
-            className="text-3xl font-bold text-[#e5e7eb] mb-8 text-center font-montserrat gradient-text"
+            className="text-3xl font-serif font-bold text-[#e5e7eb] mb-8 text-center"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
             Why Choose Us?
           </motion.h2>
-          <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]"></div>
+          <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(96,165,250,0.5)]"></div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <motion.div
               className="flex flex-col items-center text-center"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Clock className="w-12 h-12 text-[#38bdf8] mb-4 hover:text-[#facc15] hover:scale-105 hover:animate-wiggle transition-transform" />
-              <h3 className="text-xl font-semibold text-[#e5e7eb] mb-2 font-montserrat">
+              <Clock className="w-12 h-12 text-slate-400 mb-4 hover:text-[#60a5fa] transition-colors" />
+              <h3 className="text-xl font-serif font-semibold text-[#e5e7eb] mb-2">
                 Delivery Guarantee
               </h3>
               <p className="text-[#9ca3af] font-inter">100% on-time delivery or we fix it for free.</p>
@@ -529,11 +553,12 @@ export default function PricingPage() {
             <motion.div
               className="flex flex-col items-center text-center"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <Code className="w-12 h-12 text-[#38bdf8] mb-4 hover:text-[#facc15] hover:scale-105 hover:animate-wiggle transition-transform" />
-              <h3 className="text-xl font-semibold text-[#e5e7eb] mb-2 font-montserrat">
+              <Code className="w-12 h-12 text-slate-400 mb-4 hover:text-[#60a5fa] transition-colors" />
+              <h3 className="text-xl font-serif font-semibold text-[#e5e7eb] mb-2">
                 Code Quality
               </h3>
               <p className="text-[#9ca3af] font-inter">Clean, maintainable code with best practices.</p>
@@ -541,11 +566,12 @@ export default function PricingPage() {
             <motion.div
               className="flex flex-col items-center text-center"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <Headphones className="w-12 h-12 text-[#38bdf8] mb-4 hover:text-[#facc15] hover:scale-105 hover:animate-wiggle transition-transform" />
-              <h3 className="text-xl font-semibold text-[#e5e7eb] mb-2 font-montserrat">
+              <Headphones className="w-12 h-12 text-slate-400 mb-4 hover:text-[#60a5fa] transition-colors" />
+              <h3 className="text-xl font-serif font-semibold text-[#e5e7eb] mb-2">
                 Dedicated Support
               </h3>
               <p className="text-[#9ca3af] font-inter">Support tailored to your plan’s duration.</p>
@@ -554,56 +580,67 @@ export default function PricingPage() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="section-divider"></div>
+
       {/* FAQ Section with Filters */}
       <section className="section bg-[#0d1117] grain-overlay">
-        <div className="container">
+        <div className="container mx-auto px-4">
           <motion.h2
-            className="text-3xl font-bold text-[#e5e7eb] mb-8 text-center font-montserrat gradient-text"
+            className="text-3xl font-serif font-bold text-[#e5e7eb] mb-8 text-center"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
             Frequently Asked Questions
           </motion.h2>
-          <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]"></div>
-          <div className="flex justify-center mb-8 space-x-4">
+          <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(96,165,250,0.5)]"></div>
+          <motion.div
+            className="flex justify-center mb-8 space-x-4 flex-wrap gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             {['All', 'Payments', 'Support', 'Upgrades'].map((category) => (
               <button
                 key={category}
                 onClick={() => setFaqFilter(category)}
                 className={`px-4 py-2 rounded-lg font-inter text-sm ${
                   faqFilter === category
-                    ? 'bg-[#38bdf8] text-black'
-                    : 'bg-[#1f2937] text-[#e5e7eb] hover:bg-[#38bdf8]/20'
+                    ? 'bg-[#1e3a8a] text-[#e5e7eb]'
+                    : 'bg-[#1f2937] text-[#e5e7eb] hover:bg-[#60a5fa]/20'
                 }`}
               >
                 {category}
               </button>
             ))}
-          </div>
+          </motion.div>
           <div className="space-y-4 max-w-3xl mx-auto">
             {filteredFaqs.map((faq, index) => (
               <motion.div
                 key={index}
-                className="card bg-[#1f2937] rounded-xl shadow-card"
+                className="bg-[#1f2937] rounded-xl shadow-card"
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className="flex justify-between items-center w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-[#38bdf8]"
+                  className="flex justify-between items-center w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-[#60a5fa]"
                   aria-expanded={faqOpen === index}
                   aria-controls={`faq-answer-${index}`}
                 >
                   <span className="flex items-center">
-                    <HelpCircle className="w-5 h-5 text-[#38bdf8] mr-3 hover:text-[#facc15] hover:scale-105 hover:animate-wiggle transition-transform" />
-                    <span className="text-lg font-semibold text-[#e5e7eb] font-inter">
+                    <HelpCircle className="w-5 h-5 text-slate-400 mr-3 hover:text-[#60a5fa] transition-colors" />
+                    <span className="text-lg font-serif font-semibold text-[#e5e7eb] font-inter">
                       {faq.question}
                     </span>
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-[#38bdf8] transform transition-transform hover:text-[#facc15] hover:scale-105 hover:animate-wiggle ${
+                    className={`w-5 h-5 text-slate-400 transform transition-transform hover:text-[#60a5fa] ${
                       faqOpen === index ? 'rotate-180' : ''
                     }`}
                   />
@@ -625,49 +662,47 @@ export default function PricingPage() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="section-divider"></div>
+
       {/* Final CTA */}
-      <section className="relative grain-overlay py-24 text-center overflow-hidden">
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-black via-[#0e0e0e] to-[#0a0a0a] animate-gradient-x -z-10"
-        ></motion.div>
-        <motion.div
-          className="absolute inset-0 -z-10 opacity-20"
-          style={{
-            background: 'radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%)',
-            animation: 'pulse-slow 10s ease-in-out infinite',
-          }}
-        ></motion.div>
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold text-[#e5e7eb] mb-4 gradient-text font-montserrat"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          Ready to Launch? Let’s Work Together
-        </motion.h2>
-        <motion.p
-          className="text-lg text-[#9ca3af] mb-8 max-w-2xl mx-auto font-inter"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          Start your project today and experience exceptional design and development.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          whileHover={{ scale: 1.05 }}
-          className="md:sticky bottom-4 z-50"
-        >
-          <Link
-            href="/contact"
-            className="inline-block btn-primary py-4 px-8 text-lg animate-pulse-shadow hover-lift shimmer-effect glow-ripple md:py-5 md:px-10"
-            aria-label="Start your project now"
+      <section className="section bg-[#0d1117] text-center grain-overlay">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            className="text-3xl md:text-4xl font-serif font-bold text-[#e5e7eb] mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            Start Your Project
-          </Link>
-        </motion.div>
+            Ready to Launch? Let’s Work Together
+          </motion.h2>
+          <motion.p
+            className="text-lg text-[#9ca3af] mb-8 max-w-2xl mx-auto font-inter"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Start your project today and experience exceptional design and development.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            whileHover={{ scale: 1.05 }}
+            className="md:sticky bottom-4 z-50"
+          >
+            <Link
+              href="/contact"
+              className="inline-block bg-[#1e3a8a] text-[#e5e7eb] py-4 px-8 text-lg rounded-lg font-inter hover:bg-[#60a5fa] transition-colors md:py-5 md:px-10"
+              aria-label="Start your project now"
+            >
+              Start Your Project
+            </Link>
+          </motion.div>
+        </div>
       </section>
 
       {/* Custom Plan Modal */}
@@ -686,12 +721,12 @@ export default function PricingPage() {
           >
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-[#9ca3af] hover:text-[#38bdf8]"
+              className="absolute top-4 right-4 text-[#9ca3af] hover:text-[#60a5fa] transition-colors"
               aria-label="Close modal"
             >
-              <X className="w-6 h-6 hover:scale-105 hover:animate-wiggle transition-transform" />
+              <X className="w-6 h-6" />
             </button>
-            <h3 className="text-2xl font-bold text-[#e5e7eb] mb-4 font-montserrat gradient-text">
+            <h3 className="text-2xl font-serif font-bold text-[#e5e7eb] mb-4">
               Request a Custom Plan
             </h3>
             <form className="space-y-6">
@@ -732,7 +767,7 @@ export default function PricingPage() {
               </div>
               <button
                 type="submit"
-                className="w-full btn-primary py-3 px-6 shimmer-effect hover-lift glow-ripple"
+                className="w-full bg-[#1e3a8a] text-[#e5e7eb] py-3 px-6 rounded-lg font-inter hover:bg-[#60a5fa] transition-colors"
                 aria-label="Submit custom plan request"
               >
                 Submit Request
