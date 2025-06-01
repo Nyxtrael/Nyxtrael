@@ -2,12 +2,12 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { ArrowRight, ChevronDown, Clock, Code, Globe, ShoppingCart } from 'lucide-react';
+import { ArrowRight, ChevronDown, Clock, Globe, ShoppingCart } from 'lucide-react';
 
-// Define Scope type
+// Definiowanie typu Scope
 type Scope = 'Large' | 'Medium' | 'Small';
 
-// Custom CSS for background effects and dividers
+// Niestandardowe style CSS dla efektów tła i separatorów
 const customStyles = `
   .hero-bg {
     background: linear-gradient(135deg, #1f2937 0%, #2d3748 100%);
@@ -48,6 +48,7 @@ const customStyles = `
   }
 `;
 
+// Dane studiów przypadku
 const caseStudiesData = [
   {
     id: 1,
@@ -114,15 +115,19 @@ const caseStudiesData = [
   },
 ];
 
+// Główny komponent strony
 export default function CaseStudiesPage() {
+  // Stan dla sortowania i filtrowania
   const [sortBy, setSortBy] = useState('Newest');
   const [filterType, setFilterType] = useState('All');
   const [filterPlan, setFilterPlan] = useState('All');
 
+  // Opcje sortowania i filtrowania
   const sortOptions = ['Newest', 'Impact', 'Scope'];
   const typeOptions = ['All', 'E-commerce', 'Portfolio', 'Landing'];
   const planOptions = ['All', 'Basic', 'Standard', 'Premium'];
 
+  // Filtrowanie i sortowanie danych
   const filteredStudies = caseStudiesData
     .filter((study) => filterType === 'All' || study.type === filterType)
     .filter((study) => filterPlan === 'All' || study.plan === filterPlan)
@@ -140,7 +145,7 @@ export default function CaseStudiesPage() {
     <div className="min-h-screen bg-[#1f2937]">
       <style>{customStyles}</style>
 
-      {/* Hero Section */}
+      {/* Sekcja Hero */}
       <section className="hero-bg relative grain-overlay py-24 text-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#1f2937] opacity-70 -z-5"></div>
         <h1 className="text-5xl md:text-6xl font-serif font-bold text-[#e5e7eb] mb-4 animate-fade-in">
@@ -152,14 +157,15 @@ export default function CaseStudiesPage() {
         <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(96,165,250,0.5)]"></div>
       </section>
 
-      {/* Divider */}
+      {/* Separator */}
       <div className="section-divider"></div>
 
-      {/* Filters and Sorting */}
+      {/* Sekcja Filtrowania i Sortowania */}
       <section className="section bg-[#1f2937] grain-overlay py-24">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center mb-12 space-y-4 md:space-y-0 md:space-x-6">
             <div className="flex flex-wrap gap-4">
+              {/* Filtr typu */}
               <div className="relative">
                 <select
                   value={filterType}
@@ -175,6 +181,7 @@ export default function CaseStudiesPage() {
                 </select>
                 <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#9ca3af] hover:text-[#60a5fa] transition-colors" />
               </div>
+              {/* Filtr planu */}
               <div className="relative">
                 <select
                   value={filterPlan}
@@ -191,6 +198,7 @@ export default function CaseStudiesPage() {
                 <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#9ca3af] hover:text-[#60a5fa] transition-colors" />
               </div>
             </div>
+            {/* Sortowanie */}
             <div className="relative">
               <select
                 value={sortBy}
@@ -208,7 +216,7 @@ export default function CaseStudiesPage() {
             </div>
           </div>
 
-          {/* Case Studies Grid (Masonry Layout) */}
+          {/* Siatka studiów przypadku (układ Masonry) */}
           <div className="masonry-grid columns-1 md:columns-2 lg:columns-3 gap-8">
             {filteredStudies.map((study) => (
               <div
@@ -250,10 +258,10 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* Divider */}
+      {/* Separator */}
       <div className="section-divider"></div>
 
-      {/* CTA Section */}
+      {/* Sekcja CTA */}
       <section className="section bg-[#1f2937] text-center grain-overlay py-24">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#e5e7eb] mb-4 animate-fade-in">

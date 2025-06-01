@@ -46,9 +46,9 @@ const FinalCTA: React.FC = () => {
             href="/contact"
             role="button"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-xl font-semibold font-inter bg-gradient-to-r from-[#38bdf8] to-[#facc15] text-[#0d1117] hover:shadow-[#38bdf8]/50 transition-all duration-300 shadow-md"
-            aria-label="Contact Nyxtrael to start your project"
+            aria-label="Get in touch with Nyxtrael to start your project"
           >
-            Contact Me
+            Get in Touch
             <MessageSquare className="h-5 w-5" />
           </Link>
         </motion.div>

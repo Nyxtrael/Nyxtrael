@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react'; // Added ArrowRight import
+import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react'; 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -20,7 +20,6 @@ const caseStudyLinks = [
   { href: '/case-studies/photographer-portfolio', label: 'PortraitPro' },
   { href: '/case-studies/taskmaster-pwa', label: 'TaskMaster' },
   { href: '/case-studies/neon-ritual', label: 'NeonRitual' },
-  { href: '/case-studies/nonprofit-overhaul', label: 'Community Hope' },
 ];
 
 const NavBar: React.FC = () => {

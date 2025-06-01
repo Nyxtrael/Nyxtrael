@@ -1,13 +1,49 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
-import { Check, ChevronDown, Clock, Code, Headphones, HelpCircle, X, ShoppingCart, LayoutDashboard, Heart, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Check, ChevronDown, Clock, Code, Headphones, HelpCircle, X, ArrowRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import Image from 'next/image';
 
-// Custom CSS for subtle animations and background effects
+// Custom CSS for animations and styles
 const customStyles = `
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes slide-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse-slow {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  @keyframes fade-in-fast {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes scale-in {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .animate-fade-in {
+    animation: fade-in 1s ease-in-out;
+  }
+  .animate-slide-up {
+    animation: slide-up 1s ease-in-out;
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+  .animate-fade-in-fast {
+    animation: fade-in-fast 0.5s ease-in-out;
+  }
+  .animate-scale-in {
+    animation: scale-in 0.5s ease-in-out;
+  }
   .hero-bg {
     background: linear-gradient(135deg, #0d1117 0%, #1f2937 100%);
     position: relative;
@@ -39,6 +75,24 @@ const customStyles = `
     background: linear-gradient(to bottom, #0d1117 0%, #1f2937 50%, #0d1117 100%);
     clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
     box-shadow: 0 0 15px rgba(20, 184, 166, 0.3);
+  }
+  .gradient-separator {
+    height: 2px;
+    background: linear-gradient(to right, #14b8a6, #fde68a);
+  }
+  .form-input {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #14b8a6;
+    background-color: #0d1117;
+    color: #e5e7eb;
+  }
+  .form-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #14b8a6;
+  }
+  .form-checkbox {
+    accent-color: #14b8a6;
   }
   @media (max-width: 768px) {
     .swiper-slide {
@@ -152,6 +206,18 @@ export default function PricingPage() {
 
   const filteredFaqs = faqFilter === 'All' ? faqs : faqs.filter((faq) => faq.category === faqFilter);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showModal) {
+        setShowModal(false);
+      }
+    };
+    if (showModal) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [showModal]);
+
   return (
     <div className="min-h-screen bg-[#0d1117]">
       <style>{customStyles}</style>
@@ -168,8 +234,8 @@ export default function PricingPage() {
             preload="none"
             className="absolute top-0 left-0 w-full h-full object-cover opacity-30"
           >
-            <source src="/videos/asfdafs.webm" type="video/webm" />
-            <source src="/videos/asfdafs.mp4" type="video/mp4" />
+            <source src="/videos/background-video.webm" type="video/webm" />
+            <source src="/videos/background-video.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-[#0d1117]/80 backdrop-blur-sm" />
         </div>
@@ -179,6 +245,8 @@ export default function PricingPage() {
           </h1>
           <p className="text-lg text-[#9ca3af] mb-12 max-w-3xl mx-auto font-inter animate-fade-in" style={{ animationDelay: '0.2s' }}>
             High-quality design and development tailored to your needs, delivered with precision and care.
+            <br />
+            <span className="text-[#14b8a6]">Don’t see the right plan? <a href="#custom-plan" className="underline">Build your own</a></span>
           </p>
           <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(20,184,166,0.5)]"></div>
         </div>
@@ -230,14 +298,22 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href={plan.link}
-                  className="inline-flex items-center gap-2 bg-[#14b8a6] text-[#0d1117] py-3 px-6 rounded-lg font-inter font-semibold hover:bg-[#fde68a] hover:shadow-[#14b8a6]/50 transition-all duration-300 animate-pulse-slow"
-                  aria-label={`Start ${plan.name} plan`}
-                >
-                  {plan.cta}
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
+                <div className="flex justify-between items-center">
+                  <Link
+                    href={plan.link}
+                    className="inline-flex items-center gap-2 bg-[#14b8a6] text-[#0d1117] py-3 px-6 rounded-lg font-inter font-semibold hover:bg-[#fde68a] hover:shadow-[#14b8a6]/50 transition-all duration-300 animate-pulse-slow"
+                    aria-label={`Start ${plan.name} plan`}
+                  >
+                    {plan.cta}
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                  <Link
+                    href="/case-studies"
+                    className="text-sm text-[#14b8a6] hover:text-[#fde68a] font-inter"
+                  >
+                    Learn More
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
@@ -265,10 +341,13 @@ export default function PricingPage() {
                       className="relative group"
                       style={{ animationDelay: `${idx * 0.2}s` }}
                     >
-                      <img
+                      <Image
                         src={example.image}
                         alt={example.title}
+                        width={200}
+                        height={128}
                         className="w-full h-32 object-cover rounded-lg"
+                        loading="lazy"
                       />
                       <div className="absolute inset-0 bg-[#0d1117]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <span className="text-[#e5e7eb] text-sm font-inter" title={`Built with ${plan.name}`}>
@@ -303,7 +382,7 @@ export default function PricingPage() {
             Compare Plans
           </h2>
           <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(20,184,166,0.5)]"></div>
-          
+
           {/* Desktop Table */}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-[#e5e7eb] border-collapse">
@@ -392,7 +471,7 @@ export default function PricingPage() {
       <div className="section-divider"></div>
 
       {/* Custom Plan Calculator */}
-      <section className="section bg-[#0d1117] grain-overlay py-24">
+      <section id="custom-plan" className="section bg-[#0d1117] grain-overlay py-24">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-serif font-bold text-[#e5e7eb] mb-8 text-center animate-fade-in">
             Build Your Custom Plan
@@ -592,7 +671,12 @@ export default function PricingPage() {
 
       {/* Custom Plan Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
+        <div
+          id="custom-plan-modal"
+          tabIndex={-1}
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in"
+          aria-modal="true"
+        >
           <div className="bg-[#1f2937] rounded-xl p-8 max-w-lg w-full relative border border-[#14b8a6]/30 animate-scale-in">
             <button
               onClick={() => setShowModal(false)}

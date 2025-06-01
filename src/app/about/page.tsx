@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Code, Paintbrush, Lightbulb, UserIcon, CheckCircleIcon, Rocket } from 'lucide-react';
+import { Code, Paintbrush, Lightbulb, MessageCircle, Rocket, Clock } from 'lucide-react';
 import Section from './Section';
 import AboutHero from './AboutHero';
 
@@ -10,16 +10,19 @@ const expertiseItems = [
   {
     title: 'Web Development',
     description: 'I create fast, responsive websites using modern technologies like Next.js and React, ensuring clean code and optimal performance.',
+    result: 'Built 20+ websites and apps with 99% client satisfaction.',
     icon: <Code className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
   },
   {
     title: 'UI/UX Design',
     description: 'I design intuitive interfaces with a focus on user experience, delivering sleek prototypes and visually appealing layouts.',
+    result: 'Designed interfaces for 15+ projects, boosting engagement by 25%.',
     icon: <Paintbrush className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
   },
   {
     title: 'Consulting',
     description: 'I offer expert guidance on digital projects, helping you optimize performance and plan scalable solutions.',
+    result: 'Improved app performance by 30% for 5+ clients.',
     icon: <Lightbulb className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
   },
 ];
@@ -28,7 +31,7 @@ const whyWorkWithMeItems = [
   {
     title: 'Direct Communication',
     description: 'Work directly with me—no middlemen. I ensure clear, transparent updates at every stage.',
-    icon: <UserIcon className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    icon: <MessageCircle className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
   },
   {
     title: 'Tailored Solutions',
@@ -38,7 +41,7 @@ const whyWorkWithMeItems = [
   {
     title: 'Timely Delivery',
     description: 'I prioritize deadlines, ensuring your project is completed on time without compromising quality.',
-    icon: <CheckCircleIcon className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    icon: <Clock className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
   },
 ];
 
@@ -67,7 +70,7 @@ const journeyItems = [
   },
 ];
 
-// Custom CSS for section dividers
+// Custom CSS dla separatorów sekcji
 const customStyles = `
   .section-divider {
     position: relative;
@@ -85,7 +88,7 @@ export default function About() {
 
       <AboutHero />
 
-      {/* Divider */}
+      {/* Separator */}
       <div className="section-divider"></div>
 
       <Section title="My Story" bgClass="bg-[#1f2937]">
@@ -93,7 +96,7 @@ export default function About() {
           <div className="aspect-square w-full max-w-xs mx-auto">
             <Image
               src="/images/profile-photo.jpg"
-              alt="Nyxtrael – Front-end Developer"
+              alt="Nyxtrael – Front-end Developer specializing in React and Next.js"
               width={300}
               height={300}
               className="rounded-full border-4 border-[#a855f7]/50 hover:border-[#c084fc]/50 shadow-md hover:shadow-[#a855f7]/50 transition-all duration-300"
@@ -103,10 +106,10 @@ export default function About() {
 
           <div className="md:col-span-2 prose prose-invert prose-headings:text-[#e5e7eb] prose-p:text-[#9ca3af] prose-a:text-[#a855f7] prose-a:hover:text-[#c084fc]">
             <p>
-              Hi, I’m Nyxtrael—a front-end freelancer specializing in React and Next.js, with a strong portfolio of modern, responsive web applications and clean, maintainable code.
+              I’m Nyxtrael, a passionate front-end developer with a knack for crafting sleek, high-performance web applications. I specialize in React and Next.js, focusing on delivering scalable, user-centric solutions.
             </p>
             <p>
-              I prioritize transparent communication and meticulous attention to detail at every stage of a project. From sleek landing pages and interactive prototypes to full-featured SaaS dashboards, I collaborate closely with clients to understand their goals and consistently deliver on time.
+              My journey started with a love for coding and design, evolving into a mission to help startups, creators, and SaaS teams bring their visions to life. I’m committed to transparent communication, tailored solutions, and timely delivery on every project.
             </p>
             <Link
               href="/case-studies"
@@ -119,12 +122,12 @@ export default function About() {
         </div>
       </Section>
 
-      {/* Divider */}
+      {/* Separator */}
       <div className="section-divider"></div>
 
       <Section title="My Journey" pattern bgClass="bg-[#1f2937]">
         <div className="relative max-w-4xl mx-auto">
-          {/* Timeline Line */}
+          {/* Linia czasu */}
           <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-[#a855f7] to-[#c084fc] h-full md:block hidden"></div>
           {journeyItems.map((item, index) => (
             <div
@@ -137,7 +140,7 @@ export default function About() {
               </div>
               <div className="w-1/2 flex justify-center">
                 <div className="bg-[#2d3748] p-4 rounded-full shadow-md">
-                  <Rocket className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />
+                  <Rocket className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" aria-hidden="true" />
                 </div>
               </div>
             </div>
@@ -145,7 +148,7 @@ export default function About() {
         </div>
       </Section>
 
-      {/* Divider */}
+      {/* Separator */}
       <div className="section-divider"></div>
 
       <Section title="My Expertise" pattern bgClass="bg-[#1f2937]">
@@ -158,12 +161,13 @@ export default function About() {
               <span className="mb-4" aria-hidden="true">{item.icon}</span>
               <h3 className="text-2xl font-serif font-semibold text-[#e5e7eb] mb-2">{item.title}</h3>
               <p className="text-[#9ca3af] font-inter">{item.description}</p>
+              <p className="text-[#a855f7] font-inter mt-2">{item.result}</p>
             </div>
           ))}
         </div>
       </Section>
 
-      {/* Divider */}
+      {/* Separator */}
       <div className="section-divider"></div>
 
       <Section title="Why Work With Me?" bgClass="bg-[#1f2937]">
@@ -181,7 +185,7 @@ export default function About() {
         </div>
       </Section>
 
-      {/* Divider */}
+      {/* Separator */}
       <div className="section-divider"></div>
 
       <Section title="My Tech Stack" pattern bgClass="bg-[#1f2937]">
@@ -197,7 +201,7 @@ export default function About() {
         </ul>
       </Section>
 
-      {/* Divider */}
+      {/* Separator */}
       <div className="section-divider"></div>
 
       <Section title="Let’s Work Together" bgClass="bg-[#1f2937]">

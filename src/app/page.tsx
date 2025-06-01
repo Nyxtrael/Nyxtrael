@@ -1,6 +1,7 @@
-'use client'
+'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 import Hero from '../components/Hero';
 import AboutSnippet from '../components/AboutSnippet';
 import ServiceCard from '../components/ServiceCard';
@@ -8,9 +9,78 @@ import CaseStudyCard from '../components/CaseStudyCard';
 import FinalCTA from '../components/FinalCTA';
 import CaseStudyFilters from '../components/CaseStudyFilters';
 import TestimonialsSlider from '../components/TestimonialsSlider';
-import { caseStudies } from './case-studies/data';
 import { CodeBracketIcon, PaintBrushIcon, LightBulbIcon, CheckCircleIcon, UserIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
+
+// Define the CaseStudy type (inferred from usage in CaseStudyCard and CaseStudyFilters)
+interface CaseStudy {
+  slug: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  category: string;
+  year: number;
+}
+
+// Define the case studies data with the correct properties
+const caseStudies: CaseStudy[] = [
+  {
+    slug: "startup-landing",
+    title: "BrightCRM – Landing Page for CRM Application",
+    description: "A responsive landing page encouraging demo sign-ups.",
+    thumbnail: "/images/startup-landing.jpg",
+    category: "SaaS",
+    year: 2024,
+  },
+  {
+    slug: "ecommerce-redesign",
+    title: "ShopTrend – E-commerce Store Redesign",
+    description: "Redesign of an e-commerce store with enhanced UX.",
+    thumbnail: "/images/ecommerce-redesign.jpg",
+    category: "E-commerce",
+    year: 2023,
+  },
+  {
+    slug: "saas-dashboard",
+    title: "DataSync – SaaS Analytics Dashboard",
+    description: "An intuitive analytics dashboard for a SaaS application.",
+    thumbnail: "/images/saas-dashboard.jpg",
+    category: "SaaS",
+    year: 2024,
+  },
+  {
+    slug: "photographer-portfolio",
+    title: "PortraitPro – Photographer Portfolio Website",
+    description: "A photo gallery with fast loading and fullscreen mode.",
+    thumbnail: "/images/photographer-portfolio.jpg",
+    category: "Portfolio",
+    year: 2023,
+  },
+  {
+    slug: "taskmaster-pwa",
+    title: "TaskMaster – Task Management PWA",
+    description: "A progressive web app for task management, working offline.",
+    thumbnail: "/images/taskmaster-pwa.jpg",
+    category: "PWA",
+    year: 2024,
+  },
+  {
+    slug: "neon-ritual",
+    title: "NeonRitual – AI Illustration Art Website",
+    description: "An immersive website featuring animated AI illustrations.",
+    thumbnail: "/images/neon-ritual.jpg",
+    category: "Portfolio",
+    year: 2024,
+  },
+  {
+    slug: "corporate-site",
+    title: "CorpElevate – Corporate Website for Tech Firm",
+    description: "A professional website for a tech firm to showcase services.",
+    thumbnail: "/images/corporate-site.jpg",
+    category: "Corporate",
+    year: 2024,
+  },
+];
 
 const services = [
   {
@@ -104,7 +174,7 @@ const testimonials = [
   },
 ];
 
-// Custom CSS for section dividers and grid pattern
+// Define customStyles
 const customStyles = `
   .section-divider {
     position: relative;

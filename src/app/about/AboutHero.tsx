@@ -2,7 +2,7 @@
 
 export default function AboutHero() {
   return (
-    <section role="banner" className="relative min-h-[60vh] flex items-center section-spacing bg-[#1f2937]">
+    <section role="banner" className="relative min-h-[60vh] flex items-center section-spacing bg-[#1f2937] grain-overlay">
       <div className="absolute inset-0 z-0">
         <video
           autoPlay
@@ -12,6 +12,7 @@ export default function AboutHero() {
           poster="/images/video-poster.jpg"
           preload="none"
           className="absolute top-0 left-0 w-full h-full object-cover opacity-30"
+          aria-hidden="true"
         >
           <source src="/videos/background-video.webm" type="video/webm" />
           <source src="/videos/background-video.mp4" type="video/mp4" />

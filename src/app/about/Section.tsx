@@ -16,7 +16,7 @@ export default function Section({ title, children, bgClass = '', pattern = false
       className={clsx(
         'section-spacing relative',
         bgClass,
-        pattern && 'bg-grid-white/[0.04]',
+        pattern && 'bg-grid-white/[0.04] grain-overlay',
       )}
     >
       {pattern && (

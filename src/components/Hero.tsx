@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
         muted
         playsInline
         poster="/images/video-poster.jpg"
-        preload="none"
+        preload="none" // Optimize performance by not preloading the video
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
         <source src="/videos/abstract-lines-3d.webm" type="video/webm" />
@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
         >
-          Building Modern Web Experiences
+          Crafting blazing-fast web apps that impress your users
           <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-1/2 h-1 bg-gradient-to-r from-[#38bdf8] to-[#facc15]"></span>
         </motion.h1>
         <motion.p
