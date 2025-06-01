@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { ArrowRight } from 'lucide-react';
 
 interface FormData {
   name: string;
@@ -44,28 +45,28 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-sectionGray p-6 rounded-lg shadow-card">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-white font-montserrat">
+        <label htmlFor="name" className="block text-sm font-serif font-semibold text-[#e2e8f0] mb-1">
           Name
         </label>
         <input
           id="name"
           type="text"
           {...register('name', { required: 'Name is required' })}
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-neutral-dark text-white placeholder-gray-400 focus:ring-shoptrend-gold focus:border-shoptrend-gold"
+          className="block w-full bg-[#1f2937] backdrop-blur-md text-[#e2e8f0] placeholder-[#94a3b8] font-inter border border-[#3b82f6]/30 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:border-[#3b82f6] transition-all duration-300"
           placeholder="Your name"
           aria-invalid={errors.name ? 'true' : 'false'}
         />
         {errors.name && (
-          <p className="mt-1 text-sm text-red-600" role="alert">
+          <p className="mt-1 text-sm text-[#ef4444] font-inter" role="alert">
             {errors.name.message}
           </p>
         )}
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-white font-montserrat">
+        <label htmlFor="email" className="block text-sm font-serif font-semibold text-[#e2e8f0] mb-1">
           Email
         </label>
         <input
@@ -78,31 +79,31 @@ export default function ContactForm() {
               message: 'Invalid email address',
             },
           })}
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-neutral-dark text-white placeholder-gray-400 focus:ring-shoptrend-gold focus:border-shoptrend-gold"
+          className="block w-full bg-[#1f2937] backdrop-blur-md text-[#e2e8f0] placeholder-[#94a3b8] font-inter border border-[#3b82f6]/30 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:border-[#3b82f6] transition-all duration-300"
           placeholder="your.email@example.com"
           aria-invalid={errors.email ? 'true' : 'false'}
         />
         {errors.email && (
-          <p className="mt-1 text-sm text-red-600" role="alert">
+          <p className="mt-1 text-sm text-[#ef4444] font-inter" role="alert">
             {errors.email.message}
           </p>
         )}
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-white font-montserrat">
+        <label htmlFor="message" className="block text-sm font-serif font-semibold text-[#e2e8f0] mb-1">
           Message
         </label>
         <textarea
           id="message"
           {...register('message', { required: 'Message is required' })}
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-neutral-dark text-white placeholder-gray-400 focus:ring-shoptrend-gold focus:border-shoptrend-gold"
+          className="block w-full bg-[#1f2937] backdrop-blur-md text-[#e2e8f0] placeholder-[#94a3b8] font-inter border border-[#3b82f6]/30 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:border-[#3b82f6] transition-all duration-300 resize-none"
           rows={4}
           placeholder="Tell me about your project..."
           aria-invalid={errors.message ? 'true' : 'false'}
         />
         {errors.message && (
-          <p className="mt-1 text-sm text-red-600" role="alert">
+          <p className="mt-1 text-sm text-[#ef4444] font-inter" role="alert">
             {errors.message.message}
           </p>
         )}
@@ -111,13 +112,13 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={submitStatus === 'loading'}
-        className="w-full bg-gradient-to-r from-shoptrend-gold to-shoptrend-brown text-shoptrend-bg py-2 px-4 rounded-md hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-montserrat uppercase tracking-wide"
+        className="w-full inline-flex items-center justify-center gap-2 bg-[#3b82f6] text-[#0f172a] py-3 px-6 rounded-lg font-inter font-semibold text-lg uppercase tracking-wide shadow-[#3b82f6]/50 hover:bg-[#60a5fa] hover:shadow-[#3b82f6]/70 transition-all duration-300 border-pulse disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:ring-offset-2 focus:ring-offset-[#0f172a]"
         aria-label={submitStatus === 'loading' ? 'Submitting form...' : 'Send message'}
       >
         {submitStatus === 'loading' ? (
           <span className="flex items-center justify-center">
             <svg
-              className="animate-spin h-5 w-5 mr-2 text-shoptrend-bg"
+              className="animate-spin h-5 w-5 mr-2 text-[#0f172a]"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -139,22 +140,25 @@ export default function ContactForm() {
             Sending...
           </span>
         ) : (
-          'Send Message'
+          <>
+            Send Message
+            <ArrowRight className="w-5 h-5" />
+          </>
         )}
       </button>
 
-      <div aria-live="polite" className="text-center">
+      <div aria-live="polite" className="text-center font-inter">
         {submitStatus === 'success' && (
           <p
             ref={successMessageRef}
-            className="mt-4 text-green-400 font-inter"
+            className="mt-4 text-[#10b981] font-inter"
             tabIndex={-1}
           >
             Message sent successfully! I’ll get back to you soon.
           </p>
         )}
         {submitStatus === 'error' && (
-          <p className="mt-4 text-red-400 font-inter">
+          <p className="mt-4 text-[#ef4444] font-inter">
             Failed to send message. Please try again or email me directly at hello@nyxtrael.com.
           </p>
         )}

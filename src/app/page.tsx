@@ -1,234 +1,337 @@
+'use client'
+
 import Link from 'next/link';
-   import Image from 'next/image';
-   import Hero from '../components/Hero';
-   import AboutSnippet from '../components/AboutSnippet';
-   import ServiceCard from '../components/ServiceCard';
-   import CaseStudyCard from '../components/CaseStudyCard';
-   import FinalCTA from '../components/FinalCTA';
-   import CaseStudyFilters from '../components/CaseStudyFilters';
-   import TestimonialsSlider from '../components/TestimonialsSlider';
-   import { caseStudies } from './case-studies/data';
-   import { CodeBracketIcon, PaintBrushIcon, LightBulbIcon, CheckCircleIcon, UserIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
+import Hero from '../components/Hero';
+import AboutSnippet from '../components/AboutSnippet';
+import ServiceCard from '../components/ServiceCard';
+import CaseStudyCard from '../components/CaseStudyCard';
+import FinalCTA from '../components/FinalCTA';
+import CaseStudyFilters from '../components/CaseStudyFilters';
+import TestimonialsSlider from '../components/TestimonialsSlider';
+import { caseStudies } from './case-studies/data';
+import { CodeBracketIcon, PaintBrushIcon, LightBulbIcon, CheckCircleIcon, UserIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
 
-   const services = [
-     {
-       title: 'Web Development',
-       description: 'Fast, responsive websites tailored to your needs.',
-       icon: <CodeBracketIcon className="h-12 w-12 text-accent" />,
-       benefits: [
-         'Optimized for speed and SEO',
-         'Mobile-first responsive design',
-         'Custom functionality with Next.js',
-       ],
-       examples: ['SaaS Dashboard', 'E-commerce Platform', 'Portfolio Website'],
-     },
-     {
-       title: 'UI/UX Design',
-       description: 'Intuitive and aesthetic designs that boost user engagement.',
-       icon: <PaintBrushIcon className="h-12 w-12 text-accent" />,
-       benefits: [
-         'User-centered design process',
-         'Interactive prototypes',
-         'Consistent brand visuals',
-       ],
-       examples: ['Landing Page Design', 'App Interface', 'Design System'],
-     },
-     {
-       title: 'Consulting',
-       description: 'Expert guidance on digital strategy and project optimization.',
-       icon: <LightBulbIcon className="h-12 w-12 text-accent" />,
-       benefits: [
-         'Technical audits and recommendations',
-         'Performance optimization strategies',
-         'Scalable architecture planning',
-       ],
-       examples: ['SEO Audit', 'Performance Optimization', 'Tech Strategy'],
-     },
-   ];
+const services = [
+  {
+    title: 'Web Development',
+    description: 'Fast, responsive websites tailored to your needs.',
+    icon: <CodeBracketIcon className="h-12 w-12 text-[#38bdf8] hover:text-[#facc15] transition-colors" />,
+    benefits: [
+      'Optimized for speed and SEO',
+      'Mobile-first responsive design',
+      'Custom functionality with Next.js',
+    ],
+    examples: ['SaaS Dashboard', 'E-commerce Platform', 'Portfolio Website'],
+  },
+  {
+    title: 'UI/UX Design',
+    description: 'Intuitive and aesthetic designs that boost user engagement.',
+    icon: <PaintBrushIcon className="h-12 w-12 text-[#38bdf8] hover:text-[#facc15] transition-colors" />,
+    benefits: [
+      'User-centered design process',
+      'Interactive prototypes',
+      'Consistent brand visuals',
+    ],
+    examples: ['Landing Page Design', 'App Interface', 'Design System'],
+  },
+  {
+    title: 'Consulting',
+    description: 'Expert guidance on digital strategy and project optimization.',
+    icon: <LightBulbIcon className="h-12 w-12 text-[#38bdf8] hover:text-[#facc15] transition-colors" />,
+    benefits: [
+      'Technical audits and recommendations',
+      'Performance optimization strategies',
+      'Scalable architecture planning',
+    ],
+    examples: ['SEO Audit', 'Performance Optimization', 'Tech Strategy'],
+  },
+];
 
-   const serviceFAQs = [
-     {
-       question: 'Can I hire you for design without development?',
-       answer: 'Yes! I offer standalone UI/UX design services, including interactive prototypes and design systems.',
-     },
-     {
-       question: 'What technologies do you use for web development?',
-       answer: 'I specialize in React, Next.js, and Tailwind CSS to build modern, high-performance web applications.',
-     },
-     {
-       question: 'Do you provide ongoing support after project completion?',
-       answer: 'Yes, I offer support packages tailored to your needs, from one-month to ongoing maintenance.',
-     },
-   ];
+const serviceFAQs = [
+  {
+    question: 'Can I hire you for design without development?',
+    answer: 'Yes! I offer standalone UI/UX design services, including interactive prototypes and design systems.',
+  },
+  {
+    question: 'What technologies do you use for web development?',
+    answer: 'I specialize in React, Next.js, and Tailwind CSS to build modern, high-performance web applications.',
+  },
+  {
+    question: 'Do you provide ongoing support after project completion?',
+    answer: 'Yes, I offer support packages tailored to your needs, from one-month to ongoing maintenance.',
+  },
+];
 
-   const benefits = [
-     {
-       title: 'Transparency & Communication',
-       description: 'Clear updates and open dialogue throughout your project.',
-       icon: <UserIcon className="h-12 w-12 text-accent" />,
-     },
-     {
-       title: 'On-Time Delivery',
-       description: 'Projects delivered on schedule, every time.',
-       icon: <CheckCircleIcon className="h-12 w-12 text-accent" />,
-     },
-     {
-       title: 'Modern Tech Stack',
-       description: 'Built with Next.js, Tailwind CSS, and AI-driven tools.',
-       icon: <RocketLaunchIcon className="h-12 w-12 text-accent" />,
-     },
-     {
-       title: 'Flexible Billing',
-       description: 'Choose between subscription or one-time payment.',
-       icon: <CheckCircleIcon className="h-12 w-12 text-accent" />,
-     },
-   ];
+const benefits = [
+  {
+    title: 'Transparency & Communication',
+    description: 'Clear updates and open dialogue throughout your project.',
+    icon: <UserIcon className="h-12 w-12 text-[#38bdf8] hover:text-[#facc15] transition-colors" />,
+  },
+  {
+    title: 'On-Time Delivery',
+    description: 'Projects delivered on schedule, every time.',
+    icon: <CheckCircleIcon className="h-12 w-12 text-[#38bdf8] hover:text-[#facc15] transition-colors" />,
+  },
+  {
+    title: 'Modern Tech Stack',
+    description: 'Built with Next.js, Tailwind CSS, and AI-driven tools.',
+    icon: <RocketLaunchIcon className="h-12 w-12 text-[#38bdf8] hover:text-[#facc15] transition-colors" />,
+  },
+  {
+    title: 'Flexible Billing',
+    description: 'Choose between subscription or one-time payment.',
+    icon: <CheckCircleIcon className="h-12 w-12 text-[#38bdf8] hover:text-[#facc15] transition-colors" />,
+  },
+];
 
-   const testimonials = [
-     {
-       quote: 'Super fast delivery, amazing design. Will hire again!',
-       author: 'Alex, Startup Founder',
-       avatar: '/images/avatar-alex.jpg',
-     },
-     {
-       quote: 'Nyxtrael transformed our website into a modern masterpiece!',
-       author: 'Sarah, E-commerce Owner',
-       avatar: '/images/avatar-sarah.jpg',
-     },
-     {
-       quote: 'Professional, communicative, and highly skilled. Highly recommend!',
-       author: 'Mark, SaaS CEO',
-       avatar: '/images/avatar-mark.jpg',
-     },
-   ];
+const testimonials = [
+  {
+    quote: 'Super fast delivery, amazing design. Will hire again!',
+    author: 'Alex, Startup Founder',
+    avatar: '/images/avatar-alex.jpg',
+  },
+  {
+    quote: 'Nyxtrael transformed our website into a modern masterpiece!',
+    author: 'Sarah, E-commerce Owner',
+    avatar: '/images/avatar-sarah.jpg',
+  },
+  {
+    quote: 'Professional, communicative, and highly skilled. Highly recommend!',
+    author: 'Mark, SaaS CEO',
+    avatar: '/images/avatar-mark.jpg',
+  },
+];
 
-   export default function Home() {
-     const featuredCaseStudies = caseStudies.slice(0, 3);
+// Custom CSS for section dividers and grid pattern
+const customStyles = `
+  .section-divider {
+    position: relative;
+    height: 80px;
+    background: linear-gradient(to bottom, #0d1117 0%, #1f2937 50%, #0d1117 100%);
+    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+  }
+  .grid-pattern {
+    background-image: linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+`;
 
-     return (
-       <div className="bg-neutral-dark">
-         {/* Hero Section */}
-         <Hero />
+export default function Home() {
+  const featuredCaseStudies = caseStudies.slice(0, 3);
 
-         {/* About Snippet */}
-         <AboutSnippet />
+  return (
+    <div className="bg-[#0d1117]">
+      <style>{customStyles}</style>
 
-         {/* Services Section */}
-         <section className="section-spacing">
-           <div className="container mx-auto">
-             <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12 animate-fade-in heading-underline">
-               My Services
-             </h2>
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-               {services.map((service, index) => (
-                 <ServiceCard
-                   key={index}
-                   title={service.title}
-                   description={service.description}
-                   icon={service.icon}
-                   benefits={service.benefits}
-                   examples={service.examples}
-                   className="animate-fade-in-up"
-                 />
-               ))}
-             </div>
-             {/* FAQ Section */}
-             <div className="mt-12">
-               <h3 className="text-2xl font-semibold text-white text-center mb-8 font-montserrat">Frequently Asked Questions</h3>
-               <div className="space-y-6 max-w-3xl mx-auto">
-                 {serviceFAQs.map((faq, index) => (
-                   <div
-                     key={index}
-                     className="bg-gray-800/50 p-6 rounded-lg shadow-lg border border-purple-500/20 animate-slide-up"
-                     style={{ animationDelay: `${index * 0.1}s` }}
-                   >
-                     <h4 className="text-lg font-semibold text-white mb-2 font-montserrat">{faq.question}</h4>
-                     <p className="text-gray-400 font-inter">{faq.answer}</p>
-                   </div>
-                 ))}
-               </div>
-             </div>
-           </div>
-         </section>
+      {/* Hero Section */}
+      <Hero />
 
-         {/* Why Work With Me Section */}
-         <section className="section-spacing bg-neutral-dark">
-           <div className="container mx-auto">
-             <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12 animate-fade-in heading-underline">
-               Why Work With Me
-             </h2>
-             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-               {benefits.map((benefit, index) => (
-                 <div
-                   key={index}
-                   className="bg-neutral-mid p-6 rounded-2xl card border border-accent/50 shadow-card hover:shadow-card-hover hover:bg-opacity-95 hover:scale-105 transition-all duration-300 animate-fade-in-up"
-                   style={{ animationDelay: `${index * 0.1}s` }}
-                 >
-                   <div className="flex justify-center mb-4" aria-hidden="true">{benefit.icon}</div>
-                   <h3 className="text-xl font-semibold text-white mb-2 text-center font-montserrat">{benefit.title}</h3>
-                   <p className="text-[#F5F5F5] leading-relaxed text-center">{benefit.description}</p>
-                 </div>
-               ))}
-             </div>
-           </div>
-         </section>
+      {/* Divider */}
+      <div className="section-divider"></div>
 
-         {/* Testimonials Section */}
-         <TestimonialsSlider testimonials={testimonials} />
+      {/* About Snippet */}
+      <AboutSnippet />
 
-         {/* Smart Tools Section */}
-         <section className="section-spacing bg-neutral-dark">
-           <div className="container mx-auto">
-             <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12 animate-fade-in heading-underline">
-               Smart Tools for Modern Development
-             </h2>
-             <div className="text-center max-w-3xl mx-auto">
-               <p className="text-lg text-[#F5F5F5] leading-relaxed animate-fade-in font-inter">
-                 I leverage cutting-edge AI tools and automation to streamline development, enabling faster iterations and smarter prototyping.
-               </p>
-               <div className="flex justify-center gap-4 mt-6">
-                 <span className="bg-accent text-neutral-dark px-4 py-2 rounded-full text-sm font-medium animate-fade-in">AI Content Generation</span>
-                 <span className="bg-accent text-neutral-dark px-4 py-2 rounded-full text-sm font-medium animate-fade-in">Rapid Prototyping</span>
-                 <span className="bg-accent text-neutral-dark px-4 py-2 rounded-full text-sm font-medium animate-fade-in">Automated Testing</span>
-               </div>
-             </div>
-           </div>
-         </section>
+      {/* Divider */}
+      <div className="section-divider"></div>
 
-         {/* Case Studies Section */}
-         <section className="section-spacing bg-neutral-mid pattern-grid">
-           <div className="container mx-auto">
-             <h2 className="section-header text-white animate-fade-in">Featured Projects</h2>
-             <CaseStudyFilters caseStudies={caseStudies} />
+      {/* Services Section */}
+      <section className="section bg-[#0d1117] grain-overlay py-24">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            className="text-5xl md:text-6xl font-serif font-bold text-[#e5e7eb] text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            My Services
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-[#38bdf8] to-[#facc15] mx-auto mt-2"></span>
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <ServiceCard
+                key={index}
+                title={service.title}
+                description={service.description}
+                icon={service.icon}
+                benefits={service.benefits}
+                examples={service.examples}
+                className={`delay-${index * 100}`}
+              />
+            ))}
+          </div>
+          {/* FAQ Section */}
+          <div className="mt-12">
+            <motion.h3
+              className="text-2xl font-serif font-semibold text-[#e5e7eb] text-center mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              Frequently Asked Questions
+            </motion.h3>
+            <div className="space-y-6 max-w-3xl mx-auto">
+              {serviceFAQs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-[#1f2937] p-6 rounded-lg shadow-md border border-[#38bdf8]/30 hover:border-[#facc15]/50 hover:shadow-[#38bdf8]/50 transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <h4 className="text-lg font-serif font-semibold text-[#e5e7eb] mb-2">{faq.question}</h4>
+                  <p className="text-[#9ca3af] font-inter">{faq.answer}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-               {featuredCaseStudies.map((caseStudy, index) => (
-                 <CaseStudyCard
-                   key={caseStudy.slug}
-                   title={caseStudy.title}
-                   description={caseStudy.description}
-                   slug={caseStudy.slug}
-                   thumbnail={caseStudy.thumbnail}
-                   category={caseStudy.category}
-                   year={caseStudy.year}
-                   className="animate-fade-in-up"
-                 />
-               ))}
-             </div>
-             <div className="text-center mt-12">
-               <Link
-                 href="/case-studies"
-                 className="inline-block text-accent font-medium hover:text-[#F5F5F5] glow-hover transition-colors"
-                 aria-label="View all case studies"
-               >
-                 View All Projects
-               </Link>
-             </div>
-           </div>
-         </section>
+      {/* Divider */}
+      <div className="section-divider"></div>
 
-         {/* Final CTA */}
-         <FinalCTA />
-       </div>
-     );
-   }
+      {/* Why Work With Me Section */}
+      <section className="section bg-[#0d1117] grain-overlay py-24">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            className="text-5xl md:text-6xl font-serif font-bold text-[#e5e7eb] text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Why Work With Me
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-[#38bdf8] to-[#facc15] mx-auto mt-2"></span>
+          </motion.h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            {benefits.map((benefit, index) => (
+              <motion.div
+                key={index}
+                className="bg-[#1f2937] p-6 rounded-2xl border border-[#38bdf8]/30 hover:border-[#facc15]/50 hover:shadow-[#38bdf8]/50 transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="flex justify-center mb-4" aria-hidden="true">{benefit.icon}</div>
+                <h3 className="text-xl font-serif font-semibold text-[#e5e7eb] mb-2 text-center">{benefit.title}</h3>
+                <p className="text-[#9ca3af] leading-relaxed text-center font-inter">{benefit.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="section-divider"></div>
+
+      {/* Testimonials Section */}
+      <TestimonialsSlider testimonials={testimonials} />
+
+      {/* Divider */}
+      <div className="section-divider"></div>
+
+      {/* Smart Tools Section */}
+      <section className="section bg-[#0d1117] grain-overlay py-24 grid-pattern">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            className="text-5xl md:text-6xl font-serif font-bold text-[#e5e7eb] text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Smart Tools for Modern Development
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-[#38bdf8] to-[#facc15] mx-auto mt-2"></span>
+          </motion.h2>
+          <div className="text-center max-w-3xl mx-auto">
+            <motion.p
+              className="text-lg text-[#9ca3af] leading-relaxed font-inter"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              I leverage cutting-edge AI tools and automation to streamline development, enabling faster iterations and smarter prototyping.
+            </motion.p>
+            <motion.div
+              className="flex justify-center gap-4 mt-6 flex-wrap"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <span className="bg-[#38bdf8] text-[#0d1117] px-4 py-2 rounded-full text-sm font-medium font-inter">AI Content Generation</span>
+              <span className="bg-[#38bdf8] text-[#0d1117] px-4 py-2 rounded-full text-sm font-medium font-inter">Rapid Prototyping</span>
+              <span className="bg-[#38bdf8] text-[#0d1117] px-4 py-2 rounded-full text-sm font-medium font-inter">Automated Testing</span>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="section-divider"></div>
+
+      {/* Case Studies Section */}
+      <section className="section bg-[#0d1117] grain-overlay py-24">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            className="text-5xl md:text-6xl font-serif font-bold text-[#e5e7eb] text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Featured Projects
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-[#38bdf8] to-[#facc15] mx-auto mt-2"></span>
+          </motion.h2>
+          <CaseStudyFilters caseStudies={caseStudies} />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {featuredCaseStudies.map((caseStudy, index) => (
+              <CaseStudyCard
+                key={caseStudy.slug}
+                title={caseStudy.title}
+                description={caseStudy.description}
+                slug={caseStudy.slug}
+                thumbnail={caseStudy.thumbnail}
+                category={caseStudy.category}
+                year={caseStudy.year}
+                className={`delay-${index * 100}`}
+              />
+            ))}
+          </div>
+          <motion.div
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <Link
+              href="/case-studies"
+              className="inline-block bg-gradient-to-r from-[#38bdf8] to-[#facc15] text-[#0d1117] px-6 py-3 rounded-lg font-inter font-semibold hover:shadow-[#38bdf8]/50 transition-all duration-300"
+              aria-label="View all case studies"
+            >
+              View All Projects
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="section-divider"></div>
+
+      {/* Final CTA */}
+      <FinalCTA />
+    </div>
+  );
+}

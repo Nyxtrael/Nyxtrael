@@ -25,12 +25,11 @@ export default function Section({ title, children, bgClass = '', pattern = false
         </div>
       )}
 
-      <div className="container relative z-10">
+      <div className="container relative z-10 px-4">
         {title && (
-          <h2
-            className="section-header text-white text-center mb-10 animate-fade-in"
-          >
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#e5e7eb] text-center mb-10">
             {title}
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-[#a855f7] to-[#c084fc] mx-auto mt-2"></span>
           </h2>
         )}
         {children}
