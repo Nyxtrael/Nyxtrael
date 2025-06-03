@@ -13,8 +13,10 @@ const navLinks = [
 ];
 
 const exampleWorkLinks = [
-  { href: '/example-work/shop', label: 'ShopTrend' },
-  { href: '/example-work/data', label: 'DataSync' },
+  { href: '/example-work/shop', label: 'ShopTrend', category: 'SaaS & E-Commerce' },
+  { href: '/example-work/data', label: 'DataSync', category: 'SaaS & E-Commerce' },
+  { href: '/example-work/health', label: 'Health & Wellness', category: 'Creative & Lifestyle' },
+  { href: '/example-work/artist', label: 'Artist Portfolio', category: 'Creative & Lifestyle' },
 ];
 
 const NavBar: React.FC = () => {
@@ -28,6 +30,15 @@ const NavBar: React.FC = () => {
   const toggleSubmenu = () => {
     setIsSubmenuOpen(!isSubmenuOpen);
   };
+
+  // Group links by category for desktop submenu
+  const groupedLinks = exampleWorkLinks.reduce((acc, link) => {
+    if (!acc[link.category]) {
+      acc[link.category] = [];
+    }
+    acc[link.category].push(link);
+    return acc;
+  }, {} as Record<string, typeof exampleWorkLinks>);
 
   return (
     <nav
@@ -79,15 +90,19 @@ const NavBar: React.FC = () => {
                     isSubmenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
                   }`}
                 >
-                  <p className="px-4 py-2 text-[#9ca3af] text-xs font-semibold uppercase">SaaS & E-Commerce</p>
-                  {exampleWorkLinks.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="block px-4 py-2 text-[#e5e7eb] text-sm hover:bg-[#60a5fa] hover:text-[#0d1117] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#60a5fa] focus:ring-offset-2 focus:ring-offset-[#1f2937]"
-                    >
-                      {item.label}
-                    </Link>
+                  {Object.entries(groupedLinks).map(([category, links]) => (
+                    <div key={category}>
+                      <p className="px-4 py-2 text-[#9ca3af] text-xs font-semibold uppercase">{category}</p>
+                      {links.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block px-4 py-2 text-[#e5e7eb] text-sm hover:bg-[#60a5fa] hover:text-[#0d1117] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#60a5fa] focus:ring-offset-2 focus:ring-offset-[#1f2937]"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
                   ))}
                 </div>
               </div>
@@ -138,16 +153,20 @@ const NavBar: React.FC = () => {
                     isSubmenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
                   }`}
                 >
-                  <p className="px-4 py-2 text-[#9ca3af] text-xs font-semibold uppercase">SaaS & E-Commerce</p>
-                  {exampleWorkLinks.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="block py-2 text-[#e5e7eb] text-sm hover:text-[#60a5fa] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#60a5fa] focus:ring-offset-2 focus:ring-offset-[#1f2937] font-inter"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
+                  {Object.entries(groupedLinks).map(([category, links]) => (
+                    <div key={category}>
+                      <p className="px-4 py-2 text-[#9ca3af] text-xs font-semibold uppercase">{category}</p>
+                      {links.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block py-2 text-[#e5e7eb] text-sm hover:text-[#60a5fa] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#60a5fa] focus:ring-offset-2 focus:ring-offset-[#1f2937] font-inter"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
                   ))}
                 </div>
               </div>

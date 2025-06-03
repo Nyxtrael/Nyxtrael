@@ -101,6 +101,36 @@ const customStyles = `
   }
 `;
 
+// Define the ExampleWork type
+interface ExampleWork {
+  title: string;
+  description: string;
+  thumbnail: string;
+  href: string;
+}
+
+// Define the example work projects data
+const exampleWorkProjects: ExampleWork[] = [
+  {
+    title: 'ShopTrend – E-commerce Redesign',
+    description: 'A modern e-commerce store with enhanced UX and vibrant design.',
+    thumbnail: '/images/shoptrend.jpg',
+    href: '/example-work/shop',
+  },
+  {
+    title: 'DataSync – SaaS Analytics Dashboard',
+    description: 'An intuitive analytics dashboard for real-time insights.',
+    thumbnail: '/images/datasync.jpg',
+    href: '/example-work/data',
+  },
+  {
+    title: 'Health & Wellness – Diet & Exercise Plans',
+    description: 'A dynamic one-pager promoting health courses and tips.',
+    thumbnail: '/images/health-wellness.jpg',
+    href: '/example-work/health',
+  },
+];
+
 export default function PricingPage() {
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -130,11 +160,6 @@ export default function PricingPage() {
       ],
       cta: 'Start Now',
       link: '/contact',
-      examples: [
-        { image: '/images/case-studies/basic-1.jpg', title: 'Personal Portfolio' },
-        { image: '/images/case-studies/basic-2.jpg', title: 'Small Business Site' },
-        { image: '/images/case-studies/basic-3.jpg', title: 'Blog' },
-      ],
     },
     {
       name: 'Standard',
@@ -153,11 +178,6 @@ export default function PricingPage() {
       cta: 'Start Now',
       link: '/contact',
       isPopular: true,
-      examples: [
-        { image: '/images/case-studies/standard-1.jpg', title: 'Business Website' },
-        { image: '/images/case-studies/standard-2.jpg', title: 'E-commerce Store' },
-        { image: '/images/case-studies/standard-3.jpg', title: 'Agency Site' },
-      ],
     },
     {
       name: 'Premium',
@@ -175,11 +195,6 @@ export default function PricingPage() {
       ],
       cta: 'Start Now',
       link: '/contact',
-      examples: [
-        { image: '/images/case-studies/premium-1.jpg', title: 'Enterprise Portal' },
-        { image: '/images/case-studies/premium-2.jpg', title: 'SaaS Dashboard' },
-        { image: '/images/case-studies/premium-3.jpg', title: 'Non-Profit Platform' },
-      ],
     },
   ];
 
@@ -246,7 +261,7 @@ export default function PricingPage() {
           <p className="text-lg text-[#9ca3af] mb-12 max-w-3xl mx-auto font-inter animate-fade-in" style={{ animationDelay: '0.2s' }}>
             High-quality design and development tailored to your needs, delivered with precision and care.
             <br />
-            <span className="text-[#14b8a6]">Don’t see the right plan? <a href="#custom-plan" className="underline">Build your own</a></span>
+            <span className="text-[#14b8a6]"><a href="#custom-plan" className="underline">Build your own</a></span>
           </p>
           <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(20,184,166,0.5)]"></div>
         </div>
@@ -330,45 +345,39 @@ export default function PricingPage() {
             See What We’ve Built
           </h2>
           <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(20,184,166,0.5)]"></div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {plans.map((plan) => (
-              <div key={plan.name} className="animate-fade-in">
-                <h3 className="text-2xl font-serif font-semibold text-[#e5e7eb] mb-4 text-center">{plan.name} Plan</h3>
-                <div className="grid grid-cols-3 gap-4">
-                  {plan.examples.map((example, idx) => (
-                    <div
-                      key={example.title}
-                      className="relative group"
-                      style={{ animationDelay: `${idx * 0.2}s` }}
+          <Swiper spaceBetween={20} slidesPerView={1} loop={true} breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}>
+            {exampleWorkProjects.map((project, idx) => (
+              <SwiperSlide key={project.title}>
+                <div className="relative bg-[#1f2937] rounded-xl overflow-hidden border border-[#14b8a6]/30 hover:border-[#fde68a]/50 hover:shadow-[#14b8a6]/50 transition-all duration-300 animate-fade-in" style={{ animationDelay: `${idx * 0.2}s` }}>
+                  <Image
+                    src={project.thumbnail}
+                    alt={project.title}
+                    width={400}
+                    height={300}
+                    className="w-full h-64 object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] to-transparent opacity-70"></div>
+                  <div className="relative p-6">
+                    <h3 className="text-xl font-serif font-semibold text-[#e5e7eb] mb-2">{project.title}</h3>
+                    <p className="text-[#9ca3af] mb-4 font-inter">{project.description}</p>
+                    <Link
+                      href={project.href}
+                      className="inline-flex items-center gap-2 bg-[#14b8a6] text-[#0d1117] py-2 px-5 rounded-lg font-inter font-semibold hover:bg-[#fde68a] hover:shadow-[#14b8a6]/50 transition-all duration-300"
+                      aria-label={`View ${project.title}`}
                     >
-                      <Image
-                        src={example.image}
-                        alt={example.title}
-                        width={200}
-                        height={128}
-                        className="w-full h-32 object-cover rounded-lg"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-[#0d1117]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span className="text-[#e5e7eb] text-sm font-inter" title={`Built with ${plan.name}`}>
-                          {example.title}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
+                      View Project
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
-                <div className="text-center mt-4">
-                  <Link
-                    href="/case-studies"
-                    className="inline-flex items-center gap-2 bg-[#14b8a6] text-[#0d1117] py-2 px-5 rounded-lg font-inter font-semibold hover:bg-[#fde68a] hover:shadow-[#14b8a6]/50 transition-all duration-300"
-                  >
-                    See Full Case Study
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </section>
 

@@ -5,80 +5,44 @@ import { useState } from 'react';
 import Hero from '../components/Hero';
 import AboutSnippet from '../components/AboutSnippet';
 import ServiceCard from '../components/ServiceCard';
-import CaseStudyCard from '../components/CaseStudyCard';
-import FinalCTA from '../components/FinalCTA';
-import CaseStudyFilters from '../components/CaseStudyFilters';
 import TestimonialsSlider from '../components/TestimonialsSlider';
+import FinalCTA from '../components/FinalCTA';
 import { CodeBracketIcon, PaintBrushIcon, LightBulbIcon, CheckCircleIcon, UserIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 
-// Define the CaseStudy type (inferred from usage in CaseStudyCard and CaseStudyFilters)
-interface CaseStudy {
-  slug: string;
+// Define the ExampleWork type
+interface ExampleWork {
   title: string;
   description: string;
   thumbnail: string;
-  category: string;
-  year: number;
+  href: string;
 }
 
-// Define the case studies data with the correct properties
-const caseStudies: CaseStudy[] = [
+// Define the example work subpages data
+const exampleWorkSubpages: ExampleWork[] = [
   {
-    slug: "startup-landing",
-    title: "BrightCRM – Landing Page for CRM Application",
-    description: "A responsive landing page encouraging demo sign-ups.",
-    thumbnail: "/images/startup-landing.jpg",
-    category: "SaaS",
-    year: 2024,
+    title: 'ShopTrend – E-commerce Redesign',
+    description: 'A modern e-commerce store redesign with enhanced UX.',
+    thumbnail: '/images/shoptrend.jpg',
+    href: '/example-work/shop',
   },
   {
-    slug: "ecommerce-revamp",
-    title: "ShopTrend – E-commerce Store Redesign",
-    description: "Redesign of an e-commerce store with enhanced UX.",
-    thumbnail: "/images/ecommerce-redesign.jpg",
-    category: "E-commerce",
-    year: 2023,
+    title: 'DataSync – SaaS Analytics Dashboard',
+    description: 'An intuitive analytics dashboard for a SaaS application.',
+    thumbnail: '/images/datasync.jpg',
+    href: '/example-work/data',
   },
   {
-    slug: "saas-dashboard",
-    title: "DataSync – SaaS Analytics Dashboard",
-    description: "An intuitive analytics dashboard for a SaaS application.",
-    thumbnail: "/images/saas-dashboard.jpg",
-    category: "SaaS",
-    year: 2024,
+    title: 'Health & Wellness – Diet & Exercise Plans',
+    description: 'A vibrant one-pager for health courses and tips.',
+    thumbnail: '/images/health-wellness.jpg',
+    href: '/example-work/health',
   },
   {
-    slug: "photographer-portfolio",
-    title: "PortraitPro – Photographer Portfolio Website",
-    description: "A photo gallery with fast loading and fullscreen mode.",
-    thumbnail: "/images/photographer-portfolio.jpg",
-    category: "Portfolio",
-    year: 2023,
-  },
-  {
-    slug: "taskmaster-pwa",
-    title: "TaskMaster – Task Management PWA",
-    description: "A progressive web app for task management, working offline.",
-    thumbnail: "/images/taskmaster-pwa.jpg",
-    category: "PWA",
-    year: 2024,
-  },
-  {
-    slug: "neon-ritual",
-    title: "NeonRitual – AI Illustration Art Website",
-    description: "An immersive website featuring animated AI illustrations.",
-    thumbnail: "/images/neon-ritual.jpg",
-    category: "Portfolio",
-    year: 2024,
-  },
-  {
-    slug: "corporate-site",
-    title: "CorpElevate – Corporate Website for Tech Firm",
-    description: "A professional website for a tech firm to showcase services.",
-    thumbnail: "/images/corporate-site.jpg",
-    category: "Corporate",
-    year: 2024,
+    title: 'Artist Portfolio – Creative Showcase',
+    description: 'An elegant portfolio for a visual artist.',
+    thumbnail: '/images/artist-portfolio.jpg',
+    href: '/example-work/artist',
   },
 ];
 
@@ -191,8 +155,6 @@ const customStyles = `
 `;
 
 export default function Home() {
-  const featuredCaseStudies = caseStudies.slice(0, 3);
-
   return (
     <div className="bg-[#0d1117]">
       <style>{customStyles}</style>
@@ -350,7 +312,7 @@ export default function Home() {
       {/* Divider */}
       <div className="section-divider"></div>
 
-      {/* Case Studies Section */}
+      {/* Example Work Highlights Section */}
       <section className="section bg-[#0d1117] grain-overlay py-24">
         <div className="container mx-auto px-4">
           <motion.h2
@@ -360,40 +322,39 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Featured Projects
+            Example Work Highlights
             <span className="block w-1/4 h-1 bg-gradient-to-r from-[#38bdf8] to-[#facc15] mx-auto mt-2"></span>
           </motion.h2>
-          <CaseStudyFilters caseStudies={caseStudies} />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredCaseStudies.map((caseStudy, index) => (
-              <CaseStudyCard
-                key={caseStudy.slug}
-                title={caseStudy.title}
-                description={caseStudy.description}
-                slug={caseStudy.slug}
-                thumbnail={caseStudy.thumbnail}
-                category={caseStudy.category}
-                year={caseStudy.year}
-                className={`delay-${index * 100}`}
-              />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {exampleWorkSubpages.map((subpage, index) => (
+              <motion.div
+                key={index}
+                className="relative bg-[#1f2937] rounded-2xl overflow-hidden border border-[#38bdf8]/30 hover:border-[#facc15]/50 hover:shadow-[#38bdf8]/50 transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <img
+                  src={subpage.thumbnail}
+                  alt={subpage.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] to-transparent opacity-70"></div>
+                <div className="relative p-6">
+                  <h3 className="text-xl font-serif font-semibold text-[#e5e7eb] mb-2">{subpage.title}</h3>
+                  <p className="text-[#9ca3af] mb-4 font-inter">{subpage.description}</p>
+                  <Link
+                    href={subpage.href}
+                    className="inline-block bg-gradient-to-r from-[#38bdf8] to-[#facc15] text-[#0d1117] px-4 py-2 rounded-lg font-inter font-semibold hover:shadow-[#38bdf8]/50 transition-all duration-300"
+                    aria-label={`View ${subpage.title}`}
+                  >
+                    View Project
+                  </Link>
+                </div>
+              </motion.div>
             ))}
           </div>
-          <motion.div
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <Link
-              href="/case-studies"
-              className="inline-block bg-gradient-to-r from-[#38bdf8] to-[#facc15] text-[#0d1117] px-6 py-3 rounded-lg font-inter font-semibold hover:shadow-[#38bdf8]/50 transition-all duration-300"
-              aria-label="View all case studies"
-            >
-              View All Projects
-            </Link>
-          </motion.div>
         </div>
       </section>
 
