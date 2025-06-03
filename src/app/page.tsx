@@ -33,7 +33,7 @@ const caseStudies: CaseStudy[] = [
     year: 2024,
   },
   {
-    slug: "ecommerce-redesign",
+    slug: "ecommerce-revamp",
     title: "ShopTrend – E-commerce Store Redesign",
     description: "Redesign of an e-commerce store with enhanced UX.",
     thumbnail: "/images/ecommerce-redesign.jpg",

@@ -14,7 +14,6 @@ const Footer: React.FC = () => {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/gallery', label: 'Gallery' },
-    { href: '/case-studies', label: 'Case Studies' },
     { href: '/contact', label: 'Contact' },
   ];
 

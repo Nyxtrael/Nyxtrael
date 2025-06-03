@@ -2,9 +2,17 @@
 
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState } from 'react';
 import ServiceCard from '../../components/ServiceCard';
 import { CodeBracketIcon, PaintBrushIcon, LightBulbIcon } from '@heroicons/react/24/outline';
 import { ArrowRight } from 'lucide-react';
+
+// Define form data type
+type QuickQuoteFormData = {
+  name: string;
+  email: string;
+  message: string;
+};
 
 const services = [
   {
@@ -98,6 +106,35 @@ const customStyles = `
 `;
 
 export default function Services() {
+  // State for form data
+  const [formData, setFormData] = useState<QuickQuoteFormData>({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  // State for submission status
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Log form data to console (placeholder for actual submission logic)
+    console.log('Quick Quote Form Data:', formData);
+    setIsSubmitted(true);
+    // Reset form after submission
+    setFormData({ name: '', email: '', message: '' });
+  };
+
   return (
     <main className="bg-[#111827] overflow-hidden">
       <Head>
@@ -220,46 +257,57 @@ export default function Services() {
               <h3 className="text-lg font-serif font-semibold text-[#e5e7eb] mb-4 animate-slide-up">
                 Prefer a quick quote?
               </h3>
-              <form className="space-y-4">
-                <div>
-                  <label htmlFor="name-quick" className="sr-only">Your Name</label>
-                  <input
-                    id="name-quick"
-                    type="text"
-                    placeholder="Your Name"
-                    className="w-full p-3 rounded-lg border border-[#4f46e5]/30 bg-[#1f2937] text-[#e5e7eb] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4f46e5] transition-all duration-300"
-                    disabled
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email-quick" className="sr-only">Your Email</label>
-                  <input
-                    id="email-quick"
-                    type="email"
-                    placeholder="Your Email"
-                    className="w-full p-3 rounded-lg border border-[#4f46e5]/30 bg-[#1f2937] text-[#e5e7eb] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4f46e5] transition-all duration-300"
-                    disabled
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message-quick" className="sr-only">Your Message</label>
-                  <textarea
-                    id="message-quick"
-                    placeholder="Tell me about your project"
-                    rows={4}
-                    className="w-full p-3 rounded-lg border border-[#4f46e5]/30 bg-[#1f2937] text-[#e5e7eb] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4f46e5] transition-all duration-300 resize-none"
-                    disabled
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#4f46e5] text-[#e5e7eb] py-4 px-8 rounded-lg text-xl font-semibold font-inter shadow-[#4f46e5]/50 hover:bg-[#22d3ee] hover:shadow-[#22d3ee]/70 transition-all duration-300 animate-pulse-slow focus:outline-none focus:ring-2 focus:ring-[#22d3ee] focus:ring-offset-2 focus:ring-offset-[#111827]"
-                  disabled
-                >
-                  Get in Touch
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-              </form>
+              {isSubmitted ? (
+                <p className="text-[#e5e7eb] font-inter">
+                  Thank you for your message! I’ll get back to you within 24 hours.
+                </p>
+              ) : (
+                <form className="space-y-4" onSubmit={handleSubmit}>
+                  <div>
+                    <label htmlFor="name" className="sr-only">Your Name</label>
+                    <input
+                      id="name"
+                      type="text"
+                      placeholder="Your Name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full p-3 rounded-lg border border-[#4f46e5]/30 bg-[#1f2937] text-[#e5e7eb] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4f46e5] transition-all duration-300"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="sr-only">Your Email</label>
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder="Your Email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full p-3 rounded-lg border border-[#4f46e5]/30 bg-[#1f2937] text-[#e5e7eb] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4f46e5] transition-all duration-300"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="sr-only">Your Message</label>
+                    <textarea
+                      id="message"
+                      placeholder="Tell me about your project"
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="w-full p-3 rounded-lg border border-[#4f46e5]/30 bg-[#1f2937] text-[#e5e7eb] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4f46e5] transition-all duration-300 resize-none"
+                      required
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-[#4f46e5] text-[#e5e7eb] py-4 px-8 rounded-lg text-xl font-semibold font-inter shadow-[#4f46e5]/50 hover:bg-[#22d3ee] hover:shadow-[#22d3ee]/70 transition-all duration-300 animate-pulse-slow focus:outline-none focus:ring-2 focus:ring-[#22d3ee] focus:ring-offset-2 focus:ring-offset-[#111827]"
+                  >
+                    Get in Touch
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                </form>
+              )}
             </div>
 
             {/* Right Option: Link to Case Studies */}

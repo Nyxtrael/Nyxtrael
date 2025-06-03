@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -45,6 +47,17 @@ const AboutSnippet: React.FC = () => {
             <p className="text-lg text-[#9ca3af] leading-relaxed font-inter">
               Hi, I’m Nyxtrael—a front-end developer specializing in React and Next.js. I build fast, responsive web applications with a focus on user experience and performance.
             </p>
+            <div className="space-y-2">
+              <p className="text-[#e5e7eb] font-inter">
+                <span className="text-[#38bdf8] font-semibold">12+ Frontend UI Concepts Designed</span>
+              </p>
+              <p className="text-[#e5e7eb] font-inter">
+                <span className="text-[#38bdf8] font-semibold">3 Years Learning & Building With Next.js</span>
+              </p>
+              <p className="text-[#e5e7eb] font-inter">
+                <span className="text-[#38bdf8] font-semibold">100% Deadlines Met</span> in Personal & Practice Projects
+              </p>
+            </div>
             <Link
               href="/about"
               className="inline-block bg-gradient-to-r from-[#38bdf8] to-[#facc15] text-[#0d1117] px-6 py-3 rounded-lg font-inter font-semibold hover:shadow-[#38bdf8]/50 transition-all duration-300"

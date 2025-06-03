@@ -1,67 +1,33 @@
 'use client';
 
 import Link from 'next/link';
-import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react'; 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
 
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Services' },
-  { href: '/case-studies', label: 'Case Studies', hasSubmenu: true },
+  { href: '/example-work', label: 'Example Work', hasSubmenu: true },
   { href: '/pricing', label: 'Pricing' },
 ];
 
-const caseStudyLinks = [
-  { href: '/case-studies/startup-landing', label: 'BrightCRM' },
-  { href: '/case-studies/ecommerce-revamp', label: 'ShopTrend' },
-  { href: '/case-studies/saas-dashboard', label: 'DataSync' },
-  { href: '/case-studies/photographer-portfolio', label: 'PortraitPro' },
-  { href: '/case-studies/taskmaster-pwa', label: 'TaskMaster' },
-  { href: '/case-studies/neon-ritual', label: 'NeonRitual' },
+const exampleWorkLinks = [
+  { href: '/example-work/shop', label: 'ShopTrend' },
+  { href: '/example-work/data', label: 'DataSync' },
 ];
 
 const NavBar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
-  const [clickCount, setClickCount] = useState(0);
-  const [lastClickTime, setLastClickTime] = useState(0);
-  const router = useRouter();
-
-  const DOUBLE_CLICK_THRESHOLD = 300; // 300ms threshold for double-click
-
-  const handleCaseStudiesClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const currentTime = new Date().getTime();
-
-    if (currentTime - lastClickTime <= DOUBLE_CLICK_THRESHOLD) {
-      // Double-click detected: navigate to /case-studies
-      setClickCount(0);
-      setLastClickTime(0);
-      setIsSubmenuOpen(false);
-      router.push('/case-studies');
-    } else {
-      // Single click: toggle submenu
-      setClickCount(1);
-      setLastClickTime(currentTime);
-      setIsSubmenuOpen(!isSubmenuOpen);
-    }
-  };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  useEffect(() => {
-    if (clickCount > 0) {
-      const timer = setTimeout(() => {
-        setClickCount(0);
-        setLastClickTime(0);
-      }, DOUBLE_CLICK_THRESHOLD);
-      return () => clearTimeout(timer);
-    }
-  }, [clickCount]);
+  const toggleSubmenu = () => {
+    setIsSubmenuOpen(!isSubmenuOpen);
+  };
 
   return (
     <nav
@@ -100,7 +66,7 @@ const NavBar: React.FC = () => {
               <div key={link.href} className="relative group">
                 <button
                   className="text-[#e5e7eb] hover:text-[#60a5fa] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#60a5fa] focus:ring-offset-2 focus:ring-offset-[#1f2937] flex items-center"
-                  onClick={handleCaseStudiesClick}
+                  onClick={toggleSubmenu}
                   aria-expanded={isSubmenuOpen}
                   aria-controls="submenu"
                 >
@@ -113,7 +79,8 @@ const NavBar: React.FC = () => {
                     isSubmenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
                   }`}
                 >
-                  {caseStudyLinks.map((item) => (
+                  <p className="px-4 py-2 text-[#9ca3af] text-xs font-semibold uppercase">SaaS & E-Commerce</p>
+                  {exampleWorkLinks.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
@@ -158,7 +125,7 @@ const NavBar: React.FC = () => {
               <div key={link.href} className="w-full">
                 <button
                   className="text-[#e5e7eb] hover:text-[#60a5fa] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#60a5fa] focus:ring-offset-2 focus:ring-offset-[#1f2937] flex items-center w-full text-left text-lg font-inter"
-                  onClick={handleCaseStudiesClick}
+                  onClick={toggleSubmenu}
                   aria-expanded={isSubmenuOpen}
                   aria-controls="mobile-submenu"
                 >
@@ -171,7 +138,8 @@ const NavBar: React.FC = () => {
                     isSubmenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
                   }`}
                 >
-                  {caseStudyLinks.map((item) => (
+                  <p className="px-4 py-2 text-[#9ca3af] text-xs font-semibold uppercase">SaaS & E-Commerce</p>
+                  {exampleWorkLinks.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}

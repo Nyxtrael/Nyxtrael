@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Code, Paintbrush, Lightbulb, MessageCircle, Rocket, Clock } from 'lucide-react';
+import { Code, Paintbrush, Lightbulb, MessageCircle, Rocket, Clock, Brain, Globe, Wrench } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Section from './Section';
 import AboutHero from './AboutHero';
 
@@ -10,19 +11,19 @@ const expertiseItems = [
   {
     title: 'Web Development',
     description: 'I create fast, responsive websites using modern technologies like Next.js and React, ensuring clean code and optimal performance.',
-    result: 'Built 20+ websites and apps with 99% client satisfaction.',
+    result: 'Developed 20+ personal and portfolio websites focused on clean code and performance.',
     icon: <Code className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
   },
   {
     title: 'UI/UX Design',
     description: 'I design intuitive interfaces with a focus on user experience, delivering sleek prototypes and visually appealing layouts.',
-    result: 'Designed interfaces for 15+ projects, boosting engagement by 25%.',
+    result: 'Crafted 15+ UI/UX layouts with user-centered design, improving usability and flow.',
     icon: <Paintbrush className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
   },
   {
     title: 'Consulting',
     description: 'I offer expert guidance on digital projects, helping you optimize performance and plan scalable solutions.',
-    result: 'Improved app performance by 30% for 5+ clients.',
+    result: 'Optimized front-end speed and SEO across 5+ real-world simulations and mock projects.',
     icon: <Lightbulb className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
   },
 ];
@@ -50,27 +51,35 @@ const techStack = ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Figma'];
 const journeyItems = [
   {
     year: '2022',
-    title: 'The Beginning',
-    description: 'Started my journey as a front-end developer, focusing on React and building small projects for local businesses.',
+    title: 'First Steps',
+    description: 'Started exploring front-end development with React. Built my first personal sites and mini-projects for local ideas and non-commercial use.',
+    icon: <Brain className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    caseStudyLink: null,
   },
   {
     year: '2023',
-    title: 'First Big Project',
-    description: 'Delivered my first major SaaS dashboard for a startup, which led to a 20% increase in their user engagement.',
+    title: 'First Real Project',
+    description: 'Designed a full SaaS dashboard as a portfolio challenge, focused on real-time UX with Next.js and data visualizations via Chart.js.',
+    icon: <Code className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    caseStudyLink: '/case-studies/datasync',
   },
   {
     year: '2024',
-    title: 'Freelance Expansion',
-    description: 'Expanded my freelance services, working with clients globally and specializing in Next.js and UI/UX design.',
+    title: 'Going Freelance',
+    description: 'Started offering freelance services on Fiverr and building client-ready templates. Published several responsive websites using Tailwind and deployed via Vercel.',
+    icon: <Globe className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    caseStudyLink: '/case-studies/shoptrend',
   },
   {
     year: '2025',
-    title: 'Today',
-    description: 'Continuing to build high-performance web applications, focusing on scalability and user-centric design.',
+    title: 'Production Focus',
+    description: 'Currently refining advanced layouts and component systems. Publishing full-featured case studies including accessibility, SEO, and performance audits.',
+    icon: <Wrench className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    caseStudyLink: null,
   },
 ];
 
-// Custom CSS dla separatorów sekcji
+// Custom CSS dla separatorów sekcji i linii czasu
 const customStyles = `
   .section-divider {
     position: relative;
@@ -78,6 +87,9 @@ const customStyles = `
     background: linear-gradient(to bottom, #1f2937 0%, #2d3748 50%, #1f2937 100%);
     clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
     box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+  }
+  .timeline-gradient {
+    background: linear-gradient(to bottom, #a855f7, #c084fc);
   }
 `;
 
@@ -113,7 +125,7 @@ export default function About() {
             </p>
             <Link
               href="/case-studies"
-              className="inline-block bg-gradient-to-r from-[#a855f7] to-[#c084fc] text-[#e5e7eb] px-8 py-4 rounded-lg font-inter text-lg font-semibold hover:shadow-[#a855f7]/70 transition-all duration-300"
+              className="inline-block bg-gradient-to-r from-[#a855f7] to-[#c084fc] text-[#0d1117] px-8 py-4 rounded-lg font-inter text-lg font-semibold hover:shadow-[#a855f7]/70 transition-all duration-300"
               aria-label="View my work in case studies"
             >
               View My Work
@@ -127,23 +139,44 @@ export default function About() {
 
       <Section title="My Journey" pattern bgClass="bg-[#1f2937]">
         <div className="relative max-w-4xl mx-auto">
-          {/* Linia czasu */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-[#a855f7] to-[#c084fc] h-full md:block hidden"></div>
+          {/* Linia czasu z gradientem */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 timeline-gradient h-full md:block hidden"></div>
           {journeyItems.map((item, index) => (
-            <div
+            <motion.div
               key={item.year}
               className={`flex items-center mb-12 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} md:${index % 2 === 0 ? 'text-right' : 'text-left'}`}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
             >
-              <div className={`w-1/2 p-6 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+              <motion.div
+                className={`w-1/2 p-6 ${index % 2 === 0 ? 'text-right' : 'text-left'} hover:shadow-[#a855f7]/50 transition-all duration-300 rounded-lg`}
+                whileHover={{ scale: 1.02 }}
+              >
                 <h3 className="text-xl font-serif font-semibold text-[#e5e7eb] mb-2">{item.year} - {item.title}</h3>
                 <p className="text-[#9ca3af] font-inter">{item.description}</p>
-              </div>
+                {item.caseStudyLink && (
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Link
+                      href={item.caseStudyLink}
+                      className="inline-block mt-2 text-[#a855f7] hover:text-[#c084fc] font-inter text-sm underline"
+                      aria-label={`See work from ${item.year}`}
+                    >
+                      See Work from This Year
+                    </Link>
+                  </motion.div>
+                )}
+              </motion.div>
               <div className="w-1/2 flex justify-center">
                 <div className="bg-[#2d3748] p-4 rounded-full shadow-md">
-                  <Rocket className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" aria-hidden="true" />
+                  {item.icon}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </Section>
