@@ -313,7 +313,7 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-center">
                   <Link
                     href={plan.link}
                     className="inline-flex items-center gap-2 bg-[#14b8a6] text-[#0d1117] py-3 px-6 rounded-lg font-inter font-semibold hover:bg-[#fde68a] hover:shadow-[#14b8a6]/50 transition-all duration-300 animate-pulse-slow"
@@ -321,12 +321,6 @@ export default function PricingPage() {
                   >
                     {plan.cta}
                     <ArrowRight className="w-5 h-5" />
-                  </Link>
-                  <Link
-                    href="/case-studies"
-                    className="text-sm text-[#14b8a6] hover:text-[#fde68a] font-inter"
-                  >
-                    Learn More
                   </Link>
                 </div>
               </div>
