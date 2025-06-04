@@ -30,7 +30,7 @@ export default function CTASection() {
       >
         <Link
           href="/contact"
-          className="inline-block bg-gradient-to-r from-[#ff6b6b] to-[#ff8e53] text-[#1f2937] px-8 py-4 rounded-lg font-semibold hover:bg-[#ff9e63] transition-colors shadow-md"
+          className="inline-block bg-gradient-to-r from-[#3b82f6] to-[#a855f7] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#a855f7] transition-colors shadow-md"
         >
           Get in Touch
         </Link>

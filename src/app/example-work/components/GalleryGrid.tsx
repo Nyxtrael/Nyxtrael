@@ -4,27 +4,45 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-const mockWorks = [
-  { id: 1, title: 'Abstract Harmony', category: 'Illustrations', image: '/images/abstract-harmony.jpg' },
-  { id: 2, title: 'Minimalist Web Design', category: 'Web Design', image: '/images/web-design.jpg' },
-  { id: 3, title: 'Dreamy Animation', category: 'Animations', image: '/images/animation.jpg' },
-  { id: 4, title: 'Floral Sketch', category: 'Illustrations', image: '/images/floral-sketch.jpg' },
-  { id: 5, title: 'Portfolio Site', category: 'Web Design', image: '/images/portfolio-site.jpg' },
-  { id: 6, title: 'Motion Graphics', category: 'Animations', image: '/images/motion-graphics.jpg' },
+// Define the interface for a work item
+interface WorkItem {
+  id: number;
+  title: string;
+  category: string;
+  image: string;
+}
+
+const mockWorks: WorkItem[] = [
+  { id: 1, title: 'Timeless Elegance', category: 'Portraits', image: '/images/portrait-woman.jpg' },
+  { id: 2, title: 'Quiet Strength', category: 'Portraits', image: '/images/portrait-man.jpg' },
+  { id: 3, title: 'Innocent Joy', category: 'Portraits', image: '/images/portrait-child.jpg' },
+  { id: 4, title: 'Love Captured', category: 'Portraits', image: '/images/portrait-couple.jpg' },
+  { id: 5, title: 'Studio Serenity', category: 'Stills', image: '/images/studio-still.jpg' },
+  { id: 6, title: 'Monochrome Beauty', category: 'Portraits', image: '/images/black-and-white-portrait.jpg' },
 ];
-const categories = ['All', 'Illustrations', 'Web Design', 'Animations'];
+const categories = ['All', 'Portraits', 'Stills'];
 
 export default function GalleryGrid() {
   const [filter, setFilter] = useState('All');
+  const [selectedImage, setSelectedImage] = useState<WorkItem | null>(null);
+
   const filtered = mockWorks.filter(work => filter === 'All' || work.category === filter);
 
+  const handleImageClick = (work: WorkItem) => {
+    setSelectedImage(work);
+  };
+
+  const handleCloseLightbox = () => {
+    setSelectedImage(null);
+  };
+
   return (
-    <section className="py-12 bg-[#f5f5f5] dark:bg-[#2d3748]">
-      <h2 className="text-3xl font-bold text-center mb-6 text-[#1f2937] dark:text-[#e5e7eb]">
-        My Work
+    <section className="py-12">
+      <h2 className="text-3xl font-bold text-center mb-6 text-[#e5e7eb]">
+        Moments Frozen in Time
       </h2>
       <div className="flex justify-center mb-6 items-center gap-2">
-        <label htmlFor="category-filter" className="text-[#1f2937] dark:text-[#e5e7eb] font-medium">
+        <label htmlFor="category-filter" className="text-[#e5e7eb] font-medium">
           Filter by Category:
         </label>
         <select
@@ -42,11 +60,13 @@ export default function GalleryGrid() {
         {filtered.map(work => (
           <motion.div
             key={work.id}
-            className="relative transition-transform transform hover:scale-105 hover:shadow-lg"
+            className="relative transition-transform transform hover:shadow-lg cursor-pointer"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.05 }}
+            onClick={() => handleImageClick(work)}
           >
             <Image
               src={work.image}
@@ -61,6 +81,40 @@ export default function GalleryGrid() {
           </motion.div>
         ))}
       </div>
+
+      {/* Lightbox */}
+      {selectedImage && (
+        <motion.div
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={handleCloseLightbox}
+        >
+          <motion.div
+            className="relative max-w-4xl mx-auto"
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0.8 }}
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the image
+          >
+            <Image
+              src={selectedImage.image}
+              alt={selectedImage.title}
+              width={800}
+              height={600}
+              className="w-full h-auto rounded-lg"
+            />
+            <p className="text-white text-center mt-4 text-xl">{selectedImage.title}</p>
+            <button
+              className="absolute top-2 right-2 text-white text-2xl bg-gray-800 rounded-full w-10 h-10 flex items-center justify-center"
+              onClick={handleCloseLightbox}
+            >
+              ×
+            </button>
+          </motion.div>
+        </motion.div>
+      )}
     </section>
   );
 }

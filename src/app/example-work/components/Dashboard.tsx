@@ -35,7 +35,7 @@ export default function Dashboard() {
         {
           label: 'Revenue (EUR)',
           data: [300, 450, 200, 600, 800, 500, 700],
-          borderColor: '#ff6b6b',
+          borderColor: '#3b82f6',
           tension: 0.3,
         },
       ],
@@ -46,7 +46,7 @@ export default function Dashboard() {
         {
           label: 'Revenue (EUR)',
           data: [1200, 1800, 1500, 2100],
-          borderColor: '#ff6b6b',
+          borderColor: '#3b82f6',
           tension: 0.3,
         },
       ],
@@ -57,7 +57,7 @@ export default function Dashboard() {
         {
           label: 'Revenue (EUR)',
           data: [5000, 6000, 7500],
-          borderColor: '#ff6b6b',
+          borderColor: '#3b82f6',
           tension: 0.3,
         },
       ],
@@ -78,8 +78,8 @@ export default function Dashboard() {
             onClick={() => setTimeRange(range)}
             className={`px-4 py-2 rounded-lg font-medium transition-colors ${
               timeRange === range
-                ? 'bg-[#ff6b6b] text-white'
-                : 'bg-gray-200 dark:bg-gray-600 text-[#1f2937] dark:text-[#e5e7eb] hover:bg-[#ff8e53] hover:text-white'
+                ? 'bg-[#3b82f6] text-white'
+                : 'bg-gray-200 dark:bg-gray-600 text-[#1f2937] dark:text-[#e5e7eb] hover:bg-[#a855f7] hover:text-white'
             }`}
           >
             {range}

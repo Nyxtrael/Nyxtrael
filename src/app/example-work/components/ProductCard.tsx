@@ -11,9 +11,9 @@ const products = [
 
 export default function ProductCard() {
   return (
-    <section className="py-12 bg-white dark:bg-[#1f2937]">
+    <section className="py-12">
       <motion.h2
-        className="text-3xl font-bold text-center mb-12 text-[#1f2937] dark:text-[#e5e7eb]"
+        className="text-3xl font-bold text-center mb-12 text-[#1f2937]"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -29,7 +29,7 @@ export default function ProductCard() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="p-6 bg-[#f5f5f5] dark:bg-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+            className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
             <Image
               src={product.image}
@@ -38,11 +38,15 @@ export default function ProductCard() {
               height={200}
               className="w-full h-48 object-cover rounded mb-4"
             />
-            <h3 className="text-xl font-semibold mb-2 text-[#1f2937] dark:text-[#e5e7eb]">{product.title}</h3>
-            <p className="text-[#4b5563] dark:text-[#bfdbfe] mb-4">{product.description}</p>
-            <button className="px-4 py-2 bg-[#f97316] text-white rounded-lg hover:bg-[#fb923c] transition">
+            <h3 className="text-xl font-semibold mb-2 text-[#1f2937]">{product.title}</h3>
+            <p className="text-[#4b5563] mb-4">{product.description}</p>
+            <motion.button
+              className="px-4 py-2 bg-[#10b981] text-white rounded-lg hover:bg-[#14b8a6] transition"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Buy Now
-            </button>
+            </motion.button>
           </motion.div>
         ))}
       </div>

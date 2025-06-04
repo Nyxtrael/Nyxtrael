@@ -6,7 +6,7 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
       <header className="bg-gradient-to-r from-[#ff6b6b] to-[#ff8e53] text-[#1f2937] p-4 shadow-md">
         <nav className="flex justify-between items-center max-w-5xl mx-auto">
           <Link href="/" className="text-xl font-bold">Portfolio</Link>
-          <Link href="/example-work/shop" className="text-lg font-semibold">ShopTrend</Link>
+          <Link href="/example-work/shop" className="text-lg font-semibold scroll-smooth">ShopTrend</Link>
         </nav>
       </header>
       <main>{children}</main>

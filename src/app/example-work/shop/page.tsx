@@ -1,8 +1,10 @@
 'use client';
+
 import HeroShopTrend from '../components/HeroShopTrend';
 import ProductList from '../components/ProductList';
 import Features from '../components/Features';
-import BeforeAfterLink from '../components/BeforeAfterLink';
+import Results from '../components/Results';
+import FeaturedCollections from '../components/FeaturedCollections'; // Renamed from BeforeAfterComparison
 import Testimonials from '../components/Testimonials';
 import CTASection from '../components/CTASection';
 
@@ -23,9 +25,11 @@ export default function ShopTrendPage() {
       <div className="section-divider" />
       <Features />
       <div className="section-divider" />
+      <Results />
+      <div className="section-divider" />
       <ProductList />
       <div className="section-divider" />
-      <BeforeAfterLink />
+      <FeaturedCollections /> {/* Updated section */}
       <div className="section-divider" />
       <Testimonials />
       <div className="section-divider" />

@@ -35,6 +35,18 @@ export default function CTASection() {
           Get in Touch
         </Link>
       </motion.div>
+      <motion.blockquote
+        className="mt-12 max-w-3xl mx-auto text-center italic text-[#bfdbfe] p-6 bg-[#2d3748] rounded-lg shadow-md"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.6 }}
+      >
+        “The new version of ShopTrend surpassed our expectations—sales have soared, and customers love the design!”
+        <span className="block mt-2 font-semibold text-[#e5e7eb]">
+          — Emily Carter, CEO of ShopTrend
+        </span>
+      </motion.blockquote>
     </section>
   );
 }
