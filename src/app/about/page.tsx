@@ -52,30 +52,30 @@ const journeyItems = [
   {
     year: '2022',
     title: 'First Steps',
-    description: 'Started exploring front-end development with React. Built my first personal sites and mini-projects for local ideas and non-commercial use.',
+    description: 'Began my front-end journey by learning React and building small personal sites to explore design and functionality.',
     icon: <Brain className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
     caseStudyLink: null,
   },
   {
     year: '2023',
-    title: 'First Real Project',
-    description: 'Designed a full SaaS dashboard as a portfolio challenge, focused on real-time UX with Next.js and data visualizations via Chart.js.',
+    title: 'Portfolio Growth',
+    description: 'Built DataSync, a SaaS dashboard for my portfolio, focusing on real-time UX with Next.js and Chart.js for data visualizations.',
     icon: <Code className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
-    caseStudyLink: '/case-studies/datasync',
+    caseStudyLink: '/example-work/data',
   },
   {
     year: '2024',
-    title: 'Going Freelance',
-    description: 'Started offering freelance services on Fiverr and building client-ready templates. Published several responsive websites using Tailwind and deployed via Vercel.',
+    title: 'Expanding Skills',
+    description: 'Created ShopTrend, an e-commerce redesign project, and explored freelance opportunities by building responsive templates with Tailwind CSS.',
     icon: <Globe className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
-    caseStudyLink: '/case-studies/shoptrend',
+    caseStudyLink: '/example-work/shop',
   },
   {
     year: '2025',
-    title: 'Production Focus',
-    description: 'Currently refining advanced layouts and component systems. Publishing full-featured case studies including accessibility, SEO, and performance audits.',
+    title: 'Ongoing Learning',
+    description: 'Currently refining my skills with projects like a health-focused one-pager, emphasizing accessibility, SEO, and performance.',
     icon: <Wrench className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
-    caseStudyLink: null,
+    caseStudyLink: '/example-work/health',
   },
 ];
 
@@ -121,14 +121,14 @@ export default function About() {
               I’m Nyxtrael, a passionate front-end developer with a knack for crafting sleek, high-performance web applications. I specialize in React and Next.js, focusing on delivering scalable, user-centric solutions.
             </p>
             <p>
-              My journey started with a love for coding and design, evolving into a mission to help startups, creators, and SaaS teams bring their visions to life. I’m committed to transparent communication, tailored solutions, and timely delivery on every project.
+              My journey started with a love for coding and design, evolving into a mission to build impactful projects like a SaaS dashboard, an e-commerce redesign, and a health-focused one-pager. I’m committed to transparent communication, tailored solutions, and timely delivery on every project.
             </p>
             <Link
-              href="/case-studies"
+              href="/example-work/health"
               className="inline-block bg-gradient-to-r from-[#a855f7] to-[#c084fc] text-[#0d1117] px-8 py-4 rounded-lg font-inter text-lg font-semibold hover:shadow-[#a855f7]/70 transition-all duration-300"
-              aria-label="View my work in case studies"
+              aria-label="View Nyxtrael's Health & Wellness project"
             >
-              View My Work
+              See My Health Project
             </Link>
           </div>
         </div>
@@ -164,9 +164,9 @@ export default function About() {
                     <Link
                       href={item.caseStudyLink}
                       className="inline-block mt-2 text-[#a855f7] hover:text-[#c084fc] font-inter text-sm underline"
-                      aria-label={`See work from ${item.year}`}
+                      aria-label={`View ${item.title} project from ${item.year}`}
                     >
-                      See Work from This Year
+                      See This Project
                     </Link>
                   </motion.div>
                 )}

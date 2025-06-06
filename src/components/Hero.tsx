@@ -52,10 +52,10 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
         >
           <Link
-            href="/case-studies"
+            href="/pricing"
             className="bg-gradient-to-r from-[#38bdf8] to-[#facc15] text-[#0d1117] px-6 py-3 rounded-lg font-inter font-semibold hover:shadow-[#38bdf8]/50 transition-all duration-300"
           >
-            View Case Studies
+            See Pricing Plans
           </Link>
           <Link
             href="/contact"
