@@ -114,7 +114,10 @@ export default function Services() {
   });
 
   // State for submission status
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  // State for form errors
+  const [errors, setErrors] = useState<Partial<QuickQuoteFormData>>({});
 
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -123,16 +126,58 @@ export default function Services() {
       ...prev,
       [id]: value,
     }));
+    // Clear error for the field when user starts typing
+    setErrors((prev) => ({
+      ...prev,
+      [id]: '',
+    }));
+  };
+
+  // Validate form data
+  const validateForm = () => {
+    const newErrors: Partial<QuickQuoteFormData> = {};
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(formData.email)) {
+      newErrors.email = 'Invalid email address';
+    }
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Log form data to console (placeholder for actual submission logic)
-    console.log('Quick Quote Form Data:', formData);
-    setIsSubmitted(true);
-    // Reset form after submission
-    setFormData({ name: '', email: '', message: '' });
+    if (!validateForm()) {
+      return;
+    }
+
+    setSubmitStatus('loading');
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    }
   };
 
   return (
@@ -257,8 +302,8 @@ export default function Services() {
               <h3 className="text-lg font-serif font-semibold text-[#e5e7eb] mb-4 animate-slide-up">
                 Prefer a quick quote?
               </h3>
-              {isSubmitted ? (
-                <p className="text-[#e5e7eb] font-inter">
+              {submitStatus === 'success' ? (
+                <p className="text-[#10b981] font-inter">
                   Thank you for your message! I’ll get back to you within 24 hours.
                 </p>
               ) : (
@@ -272,8 +317,13 @@ export default function Services() {
                       value={formData.name}
                       onChange={handleInputChange}
                       className="w-full p-3 rounded-lg border border-[#4f46e5]/30 bg-[#1f2937] text-[#e5e7eb] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4f46e5] transition-all duration-300"
-                      required
+                      aria-invalid={errors.name ? 'true' : 'false'}
                     />
+                    {errors.name && (
+                      <p className="mt-1 text-sm text-[#ef4444] font-inter" role="alert">
+                        {errors.name}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="email" className="sr-only">Your Email</label>
@@ -284,8 +334,13 @@ export default function Services() {
                       value={formData.email}
                       onChange={handleInputChange}
                       className="w-full p-3 rounded-lg border border-[#4f46e5]/30 bg-[#1f2937] text-[#e5e7eb] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4f46e5] transition-all duration-300"
-                      required
+                      aria-invalid={errors.email ? 'true' : 'false'}
                     />
+                    {errors.email && (
+                      <p className="mt-1 text-sm text-[#ef4444] font-inter" role="alert">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="message" className="sr-only">Your Message</label>
@@ -296,33 +351,73 @@ export default function Services() {
                       value={formData.message}
                       onChange={handleInputChange}
                       className="w-full p-3 rounded-lg border border-[#4f46e5]/30 bg-[#1f2937] text-[#e5e7eb] placeholder-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#4f46e5] transition-all duration-300 resize-none"
-                      required
+                      aria-invalid={errors.message ? 'true' : 'false'}
                     />
+                    {errors.message && (
+                      <p className="mt-1 text-sm text-[#ef4444] font-inter" role="alert">
+                        {errors.message}
+                      </p>
+                    )}
                   </div>
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 bg-[#4f46e5] text-[#e5e7eb] py-4 px-8 rounded-lg text-xl font-semibold font-inter shadow-[#4f46e5]/50 hover:bg-[#22d3ee] hover:shadow-[#22d3ee]/70 transition-all duration-300 animate-pulse-slow focus:outline-none focus:ring-2 focus:ring-[#22d3ee] focus:ring-offset-2 focus:ring-offset-[#111827]"
+                    disabled={submitStatus === 'loading'}
+                    className="w-full inline-flex items-center justify-center gap-2 bg-[#4f46e5] text-[#e5e7eb] py-4 px-8 rounded-lg text-xl font-semibold font-inter shadow-[#4f46e5]/50 hover:bg-[#22d3ee] hover:shadow-[#22d3ee]/70 transition-all duration-300 animate-pulse-slow focus:outline-none focus:ring-2 focus:ring-[#22d3ee] focus:ring-offset-2 focus:ring-offset-[#111827] disabled:opacity-50 disabled:cursor-not-allowed"
+                    aria-label={submitStatus === 'loading' ? 'Submitting form...' : 'Get in touch'}
                   >
-                    Get in Touch
-                    <ArrowRight className="w-5 h-5" />
+                    {submitStatus === 'loading' ? (
+                      <span className="flex items-center justify-center">
+                        <svg
+                          className="animate-spin h-5 w-5 mr-2 text-[#e5e7eb]"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8v8H4z"
+                          />
+                        </svg>
+                        Sending...
+                      </span>
+                    ) : (
+                      <>
+                        Get in Touch
+                        <ArrowRight className="w-5 h-5" />
+                      </>
+                    )}
                   </button>
+                  {submitStatus === 'error' && (
+                    <p className="mt-4 text-[#ef4444] font-inter text-center">
+                      Failed to send message. Please try again or email me directly at hello@nyxtrael.com.
+                    </p>
+                  )}
                 </form>
               )}
             </div>
 
-            {/* Right Option: Link to Case Studies */}
+            {/* Right Option: Link to a Project */}
             <div className="flex-1 max-w-md flex flex-col items-center">
               <h3 className="text-lg font-serif font-semibold text-[#e5e7eb] mb-4 animate-slide-up">
                 Not sure yet?
               </h3>
               <p className="text-[#9ca3af] mb-6 font-inter">
-                Explore my portfolio to see how I’ve helped others bring their ideas to life.
+                Explore my Health & Wellness project to see how I’ve brought ideas to life.
               </p>
               <Link
-                href="/case-studies"
+                href="/example-work/health"
                 className="w-full inline-flex items-center justify-center gap-2 bg-[#4f46e5] text-[#e5e7eb] py-4 px-8 rounded-lg text-xl font-semibold font-inter shadow-[#4f46e5]/50 hover:bg-[#22d3ee] hover:shadow-[#22d3ee]/70 transition-all duration-300 animate-pulse-slow focus:outline-none focus:ring-2 focus:ring-[#22d3ee] focus:ring-offset-2 focus:ring-offset-[#111827]"
               >
-                View Case Studies
+                See Health Project
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </div>

@@ -25,7 +25,7 @@ export default function ContactForm() {
   const onSubmit = async (data: FormData) => {
     setSubmitStatus('loading');
     try {
-      const response = await fetch('https://formspree.io/f/your-form-id', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +33,8 @@ export default function ContactForm() {
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+      if (result.success) {
         setSubmitStatus('success');
         reset();
       } else {
@@ -112,13 +113,13 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={submitStatus === 'loading'}
-        className="w-full inline-flex items-center justify-center gap-2 bg-[#3b82f6] text-[#0f172a] py-3 px-6 rounded-lg font-inter font-semibold text-lg uppercase tracking-wide shadow-[#3b82f6]/50 hover:bg-[#60a5fa] hover:shadow-[#3b82f6]/70 transition-all duration-300 border-pulse disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:ring-offset-2 focus:ring-offset-[#0f172a]"
-        aria-label={submitStatus === 'loading' ? 'Submitting form...' : 'Send message'}
+        className="w-full inline-flex items-center justify-center gap-2 bg-[#4f46e5] text-[#e5e7eb] py-4 px-8 rounded-lg text-xl font-semibold font-inter shadow-[#4f46e5]/50 hover:bg-[#22d3ee] hover:shadow-[#22d3ee]/70 transition-all duration-300 animate-pulse-slow focus:outline-none focus:ring-2 focus:ring-[#22d3ee] focus:ring-offset-2 focus:ring-offset-[#111827] disabled:opacity-50 disabled:cursor-not-allowed"
+        aria-label={submitStatus === 'loading' ? 'Submitting form...' : 'Get in touch'}
       >
         {submitStatus === 'loading' ? (
           <span className="flex items-center justify-center">
             <svg
-              className="animate-spin h-5 w-5 mr-2 text-[#0f172a]"
+              className="animate-spin h-5 w-5 mr-2 text-[#e5e7eb]"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -141,7 +142,7 @@ export default function ContactForm() {
           </span>
         ) : (
           <>
-            Send Message
+            Get in Touch
             <ArrowRight className="w-5 h-5" />
           </>
         )}
