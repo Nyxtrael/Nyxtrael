@@ -160,7 +160,7 @@ export default function ContactForm() {
         )}
         {submitStatus === 'error' && (
           <p className="mt-4 text-[#ef4444] font-inter">
-            Failed to send message. Please try again or email me directly at hello@nyxtrael.com.
+            Failed to send message. Please try again or email me directly at nyxtrael@gmail.com.
           </p>
         )}
       </div>

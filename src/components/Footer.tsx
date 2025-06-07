@@ -95,12 +95,12 @@ const Footer: React.FC = () => {
               })}
             </div>
             <Link
-              href="mailto:hello@nyxtrael.com"
+              href="mailto:nyxtrael@gmail.com"
               className="text-medium-gray hover:text-dark-accent transition-colors duration-200 font-inter flex justify-center md:justify-start items-center space-x-2"
               aria-label="Email contact"
             >
               <Mail className="h-5 w-5 text-dark-accent" />
-              <span>hello@nyxtrael.com</span>
+              <span>nyxtrael@gmail.com</span>
             </Link>
           </div>
         </div>

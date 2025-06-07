@@ -121,7 +121,7 @@ export default function Contact() {
               <p className="text-[#94a3b8] font-inter">Share your idea, and I’ll respond within 24 hours to discuss next steps.</p>
               <ul className="space-y-2 text-[#94a3b8] font-inter">
                 <li className="flex items-center gap-2">
-                  <span className="text-lg">📨</span> Email: hello@nyxtrael.com
+                  <span className="text-lg">📨</span> Email: nyxtrael@gmail.com
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-lg">🌍</span> Based in Europe, working globally

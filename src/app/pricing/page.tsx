@@ -1,12 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Check, ChevronDown, Clock, Code, Headphones, HelpCircle, X, ArrowRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Image from 'next/image';
-import { useForm } from 'react-hook-form';
 
 // Custom CSS for animations and styles
 const customStyles = `
@@ -27,8 +27,8 @@ const customStyles = `
     100% { opacity: 1; }
   }
   @keyframes scale-in {
-    0% { opacity: 0; transform: scale(0.9); }
-    100% { opacity: 1; transform: scale(1); }
+    0% { transform: scale(0.95); }
+    100% { transform: scale(1); }
   }
   .animate-fade-in {
     animation: fade-in 1s ease-in-out;
@@ -43,7 +43,7 @@ const customStyles = `
     animation: fade-in-fast 0.5s ease-in-out;
   }
   .animate-scale-in {
-    animation: scale-in 0.5s ease-in-out;
+    animation: scale-in 0.3s ease-in-out;
   }
   .hero-bg {
     background: linear-gradient(135deg, #0d1117 0%, #1f2937 100%);
@@ -100,6 +100,82 @@ const customStyles = `
       width: 100% !important;
     }
   }
+  .pricing-card {
+    padding: 1rem;
+    background: #1f2937;
+    border: 1px solid #14b8a6/30;
+    border-radius: 0.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+  .pricing-card:hover {
+    border-color: #fde68a/50;
+    box-shadow: 0 0 10px #14b8a6/50;
+    transform: scale(1.02); /* Smooth scale effect without opacity change */
+  }
+  .pricing-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #e5e7eb;
+  }
+  .pricing-card .price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #14b8a6;
+    margin: 1rem 0;
+  }
+  .pricing-card .description {
+    color: #9ca3af;
+    margin-bottom: 1rem;
+  }
+  .pricing-card .details {
+    color: #e5e7eb;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+  .pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  .pricing-card ul li {
+    display: flex;
+    align-items: center;
+    color: #e5e7eb;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+  .pricing-card ul li span {
+    margin-right: 0.5rem;
+  }
+  .pricing-card .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #14b8a6;
+    color: #0d1117;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  .pricing-card .cta:hover {
+    background: #fde68a;
+    box-shadow: 0 0 10px #14b8a6/50;
+  }
+  .pricing-card .popular {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #14b8a6;
+    color: #0d1117;
+    padding: 0.25rem 0.75rem;
+    border-bottom-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
 `;
 
 // Define the ExampleWork type
@@ -108,15 +184,6 @@ interface ExampleWork {
   description: string;
   thumbnail: string;
   href: string;
-}
-
-// Define the CustomPlan type
-interface CustomPlan {
-  pages: number;
-  revisions: number;
-  seo: boolean;
-  contactForm: boolean;
-  cms: boolean;
 }
 
 // Define the example work projects data
@@ -142,24 +209,23 @@ const exampleWorkProjects: ExampleWork[] = [
 ];
 
 export default function PricingPage() {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<CustomPlan>();
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState(false);
   const [faqFilter, setFaqFilter] = useState('All');
-  const [customPlan, setCustomPlan] = useState<CustomPlan>({
-    pages: 1,
+  const [customPlan, setCustomPlan] = useState({
+    pages: 5, // Set to 5 as per screenshot
     revisions: 0,
     seo: false,
     contactForm: false,
     cms: false,
   });
-  const successMessageRef = useRef<HTMLParagraphElement>(null);
+  const router = useRouter();
 
   const plans = [
     {
       name: 'Basic',
-      price: '€92',
-      description: 'Perfect for launching a personal portfolio or small project.',
+      price: '$199 / ~€179',
+      description: '1–3 pages, no CMS, 1 contact form',
       duration: '1-2 weeks',
       pages: 'Up to 3 pages',
       support: '1 month',
@@ -170,13 +236,13 @@ export default function PricingPage() {
         { name: 'Contact form', value: false, tooltip: 'Integrated contact form' },
         { name: 'CMS / Stripe', value: false, tooltip: 'Content management or payment integration' },
       ],
-      cta: 'Start Now',
+      cta: 'Get Started',
       link: '/contact',
     },
     {
       name: 'Standard',
-      price: '€184',
-      description: 'Ideal for growing businesses needing advanced features.',
+      price: '$399 / ~€359',
+      description: '3–6 pages, contact form, CMS, SEO',
       duration: '2-4 weeks',
       pages: 'Up to 6 pages',
       support: '3 months',
@@ -187,14 +253,14 @@ export default function PricingPage() {
         { name: 'Contact form', value: true, tooltip: 'Integrated contact form' },
         { name: 'CMS / Stripe', value: false, tooltip: 'Content management or payment integration' },
       ],
-      cta: 'Start Now',
+      cta: 'Get Started',
       link: '/contact',
       isPopular: true,
     },
     {
       name: 'Premium',
-      price: '€299',
-      description: 'Comprehensive solution for ambitious projects.',
+      price: '$599–$699 / ~€549–€649',
+      description: '7–10 pages, CMS, Stripe, advanced features',
       duration: '4-6 weeks',
       pages: 'Up to 10 pages',
       support: '6 months',
@@ -205,7 +271,7 @@ export default function PricingPage() {
         { name: 'Contact form', value: true, tooltip: 'Integrated contact form' },
         { name: 'CMS / Stripe', value: true, tooltip: 'Content management or payment integration' },
       ],
-      cta: 'Start Now',
+      cta: 'Request Project',
       link: '/contact',
     },
   ];
@@ -218,13 +284,18 @@ export default function PricingPage() {
   ];
 
   const calculateCustomPrice = () => {
-    let price = 50; // Base price
-    price += customPlan.pages * 20; // €20 per page
-    price += customPlan.revisions * 10; // €10 per revision
-    if (customPlan.seo) price += 30; // SEO addon
-    if (customPlan.contactForm) price += 20; // Contact form addon
-    if (customPlan.cms) price += 50; // CMS addon
-    return price;
+    let price = 199; // Base price for 1-3 pages (Basic)
+    // Add $50 per page from 4-6 to reach $399 (Standard), then $50 per page from 7-10 to $699 (Premium)
+    if (customPlan.pages > 3 && customPlan.pages <= 6) price += (customPlan.pages - 3) * 50; // $50 per page from 4-6
+    if (customPlan.pages > 6) price += 150 + (customPlan.pages - 6) * 50; // $150 for 6 pages, +$50 per page up to 10
+    // Revisions start at 2 (included in base), add $25 per additional revision
+    price += Math.max(0, customPlan.revisions - 2) * 25;
+    // Add-ons
+    if (customPlan.seo) price += 100; // Full SEO
+    if (customPlan.contactForm) price += 50; // Contact form
+    if (customPlan.cms) price += 150; // CMS/Stripe
+    // Cap the price at $699 (Premium max)
+    return Math.min(Math.round(price), 699);
   };
 
   const toggleFaq = (index: number | null) => {
@@ -235,52 +306,27 @@ export default function PricingPage() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && submitStatus === 'success') {
-        setSubmitStatus('idle');
+      if (e.key === 'Escape' && showModal) {
+        setShowModal(false);
       }
     };
-    if (submitStatus === 'success' && successMessageRef.current) {
-      successMessageRef.current.focus();
-    }
-    if (submitStatus === 'success') {
+    if (showModal) {
       document.addEventListener('keydown', handleKeyDown);
     }
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [submitStatus]);
+  }, [showModal]);
 
-  const onCustomSubmit = async (data: CustomPlan) => {
-    setSubmitStatus('loading');
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: 'Custom Plan Request', // Placeholder name
-          email: 'custom@example.com', // Placeholder email (replace with actual user input if needed)
-          message: `
-            Custom Plan Request:
-            - Pages: ${data.pages}
-            - Revisions: ${data.revisions}
-            - SEO: ${data.seo ? 'Yes' : 'No'}
-            - Contact Form: ${data.contactForm ? 'Yes' : 'No'}
-            - CMS: ${data.cms ? 'Yes' : 'No'}
-            - Estimated Price: €${calculateCustomPrice()}
-          `,
-        }),
-      });
-
-      const result = await response.json();
-      if (result.success) {
-        setSubmitStatus('success');
-        reset();
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      setSubmitStatus('error');
-    }
+  const handleRequestCustomPlan = () => {
+    const price = calculateCustomPrice();
+    const queryParams = new URLSearchParams({
+      pages: customPlan.pages.toString(),
+      revisions: customPlan.revisions.toString(),
+      seo: customPlan.seo.toString(),
+      contactForm: customPlan.contactForm.toString(),
+      cms: customPlan.cms.toString(),
+      price: price.toString(),
+    }).toString();
+    router.push(`/contact?${queryParams}`);
   };
 
   return (
@@ -327,52 +373,40 @@ export default function PricingPage() {
             {plans.map((plan, index) => (
               <div
                 key={plan.name}
-                className={`relative p-8 bg-[#1f2937] rounded-xl shadow-md border border-[#14b8a6]/30 hover:border-[#fde68a]/50 hover:shadow-[#14b8a6]/50 transition-all duration-300 animate-fade-in ${plan.isPopular ? 'ring-2 ring-[#14b8a6]' : ''}`}
+                className="pricing-card animate-fade-in"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                {plan.isPopular && (
-                  <span className="absolute top-0 right-0 bg-[#14b8a6] text-[#0d1117] text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
-                    Most Popular
-                  </span>
+                {plan.name === 'Standard' && (
+                  <span className="popular">Most Popular</span>
                 )}
-                <h3 className="text-2xl font-serif font-semibold text-[#e5e7eb] mb-4">{plan.name}</h3>
-                <p className="text-3xl font-bold text-[#14b8a6] mb-4">{plan.price}</p>
-                <p className="text-[#9ca3af] text-base mb-4 font-inter">{plan.description}</p>
-                <p className="text-[#e5e7eb] text-sm mb-2 font-inter">Delivery: {plan.duration}</p>
-                <p className="text-[#e5e7eb] text-sm mb-2 font-inter">Pages: {plan.pages}</p>
-                <p className="text-[#e5e7eb] text-sm mb-6 font-inter">Support: {plan.support}</p>
-                <ul className="space-y-3 mb-8">
+                <h3 className="mb-4">{plan.name}</h3>
+                <p className="price mb-4">{plan.price}</p>
+                <p className="description mb-4">{plan.description}</p>
+                <p className="details mb-2">Delivery: {plan.duration}</p>
+                <p className="details mb-2">Pages: {plan.pages}</p>
+                <p className="details mb-6">Support: {plan.support}</p>
+                <ul className="mb-8">
                   {plan.features.map((feature, idx) => (
-                    <li
-                      key={feature.name}
-                      className="flex items-center text-[#e5e7eb] text-base font-inter animate-slide-up"
-                      style={{ animationDelay: `${idx * 0.1}s` }}
-                    >
+                    <li key={feature.name} className="animate-slide-up" style={{ animationDelay: `${idx * 0.1}s` }}>
                       {typeof feature.value === 'boolean' ? (
                         <span className={feature.value ? 'text-[#14b8a6]' : 'text-[#6b7280]'} aria-label={feature.tooltip}>
-                          {feature.value ? (
-                            <Check className="w-6 h-6 mr-3 text-[#14b8a6] hover:text-[#fde68a] transition-colors" />
-                          ) : (
-                            <X className="w-6 h-6 mr-3 text-[#6b7280] hover:text-[#fde68a] transition-colors" />
-                          )}
+                          {feature.value ? <Check className="mr-3" /> : <X className="mr-3" />}
                         </span>
                       ) : (
                         <span className="text-[#14b8a6]">{feature.value}</span>
                       )}
-                      <span className="ml-3">{feature.name}</span>
+                      {feature.name}
                     </li>
                   ))}
                 </ul>
-                <div className="flex justify-center">
-                  <Link
-                    href={plan.link}
-                    className="inline-flex items-center gap-2 bg-[#14b8a6] text-[#0d1117] py-3 px-6 rounded-lg font-inter font-semibold hover:bg-[#fde68a] hover:shadow-[#14b8a6]/50 transition-all duration-300 animate-pulse-slow"
-                    aria-label={`Start ${plan.name} plan`}
-                  >
-                    {plan.cta}
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                </div>
+                <Link
+                  href={plan.link}
+                  className="cta"
+                  aria-label={`Start ${plan.name} plan`}
+                >
+                  {plan.cta}
+                  <ArrowRight />
+                </Link>
               </div>
             ))}
           </div>
@@ -530,105 +564,71 @@ export default function PricingPage() {
             Build Your Custom Plan
           </h2>
           <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(20,184,166,0.5)]"></div>
-          <div className="max-w-2xl mx-auto bg-[#1f2937] p-8 rounded-xl shadow-md border border-[#14b8a6]/30 animate-fade-in">
-            <form onSubmit={handleSubmit(onCustomSubmit)} className="space-y-6">
+          <div className="max-w-2xl mx-auto pricing-card animate-fade-in">
+            <div className="space-y-6">
               <div>
-                <label className="block text-[#e5e7eb] font-inter mb-2">Number of Pages</label>
+                <label className="block text-[#e5e7eb] font-inter mb-2">Number of Pages (Base: $199 for 1-3)</label>
                 <input
                   type="number"
                   min="1"
-                  {...register('pages', { required: true, min: 1 })}
+                  max="10" // Cap at Premium's max pages
                   value={customPlan.pages}
                   onChange={(e) => setCustomPlan({ ...customPlan, pages: parseInt(e.target.value) || 1 })}
                   className="form-input w-full"
                 />
-                {errors.pages && <p className="text-sm text-[#ef4444] mt-1">Pages must be at least 1</p>}
               </div>
               <div>
-                <label className="block text-[#e5e7eb] font-inter mb-2">Number of Revisions</label>
+                <label className="block text-[#e5e7eb] font-inter mb-2">Number of Revisions (Base: 2, +$25 each)</label>
                 <input
                   type="number"
                   min="0"
-                  {...register('revisions', { required: true, min: 0 })}
                   value={customPlan.revisions}
                   onChange={(e) => setCustomPlan({ ...customPlan, revisions: parseInt(e.target.value) || 0 })}
                   className="form-input w-full"
                 />
-                {errors.revisions && <p className="text-sm text-[#ef4444] mt-1">Revisions cannot be negative</p>}
               </div>
               <div className="flex items-center space-x-4">
                 <input
                   type="checkbox"
                   id="seo"
-                  {...register('seo')}
                   checked={customPlan.seo}
                   onChange={(e) => setCustomPlan({ ...customPlan, seo: e.target.checked })}
                   className="form-checkbox"
                 />
-                <label htmlFor="seo" className="text-[#e5e7eb] font-inter">Add Full SEO (€30)</label>
+                <label htmlFor="seo" className="text-[#e5e7eb] font-inter">Add Full SEO (+$100)</label>
               </div>
               <div className="flex items-center space-x-4">
                 <input
                   type="checkbox"
                   id="contactForm"
-                  {...register('contactForm')}
                   checked={customPlan.contactForm}
                   onChange={(e) => setCustomPlan({ ...customPlan, contactForm: e.target.checked })}
                   className="form-checkbox"
                 />
-                <label htmlFor="contactForm" className="text-[#e5e7eb] font-inter">Add Contact Form (€20)</label>
+                <label htmlFor="contactForm" className="text-[#e5e7eb] font-inter">Add Contact Form (+$50)</label>
               </div>
               <div className="flex items-center space-x-4">
                 <input
                   type="checkbox"
                   id="cms"
-                  {...register('cms')}
                   checked={customPlan.cms}
                   onChange={(e) => setCustomPlan({ ...customPlan, cms: e.target.checked })}
                   className="form-checkbox"
                 />
-                <label htmlFor="cms" className="text-[#e5e7eb] font-inter">Add CMS (€50)</label>
+                <label htmlFor="cms" className="text-[#e5e7eb] font-inter">Add CMS/Stripe (+$150)</label>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold text-[#14b8a6] mb-4">Estimated Price: €{calculateCustomPrice()}</p>
+                <p className="price mb-4">Estimated Price: ${calculateCustomPrice()}</p>
                 <button
-                  type="submit"
-                  disabled={submitStatus === 'loading'}
-                  className="w-full inline-flex items-center gap-2 bg-[#14b8a6] text-[#0d1117] py-3 px-6 rounded-lg font-inter font-semibold hover:bg-[#fde68a] hover:shadow-[#14b8a6]/50 transition-all duration-300 animate-pulse-slow disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label={submitStatus === 'loading' ? 'Submitting custom plan...' : 'Request custom plan'}
+                  onClick={handleRequestCustomPlan}
+                  className="cta"
+                  aria-label="Request custom plan"
                 >
-                  {submitStatus === 'loading' ? (
-                    <span className="flex items-center justify-center">
-                      <svg
-                        className="animate-spin h-5 w-5 mr-2 text-[#0d1117]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-                      </svg>
-                      Sending...
-                    </span>
-                  ) : (
-                    <>
-                      Request Custom Plan
-                      <ArrowRight className="w-5 h-5" />
-                    </>
-                  )}
+                  Request Custom Plan
+                  <ArrowRight />
                 </button>
-                {submitStatus === 'success' && (
-                  <p className="mt-4 text-[#10b981] font-inter" ref={successMessageRef} tabIndex={-1}>
-                    Custom plan request sent successfully! I’ll get back to you soon.
-                  </p>
-                )}
-                {submitStatus === 'error' && (
-                  <p className="mt-4 text-[#ef4444] font-inter">
-                    Failed to send custom plan request. Please try again or email me directly at hello@nyxtrael.com.
-                  </p>
-                )}
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </section>
