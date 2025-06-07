@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react'; // Added useRef to the import
+import { useState, useEffect, useRef } from 'react';
 import { Check, ChevronDown, Clock, Code, Headphones, HelpCircle, X, ArrowRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -153,7 +153,7 @@ export default function PricingPage() {
     contactForm: false,
     cms: false,
   });
-  const successMessageRef = useRef<HTMLParagraphElement>(null); // Added useRef definition
+  const successMessageRef = useRef<HTMLParagraphElement>(null);
 
   const plans = [
     {
