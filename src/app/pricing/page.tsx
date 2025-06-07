@@ -1,11 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react'; // Added useRef to the import
 import { Check, ChevronDown, Clock, Code, Headphones, HelpCircle, X, ArrowRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Image from 'next/image';
+import { useForm } from 'react-hook-form';
 
 // Custom CSS for animations and styles
 const customStyles = `
@@ -109,6 +110,15 @@ interface ExampleWork {
   href: string;
 }
 
+// Define the CustomPlan type
+interface CustomPlan {
+  pages: number;
+  revisions: number;
+  seo: boolean;
+  contactForm: boolean;
+  cms: boolean;
+}
+
 // Define the example work projects data
 const exampleWorkProjects: ExampleWork[] = [
   {
@@ -132,16 +142,18 @@ const exampleWorkProjects: ExampleWork[] = [
 ];
 
 export default function PricingPage() {
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<CustomPlan>();
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
-  const [showModal, setShowModal] = useState(false);
   const [faqFilter, setFaqFilter] = useState('All');
-  const [customPlan, setCustomPlan] = useState({
+  const [customPlan, setCustomPlan] = useState<CustomPlan>({
     pages: 1,
     revisions: 0,
     seo: false,
     contactForm: false,
     cms: false,
   });
+  const successMessageRef = useRef<HTMLParagraphElement>(null); // Added useRef definition
 
   const plans = [
     {
@@ -223,15 +235,53 @@ export default function PricingPage() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && showModal) {
-        setShowModal(false);
+      if (e.key === 'Escape' && submitStatus === 'success') {
+        setSubmitStatus('idle');
       }
     };
-    if (showModal) {
+    if (submitStatus === 'success' && successMessageRef.current) {
+      successMessageRef.current.focus();
+    }
+    if (submitStatus === 'success') {
       document.addEventListener('keydown', handleKeyDown);
     }
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [showModal]);
+  }, [submitStatus]);
+
+  const onCustomSubmit = async (data: CustomPlan) => {
+    setSubmitStatus('loading');
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: 'Custom Plan Request', // Placeholder name
+          email: 'custom@example.com', // Placeholder email (replace with actual user input if needed)
+          message: `
+            Custom Plan Request:
+            - Pages: ${data.pages}
+            - Revisions: ${data.revisions}
+            - SEO: ${data.seo ? 'Yes' : 'No'}
+            - Contact Form: ${data.contactForm ? 'Yes' : 'No'}
+            - CMS: ${data.cms ? 'Yes' : 'No'}
+            - Estimated Price: €${calculateCustomPrice()}
+          `,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitStatus('success');
+        reset();
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#0d1117]">
@@ -481,34 +531,39 @@ export default function PricingPage() {
           </h2>
           <div className="gradient-separator w-1/4 mx-auto mb-12 drop-shadow-[0_0_10px_rgba(20,184,166,0.5)]"></div>
           <div className="max-w-2xl mx-auto bg-[#1f2937] p-8 rounded-xl shadow-md border border-[#14b8a6]/30 animate-fade-in">
-            <div className="space-y-6">
+            <form onSubmit={handleSubmit(onCustomSubmit)} className="space-y-6">
               <div>
                 <label className="block text-[#e5e7eb] font-inter mb-2">Number of Pages</label>
                 <input
                   type="number"
                   min="1"
+                  {...register('pages', { required: true, min: 1 })}
                   value={customPlan.pages}
                   onChange={(e) => setCustomPlan({ ...customPlan, pages: parseInt(e.target.value) || 1 })}
-                  className="form-input w-full bg-[#0d1117] text-[#e5e7eb] placeholder-[#9ca3af] focus:ring-[#14b8a6] focus:border-[#14b8a6]"
+                  className="form-input w-full"
                 />
+                {errors.pages && <p className="text-sm text-[#ef4444] mt-1">Pages must be at least 1</p>}
               </div>
               <div>
                 <label className="block text-[#e5e7eb] font-inter mb-2">Number of Revisions</label>
                 <input
                   type="number"
                   min="0"
+                  {...register('revisions', { required: true, min: 0 })}
                   value={customPlan.revisions}
                   onChange={(e) => setCustomPlan({ ...customPlan, revisions: parseInt(e.target.value) || 0 })}
-                  className="form-input w-full bg-[#0d1117] text-[#e5e7eb] placeholder-[#9ca3af] focus:ring-[#14b8a6] focus:border-[#14b8a6]"
+                  className="form-input w-full"
                 />
+                {errors.revisions && <p className="text-sm text-[#ef4444] mt-1">Revisions cannot be negative</p>}
               </div>
               <div className="flex items-center space-x-4">
                 <input
                   type="checkbox"
                   id="seo"
+                  {...register('seo')}
                   checked={customPlan.seo}
                   onChange={(e) => setCustomPlan({ ...customPlan, seo: e.target.checked })}
-                  className="form-checkbox text-[#14b8a6]"
+                  className="form-checkbox"
                 />
                 <label htmlFor="seo" className="text-[#e5e7eb] font-inter">Add Full SEO (€30)</label>
               </div>
@@ -516,9 +571,10 @@ export default function PricingPage() {
                 <input
                   type="checkbox"
                   id="contactForm"
+                  {...register('contactForm')}
                   checked={customPlan.contactForm}
                   onChange={(e) => setCustomPlan({ ...customPlan, contactForm: e.target.checked })}
-                  className="form-checkbox text-[#14b8a6]"
+                  className="form-checkbox"
                 />
                 <label htmlFor="contactForm" className="text-[#e5e7eb] font-inter">Add Contact Form (€20)</label>
               </div>
@@ -526,23 +582,53 @@ export default function PricingPage() {
                 <input
                   type="checkbox"
                   id="cms"
+                  {...register('cms')}
                   checked={customPlan.cms}
                   onChange={(e) => setCustomPlan({ ...customPlan, cms: e.target.checked })}
-                  className="form-checkbox text-[#14b8a6]"
+                  className="form-checkbox"
                 />
                 <label htmlFor="cms" className="text-[#e5e7eb] font-inter">Add CMS (€50)</label>
               </div>
               <div className="text-center">
                 <p className="text-2xl font-bold text-[#14b8a6] mb-4">Estimated Price: €{calculateCustomPrice()}</p>
                 <button
-                  onClick={() => setShowModal(true)}
-                  className="inline-flex items-center gap-2 bg-[#14b8a6] text-[#0d1117] py-3 px-6 rounded-lg font-inter font-semibold hover:bg-[#fde68a] hover:shadow-[#14b8a6]/50 transition-all duration-300 animate-pulse-slow"
+                  type="submit"
+                  disabled={submitStatus === 'loading'}
+                  className="w-full inline-flex items-center gap-2 bg-[#14b8a6] text-[#0d1117] py-3 px-6 rounded-lg font-inter font-semibold hover:bg-[#fde68a] hover:shadow-[#14b8a6]/50 transition-all duration-300 animate-pulse-slow disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label={submitStatus === 'loading' ? 'Submitting custom plan...' : 'Request custom plan'}
                 >
-                  Request Custom Plan
-                  <ArrowRight className="w-5 h-5" />
+                  {submitStatus === 'loading' ? (
+                    <span className="flex items-center justify-center">
+                      <svg
+                        className="animate-spin h-5 w-5 mr-2 text-[#0d1117]"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                      </svg>
+                      Sending...
+                    </span>
+                  ) : (
+                    <>
+                      Request Custom Plan
+                      <ArrowRight className="w-5 h-5" />
+                    </>
+                  )}
                 </button>
+                {submitStatus === 'success' && (
+                  <p className="mt-4 text-[#10b981] font-inter" ref={successMessageRef} tabIndex={-1}>
+                    Custom plan request sent successfully! I’ll get back to you soon.
+                  </p>
+                )}
+                {submitStatus === 'error' && (
+                  <p className="mt-4 text-[#ef4444] font-inter">
+                    Failed to send custom plan request. Please try again or email me directly at hello@nyxtrael.com.
+                  </p>
+                )}
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </section>
@@ -671,74 +757,6 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
-
-      {/* Custom Plan Modal */}
-      {showModal && (
-        <div
-          id="custom-plan-modal"
-          tabIndex={-1}
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in"
-          aria-modal="true"
-        >
-          <div className="bg-[#1f2937] rounded-xl p-8 max-w-lg w-full relative border border-[#14b8a6]/30 animate-scale-in">
-            <button
-              onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-[#9ca3af] hover:text-[#14b8a6] transition-colors"
-              aria-label="Close modal"
-            >
-              <X className="w-6 h-6" />
-            </button>
-            <h3 className="text-2xl font-serif font-bold text-[#e5e7eb] mb-4">
-              Request a Custom Plan
-            </h3>
-            <form className="space-y-6">
-              <div>
-                <label htmlFor="custom-name" className="block text-sm font-medium text-[#e5e7eb] font-inter mb-1">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="custom-name"
-                  className="form-input w-full bg-[#0d1117] text-[#e5e7eb] placeholder-[#9ca3af] focus:ring-[#14b8a6] focus:border-[#14b8a6]"
-                  placeholder="Your Name"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="custom-email" className="block text-sm font-medium text-[#e5e7eb] font-inter mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="custom-email"
-                  className="form-input w-full bg-[#0d1117] text-[#e5e7eb] placeholder-[#9ca3af] focus:ring-[#14b8a6] focus:border-[#14b8a6]"
-                  placeholder="Your Email"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="custom-message" className="block text-sm font-medium text-[#e5e7eb] font-inter mb-1">
-                  Project Details
-                </label>
-                <textarea
-                  id="custom-message"
-                  className="form-input w-full h-32 resize-none bg-[#0d1117] text-[#e5e7eb] placeholder-[#9ca3af] focus:ring-[#14b8a6] focus:border-[#14b8a6]"
-                  placeholder="Tell us about your project"
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full inline-flex items-center gap-2 bg-[#14b8a6] text-[#0d1117] py-3 px-6 rounded-lg font-inter font-semibold hover:bg-[#fde68a] hover:shadow-[#14b8a6]/50 transition-all duration-300"
-                aria-label="Submit custom plan request"
-              >
-                Submit Request
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
