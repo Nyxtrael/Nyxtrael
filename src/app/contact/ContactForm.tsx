@@ -113,13 +113,13 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={submitStatus === 'loading'}
-        className="w-full inline-flex items-center justify-center gap-2 bg-[#4f46e5] text-[#e5e7eb] py-4 px-8 rounded-lg text-xl font-semibold font-inter shadow-[#4f46e5]/50 hover:bg-[#22d3ee] hover:shadow-[#22d3ee]/70 transition-all duration-300 animate-pulse-slow focus:outline-none focus:ring-2 focus:ring-[#22d3ee] focus:ring-offset-2 focus:ring-offset-[#111827] disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full inline-flex items-center justify-center gap-2 bg-[#3b82f6] text-[#0f172a] py-4 px-8 rounded-lg text-xl font-semibold font-inter shadow-[#3b82f6]/50 hover:bg-[#60a5fa] hover:shadow-[#3b82f6]/70 transition-all duration-300 animate-pulse-slow focus:outline-none focus:ring-2 focus:ring-[#60a5fa] focus:ring-offset-2 focus:ring-offset-[#111827] disabled:opacity-50 disabled:cursor-not-allowed"
         aria-label={submitStatus === 'loading' ? 'Submitting form...' : 'Get in touch'}
       >
         {submitStatus === 'loading' ? (
           <span className="flex items-center justify-center">
             <svg
-              className="animate-spin h-5 w-5 mr-2 text-[#e5e7eb]"
+              className="animate-spin h-5 w-5 mr-2 text-[#0f172a]"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"

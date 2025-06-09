@@ -127,6 +127,16 @@ export default function Contact() {
                   <span className="text-lg">🌍</span> Based in Europe, working globally
                 </li>
               </ul>
+              <Link
+                href="https://docs.google.com/forms/d/e/1FAIpQLSd7cmuIN4r4OGPT7Z2vdxrPTORrR16HHAz41CanqpfMbPwDWQ/viewform?usp=header"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#3b82f6] text-[#0f172a] px-8 py-4 rounded-lg font-inter font-semibold text-lg uppercase tracking-wide shadow-[#3b82f6]/50 hover:bg-[#60a5fa] hover:shadow-[#3b82f6]/70 transition-all duration-300 border-pulse focus:outline-none focus:ring-2 focus:ring-[#3b82f6] focus:ring-offset-2 focus:ring-offset-[#0f172a] hover:scale-105"
+                aria-label="Fill out the project brief form"
+              >
+                Fill Out Brief
+                <ArrowRight className="w-5 h-5" />
+              </Link>
             </div>
             <div className="bg-[#1f2937] backdrop-blur-md p-6 rounded-lg shadow-md border border-[#3b82f6]/30 animate-slide-up">
               <ContactForm />
