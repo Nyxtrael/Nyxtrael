@@ -75,7 +75,7 @@ const customStyles = `
     height: 80px;
     background: linear-gradient(to bottom, var(--neutral-bg) 0%, var(--neutral-mid) 50%, var(--neutral-bg) 100%);
     clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
   }
 `;
 
@@ -418,7 +418,7 @@ export default function Services() {
               </p>
               <Link
                 href="/portfolio/health-wellness"
-                className="w-full inline-flex items-center justify-center gap-2 bg-gradient-cta text-neutral-dark py-4 px-8 rounded-lg text-xl font-semibold shadow-accent/50 hover:shadow-accent/70 transition-all duration-300 focus-outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-neutral-bg"
+                className="w-full inline-flex items-center justify-center gap-2 bg-gradient-cta text-neutral-dark py-4 px-8 rounded-lg text-xl font-semibold shadow-accent/50 hover:shadow-accent/70 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-neutral-bg"
               >
                 See Health Project
                 <ArrowRight className="w-5 h-5" />

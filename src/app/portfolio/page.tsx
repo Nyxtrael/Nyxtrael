@@ -1,76 +1,117 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import ServiceCard from '../../components/ServiceCard';
+import { CodeBracketIcon, PaintBrushIcon, LightBulbIcon } from '@heroicons/react/24/outline';
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const projects = [
+interface QuickQuoteFormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+const services = [
   {
-    slug: 'shoptrend',
-    title: 'ShopTrend – E-commerce Redesign',
-    category: 'SaaS & E-Commerce',
-    coverImage: '/images/portfolio/shoptrend-cover.jpg',
-    excerpt: 'A modern e-commerce store redesign to boost conversions.',
-    metric: '+25% conversion increase',
+    title: 'Web Development',
+    description: 'Fast, responsive websites tailored to your needs.',
+    icon: <CodeBracketIcon className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    benefits: [
+      'Optimized for speed and SEO',
+      'Mobile-first responsive design',
+      'Custom functionality with Next.js',
+    ],
+    examples: ['SaaS Dashboard', 'E-commerce Platform', 'Portfolio Website'],
   },
   {
-    slug: 'datasync',
-    title: 'DataSync – SaaS Analytics Dashboard',
-    category: 'SaaS & E-Commerce',
-    coverImage: '/images/portfolio/datasync-cover.jpg',
-    excerpt: 'An intuitive dashboard for real-time analytics.',
-    metric: '40% faster load time',
+    title: 'UI/UX Design',
+    description: 'Intuitive and aesthetic designs that boost user engagement.',
+    icon: <PaintBrushIcon className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    benefits: [
+      'User-centered design process',
+      'Interactive prototypes',
+      'Consistent brand visuals',
+    ],
+    examples: ['Landing Page Design', 'App Interface', 'Design System'],
   },
   {
-    slug: 'health-wellness',
-    title: 'Health & Wellness – Diet Plans',
-    category: 'Creative & Lifestyle',
-    coverImage: '/images/portfolio/health-wellness-cover.jpg',
-    excerpt: 'A vibrant one-pager for health courses.',
-    metric: '90+ PageSpeed score',
-  },
-  {
-    slug: 'artist-portfolio',
-    title: 'Artist Portfolio – Creative Showcase',
-    category: 'Creative & Lifestyle',
-    coverImage: '/images/portfolio/artist-portfolio-cover.jpg',
-    excerpt: 'An elegant portfolio for a visual artist.',
-    metric: '50% more engagement',
+    title: 'Consulting',
+    description: 'Expert guidance on digital strategy and project optimization.',
+    icon: <LightBulbIcon className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    benefits: [
+      'Technical audits and recommendations',
+      'Performance optimization strategies',
+      'Scalable architecture planning',
+    ],
+    examples: ['SEO Audit', 'Performance Optimization', 'Tech Strategy'],
   },
 ];
 
-const categories = ['All', 'SaaS & E-Commerce', 'Creative & Lifestyle'];
+const processSteps = [
+  {
+    title: 'Free Consultation',
+    description: 'We discuss your goals and requirements.',
+  },
+  {
+    title: 'Proposal & Timeline',
+    description: 'You receive a detailed project outline.',
+  },
+  {
+    title: 'Design & Build',
+    description: 'I create your custom website step by step.',
+  },
+  {
+    title: 'Launch & Support',
+    description: 'Your site goes live and stays in good hands.',
+  },
+];
 
 const customStyles = `
   .section-divider {
     position: relative;
     height: 80px;
-    background: linear-gradient(to bottom, #0d1117 0%, #1f2937 50%, #0d1117 100%);
+    background: linear-gradient(to bottom, var(--neutral-bg) 0%, var(--neutral-mid) 50%, var(--neutral-bg) 100%);
     clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
-  }
-  .grid-pattern {
-    background-image: linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
-    background-size: 20px 20px;
+    box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
   }
 `;
 
-export default function Portfolio() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+export default function Services() {
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<QuickQuoteFormData>();
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const filteredProjects = selectedCategory === 'All'
-    ? projects
-    : projects.filter((project) => project.category === selectedCategory);
+  const onSubmit = async (data: QuickQuoteFormData) => {
+    setSubmitStatus('loading');
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitStatus('success');
+        reset();
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    }
+  };
 
   return (
-    <main className="bg-neutral-bg font-inter">
+    <main className="bg-neutral-bg font-inter overflow-hidden">
       <style>{customStyles}</style>
 
-      {/* Portfolio Hero */}
-      <section className="relative min-h-[60vh] flex items-center py-16 bg-neutral-bg">
+      {/* Services Hero Section */}
+      <section className="relative min-h-[60vh] flex items-center py-20 bg-neutral-bg">
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -85,90 +126,58 @@ export default function Portfolio() {
             <source src="/videos/background-video.webm" type="video/webm" />
             <source src="/videos/background-video.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-neutral-bg/80 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-neutral-bg/80 backdrop-blur-md" />
         </div>
         <motion.div
-          className="container mx-auto text-center relative z-10"
+          className="container mx-auto text-center z-10 relative"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-text-base mb-4 bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">
-            Portfolio
+          <h1 className="text-5xl md:text-6xl font-bold text-text-base mb-6 bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">
+            My Services
             <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
           </h1>
-          <p className="text-xl md:text-2xl text-text-muted max-w-3xl mx-auto font-inter leading-relaxed">
-            Explore my projects, from e-commerce redesigns to SaaS dashboards, each crafted to deliver impactful results.
+          <p className="text-xl md:text-2xl text-text-muted mb-10 leading-relaxed">
+            Fast, modern websites for startups, creators, and SaaS—crafted with speed, design, and performance in mind.
+            <br />
+            (Usługi dostępne w języku polskim i angielskim)
           </p>
         </motion.div>
       </section>
 
       <div className="section-divider" />
 
-      {/* Category Filters */}
-      <section className="py-16 bg-neutral-bg">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-center gap-4 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg font-inter font-semibold ${
-                  selectedCategory === category
-                    ? 'bg-accent text-neutral-dark'
-                    : 'bg-neutral-mid text-text-base hover:bg-accent hover:text-neutral-dark'
-                } transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Grid */}
-      <section className="py-16 bg-neutral-bg grid-pattern">
+      {/* Services List Section */}
+      <section className="py-24 bg-neutral-bg">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-4xl md:text-5xl font-bold text-text-base text-center mb-12"
+            className="text-4xl md:text-5xl font-bold text-text-base text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            Projects
+            What I Offer
             <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
           </motion.h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {services.map((service, index) => (
               <motion.div
-                key={project.slug}
-                className="bg-neutral-mid rounded-lg overflow-hidden border border-accent/30 hover:border-yellow-400/50 hover:shadow-accent/50 transition-all duration-300"
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
               >
-                <Image
-                  src={project.coverImage}
-                  alt={`${project.title} screenshot`}
-                  width={400}
-                  height={225}
-                  className="w-full h-48 object-cover"
+                <ServiceCard
+                  icon={service.icon}
+                  title={service.title}
+                  description={service.description}
+                  benefits={service.benefits}
+                  examples={service.examples}
+                  className="bg-neutral-mid border-accent/30 hover:border-yellow-400/50 hover:shadow-accent/50 transition-all duration-300"
                 />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-text-base mb-2">{project.title}</h3>
-                  <p className="text-text-muted mb-2">{project.excerpt}</p>
-                  <p className="text-accent text-sm mb-4">{project.metric}</p>
-                  <Link
-                    href={`/portfolio/${project.slug}`}
-                    className="inline-flex items-center gap-2 bg-gradient-cta text-neutral-dark px-4 py-2 rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                    aria-label={`View ${project.title} case study`}
-                  >
-                    View Case Study
-                    <ArrowRight className="h-5 w-5" />
-                  </Link>
-                </div>
               </motion.div>
             ))}
           </div>
@@ -177,43 +186,124 @@ export default function Portfolio() {
 
       <div className="section-divider" />
 
-      {/* CTA Section */}
-      <section className="py-24 bg-neutral-bg text-center">
-        <motion.h2
-          className="text-5xl font-bold text-text-base mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          Ready to Achieve Similar Results?
-          <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
-        </motion.h2>
-        <motion.p
-          className="text-xl text-text-muted mb-10 max-w-3xl mx-auto font-inter"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          Let’s collaborate to create a high-performance web solution. I’ll respond within 24 hours.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-xl font-semibold bg-gradient-cta text-neutral-dark hover:shadow-accent/50 hover:scale-105 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            aria-label="Get in touch with Nyxtrael"
+      {/* How It Works Section */}
+      <section className="py-24 bg-neutral-bg">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold text-text-base text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            Get in Touch
-            <ArrowRight className="h-5 w-5" />
-          </Link>
-        </motion.div>
+            How It Works
+            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                className="relative flex flex-col items-center text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+              >
+                <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-accent text-neutral-dark font-bold hover:bg-yellow-400 transition-colors">
+                  {index + 1}
+                </div>
+                <h3 className="text-xl font-semibold text-text-base mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-text-muted">
+                  {step.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
-    </main>
-  );
-}
+
+      <div className="section-divider" />
+
+      {/* Testimonial Section */}
+      <section className="py-24 bg-neutral-bg">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold text-text-base text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Client Feedback
+            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+          </motion.h2>
+          <motion.blockquote
+            className="text-center text-xl text-text-muted italic max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            “Nyxtrael’s work was worth every penny—our site paid for itself in months.” – Jane Doe, Startup Founder
+          </motion.blockquote>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* Call to Action Section */}
+      <section className="py-24 bg-neutral-bg text-center">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold text-text-base mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            Let’s Work Together
+            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+          </motion.h2>
+          <motion.p
+            className="text-lg md:text-xl text-text-muted mb-10 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Ready to transform your digital presence? Let’s discuss how I can help.
+          </motion.p>
+          <div className="flex flex-col md:flex-row justify-center gap-8">
+            {/* Left Option: Quick Quote Form */}
+            <motion.div
+              className="flex-1 max-w-md"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <h3 className="text-lg font-semibold text-text-base mb-4">
+                Prefer a quick quote?
+              </h3>
+              {submitStatus === 'success' ? (
+                <p className="text-accent">
+                  Thank you for your message! I’ll get back to you within 24 hours.
+                </p>
+              ) : (
+                <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-semibold text-text-base mb-1">
+                      Your Name
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      {...register('name', { required: 'Name is required' })}
+                      className="w-full p-3 rounded-lg border border-accent/30 bg-neutral-mid text-text-base placeholder-text-muted-secondary focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
+                      placeholder="Your name"
+                      aria-invalid={errors.name ? 'true' : 'false'}
+                    />
+                    {errors.name && (
+                      <p className="mt-1 text-sm text
