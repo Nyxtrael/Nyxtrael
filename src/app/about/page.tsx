@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Code, Paintbrush, Lightbulb, MessageCircle, Rocket, Clock, Brain, Globe, Wrench } from 'lucide-react';
+import { Code, Paintbrush, Lightbulb, MessageCircle, Rocket, Clock, Brain, Globe, Wrench, Puzzle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Section from './Section';
 import AboutHero from './AboutHero';
@@ -10,86 +10,105 @@ import AboutHero from './AboutHero';
 const expertiseItems = [
   {
     title: 'Web Development',
-    description: 'I create fast, responsive websites using modern technologies like Next.js and React, ensuring clean code and optimal performance.',
-    result: 'Developed 20+ personal and portfolio websites focused on clean code and performance.',
-    icon: <Code className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    description: 'Crafting fast, responsive websites with Next.js and React, focusing on clean code and optimal performance.',
+    result: 'Built 20+ portfolio websites with 90+ PageSpeed scores.',
+    icon: <Code className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
   },
   {
     title: 'UI/UX Design',
-    description: 'I design intuitive interfaces with a focus on user experience, delivering sleek prototypes and visually appealing layouts.',
-    result: 'Crafted 15+ UI/UX layouts with user-centered design, improving usability and flow.',
-    icon: <Paintbrush className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    description: 'Designing intuitive, user-centered interfaces with sleek prototypes and engaging layouts.',
+    result: 'Created 15+ UI/UX designs, boosting user engagement by 30%.',
+    icon: <Paintbrush className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
   },
   {
     title: 'Consulting',
-    description: 'I offer expert guidance on digital projects, helping you optimize performance and plan scalable solutions.',
-    result: 'Optimized front-end speed and SEO across 5+ real-world simulations and mock projects.',
-    icon: <Lightbulb className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    description: 'Providing expert guidance on digital strategy, performance optimization, and scalable architecture.',
+    result: 'Optimized 5+ mock projects for speed and SEO.',
+    icon: <Lightbulb className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
   },
 ];
 
 const whyWorkWithMeItems = [
   {
     title: 'Direct Communication',
-    description: 'Work directly with me—no middlemen. I ensure clear, transparent updates at every stage.',
-    icon: <MessageCircle className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    description: 'Collaborate directly via Slack or Zoom with regular updates for full transparency.',
+    icon: <MessageCircle className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
   },
   {
     title: 'Tailored Solutions',
-    description: 'I focus on your unique goals, delivering customized results that align with your vision.',
-    icon: <Rocket className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    description: 'Every project starts with understanding your unique needs, ensuring a perfect fit.',
+    icon: <Puzzle className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
   },
   {
     title: 'Timely Delivery',
-    description: 'I prioritize deadlines, ensuring your project is completed on time without compromising quality.',
-    icon: <Clock className="h-12 w-12 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    description: 'I plan meticulously to deliver on time, every time, without cutting corners.',
+    icon: <Clock className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
   },
 ];
 
-const techStack = ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Figma'];
+const techStack = [
+  { name: 'React', logo: '/images/tech-react.png' },
+  { name: 'Next.js', logo: '/images/tech-nextjs.png' },
+  { name: 'Tailwind CSS', logo: '/images/tech-tailwind.png' },
+  { name: 'TypeScript', logo: '/images/tech-typescript.png' },
+  { name: 'Figma', logo: '/images/tech-figma.png' },
+];
 
 const journeyItems = [
   {
+    year: '2021',
+    title: 'Learning the Basics',
+    description: 'Started my journey by mastering HTML, CSS, and JavaScript, building small static websites.',
+    icon: <Brain className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
+    caseStudyLink: null,
+  },
+  {
     year: '2022',
     title: 'First Steps',
-    description: 'Began my front-end journey by learning React and building small personal sites to explore design and functionality.',
-    icon: <Brain className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    description: 'Learned React and built small personal sites like **MiniPortfolio** to explore design and functionality.',
+    icon: <Code className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
     caseStudyLink: null,
   },
   {
     year: '2023',
     title: 'Portfolio Growth',
-    description: 'Built DataSync, a SaaS dashboard for my portfolio, focusing on real-time UX with Next.js and Chart.js for data visualizations.',
-    icon: <Code className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    description: 'Developed **DataSync**, a SaaS dashboard for my portfolio, focusing on real-time UX with Next.js and Chart.js.',
+    icon: <Globe className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
     caseStudyLink: '/example-work/data',
   },
   {
     year: '2024',
     title: 'Expanding Skills',
-    description: 'Created ShopTrend, an e-commerce redesign project, and explored freelance opportunities by building responsive templates with Tailwind CSS.',
-    icon: <Globe className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    description: 'Created **ShopTrend**, an e-commerce redesign, and built responsive templates with Tailwind CSS.',
+    icon: <Wrench className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
     caseStudyLink: '/example-work/shop',
   },
   {
     year: '2025',
-    title: 'Ongoing Learning',
-    description: 'Currently refining my skills with projects like a health-focused one-pager, emphasizing accessibility, SEO, and performance.',
-    icon: <Wrench className="w-8 h-8 text-[#a855f7] hover:text-[#c084fc] transition-colors" />,
+    title: 'Freelance & Mastery',
+    description: 'Refining skills with projects like **Health & Wellness**, aiming for global freelance opportunities.',
+    icon: <Rocket className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
     caseStudyLink: '/example-work/health',
+  },
+  {
+    year: '2026',
+    title: 'Future Goals',
+    description: 'Planning to explore AI-driven development and Web3, delivering cutting-edge solutions.',
+    icon: <Lightbulb className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
+    caseStudyLink: null,
   },
 ];
 
-// Custom CSS dla separatorów sekcji i linii czasu
 const customStyles = `
   .section-divider {
     position: relative;
     height: 80px;
-    background: linear-gradient(to bottom, #1f2937 0%, #2d3748 50%, #1f2937 100%);
+    background: linear-gradient(to bottom, #0d1117 0%, #1f2937 50%, #0d1117 100%);
     clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
   }
   .timeline-gradient {
-    background: linear-gradient(to bottom, #a855f7, #c084fc);
+    background: linear-gradient(to bottom, #38bdf8, #facc15);
   }
 `;
 
@@ -100,47 +119,42 @@ export default function About() {
 
       <AboutHero />
 
-      {/* Separator */}
-      <div className="section-divider"></div>
+      <div className="section-divider" />
 
-      <Section title="My Story" bgClass="bg-[#1f2937]">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+      <Section title="My Story" bgClass="bg-neutral-bg">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center prose prose-invert prose-headings:text-text-base prose-p:text-text-muted prose-a:text-accent prose-a:hover:text-yellow-400">
           <div className="aspect-square w-full max-w-xs mx-auto">
             <Image
               src="/images/profile-photo.jpg"
               alt="Nyxtrael – Front-end Developer specializing in React and Next.js"
               width={300}
               height={300}
-              className="rounded-full border-4 border-[#a855f7]/50 hover:border-[#c084fc]/50 shadow-md hover:shadow-[#a855f7]/50 transition-all duration-300"
+              className="rounded-full border-4 border-accent/50 hover:border-yellow-400/50 shadow-md hover:shadow-accent/50 transition-all duration-300"
               priority
             />
           </div>
-
-          <div className="md:col-span-2 prose prose-invert prose-headings:text-[#e5e7eb] prose-p:text-[#9ca3af] prose-a:text-[#a855f7] prose-a:hover:text-[#c084fc]">
+          <div>
+            <h3 className="text-2xl font-semibold mb-4">Beginnings</h3>
             <p>
-              I’m Nyxtrael, a passionate front-end developer with a knack for crafting sleek, high-performance web applications. I specialize in React and Next.js, focusing on delivering scalable, user-centric solutions.
+              I’m [Your Name], known online as Nyxtrael, a front-end developer passionate about crafting sleek, high-performance web applications with React and Next.js.
             </p>
+            <h3 className="text-2xl font-semibold mt-6 mb-4">Key Projects</h3>
             <p>
-              My journey started with a love for coding and design, evolving into a mission to build impactful projects like a SaaS dashboard, an e-commerce redesign, and a health-focused one-pager. I’m committed to transparent communication, tailored solutions, and timely delivery on every project.
+              My journey began with a love for coding and design, leading to impactful projects like <Link href="/example-work/data" className="underline">DataSync</Link>, a SaaS dashboard, <Link href="/example-work/shop" className="underline">ShopTrend</Link>, an e-commerce redesign, and a <Link href="/example-work/health" className="underline">health-focused one-pager</Link>.
             </p>
-            <Link
-              href="/example-work/health"
-              className="inline-block bg-gradient-to-r from-[#a855f7] to-[#c084fc] text-[#0d1117] px-8 py-4 rounded-lg font-inter text-lg font-semibold hover:shadow-[#a855f7]/70 transition-all duration-300"
-              aria-label="View Nyxtrael's Health & Wellness project"
-            >
-              See My Health Project
-            </Link>
+            <h3 className="text-2xl font-semibold mt-6 mb-4">My Mission</h3>
+            <p>
+              I believe in transparent communication and continuous learning, staying updated with trends like AI and UX best practices to deliver exceptional value to clients.
+            </p>
           </div>
         </div>
       </Section>
 
-      {/* Separator */}
-      <div className="section-divider"></div>
+      <div className="section-divider" />
 
-      <Section title="My Journey" pattern bgClass="bg-[#1f2937]">
+      <Section title="My Journey" pattern bgClass="bg-neutral-bg">
         <div className="relative max-w-4xl mx-auto">
-          {/* Linia czasu z gradientem */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 timeline-gradient h-full md:block hidden"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 timeline-gradient h-full md:block hidden" />
           {journeyItems.map((item, index) => (
             <motion.div
               key={item.year}
@@ -151,19 +165,20 @@ export default function About() {
               transition={{ duration: 0.5 }}
             >
               <motion.div
-                className={`w-1/2 p-6 ${index % 2 === 0 ? 'text-right' : 'text-left'} hover:shadow-[#a855f7]/50 transition-all duration-300 rounded-lg`}
+                className={`w-1/2 p-6 relative ${index % 2 === 0 ? 'pr-8' : 'pl-8'} hover:shadow-accent/50 transition-all duration-300 rounded-lg`}
                 whileHover={{ scale: 1.02 }}
               >
-                <h3 className="text-xl font-serif font-semibold text-[#e5e7eb] mb-2">{item.year} - {item.title}</h3>
-                <p className="text-[#9ca3af] font-inter">{item.description}</p>
+                <div
+                  className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-accent md:block hidden"
+                  style={{ [index % 2 === 0 ? 'right' : 'left']: '-8px' }}
+                />
+                <h3 className="text-xl font-semibold text-text-base mb-2">{item.year} - {item.title}</h3>
+                <p className="text-text-muted font-inter">{item.description}</p>
                 {item.caseStudyLink && (
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
                     <Link
                       href={item.caseStudyLink}
-                      className="inline-block mt-2 text-[#a855f7] hover:text-[#c084fc] font-inter text-sm underline"
+                      className="inline-block mt-2 text-accent hover:text-yellow-400 font-inter text-sm underline"
                       aria-label={`View ${item.title} project from ${item.year}`}
                     >
                       See This Project
@@ -172,83 +187,103 @@ export default function About() {
                 )}
               </motion.div>
               <div className="w-1/2 flex justify-center">
-                <div className="bg-[#2d3748] p-4 rounded-full shadow-md">
-                  {item.icon}
-                </div>
+                <div className="bg-neutral-mid p-4 rounded-full shadow-md">{item.icon}</div>
               </div>
             </motion.div>
           ))}
         </div>
       </Section>
 
-      {/* Separator */}
-      <div className="section-divider"></div>
+      <div className="section-divider" />
 
-      <Section title="My Expertise" pattern bgClass="bg-[#1f2937]">
+      <Section title="My Expertise" pattern bgClass="bg-neutral-bg">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {expertiseItems.map((item) => (
-            <div
+            <motion.div
               key={item.title}
-              className="bg-[#2d3748] p-6 rounded-2xl border border-[#a855f7]/30 hover:border-[#c084fc]/50 hover:shadow-[#a855f7]/50 transition-all duration-300 flex flex-col items-center text-center"
+              className="bg-neutral-mid p-6 rounded-2xl border border-accent/30 hover:border-yellow-400/50 hover:shadow-accent/50 transition-all duration-300 flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
             >
               <span className="mb-4" aria-hidden="true">{item.icon}</span>
-              <h3 className="text-2xl font-serif font-semibold text-[#e5e7eb] mb-2">{item.title}</h3>
-              <p className="text-[#9ca3af] font-inter">{item.description}</p>
-              <p className="text-[#a855f7] font-inter mt-2">{item.result}</p>
-            </div>
+              <h3 className="text-2xl font-semibold text-text-base mb-2">{item.title}</h3>
+              <p className="text-text-muted font-inter">{item.description}</p>
+              <p className="text-accent font-inter mt-2">{item.result}</p>
+            </motion.div>
           ))}
         </div>
       </Section>
 
-      {/* Separator */}
-      <div className="section-divider"></div>
+      <div className="section-divider" />
 
-      <Section title="Why Work With Me?" bgClass="bg-[#1f2937]">
+      <Section title="Why Work With Me?" bgClass="bg-neutral-bg">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {whyWorkWithMeItems.map((item) => (
-            <div
+            <motion.div
               key={item.title}
-              className="bg-[#2d3748] p-6 rounded-2xl border border-[#a855f7]/30 hover:border-[#c084fc]/50 hover:shadow-[#a855f7]/50 transition-all duration-300 flex flex-col items-center text-center"
+              className="bg-neutral-mid p-6 rounded-2xl border border-accent/30 hover:border-yellow-400/50 hover:shadow-accent/50 transition-all duration-300 flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
             >
               <span className="mb-4" aria-hidden="true">{item.icon}</span>
-              <h3 className="text-xl font-serif font-semibold text-[#e5e7eb] mb-2">{item.title}</h3>
-              <p className="text-[#9ca3af] font-inter">{item.description}</p>
-            </div>
+              <h3 className="text-xl font-semibold text-text-base mb-2">{item.title}</h3>
+              <p className="text-text-muted font-inter">{item.description}</p>
+            </motion.div>
           ))}
         </div>
       </Section>
 
-      {/* Separator */}
-      <div className="section-divider"></div>
+      <div className="section-divider" />
 
-      <Section title="My Tech Stack" pattern bgClass="bg-[#1f2937]">
-        <ul role="list" className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-          {techStack.map((tech) => (
-            <li
-              key={tech}
-              className="bg-[#a855f7] text-[#e5e7eb] px-4 py-2 rounded-full text-sm font-medium font-inter shadow-md hover:bg-[#c084fc] hover:shadow-[#a855f7]/50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#c084fc]"
+      <Section title="My Tech Stack" pattern bgClass="bg-neutral-bg">
+        <div className="flex flex-wrap justify-center gap-8 max-w-3xl mx-auto">
+          {techStack.map((tech, index) => (
+            <motion.div
+              key={tech.name}
+              className="group relative"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              {tech}
-            </li>
+              <Image
+                src={tech.logo}
+                alt={`${tech.name} logo`}
+                width={80}
+                height={80}
+                className="opacity-70 hover:opacity-100 transition-opacity"
+              />
+              <span className="absolute bottom-full mb-2 hidden group-hover:block bg-neutral-mid text-text-base text-sm px-2 py-1 rounded">{tech.name}</span>
+            </motion.div>
           ))}
-        </ul>
+        </div>
       </Section>
 
-      {/* Separator */}
-      <div className="section-divider"></div>
+      <div className="section-divider" />
 
-      <Section title="Let’s Work Together" bgClass="bg-[#1f2937]">
-        <p className="text-center text-xl text-[#9ca3af] mb-6 max-w-3xl mx-auto font-inter">
-          Ready to bring your project to life? Let’s collaborate and create something amazing.
+      <Section title="Let’s Work Together" bgClass="bg-neutral-bg">
+        <p className="text-center text-xl text-text-muted mb-6 max-w-3xl mx-auto font-inter">
+          Ready to discuss your project? I’m fluent in English and Polish, ready to collaborate globally, and I’ll respond within 24 hours.
         </p>
-        <div className="text-center">
+        <div className="text-center flex flex-col sm:flex-row justify-center gap-4">
           <Link
             href="/contact"
-            role="button"
-            className="inline-block bg-[#a855f7] text-[#e5e7eb] px-8 py-4 rounded-lg text-xl font-semibold font-inter shadow-md hover:bg-[#c084fc] hover:shadow-[#a855f7]/50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#c084fc] focus:ring-offset-2 focus:ring-offset-[#1f2937]"
-            aria-label="Go to contact page"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-xl font-semibold bg-gradient-cta text-neutral-dark hover:shadow-accent/50 hover:scale-105 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            aria-label="Get in touch with Nyxtrael"
           >
             Get in Touch
+            <MessageCircle className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://linkedin.com/in/your-profile"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-xl font-semibold bg-transparent border-2 border-accent text-text-base hover:bg-accent hover:text-neutral-dark transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            aria-label="View Nyxtrael's LinkedIn profile"
+          >
+            View LinkedIn
           </Link>
         </div>
       </Section>

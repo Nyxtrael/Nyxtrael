@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import '../styles/globals.css';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-import ClientLayout from '../components/ClientLayout';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://nyxtrael.com'),
@@ -18,13 +17,12 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-background text-text-primary font-body">
+      <body className="font-inter">
         <NavBar />
-        <ClientLayout>{children}</ClientLayout>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

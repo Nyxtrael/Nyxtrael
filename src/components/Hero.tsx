@@ -1,9 +1,12 @@
+'use client';
+
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-neutral-bg">
       {/* Video Background */}
       <video
         autoPlay
@@ -11,7 +14,7 @@ const Hero: React.FC = () => {
         muted
         playsInline
         poster="/images/video-poster.jpg"
-        preload="none" // Optimize performance by not preloading the video
+        preload="none"
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
         <source src="/videos/abstract-lines-3d.webm" type="video/webm" />
@@ -19,51 +22,72 @@ const Hero: React.FC = () => {
       </video>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-[#0d1117]/80 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-neutral-bg/80 backdrop-blur-sm" />
 
       {/* Hero Content */}
       <motion.div
-        className="relative z-10 text-center px-6 container mx-auto"
+        className="relative z-10 text-center px-6 container mx-auto flex flex-col md:flex-row items-center gap-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        <motion.h1
-          className="text-5xl md:text-7xl font-serif font-bold text-[#e5e7eb] mb-6 relative"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-        >
-          Crafting blazing-fast web apps that impress your users
-          <span className="absolute left-1/2 transform -translate-x-1/2 bottom-[-10px] w-1/2 h-1 bg-gradient-to-r from-[#38bdf8] to-[#facc15]"></span>
-        </motion.h1>
-        <motion.p
-          className="text-lg md:text-2xl text-[#9ca3af] mb-10 font-inter"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
-        >
-          Front-end developer specializing in sleek, high-performance web applications.
-        </motion.p>
+        {/* Portrait/Graphic */}
         <motion.div
-          className="flex flex-col sm:flex-row justify-center gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+          className="flex-shrink-0"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <Link
-            href="/pricing"
-            className="bg-gradient-to-r from-[#38bdf8] to-[#facc15] text-[#0d1117] px-6 py-3 rounded-lg font-inter font-semibold hover:shadow-[#38bdf8]/50 transition-all duration-300"
-          >
-            See Pricing Plans
-          </Link>
-          <Link
-            href="/contact"
-            className="bg-transparent border-2 border-[#38bdf8] text-[#e5e7eb] px-6 py-3 rounded-lg font-inter font-semibold hover:bg-[#38bdf8] hover:text-[#0d1117] hover:shadow-[#38bdf8]/50 transition-all duration-300"
-          >
-            Get in Touch
-          </Link>
+          <Image
+            src="/images/profile-photo.jpg"
+            alt="Nyxtrael - Front-end Developer specializing in React and Next.js"
+            width={200}
+            height={200}
+            className="rounded-full border-4 border-accent/50 hover:border-yellow-400/50 transition-all"
+            priority
+          />
         </motion.div>
+
+        {/* Text and CTA */}
+        <div>
+          <motion.h1
+            className="text-4xl md:text-6xl font-bold text-text-base mb-4 bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Blazing-fast web apps to grow your business
+          </motion.h1>
+          <motion.p
+            className="text-lg md:text-xl text-text-muted mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            Front-end developer crafting high-performance, user-focused solutions with React and Next.js.
+          </motion.p>
+          <motion.div
+            className="flex flex-col sm:flex-row justify-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <Link
+              href="/contact"
+              className="bg-gradient-cta text-neutral-dark px-6 py-3 rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300"
+              aria-label="Start your project with Nyxtrael"
+            >
+              Let’s Start Your Project
+            </Link>
+            <Link
+              href="/portfolio"
+              className="bg-transparent border-2 border-accent text-text-base px-6 py-3 rounded-lg font-semibold hover:bg-accent hover:text-neutral-dark transition-all duration-300"
+              aria-label="View Nyxtrael's portfolio"
+            >
+              View Portfolio
+            </Link>
+          </motion.div>
+        </div>
       </motion.div>
     </section>
   );

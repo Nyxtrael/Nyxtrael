@@ -4,19 +4,25 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
+const metrics = [
+  { value: '12+', label: 'UI Concepts Designed' },
+  { value: '3+', label: 'Years with Next.js' },
+  { value: '100%', label: 'Deadlines Met' },
+];
+
 const AboutSnippet: React.FC = () => {
   return (
-    <section className="section bg-[#0d1117] grain-overlay py-24">
+    <section className="py-24 bg-neutral-bg">
       <div className="container mx-auto px-4">
         <motion.h2
-          className="text-5xl md:text-6xl font-serif font-bold text-[#e5e7eb] text-center mb-16"
+          className="text-5xl font-bold text-text-base text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
           About Me
-          <span className="block w-1/4 h-1 bg-gradient-to-r from-[#38bdf8] to-[#facc15] mx-auto mt-2"></span>
+          <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
         </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Personal Photo */}
@@ -32,7 +38,7 @@ const AboutSnippet: React.FC = () => {
               alt="Nyxtrael - Front-end Developer specializing in React and Next.js"
               width={300}
               height={300}
-              className="rounded-full border-4 border-[#38bdf8]/50 hover:border-[#facc15]/50 shadow-md hover:shadow-[#38bdf8]/50 transition-all max-w-full h-auto"
+              className="rounded-full border-4 border-accent/50 hover:border-yellow-400/50 transition-all"
               priority
             />
           </motion.div>
@@ -44,23 +50,27 @@ const AboutSnippet: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <p className="text-lg text-[#9ca3af] leading-relaxed font-inter">
-              Hi, I’m Nyxtrael—a front-end developer specializing in React and Next.js. I build fast, responsive web applications with a focus on user experience and performance.
+            <p className="text-lg text-text-muted">
+              I’m Nyxtrael, a passionate front-end developer specializing in React and Next.js. I craft fast, responsive web apps that deliver seamless user experiences and drive business growth.
             </p>
-            <div className="space-y-2">
-              <p className="text-[#e5e7eb] font-inter">
-                <span className="text-[#38bdf8] font-semibold">12+ Frontend UI Concepts Designed</span>
-              </p>
-              <p className="text-[#e5e7eb] font-inter">
-                <span className="text-[#38bdf8] font-semibold">3 Years Learning & Building With Next.js</span>
-              </p>
-              <p className="text-[#e5e7eb] font-inter">
-                <span className="text-[#38bdf8] font-semibold">100% Deadlines Met</span> in Personal & Practice Projects
-              </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {metrics.map((metric, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-neutral-mid p-4 rounded-lg text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <p className="text-2xl font-bold text-accent">{metric.value}</p>
+                  <p className="text-text-muted text-sm">{metric.label}</p>
+                </motion.div>
+              ))}
             </div>
             <Link
               href="/about"
-              className="inline-block bg-gradient-to-r from-[#38bdf8] to-[#facc15] text-[#0d1117] px-6 py-3 rounded-lg font-inter font-semibold hover:shadow-[#38bdf8]/50 transition-all duration-300"
+              className="inline-block bg-gradient-cta text-neutral-dark px-6 py-3 rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300"
               aria-label="Learn more about Nyxtrael"
             >
               Learn More
