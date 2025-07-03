@@ -71,16 +71,14 @@ export default function ContactForm() {
     }
   };
 
-  // Debug log to verify submitStatus type (remove in production)
-  console.log('submitStatus:', submitStatus, 'Type:', typeof submitStatus);
-
-  // Type guard to ensure TypeScript recognizes all states
-  const isSuccess = (status: string): status is 'success' => status === 'success';
+  // Type guard to enforce all possible states
+  const isValidStatus = (status: string): status is 'idle' | 'loading' | 'success' | 'error' => 
+    ['idle', 'loading', 'success', 'error'].includes(status);
 
   return (
     <div>
       <h3 className="text-2xl font-semibold text-text-base mb-6">Send Me a Message</h3>
-      {isSuccess(submitStatus) && ( // Using type guard
+      {isValidStatus(submitStatus) && submitStatus === 'success' && ( // Using type guard
         <p
           ref={successMessageRef}
           className="text-accent text-center text-lg"
@@ -88,7 +86,7 @@ export default function ContactForm() {
         >
           Thank you for your message! I’ll get back to you within 24 hours.
         </p>
-      ) || (submitStatus === 'error' || submitStatus === 'loading' || submitStatus === 'idle') && (
+      ) || (isValidStatus(submitStatus) && ['error', 'loading', 'idle'].includes(submitStatus)) && (
         <form className="space-y-6 font-inter" onSubmit={handleSubmit(onSubmit)} noValidate>
           <input
             type="text"
@@ -210,7 +208,7 @@ export default function ContactForm() {
             )}
           </button>
           <div aria-live="polite" className="text-center">
-            {isSuccess(submitStatus) && ( // Using type guard
+            {isValidStatus(submitStatus) && submitStatus === 'success' && (
               <p
                 ref={successMessageRef}
                 className="mt-4 text-accent"
@@ -219,8 +217,8 @@ export default function ContactForm() {
                 Thank you for your message! I’ll get back to you within 24 hours.
               </p>
             )}
-            {(submitStatus === 'error' || submitStatus === 'loading' || submitStatus === 'idle') && (
-              <></> // Empty fragment for non-success states, error message removed for simplicity
+            {(isValidStatus(submitStatus) && ['error', 'loading', 'idle'].includes(submitStatus)) && (
+              <></> // Empty fragment for non-success states
             )}
           </div>
         </form>
