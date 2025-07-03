@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 export default function HeroArtist() {
   return (
     <section className="relative h-screen flex items-center justify-center text-center px-8">
-      {/* Background Video with Overlay */}
       <div className="absolute inset-0 z-0">
         <video
           autoPlay
@@ -18,7 +17,12 @@ export default function HeroArtist() {
           <source src="/videos/artist-hero-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 bg-black bg-opacity-40" />
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-b from-transparent via-neutral-bg/50 to-neutral-bg"
+          initial={{ y: '-20%' }}
+          animate={{ y: '20%' }}
+          transition={{ duration: 10, repeat: Infinity, repeatType: 'reverse' }}
+        />
       </div>
       <motion.div
         className="relative space-y-4 max-w-2xl z-10"
@@ -32,9 +36,14 @@ export default function HeroArtist() {
         <p className="text-lg text-white">
           Visual Artist & Photographer
         </p>
-        <button className="mt-4 px-6 py-3 bg-[#e9d5ff] text-[#1f2937] font-medium rounded-lg shadow hover:bg-[#d8b4fe] transition">
+        <motion.button
+          className="mt-4 px-6 py-3 bg-[#e9d5ff] text-[#1f2937] font-medium rounded-lg shadow hover:bg-[#d8b4fe] transition"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Get in touch"
+        >
           Get in Touch
-        </button>
+        </motion.button>
       </motion.div>
     </section>
   );

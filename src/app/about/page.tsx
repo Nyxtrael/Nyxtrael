@@ -74,21 +74,21 @@ const journeyItems = [
     title: 'Portfolio Growth',
     description: 'Developed **DataSync**, a SaaS dashboard for my portfolio, focusing on real-time UX with Next.js and Chart.js.',
     icon: <Globe className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
-    caseStudyLink: '/example-work/data',
+    caseStudyLink: '/example-work/datasync',
   },
   {
     year: '2024',
     title: 'Expanding Skills',
     description: 'Created **ShopTrend**, an e-commerce redesign, and built responsive templates with Tailwind CSS.',
     icon: <Wrench className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
-    caseStudyLink: '/example-work/shop',
+    caseStudyLink: '/example-work/shoptrend',
   },
   {
     year: '2025',
     title: 'Freelance & Mastery',
     description: 'Refining skills with projects like **Health & Wellness**, aiming for global freelance opportunities.',
     icon: <Rocket className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
-    caseStudyLink: '/example-work/health',
+    caseStudyLink: '/example-work/health-wellness',
   },
   {
     year: '2026',
@@ -140,7 +140,7 @@ export default function About() {
             </p>
             <h3 className="text-2xl font-semibold mt-6 mb-4">Key Projects</h3>
             <p>
-              My journey began with a love for coding and design, leading to impactful projects like <Link href="/example-work/data" className="underline">DataSync</Link>, a SaaS dashboard, <Link href="/example-work/shop" className="underline">ShopTrend</Link>, an e-commerce redesign, and a <Link href="/example-work/health" className="underline">health-focused one-pager</Link>.
+              My journey began with a love for coding and design, leading to impactful projects like <Link href="/example-work/datasync" className="underline">DataSync</Link>, a SaaS dashboard, <Link href="/example-work/shoptrend" className="underline">ShopTrend</Link>, an e-commerce redesign, and a <Link href="/example-work/health-wellness" className="underline">health-focused one-pager</Link>.
             </p>
             <h3 className="text-2xl font-semibold mt-6 mb-4">My Mission</h3>
             <p>
@@ -279,7 +279,7 @@ export default function About() {
             <MessageCircle className="h-5 w-5" />
           </Link>
           <Link
-            href="https://linkedin.com/in/your-profile"
+            href="https://www.linkedin.com/in/nyxtrael-nyxtrael-928670368/"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-xl font-semibold bg-transparent border-2 border-accent text-text-base hover:bg-accent hover:text-neutral-dark transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label="View Nyxtrael's LinkedIn profile"
           >

@@ -20,10 +20,10 @@ const Footer: React.FC = () => {
   ];
 
   const exampleWorkLinks = [
-    { href: '/portfolio/shoptrend', label: 'ShopTrend' },
-    { href: '/portfolio/datasync', label: 'DataSync' },
-    { href: '/portfolio/health-wellness', label: 'Health & Wellness' },
-    { href: '/portfolio/artist-portfolio', label: 'Artist Portfolio' },
+    { href: '/example-work/shoptrend', label: 'ShopTrend' },
+    { href: '/example-work/datasync', label: 'DataSync' },
+    { href: '/example-work/health-wellness', label: 'Health & Wellness' },
+    { href: '/example-work/artist-portfolio', label: 'Artist Portfolio' },
   ];
 
   return (

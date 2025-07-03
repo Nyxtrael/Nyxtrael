@@ -22,19 +22,10 @@ const mockWorks: WorkItem[] = [
 ];
 const categories = ['All', 'Portraits', 'Stills'];
 
-export default function GalleryGrid() {
+export default function GalleryGrid({ onImageClick }: { onImageClick: (image: string) => void }) {
   const [filter, setFilter] = useState('All');
-  const [selectedImage, setSelectedImage] = useState<WorkItem | null>(null);
 
   const filtered = mockWorks.filter(work => filter === 'All' || work.category === filter);
-
-  const handleImageClick = (work: WorkItem) => {
-    setSelectedImage(work);
-  };
-
-  const handleCloseLightbox = () => {
-    setSelectedImage(null);
-  };
 
   return (
     <section className="py-12">
@@ -66,7 +57,7 @@ export default function GalleryGrid() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.05 }}
-            onClick={() => handleImageClick(work)}
+            onClick={() => onImageClick(work.image)}
           >
             <Image
               src={work.image}
@@ -81,40 +72,6 @@ export default function GalleryGrid() {
           </motion.div>
         ))}
       </div>
-
-      {/* Lightbox */}
-      {selectedImage && (
-        <motion.div
-          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={handleCloseLightbox}
-        >
-          <motion.div
-            className="relative max-w-4xl mx-auto"
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0.8 }}
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the image
-          >
-            <Image
-              src={selectedImage.image}
-              alt={selectedImage.title}
-              width={800}
-              height={600}
-              className="w-full h-auto rounded-lg"
-            />
-            <p className="text-white text-center mt-4 text-xl">{selectedImage.title}</p>
-            <button
-              className="absolute top-2 right-2 text-white text-2xl bg-gray-800 rounded-full w-10 h-10 flex items-center justify-center"
-              onClick={handleCloseLightbox}
-            >
-              ×
-            </button>
-          </motion.div>
-        </motion.div>
-      )}
     </section>
   );
 }

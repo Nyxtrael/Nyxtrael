@@ -28,7 +28,7 @@ export default function AboutSection() {
       >
         <h2 className="text-3xl font-bold mb-4 text-[#e5e7eb]">The Artist Behind the Lens</h2>
         <p className="text-[#bfdbfe]">
-          I’m Ethan Carter, a dedicated photographer with over 10 years of experience capturing the essence of human emotions. My work has been showcased in three international exhibitions, and I’ve had the honor of working with clients worldwide. I believe every frame tells a story, and I’m here to help tell yours.
+          I’m Ethan Carter, a passionate photographer with over a decade of experience capturing the beauty of human moments. With works featured in international exhibitions and collaborations worldwide, I strive to create art that resonates and inspires. Let’s craft your story together.
         </p>
       </motion.div>
     </section>
