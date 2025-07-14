@@ -36,7 +36,7 @@ export default function AboutHero() {
           <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
         </h1>
         <p className="text-xl md:text-2xl text-text-muted max-w-3xl mx-auto font-inter leading-relaxed">
-          I’m [Your Name], a front-end developer crafting impactful web solutions for startups, creators, and SaaS teams with React and Next.js.
+          I’m Nyxtrael, a front-end developer crafting impactful web solutions for startups, creators, and SaaS teams with React and Next.js.
         </p>
       </motion.div>
     </section>

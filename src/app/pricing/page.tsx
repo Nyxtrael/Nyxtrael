@@ -131,82 +131,94 @@ const exampleWorkProjects: ExampleWork[] = [
     title: 'ShopTrend – E-commerce Redesign',
     description: 'A modern e-commerce store with enhanced UX and vibrant design.',
     thumbnail: '/images/portfolio/shoptrend-cover.jpg',
-    href: '/portfolio/shoptrend',
+    href: '/example-work/shoptrend',
   },
   {
     title: 'DataSync – SaaS Analytics Dashboard',
     description: 'An intuitive analytics dashboard for real-time insights.',
     thumbnail: '/images/portfolio/datasync-cover.jpg',
-    href: '/portfolio/datasync',
+    href: '/example-work/datasync',
   },
   {
     title: 'Health & Wellness – Diet Plans',
     description: 'A dynamic one-pager promoting health courses and tips.',
     thumbnail: '/images/portfolio/health-wellness-cover.jpg',
-    href: '/portfolio/health-wellness',
+    href: '/example-work/health-wellness',
   },
 ];
 
 const plans = [
   {
-    name: 'Basic',
-    price: '$199 / ~€179',
-    description: 'Perfect for small businesses or startups needing a simple, high-quality website.',
-    duration: '1-2 weeks',
-    pages: 'Up to 3 pages',
-    support: '1 month',
+    name: 'Starter Landing Page',
+    price: '€99',
+    description: 'Modern, responsive one-page website for your brand or personal use. Includes basic SEO, clean design.',
+    duration: '● 7 days ○ 3 days (+€20)',
+    pages: '1',
+    support: 'N/A',
     features: [
-      { name: 'Responsive design', value: true, tooltip: 'Optimized for all devices' },
+      { name: 'Functional website', value: true, tooltip: 'Fully operational site' },
+      { name: 'Content upload', value: true, tooltip: 'Initial content integration' },
+      { name: 'E-commerce functionality', value: false, tooltip: 'E-commerce features' },
+      { name: 'Payment integration', value: false, tooltip: 'Payment gateway setup' },
+      { name: 'Speed optimization', value: true, tooltip: 'Performance enhancements' },
+      { name: 'Hosting setup', value: true, tooltip: 'Basic hosting configuration' },
+      { name: 'Social media icons', value: true, tooltip: 'Social media links' },
+      { name: 'Plugins/extensions', value: false, tooltip: 'Additional plugins' },
       { name: 'Revisions', value: 2, tooltip: 'Number of design iterations' },
-      { name: 'SEO', value: 'Basic', tooltip: 'Basic search engine optimization' },
-      { name: 'Contact form', value: false, tooltip: 'Integrated contact form' },
-      { name: 'CMS / Stripe', value: false, tooltip: 'Content management or payment integration' },
     ],
     cta: 'Get Started',
-    link: '/contact?plan=Basic',
+    link: '/contact?plan=Starter',
   },
   {
-    name: 'Standard',
-    price: '$399 / ~€359',
-    description: 'Ideal for growing businesses needing a robust, feature-rich website.',
-    duration: '2-4 weeks',
-    pages: 'Up to 6 pages',
-    support: '3 months',
+    name: 'Business Website',
+    price: '€199',
+    description: 'Professional multi-page website with full SEO and contact form. Perfect for freelancers and startups.',
+    duration: '● 14 days ○ 7 days (+€20)',
+    pages: '6',
+    support: '1 month',
     features: [
-      { name: 'Responsive design', value: true, tooltip: 'Optimized for all devices' },
+      { name: 'Functional website', value: true, tooltip: 'Fully operational site' },
+      { name: 'Content upload', value: true, tooltip: 'Initial content integration' },
+      { name: 'E-commerce functionality', value: false, tooltip: 'E-commerce features' },
+      { name: 'Payment integration', value: false, tooltip: 'Payment gateway setup' },
+      { name: 'Speed optimization', value: true, tooltip: 'Performance enhancements' },
+      { name: 'Hosting setup', value: true, tooltip: 'Basic hosting configuration' },
+      { name: 'Social media icons', value: true, tooltip: 'Social media links' },
+      { name: 'Plugins/extensions', value: 2, tooltip: 'Number of plugins' },
       { name: 'Revisions', value: 5, tooltip: 'Number of design iterations' },
-      { name: 'SEO', value: 'Full', tooltip: 'Comprehensive search engine optimization' },
-      { name: 'Contact form', value: true, tooltip: 'Integrated contact form' },
-      { name: 'CMS / Stripe', value: false, tooltip: 'Content management or payment integration' },
     ],
     cta: 'Get Started',
-    link: '/contact?plan=Standard',
+    link: '/contact?plan=Business',
     isPopular: true,
   },
   {
-    name: 'Premium',
-    price: '$599–$699 / ~€549–€649',
-    description: 'For complex projects requiring advanced features and ongoing support.',
-    duration: '4-6 weeks',
-    pages: 'Up to 10 pages',
-    support: '6 months',
+    name: 'Custom Website',
+    price: '€349',
+    description: 'Complete website with CMS integration, Stripe payment setup, advanced SEO and all necessary features.',
+    duration: '● 30 days ○ 14 days (+€20)',
+    pages: '10',
+    support: '3 months',
     features: [
-      { name: 'Responsive design', value: true, tooltip: 'Optimized for all devices' },
+      { name: 'Functional website', value: true, tooltip: 'Fully operational site' },
+      { name: 'Content upload', value: true, tooltip: 'Initial content integration' },
+      { name: 'E-commerce functionality', value: true, tooltip: 'E-commerce features' },
+      { name: 'Payment integration', value: true, tooltip: 'Payment gateway setup' },
+      { name: 'Speed optimization', value: true, tooltip: 'Performance enhancements' },
+      { name: 'Hosting setup', value: true, tooltip: 'Basic hosting configuration' },
+      { name: 'Social media icons', value: true, tooltip: 'Social media links' },
+      { name: 'Plugins/extensions', value: 3, tooltip: 'Number of plugins' },
       { name: 'Revisions', value: 'Unlimited', tooltip: 'Unlimited design iterations' },
-      { name: 'SEO', value: 'Full', tooltip: 'Comprehensive search engine optimization' },
-      { name: 'Contact form', value: true, tooltip: 'Integrated contact form' },
-      { name: 'CMS / Stripe', value: true, tooltip: 'Content management or payment integration' },
     ],
     cta: 'Request Project',
-    link: '/contact?plan=Premium',
+    link: '/contact?plan=Custom',
   },
 ];
 
 const faqs = [
   { question: 'What payment methods do you accept?', answer: 'I accept credit cards, PayPal, and bank transfers via Stripe.', category: 'Payments' },
   { question: 'Can I upgrade my plan later?', answer: 'Yes, you can upgrade your plan at any time. Contact me to adjust your plan.', category: 'Upgrades' },
-  { question: 'What does “unlimited revisions” mean?', answer: 'Unlimited revisions in the Premium plan mean you can request as many changes as needed during the project timeline.', category: 'Support' },
-  { question: 'How long does it take to complete a project?', answer: 'Project timelines vary: Basic (1-2 weeks), Standard (2-4 weeks), and Premium (4-6 weeks).', category: 'Support' },
+  { question: 'What does “unlimited revisions” mean?', answer: 'Unlimited revisions in the Custom Website plan mean you can request as many changes as needed during the project timeline.', category: 'Support' },
+  { question: 'How long does it take to complete a project?', answer: 'Project timelines vary: Starter (7 days), Business (14 days), and Custom (30 days), with optional fast delivery (+€20).', category: 'Support' },
   { question: 'Do you offer refunds?', answer: 'If you’re not satisfied within 14 days, I offer a full refund of the initial deposit.', category: 'Payments' },
   { question: 'Is a deposit required?', answer: 'Yes, a 30% deposit is required upfront, with the balance due upon project completion.', category: 'Payments' },
 ];
@@ -215,23 +227,27 @@ export default function PricingPage() {
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   const [faqFilter, setFaqFilter] = useState('All');
   const [customPlan, setCustomPlan] = useState({
-    pages: 5,
-    revisions: 0,
+    pages: 3,
+    revisions: 2,
     seo: false,
     contactForm: false,
     cms: false,
+    eCommerce: false,
+    paymentIntegration: false,
   });
   const router = useRouter();
 
   const calculateCustomPrice = () => {
-    let price = 199;
-    if (customPlan.pages > 3 && customPlan.pages <= 6) price += (customPlan.pages - 3) * 50;
-    if (customPlan.pages > 6) price += 150 + (customPlan.pages - 6) * 50;
-    price += Math.max(0, customPlan.revisions - 2) * 25;
-    if (customPlan.seo) price += 100;
-    if (customPlan.contactForm) price += 50;
-    if (customPlan.cms) price += 150;
-    return Math.min(Math.round(price), 699);
+    let price = 99; // Base price for Starter
+    if (customPlan.pages > 1 && customPlan.pages <= 6) price += (customPlan.pages - 1) * 33; // ~€33 per page after 1
+    if (customPlan.pages > 6) price += 165 + (customPlan.pages - 6) * 33; // ~€33 per page after 6, up to 10
+    price += Math.max(0, customPlan.revisions - 2) * 25; // +€25 per revision after 2
+    if (customPlan.seo) price += 100; // Full SEO
+    if (customPlan.contactForm) price += 50; // Contact form
+    if (customPlan.cms) price += 150; // CMS integration
+    if (customPlan.eCommerce) price += 100; // E-commerce functionality
+    if (customPlan.paymentIntegration) price += 100; // Payment integration
+    return Math.min(Math.round(price), 349); // Cap at Custom price
   };
 
   const toggleFaq = (index: number | null) => {
@@ -258,6 +274,8 @@ export default function PricingPage() {
       seo: customPlan.seo.toString(),
       contactForm: customPlan.contactForm.toString(),
       cms: customPlan.cms.toString(),
+      eCommerce: customPlan.eCommerce.toString(),
+      paymentIntegration: customPlan.paymentIntegration.toString(),
       price: price.toString(),
     }).toString();
     router.push(`/contact?${queryParams}`);
@@ -292,8 +310,8 @@ export default function PricingPage() {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-5xl md:text-6xl font-bold text-text-base mb-4 bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">
-            Pricing Plans
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            Limitowana Promocja Pricing
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
           </h1>
           <p className="text-xl text-text-muted mb-12 max-w-3xl mx-auto leading-relaxed">
             Choose a transparent, flexible plan tailored to your needs—no hidden costs. Get a custom quote after a free consultation.
@@ -316,7 +334,7 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             Select Your Plan
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {plans.map((plan, index) => (
@@ -378,7 +396,7 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             See What I’ve Built
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
           </motion.h2>
           <Swiper spaceBetween={20} slidesPerView={1} loop={true} breakpoints={{
             640: { slidesPerView: 1 },
@@ -408,7 +426,7 @@ export default function PricingPage() {
                     <p className="text-text-muted mb-4">{project.description}</p>
                     <Link
                       href={project.href}
-                      className="inline-flex items-center gap-2 bg-gradient-cta text-neutral-dark py-2 px-5 rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300"
+                      className="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-yellow-400 text-neutral-dark py-2 px-5 rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300"
                       aria-label={`View ${project.title}`}
                     >
                       View Project
@@ -435,14 +453,14 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             Compare Plans
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
           </motion.h2>
 
           {/* Desktop Table */}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-text-base border-collapse">
               <thead>
-                <tr className="bg-gradient-cta text-neutral-dark sticky top-0 shadow-md">
+                <tr className="bg-gradient-to-r from-accent to-yellow-400 text-neutral-dark sticky top-0 shadow-md">
                   <th className="p-4 text-left text-sm font-semibold">Feature</th>
                   {plans.map((plan) => (
                     <th
@@ -541,7 +559,7 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             Build Your Custom Plan
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
           </motion.h2>
           <motion.div
             className="max-w-2xl mx-auto pricing-card"
@@ -552,7 +570,7 @@ export default function PricingPage() {
           >
             <div className="space-y-6">
               <div>
-                <label className="block text-text-base font-medium mb-2">Number of Pages (Base: $199 for 1-3)</label>
+                <label className="block text-text-base font-medium mb-2">Number of Pages (Base: €99 for 1)</label>
                 <input
                   type="number"
                   min="1"
@@ -563,7 +581,7 @@ export default function PricingPage() {
                 />
               </div>
               <div>
-                <label className="block text-text-base font-medium mb-2">Number of Revisions (Base: 2, +$25 each)</label>
+                <label className="block text-text-base font-medium mb-2">Number of Revisions (Base: 2, +€25 each)</label>
                 <input
                   type="number"
                   min="0"
@@ -580,7 +598,7 @@ export default function PricingPage() {
                   onChange={(e) => setCustomPlan({ ...customPlan, seo: e.target.checked })}
                   className="form-checkbox"
                 />
-                <label htmlFor="seo" className="text-text-base">Add Full SEO (+$100)</label>
+                <label htmlFor="seo" className="text-text-base">Add Full SEO (+€100)</label>
               </div>
               <div className="flex items-center space-x-4">
                 <input
@@ -590,20 +608,30 @@ export default function PricingPage() {
                   onChange={(e) => setCustomPlan({ ...customPlan, contactForm: e.target.checked })}
                   className="form-checkbox"
                 />
-                <label htmlFor="contactForm" className="text-text-base">Add Contact Form (+$50)</label>
+                <label htmlFor="contactForm" className="text-text-base">Add Contact Form (+€50)</label>
               </div>
               <div className="flex items-center space-x-4">
                 <input
                   type="checkbox"
-                  id="cms"
-                  checked={customPlan.cms}
-                  onChange={(e) => setCustomPlan({ ...customPlan, cms: e.target.checked })}
+                  id="eCommerce"
+                  checked={customPlan.eCommerce}
+                  onChange={(e) => setCustomPlan({ ...customPlan, eCommerce: e.target.checked })}
                   className="form-checkbox"
                 />
-                <label htmlFor="cms" className="text-text-base">Add CMS/Stripe (+$150)</label>
+                <label htmlFor="eCommerce" className="text-text-base">Add E-commerce (+€100)</label>
+              </div>
+              <div className="flex items-center space-x-4">
+                <input
+                  type="checkbox"
+                  id="paymentIntegration"
+                  checked={customPlan.paymentIntegration}
+                  onChange={(e) => setCustomPlan({ ...customPlan, paymentIntegration: e.target.checked })}
+                  className="form-checkbox"
+                />
+                <label htmlFor="paymentIntegration" className="text-text-base">Add Payment Integration (+€100)</label>
               </div>
               <div className="text-center">
-                <p className="price mb-4">Estimated Price: ${calculateCustomPrice()}</p>
+                <p className="price mb-4">Estimated Price: €{calculateCustomPrice()}</p>
                 <button
                   onClick={handleRequestCustomPlan}
                   className="cta"
@@ -631,7 +659,7 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             Why Choose Me?
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <motion.div
@@ -693,7 +721,7 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             Frequently Asked Questions
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
           </motion.h2>
           <div className="flex justify-center mb-8 space-x-4 flex-wrap gap-4">
             {['All', 'Payments', 'Support', 'Upgrades'].map((category) => (
@@ -764,7 +792,7 @@ export default function PricingPage() {
           transition={{ duration: 0.8 }}
         >
           Ready to Launch Your Project?
-          <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+          <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
         </motion.h2>
         <motion.p
           className="text-xl text-text-muted mb-8 max-w-2xl mx-auto"
@@ -784,7 +812,7 @@ export default function PricingPage() {
         >
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-gradient-cta text-neutral-dark py-4 px-8 text-lg rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-yellow-400 text-neutral-dark py-4 px-8 text-lg rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label="Start your project now"
           >
             Start Your Project
