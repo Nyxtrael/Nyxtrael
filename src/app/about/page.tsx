@@ -136,7 +136,7 @@ export default function About() {
           <div>
             <h3 className="text-2xl font-semibold mb-4">Beginnings</h3>
             <p>
-              I’m Nyxtrael, known online as Nyxtrael, a front-end developer passionate about crafting sleek, high-performance web applications with React and Next.js.
+              I’m Nyxtrael, a front-end developer passionate about crafting sleek, high-performance web applications with React and Next.js.
             </p>
             <h3 className="text-2xl font-semibold mt-6 mb-4">Key Projects</h3>
             <p>
