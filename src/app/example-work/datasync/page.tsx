@@ -3,12 +3,11 @@
 import HeroDataSync from '../components/HeroDataSync';
 import Features from '../components/FeaturesData';
 import Dashboard from '../components/Dashboard';
-import HowItWorks from '../components/HowItWorks'; // Renamed from BeforeAfterLink
+import HowItWorks from '../components/HowItWorks';
 import Testimonials from '../components/TestimonialsData';
-import TrustedBy from '../components/TrustedBy'; // New section
+import TrustedBy from '../components/TrustedBy'; 
 import CTASection from '../components/CTASectionData';
 
-// Custom styles for section dividers with new colors
 const customStyles = `
   .section-divider {
     height: 60px;
