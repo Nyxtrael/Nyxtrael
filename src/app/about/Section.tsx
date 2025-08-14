@@ -27,7 +27,7 @@ export default function Section({ title, children, bgClass = '', pattern = false
             className="text-4xl md:text-5xl font-bold text-text-base text-center mb-10"
           >
             {title}
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </h2>
         )}
         {children}

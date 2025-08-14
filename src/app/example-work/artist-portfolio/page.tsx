@@ -2,21 +2,22 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import HeroArtist from '../components/HeroArtist';
-import GalleryGrid from '../components/GalleryGrid';
-import AboutSection from '../components/AboutSection';
-import Testimonials from '../components/Testimonials';
-import ContactSection from '../components/ContactSection';
+import HeroArtist from './componentsartitst/HeroArtist';
+import GalleryGrid from './componentsartitst/GalleryGrid';
+import AboutSection from './componentsartitst/AboutSection';
+import Testimonials from './componentsartitst/Testimonials';
+import ContactSection from './componentsartitst/ContactSection';
+import StudioMap from './componentsartitst/StudioMap';
 
 // Custom styles for section dividers, gradients, and lightbox
 const customStyles = `
   .section-divider {
     height: 60px;
-    background: linear-gradient(to right, #e9d5ff, #d8b4fe);
+    background: linear-gradient(to right, rgba(var(--accent-rgb), 0.15), rgba(var(--accent-rgb), 0.05));
     clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
   }
   .subtle-gradient {
-    background: linear-gradient(to bottom, rgba(31, 41, 55, 0.95), rgba(31, 41, 55, 1));
+    background: linear-gradient(to bottom, rgb(var(--card-rgb) / 0.95), rgb(var(--card-rgb) / 1));
   }
   .lightbox {
     position: fixed;
@@ -81,7 +82,7 @@ export default function ArtistPortfolioPage() {
             muted
             playsInline
             poster="/images/artist-hero-video-poster.jpg"
-            className="absolute top-0 left-0 w-full h-full object-cover opacity-30"
+            className="absolute top-0 left-0 w-full h-full object-cover opacity-25"
           >
             <source src="/videos/artist-hero-video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
@@ -101,7 +102,7 @@ export default function ArtistPortfolioPage() {
         >
           <HeroArtist />
           <motion.button
-            className="mt-6 px-6 py-3 bg-[#e9d5ff] text-[#1f2937] font-medium rounded-lg shadow hover:bg-[#d8b4fe] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d8b4fe]"
+            className="mt-6 px-6 py-3 bg-gradient-cta text-neutral-900 font-semibold rounded-lg shadow-[0_8px_24px_rgba(56,189,248,0.25)] hover:shadow-[0_12px_28px_rgba(56,189,248,0.35)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => document.querySelector('#gallery')?.scrollIntoView({ behavior: 'smooth' })}
@@ -123,6 +124,10 @@ export default function ArtistPortfolioPage() {
       <div className="section-divider" />
       <div className="subtle-gradient" id="testimonials">
         <Testimonials testimonials={testimonials} currentIndex={currentTestimonial} onNext={nextTestimonial} onPrev={prevTestimonial} />
+      </div>
+      <div className="section-divider" />
+      <div className="subtle-gradient">
+        <StudioMap />
       </div>
       <div className="section-divider" />
       <div className="subtle-gradient" id="contact">

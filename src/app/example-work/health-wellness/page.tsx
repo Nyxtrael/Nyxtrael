@@ -1,14 +1,14 @@
 'use client';
 
-import HeroHealth from '../components/HeroHealth';
-import CourseCard from '../components/CourseCard';
-import ServicesSection from '../components/ServicesSection';
-import WhyTrustUs from '../components/WhyTrustUs';
-import BlogPreview from '../components/BlogPreview';
-import TestimonialsHealth from '../components/TestimonialsHealth';
-import AuthorNewsletter from '../components/AuthorNewsletter'; // Added missing import
-import ProductCard from '../components/ProductCard';
-import CTASection from '../components/CTASectionHeath';
+import HeroHealth from './componentshealth/HeroHealth';
+import CourseCard from './componentshealth/CourseCard';
+import ServicesSection from './componentshealth/ServicesSection';
+import WhyTrustUs from './componentshealth/WhyTrustUs';
+import BlogPreview from './componentshealth/BlogPreview';
+import TestimonialsHealth from './componentshealth/TestimonialsHealth';
+import AuthorNewsletter from './componentshealth/AuthorNewsletter'; // Added missing import
+import ProductCard from './componentshealth/ProductCard';
+import CTASection from './componentshealth/CTASectionHeath';
 
 // Custom styles for section dividers and subtle gradient overlay
 const customStyles = `

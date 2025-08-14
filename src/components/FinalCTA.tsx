@@ -33,7 +33,7 @@ const FinalCTA: React.FC = () => {
         >
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-xl font-semibold bg-gradient-cta text-neutral-dark hover:shadow-accent/50 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-xl font-semibold bg-gradient-cta text-neutral-900 hover:shadow-accent/50 transition-all duration-300"
             aria-label="Get in touch with Nyxtrael to start your project"
           >
             Get in Touch

@@ -33,7 +33,7 @@ const customStyles = `
   .section-divider {
     position: relative;
     height: 80px;
-    background: linear-gradient(to bottom, var(--neutral-bg) 0%, var(--neutral-mid) 50%, var(--neutral-bg) 100%);
+    background: linear-gradient(to bottom, var(--color-bg) 0%, var(--color-card) 50%, var(--color-bg) 100%);
     clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
     box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
   }
@@ -66,7 +66,7 @@ export default function Contact() {
             <source src="/videos/background-video.webm" type="video/webm" />
             <source src="/videos/background-video.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-neutral-bg/80 backdrop-blur-md" />
+          <div className="absolute inset-0 bg-neutral-bg/85 backdrop-blur-sm" />
         </div>
         <motion.div
           className="container mx-auto text-center z-10 relative"
@@ -74,9 +74,9 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-text-base mb-6 bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl font-bold text-text-base mb-6 drop-shadow-lg">
             Get in Touch
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </h1>
           <p className="text-xl md:text-2xl text-text-muted mb-10 leading-relaxed">
             I’m excited to hear about your project idea! Fill out the form or email me directly at{' '}
@@ -100,7 +100,7 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
           >
             Why Work With Me?
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left: Benefits and Contact Info */}
@@ -195,13 +195,13 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
           >
             Common Questions
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
           <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
               <motion.div
                 key={index}
-                className="bg-neutral-mid rounded-lg border border-accent/30"
+                className="bg-neutral-mid rounded-xl ring-1 ring-white/10 hover:ring-white/20 transition-colors"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

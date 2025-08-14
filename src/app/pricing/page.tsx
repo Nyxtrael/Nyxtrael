@@ -13,67 +13,66 @@ const customStyles = `
   .section-divider {
     position: relative;
     height: 80px;
-    background: linear-gradient(to bottom, #0d1117 0%, #1f2937 50%, #0d1117 100%);
+    background: linear-gradient(to bottom, var(--color-bg) 0%, var(--color-card) 50%, var(--color-bg) 100%);
     clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
   }
   .grid-pattern {
-    background-image: linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(var(--accent-rgb), 0.08) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(var(--accent-rgb), 0.08) 1px, transparent 1px);
     background-size: 20px 20px;
   }
   .form-input {
     padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    border: 1px solid #38bdf8;
-    background-color: #0d1117;
-    color: #e5e7eb;
+    border-radius: 0.5rem;
+    border: 0;
+    background-color: rgb(var(--card-rgb) / 1);
+    color: var(--color-text);
+    outline: none;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
   }
   .form-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px #38bdf8;
+    box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.9), 0 0 0 4px rgb(var(--bg-rgb));
   }
   .form-checkbox {
-    accent-color: #38bdf8;
+    accent-color: rgb(var(--accent-rgb));
   }
   @media (max-width: 768px) {
-    .swiper-slide {
-      width: 100% !important;
-    }
+    .swiper-slide { width: 100% !important; }
   }
   .pricing-card {
     padding: 1rem;
-    background: #1f2937;
-    border: 1px solid #38bdf8/30;
-    border-radius: 0.5rem;
+    background: rgb(var(--card-rgb) / 1);
+    border-radius: 1rem;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08),  0 8px 24px rgba(0,0,0,0.25);
   }
   .pricing-card:hover {
-    border-color: #facc15/50;
-    box-shadow: 0 0 10px #38bdf8/50;
-    transform: scale(1.02);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.16),  0 12px 32px rgba(0,0,0,0.35);
+    transform: translateY(-2px);
   }
   .pricing-card h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #e5e7eb;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
   }
   .pricing-card .price {
     font-size: 2rem;
-    font-weight: bold;
-    color: #38bdf8;
+    font-weight: 800;
+    color: rgb(var(--accent-rgb));
     margin: 1rem 0;
   }
   .pricing-card .description {
-    color: #9ca3af;
+    color: var(--color-muted);
     margin-bottom: 1rem;
   }
   .pricing-card .details {
-    color: #e5e7eb;
-    font-size: 0.875rem;
-    margin-bottom: 1rem;
+    color: var(--color-text);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
   }
   .pricing-card ul {
     list-style: none;
@@ -83,39 +82,59 @@ const customStyles = `
   .pricing-card ul li {
     display: flex;
     align-items: center;
-    color: #e5e7eb;
-    font-size: 0.875rem;
+    color: var(--color-text);
+    font-size: 0.9rem;
     margin-bottom: 0.5rem;
   }
-  .pricing-card ul li span {
-    margin-right: 0.5rem;
-  }
+  .pricing-card ul li span { margin-right: 0.5rem; }
   .pricing-card .cta {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: #38bdf8;
-    color: #0d1117;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.375rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    background-image: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+    color: #0a0f14;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.25);
   }
   .pricing-card .cta:hover {
-    background: #facc15;
-    box-shadow: 0 0 10px #38bdf8/50;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(var(--accent-rgb), 0.35);
   }
   .pricing-card .popular {
     position: absolute;
     top: 0;
     right: 0;
-    background: #38bdf8;
-    color: #0d1117;
+    background: rgb(var(--accent-rgb));
+    color: #0a0f14;
     padding: 0.25rem 0.75rem;
-    border-bottom-left-radius: 0.375rem;
-    border-top-right-radius: 0.375rem;
+    border-bottom-left-radius: 0.5rem;
+    border-top-right-radius: 0.75rem;
     font-size: 0.75rem;
-    font-weight: bold;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .pricing-compare {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+  }
+  .pricing-compare th, .pricing-compare td {
+    padding: 0.85rem 1rem;
+  }
+  .pricing-compare thead th {
+    background: rgb(var(--accent-rgb));
+    color: #0a0f14;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .pricing-compare tbody tr + tr td {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
   }
 `;
 
@@ -166,7 +185,7 @@ const plans = [
       { name: 'Plugins/extensions', value: false, tooltip: 'Additional plugins' },
       { name: 'Revisions', value: 2, tooltip: 'Number of design iterations' },
     ],
-    cta: 'Get Started',
+    cta: 'Send a message',
     link: '/contact?plan=Starter',
   },
   {
@@ -187,7 +206,7 @@ const plans = [
       { name: 'Plugins/extensions', value: 2, tooltip: 'Number of plugins' },
       { name: 'Revisions', value: 5, tooltip: 'Number of design iterations' },
     ],
-    cta: 'Get Started',
+    cta: 'Send a message',
     link: '/contact?plan=Business',
     isPopular: true,
   },
@@ -209,7 +228,7 @@ const plans = [
       { name: 'Plugins/extensions', value: 3, tooltip: 'Number of plugins' },
       { name: 'Revisions', value: 'Unlimited', tooltip: 'Unlimited design iterations' },
     ],
-    cta: 'Request Project',
+    cta: 'Send a message',
     link: '/contact?plan=Custom',
   },
 ];
@@ -301,7 +320,7 @@ export default function PricingPage() {
             <source src="/videos/background-video.webm" type="video/webm" />
             <source src="/videos/background-video.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-neutral-bg/80 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-neutral-bg/85 backdrop-blur-sm" />
         </div>
         <motion.div
           className="relative z-10 container mx-auto px-4"
@@ -309,14 +328,14 @@ export default function PricingPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-text-base mb-4 bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">
-            Limitowana Promocja Pricing
-            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
+          <h1 className="text-5xl md:text-6xl font-bold text-text-base mb-4 drop-shadow-lg">
+            Pricing — Transparent & Consistent
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </h1>
           <p className="text-xl text-text-muted mb-12 max-w-3xl mx-auto leading-relaxed">
             Choose a transparent, flexible plan tailored to your needs—no hidden costs. Get a custom quote after a free consultation.
             <br />
-            <Link href="#custom-plan" className="underline text-accent hover:text-yellow-400">Build your own plan</Link>
+            <Link href="#custom-plan" className="underline text-accent hover:opacity-90">Build your own plan</Link>
           </p>
         </motion.div>
       </section>
@@ -334,7 +353,7 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             Select Your Plan
-            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {plans.map((plan, index) => (
@@ -359,7 +378,7 @@ export default function PricingPage() {
                   {plan.features.map((feature, idx) => (
                     <li key={feature.name} className="flex items-center">
                       {typeof feature.value === 'boolean' ? (
-                        <span className={feature.value ? 'text-accent' : 'text-text-muted-secondary'} aria-label={feature.tooltip}>
+                        <span className={feature.value ? 'text-accent' : 'text-text-muted'} aria-label={feature.tooltip}>
                           {feature.value ? <Check className="mr-3" /> : <X className="mr-3" />}
                         </span>
                       ) : (
@@ -396,7 +415,7 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             See What I’ve Built
-            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
           <Swiper spaceBetween={20} slidesPerView={1} loop={true} breakpoints={{
             640: { slidesPerView: 1 },
@@ -406,7 +425,7 @@ export default function PricingPage() {
             {exampleWorkProjects.map((project, idx) => (
               <SwiperSlide key={project.title}>
                 <motion.div
-                  className="relative bg-neutral-mid rounded-xl overflow-hidden border border-accent/30 hover:border-yellow-400/50 hover:shadow-accent/50 transition-all duration-300"
+                  className="relative bg-neutral-mid rounded-2xl overflow-hidden ring-1 ring-white/10 hover:ring-white/20 shadow-[0_12px_40px_rgba(0,0,0,0.35)] hover:shadow-[0_18px_50px_rgba(0,0,0,0.45)] transition-all duration-300 hover:-translate-y-0.5"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -426,11 +445,11 @@ export default function PricingPage() {
                     <p className="text-text-muted mb-4">{project.description}</p>
                     <Link
                       href={project.href}
-                      className="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-yellow-400 text-neutral-dark py-2 px-5 rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300"
+                      className="inline-flex items-center gap-2 bg-gradient-cta text-neutral-900 py-2 px-5 rounded-lg font-semibold hover:shadow-[0_12px_28px_rgba(56,189,248,0.35)] transition-all duration-300"
                       aria-label={`View ${project.title}`}
                     >
                       View Project
-                      <ArrowRight className="w-4 w-4" />
+                      <ArrowRight className="h-4 w-4" />
                     </Link>
                   </div>
                 </motion.div>
@@ -453,14 +472,14 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             Compare Plans
-            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
 
           {/* Desktop Table */}
           <div className="hidden md:block overflow-x-auto">
-            <table className="w-full text-text-base border-collapse">
+            <table className="pricing-compare w-full text-text-base border-collapse">
               <thead>
-                <tr className="bg-gradient-to-r from-accent to-yellow-400 text-neutral-dark sticky top-0 shadow-md">
+                <tr className="bg-accent text-neutral-900 sticky top-0 shadow-md">
                   <th className="p-4 text-left text-sm font-semibold">Feature</th>
                   {plans.map((plan) => (
                     <th
@@ -485,13 +504,13 @@ export default function PricingPage() {
                       <td key={plan.name} className="p-4 text-center text-sm">
                         {typeof plan.features[index].value === 'boolean' ? (
                           <span
-                            className={plan.features[index].value ? 'text-accent' : 'text-text-muted-secondary'}
+                            className={plan.features[index].value ? 'text-accent' : 'text-text-muted'}
                             aria-label={feature.tooltip}
                           >
                             {plan.features[index].value ? (
-                              <Check className="w-6 h-6 mx-auto text-accent hover:text-yellow-400 transition-colors" />
+                              <Check className="w-6 h-6 mx-auto text-accent hover:opacity-90 transition-colors" />
                             ) : (
-                              <X className="w-6 h-6 mx-auto text-text-muted-secondary hover:text-yellow-400 transition-colors" />
+                              <X className="w-6 h-6 mx-auto text-text-muted hover:opacity-90 transition-colors" />
                             )}
                           </span>
                         ) : (
@@ -524,11 +543,11 @@ export default function PricingPage() {
                       {plan.features.map((feature) => (
                         <li key={feature.name} className="flex items-center text-text-base">
                           {typeof feature.value === 'boolean' ? (
-                            <span className={feature.value ? 'text-accent' : 'text-text-muted-secondary'} aria-label={feature.tooltip}>
+                            <span className={feature.value ? 'text-accent' : 'text-text-muted'} aria-label={feature.tooltip}>
                               {feature.value ? (
-                                <Check className="w-6 h-6 mr-3 text-accent hover:text-yellow-400 transition-colors" />
+                                <Check className="w-6 h-6 mr-3 text-accent hover:opacity-90 transition-colors" />
                               ) : (
-                                <X className="w-6 h-6 mr-3 text-text-muted-secondary hover:text-yellow-400 transition-colors" />
+                                <X className="w-6 h-6 mr-3 text-text-muted hover:opacity-90 transition-colors" />
                               )}
                             </span>
                           ) : (
@@ -559,7 +578,7 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             Build Your Custom Plan
-            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
           <motion.div
             className="max-w-2xl mx-auto pricing-card"
@@ -659,7 +678,7 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             Why Choose Me?
-            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <motion.div
@@ -669,7 +688,7 @@ export default function PricingPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Clock className="w-12 h-12 text-accent mb-4 hover:text-yellow-400 transition-colors" />
+              <Clock className="w-12 h-12 text-accent mb-4 hover:opacity-90 transition-colors" />
               <h3 className="text-xl font-semibold text-text-base mb-2">Delivery Guarantee</h3>
               <p className="text-text-muted">100% on-time delivery or free fixes.</p>
             </motion.div>
@@ -680,7 +699,7 @@ export default function PricingPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <Code className="w-12 h-12 text-accent mb-4 hover:text-yellow-400 transition-colors" />
+              <Code className="w-12 h-12 text-accent mb-4 hover:opacity-90 transition-colors" />
               <h3 className="text-xl font-semibold text-text-base mb-2">Code Quality</h3>
               <p className="text-text-muted">Clean, maintainable code with best practices.</p>
             </motion.div>
@@ -691,7 +710,7 @@ export default function PricingPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <Headphones className="w-12 h-12 text-accent mb-4 hover:text-yellow-400 transition-colors" />
+              <Headphones className="w-12 h-12 text-accent mb-4 hover:opacity-90 transition-colors" />
               <h3 className="text-xl font-semibold text-text-base mb-2">Dedicated Support</h3>
               <p className="text-text-muted">Support tailored to your plan’s duration.</p>
             </motion.div>
@@ -721,7 +740,7 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
           >
             Frequently Asked Questions
-            <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
           <div className="flex justify-center mb-8 space-x-4 flex-wrap gap-4">
             {['All', 'Payments', 'Support', 'Upgrades'].map((category) => (
@@ -730,8 +749,8 @@ export default function PricingPage() {
                 onClick={() => setFaqFilter(category)}
                 className={`px-4 py-2 rounded-lg text-sm font-semibold ${
                   faqFilter === category
-                    ? 'bg-accent text-neutral-dark'
-                    : 'bg-neutral-mid text-text-base hover:bg-accent hover:text-neutral-dark'
+                    ? 'bg-accent text-neutral-900'
+                    : 'bg-neutral-mid text-text-base hover:bg-accent hover:text-neutral-900'
                 } transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent`}
               >
                 {category}
@@ -750,18 +769,18 @@ export default function PricingPage() {
               >
                 <button
                   onClick={() => toggleFaq(index)}
-                  className="flex justify-between items-center w-full p-6 text-left focus-outline-none focus:ring-2 focus:ring-accent"
+                  className="flex justify-between items-center w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-accent"
                   aria-expanded={faqOpen === index}
                   aria-controls={`faq-answer-${index}`}
                 >
                   <span className="flex items-center">
-                    <HelpCircle className="w-5 h-5 text-accent mr-3 hover:text-yellow-400 transition-colors" />
+                    <HelpCircle className="w-5 h-5 text-accent mr-3 hover:opacity-90 transition-colors" />
                     <span className="text-lg font-semibold text-text-base">
                       {faq.question}
                     </span>
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-accent transform transition-transform hover:text-yellow-400 ${
+                    className={`w-5 h-5 text-accent transform transition-transform hover:opacity-90 ${
                       faqOpen === index ? 'rotate-180' : ''
                     }`}
                   />
@@ -792,7 +811,7 @@ export default function PricingPage() {
           transition={{ duration: 0.8 }}
         >
           Ready to Launch Your Project?
-          <span className="block w-1/4 h-1 bg-gradient-to-r from-accent to-yellow-400 mx-auto mt-2" />
+          <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
         </motion.h2>
         <motion.p
           className="text-xl text-text-muted mb-8 max-w-2xl mx-auto"
@@ -801,7 +820,7 @@ export default function PricingPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Start today with a free consultation and a tailored plan for your needs.
+          Prefer writing? Send me a short message about your project and I'll reply within 24 hours with next steps and pricing.
         </motion.p>
         <motion.div
           className="md:sticky bottom-4 z-50"
@@ -812,10 +831,10 @@ export default function PricingPage() {
         >
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-yellow-400 text-neutral-dark py-4 px-8 text-lg rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex items-center gap-2 bg-gradient-cta text-neutral-900 py-4 px-8 text-lg rounded-lg font-semibold hover:shadow-[0_12px_28px_rgba(56,189,248,0.35)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label="Start your project now"
           >
-            Start Your Project
+            Send a message
             <ArrowRight className="w-5 h-5" />
           </Link>
         </motion.div>

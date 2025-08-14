@@ -18,7 +18,7 @@ const services = [
   {
     title: 'Web Development',
     description: 'Fast, responsive websites tailored to your needs.',
-    icon: <CodeBracketIcon className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <CodeBracketIcon className="h-12 w-12 text-accent transition-colors" />,
     benefits: [
       'Optimized for speed and SEO',
       'Mobile-first responsive design',
@@ -29,7 +29,7 @@ const services = [
   {
     title: 'UI/UX Design',
     description: 'Intuitive and aesthetic designs that boost user engagement.',
-    icon: <PaintBrushIcon className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <PaintBrushIcon className="h-12 w-12 text-accent transition-colors" />,
     benefits: [
       'User-centered design process',
       'Interactive prototypes',
@@ -40,7 +40,7 @@ const services = [
   {
     title: 'Consulting',
     description: 'Expert guidance on digital strategy and project optimization.',
-    icon: <LightBulbIcon className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <LightBulbIcon className="h-12 w-12 text-accent transition-colors" />,
     benefits: [
       'Technical audits and recommendations',
       'Performance optimization strategies',
@@ -73,7 +73,7 @@ const customStyles = `
   .section-divider {
     position: relative;
     height: 80px;
-    background: linear-gradient(to bottom, var(--neutral-bg) 0%, var(--neutral-mid) 50%, var(--neutral-bg) 100%);
+    background: linear-gradient(to bottom, var(--color-bg) 0%, var(--color-card) 50%, var(--color-bg) 100%);
     clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
     box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
   }
@@ -126,7 +126,7 @@ export default function Services() {
             <source src="/videos/background-video.webm" type="video/webm" />
             <source src="/videos/background-video.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-neutral-bg/80 backdrop-blur-md" />
+          <div className="absolute inset-0 bg-neutral-bg/85 backdrop-blur-sm" />
         </div>
         <motion.div
           className="container mx-auto text-center z-10 relative"
@@ -134,9 +134,9 @@ export default function Services() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-text-base mb-6 bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl font-bold text-text-base mb-6 drop-shadow-lg">
             My Services
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </h1>
           <p className="text-xl md:text-2xl text-text-muted mb-10 leading-relaxed">
             Fast, modern websites for startups, creators, and SaaS—crafted with speed, design, and performance in mind.
@@ -159,7 +159,7 @@ export default function Services() {
             transition={{ duration: 0.8 }}
           >
             What I Offer
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => (
@@ -176,7 +176,7 @@ export default function Services() {
                   description={service.description}
                   benefits={service.benefits}
                   examples={service.examples}
-                  className="bg-neutral-mid border-accent/30 hover:border-yellow-400/50 hover:shadow-accent/50 transition-all duration-300"
+                  className="bg-neutral-mid rounded-2xl ring-1 ring-white/10 hover:ring-white/20 shadow-[0_8px_24px_rgba(0,0,0,0.25)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.35)] hover:-translate-y-0.5 transition-all duration-300"
                 />
               </motion.div>
             ))}
@@ -197,7 +197,7 @@ export default function Services() {
             transition={{ duration: 0.8 }}
           >
             How It Works
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {processSteps.map((step, index) => (
@@ -209,7 +209,7 @@ export default function Services() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
               >
-                <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-accent text-neutral-dark font-bold hover:bg-yellow-400 transition-colors">
+                <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-accent text-neutral-900 font-bold transition-colors">
                   {index + 1}
                 </div>
                 <h3 className="text-xl font-semibold text-text-base mb-2">
@@ -237,7 +237,7 @@ export default function Services() {
             transition={{ duration: 0.8 }}
           >
             Client Feedback
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
           <motion.blockquote
             className="text-center text-xl text-text-muted italic max-w-3xl mx-auto"
@@ -264,7 +264,7 @@ export default function Services() {
             transition={{ duration: 0.8 }}
           >
             Let’s Work Together
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
           </motion.h2>
           <motion.p
             className="text-lg md:text-xl text-text-muted mb-10 leading-relaxed"
@@ -301,7 +301,7 @@ export default function Services() {
                       id="name"
                       type="text"
                       {...register('name', { required: 'Name is required' })}
-                      className="w-full p-3 rounded-lg border border-accent/30 bg-neutral-mid text-text-base placeholder-text-muted-secondary focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
+                      className="w-full p-3 rounded-lg ring-1 ring-white/10 bg-neutral-mid text-text-base placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
                       placeholder="Your name"
                       aria-invalid={errors.name ? 'true' : 'false'}
                     />
@@ -325,7 +325,7 @@ export default function Services() {
                           message: 'Invalid email address',
                         },
                       })}
-                      className="w-full p-3 rounded-lg border border-accent/30 bg-neutral-mid text-text-base placeholder-text-muted-secondary focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
+                      className="w-full p-3 rounded-lg ring-1 ring-white/10 bg-neutral-mid text-text-base placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
                       placeholder="your.email@example.com"
                       aria-invalid={errors.email ? 'true' : 'false'}
                     />
@@ -342,7 +342,7 @@ export default function Services() {
                     <textarea
                       id="message"
                       {...register('message', { required: 'Message is required', minLength: { value: 20, message: 'Message should be at least 20 characters' } })}
-                      className="w-full p-3 rounded-lg border border-accent/30 bg-neutral-mid text-text-base placeholder-text-muted-secondary focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300 resize-none"
+                      className="w-full p-3 rounded-lg ring-1 ring-white/10 bg-neutral-mid text-text-base placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300 resize-none"
                       rows={4}
                       placeholder="Describe your project (e.g., industry, goals, features, timeline, budget)"
                       aria-invalid={errors.message ? 'true' : 'false'}
@@ -359,13 +359,13 @@ export default function Services() {
                   <button
                     type="submit"
                     disabled={submitStatus === 'loading'}
-                    className="w-full inline-flex items-center justify-center gap-2 bg-gradient-cta text-neutral-dark py-4 px-8 rounded-lg text-xl font-semibold shadow-accent/50 hover:shadow-accent/70 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-neutral-bg disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-gradient-cta text-neutral-900 py-4 px-8 rounded-lg text-xl font-semibold shadow-accent/50 hover:shadow-[0_12px_28px_rgba(56,189,248,0.35)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-neutral-bg disabled:opacity-50 disabled:cursor-not-allowed"
                     aria-label={submitStatus === 'loading' ? 'Submitting form...' : 'Get in touch'}
                   >
                     {submitStatus === 'loading' ? (
                       <span className="flex items-center justify-center">
                         <svg
-                          className="animate-spin h-5 w-5 mr-2 text-neutral-dark"
+                          className="animate-spin h-5 w-5 mr-2 text-neutral-900"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
@@ -418,7 +418,7 @@ export default function Services() {
               </p>
               <Link
                 href="/portfolio/health-wellness"
-                className="w-full inline-flex items-center justify-center gap-2 bg-gradient-cta text-neutral-dark py-4 px-8 rounded-lg text-xl font-semibold shadow-accent/50 hover:shadow-accent/70 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-neutral-bg"
+                className="w-full inline-flex items-center justify-center gap-2 bg-gradient-cta text-neutral-900 py-4 px-8 rounded-lg text-xl font-semibold shadow-accent/50 hover:shadow-[0_12px_28px_rgba(56,189,248,0.35)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-neutral-bg"
               >
                 See Health Project
                 <ArrowRight className="w-5 h-5" />

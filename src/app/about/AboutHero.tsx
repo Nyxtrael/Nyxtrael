@@ -19,21 +19,21 @@ export default function AboutHero() {
           <source src="/videos/background-video.webm" type="video/webm" />
           <source src="/videos/background-video.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-neutral-bg/80 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-neutral-bg/85 backdrop-blur-sm" />
       </div>
 
       <motion.div
-        className="container mx-auto text-center relative z-10 bg-neutral-bg/40 backdrop-blur-md shadow-2xl rounded-xl border border-accent/30 p-8"
+        className="container mx-auto text-center relative z-10 bg-neutral-bg/50 backdrop-blur-md rounded-2xl ring-1 ring-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.35)] p-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         <h1
-          className="text-5xl md:text-6xl font-bold text-text-base mb-4 bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent"
+          className="text-5xl md:text-6xl font-bold text-text-base mb-4 drop-shadow-lg"
           aria-label="About Nyxtrael"
         >
           About Nyxtrael
-          <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+          <span className="block w-24 h-0.5 bg-accent/60 mx-auto mt-3" />
         </h1>
         <p className="text-xl md:text-2xl text-text-muted max-w-3xl mx-auto font-inter leading-relaxed">
           I’m Nyxtrael, a front-end developer crafting impactful web solutions for startups, creators, and SaaS teams with React and Next.js.

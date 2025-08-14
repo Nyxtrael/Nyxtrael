@@ -160,13 +160,13 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             My Services
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-1/4 h-0.5 bg-accent/60 mx-auto mt-2" />
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={index}
-                className="bg-neutral-mid p-6 rounded-lg border border-accent/30 hover:border-yellow-400/50 transition-all duration-300"
+                className="bg-neutral-mid p-6 rounded-2xl ring-1 ring-white/10 hover:ring-white/20 shadow-[0_8px_24px_rgba(0,0,0,0.25)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-0.5"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -197,13 +197,13 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             Why Work With Me
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-1/4 h-0.5 bg-accent/60 mx-auto mt-2" />
           </motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
-                className="bg-neutral-mid p-6 rounded-lg border border-accent/30 hover:border-yellow-400/50 transition-all duration-300"
+                className="bg-neutral-mid p-6 rounded-2xl ring-1 ring-white/10 hover:ring-white/20 shadow-[0_8px_24px_rgba(0,0,0,0.25)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-0.5"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -236,7 +236,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             Smart Tools I Use
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-1/4 h-0.5 bg-accent/60 mx-auto mt-2" />
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
             {smartTools.map((tool, index) => (
@@ -270,13 +270,13 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             Example Work Highlights
-            <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+            <span className="block w-1/4 h-0.5 bg-accent/60 mx-auto mt-2" />
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {exampleWorkSubpages.map((subpage, index) => (
               <motion.div
                 key={index}
-                className="bg-neutral-mid rounded-lg overflow-hidden border border-accent/30 hover:border-yellow-400/50 hover:shadow-accent/50 transition-all duration-300"
+                className="bg-neutral-mid rounded-2xl overflow-hidden ring-1 ring-white/10 hover:ring-white/20 shadow-[0_12px_40px_rgba(0,0,0,0.35)] hover:shadow-[0_18px_50px_rgba(0,0,0,0.45)] transition-all duration-300 hover:-translate-y-0.5"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -289,7 +289,7 @@ export default function Home() {
                   <p className="text-accent text-sm mb-4">{subpage.metric}</p>
                   <Link
                     href={subpage.href}
-                    className="inline-block bg-gradient-cta text-neutral-dark px-4 py-2 rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300"
+                    className="inline-block bg-gradient-cta text-neutral-900 px-4 py-2 rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300"
                   >
                     View Project
                   </Link>

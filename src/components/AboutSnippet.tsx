@@ -22,7 +22,7 @@ const AboutSnippet: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
           About Me
-          <span className="block w-1/4 h-1 bg-gradient-cta mx-auto mt-2" />
+          <span className="block w-1/4 h-0.5 bg-accent/60 mx-auto mt-2" />
         </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Personal Photo */}
@@ -38,7 +38,7 @@ const AboutSnippet: React.FC = () => {
               alt="Nyxtrael - Front-end Developer specializing in React and Next.js"
               width={300}
               height={300}
-              className="rounded-full border-4 border-accent/50 hover:border-yellow-400/50 transition-all"
+              className="rounded-full ring-2 ring-white/80 shadow-[0_0_0_6px_rgba(11,15,20,0.85)] transition-all"
               priority
             />
           </motion.div>
@@ -57,7 +57,7 @@ const AboutSnippet: React.FC = () => {
               {metrics.map((metric, index) => (
                 <motion.div
                   key={index}
-                  className="bg-neutral-mid p-4 rounded-lg text-center"
+                  className="bg-neutral-mid p-4 rounded-xl text-center ring-1 ring-white/10 hover:ring-white/20 transition-colors"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -70,7 +70,7 @@ const AboutSnippet: React.FC = () => {
             </div>
             <Link
               href="/about"
-              className="inline-block bg-gradient-cta text-neutral-dark px-6 py-3 rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300"
+              className="inline-block bg-gradient-cta text-neutral-900 px-6 py-3 rounded-lg font-semibold hover:shadow-[0_8px_30px_rgba(56,189,248,0.35)] transition-all duration-300"
               aria-label="Learn more about Nyxtrael"
             >
               Learn More

@@ -489,3 +489,46 @@
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
+
+/* === Nyxtrael Palette Update — Option A: Pro Slate + Cyan === */
+:root {
+  /* Core palette */
+  --color-bg: #0b0f14;           /* neutral background */
+  --color-card: #0f172a;         /* surface / cards */
+  --color-text: #e5e7eb;         /* text base */
+  --color-muted: #94a3b8;        /* text muted */
+  --color-accent: #38bdf8;       /* primary accent (cyan) */
+  --color-accent-hover: #7dd3fc; /* hover accent */
+
+  /* Helpful RGB for alpha utilities */
+  --accent-rgb: 56, 189, 248;
+}
+
+/* Utility bridges so Tailwind classes in components work with CSS variables */
+.bg-neutral-bg { background-color: var(--color-bg); }
+.bg-neutral-mid { background-color: var(--color-card); }
+.text-text-base { color: var(--color-text); }
+.text-text-muted { color: var(--color-muted); }
+.text-accent { color: var(--color-accent); }
+.border-accent { border-color: var(--color-accent); }
+
+/* Gradient CTA used across CTAs (cyan-only, clean & consistent) */
+.bg-gradient-cta {
+  background-image: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+}
+
+/* Hover shadow using accent color (to support `hover:shadow-accent/50`) */
+.hover\:shadow-accent\/50:hover {
+  box-shadow: 0 8px 30px rgba(var(--accent-rgb), 0.5);
+}
+
+/* Border opacity helper for `border-accent/30` */
+.border-accent\/30 { border-color: rgba(var(--accent-rgb), 0.3) !important; }
+
+/* Focus ring consistency */
+.focus-ring {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(var(--accent-rgb), 0.9),
+    0 0 0 4px rgba(11, 15, 20, 1);
+}

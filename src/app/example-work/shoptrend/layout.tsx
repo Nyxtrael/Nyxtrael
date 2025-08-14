@@ -1,18 +1,25 @@
-import Link from 'next/link';
+import type { ReactNode } from 'react';
+import { Suspense } from 'react';
 
-export default function ShopLayout({ children }: { children: React.ReactNode }) {
+// UWAGA: CartContext w folderze componentsshop
+import { CartProvider } from './componentsshop/CartContext';
+import NavBarShop from './componentsshop/NavBarShop';
+import CartDrawer from './componentsshop/CartDrawer';
+
+export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <>
-      <header className="bg-gradient-to-r from-[#ff6b6b] to-[#ff8e53] text-[#1f2937] p-4 shadow-md">
-        <nav className="flex justify-between items-center max-w-5xl mx-auto">
-          <Link href="/" className="text-xl font-bold">Portfolio</Link>
-          <Link href="/example-work/shop" className="text-lg font-semibold scroll-smooth">ShopTrend</Link>
-        </nav>
-      </header>
-      <main>{children}</main>
-      <footer className="bg-gradient-to-r from-[#ff6b6b] to-[#ff8e53] text-[#1f2937] p-4 text-center">
-        <p className="text-sm">© {new Date().getFullYear()} ShopTrend Demo</p>
+    <CartProvider>
+      {/* Nav z useSearchParams musi być w Suspense */}
+      <Suspense fallback={<div className="h-16" />}>
+        <NavBarShop />
+      </Suspense>
+
+      <CartDrawer />
+      <main className="min-h-[60vh]">{children}</main>
+
+      <footer className="mt-16 border-t border-white/10 py-8 text-center text-text-muted">
+        © {new Date().getFullYear()} ShopTrend — Demo store.
       </footer>
-    </>
+    </CartProvider>
   );
 }

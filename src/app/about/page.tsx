@@ -12,19 +12,19 @@ const expertiseItems = [
     title: 'Web Development',
     description: 'Crafting fast, responsive websites with Next.js and React, focusing on clean code and optimal performance.',
     result: 'Built 20+ portfolio websites with 90+ PageSpeed scores.',
-    icon: <Code className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <Code className="h-12 w-12 text-accent transition-colors" />,
   },
   {
     title: 'UI/UX Design',
     description: 'Designing intuitive, user-centered interfaces with sleek prototypes and engaging layouts.',
     result: 'Created 15+ UI/UX designs, boosting user engagement by 30%.',
-    icon: <Paintbrush className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <Paintbrush className="h-12 w-12 text-accent transition-colors" />,
   },
   {
     title: 'Consulting',
     description: 'Providing expert guidance on digital strategy, performance optimization, and scalable architecture.',
     result: 'Optimized 5+ mock projects for speed and SEO.',
-    icon: <Lightbulb className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <Lightbulb className="h-12 w-12 text-accent transition-colors" />,
   },
 ];
 
@@ -32,17 +32,17 @@ const whyWorkWithMeItems = [
   {
     title: 'Direct Communication',
     description: 'Collaborate directly via Slack or Zoom with regular updates for full transparency.',
-    icon: <MessageCircle className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <MessageCircle className="h-12 w-12 text-accent transition-colors" />,
   },
   {
     title: 'Tailored Solutions',
     description: 'Every project starts with understanding your unique needs, ensuring a perfect fit.',
-    icon: <Puzzle className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <Puzzle className="h-12 w-12 text-accent transition-colors" />,
   },
   {
     title: 'Timely Delivery',
     description: 'I plan meticulously to deliver on time, every time, without cutting corners.',
-    icon: <Clock className="h-12 w-12 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <Clock className="h-12 w-12 text-accent transition-colors" />,
   },
 ];
 
@@ -59,42 +59,42 @@ const journeyItems = [
     year: '2021',
     title: 'Learning the Basics',
     description: 'Started my journey by mastering HTML, CSS, and JavaScript, building small static websites.',
-    icon: <Brain className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <Brain className="w-8 h-8 text-accent transition-colors" />,
     caseStudyLink: null,
   },
   {
     year: '2022',
     title: 'First Steps',
     description: 'Learned React and built small personal sites like **MiniPortfolio** to explore design and functionality.',
-    icon: <Code className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <Code className="w-8 h-8 text-accent transition-colors" />,
     caseStudyLink: null,
   },
   {
     year: '2023',
     title: 'Portfolio Growth',
     description: 'Developed **DataSync**, a SaaS dashboard for my portfolio, focusing on real-time UX with Next.js and Chart.js.',
-    icon: <Globe className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <Globe className="w-8 h-8 text-accent transition-colors" />,
     caseStudyLink: '/example-work/datasync',
   },
   {
     year: '2024',
     title: 'Expanding Skills',
     description: 'Created **ShopTrend**, an e-commerce redesign, and built responsive templates with Tailwind CSS.',
-    icon: <Wrench className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <Wrench className="w-8 h-8 text-accent transition-colors" />,
     caseStudyLink: '/example-work/shoptrend',
   },
   {
     year: '2025',
     title: 'Freelance & Mastery',
     description: 'Refining skills with projects like **Health & Wellness**, aiming for global freelance opportunities.',
-    icon: <Rocket className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <Rocket className="w-8 h-8 text-accent transition-colors" />,
     caseStudyLink: '/example-work/health-wellness',
   },
   {
     year: '2026',
     title: 'Future Goals',
     description: 'Planning to explore AI-driven development and Web3, delivering cutting-edge solutions.',
-    icon: <Lightbulb className="w-8 h-8 text-accent hover:text-yellow-400 transition-colors" />,
+    icon: <Lightbulb className="w-8 h-8 text-accent transition-colors" />,
     caseStudyLink: null,
   },
 ];
@@ -108,7 +108,7 @@ const customStyles = `
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
   }
   .timeline-gradient {
-    background: linear-gradient(to bottom, #38bdf8, #facc15);
+    background: linear-gradient(to bottom, #38bdf8, rgba(56,189,248,0.1));
   }
 `;
 
@@ -122,14 +122,14 @@ export default function About() {
       <div className="section-divider" />
 
       <Section title="My Story" bgClass="bg-neutral-bg">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center prose prose-invert prose-headings:text-text-base prose-p:text-text-muted prose-a:text-accent prose-a:hover:text-yellow-400">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center prose prose-invert prose-headings:text-text-base prose-p:text-text-muted prose-a:text-accent prose-a:hover:opacity-90">
           <div className="aspect-square w-full max-w-xs mx-auto">
             <Image
               src="/images/profile-photo.jpg"
               alt="Nyxtrael – Front-end Developer specializing in React and Next.js"
               width={300}
               height={300}
-              className="rounded-full border-4 border-accent/50 hover:border-yellow-400/50 shadow-md hover:shadow-accent/50 transition-all duration-300"
+              className="rounded-full ring-2 ring-white/80 shadow-[0_0_0_6px_rgba(11,15,20,0.85)] transition-all duration-300"
               priority
             />
           </div>
@@ -165,7 +165,7 @@ export default function About() {
               transition={{ duration: 0.5 }}
             >
               <motion.div
-                className={`w-1/2 p-6 relative ${index % 2 === 0 ? 'pr-8' : 'pl-8'} hover:shadow-accent/50 transition-all duration-300 rounded-lg`}
+                className={`w-1/2 p-6 relative ${index % 2 === 0 ? 'pr-8' : 'pl-8'} rounded-xl ring-1 ring-white/10 hover:ring-white/20 transition-all duration-300`}
                 whileHover={{ scale: 1.02 }}
               >
                 <div
@@ -178,7 +178,7 @@ export default function About() {
                   <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
                     <Link
                       href={item.caseStudyLink}
-                      className="inline-block mt-2 text-accent hover:text-yellow-400 font-inter text-sm underline"
+                      className="inline-block mt-2 text-accent font-inter text-sm underline"
                       aria-label={`View ${item.title} project from ${item.year}`}
                     >
                       See This Project
@@ -201,7 +201,7 @@ export default function About() {
           {expertiseItems.map((item) => (
             <motion.div
               key={item.title}
-              className="bg-neutral-mid p-6 rounded-2xl border border-accent/30 hover:border-yellow-400/50 hover:shadow-accent/50 transition-all duration-300 flex flex-col items-center text-center"
+              className="bg-neutral-mid p-6 rounded-2xl ring-1 ring-white/10 hover:ring-white/20 shadow-[0_8px_24px_rgba(0,0,0,0.25)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-0.5 flex flex-col items-center text-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -223,7 +223,7 @@ export default function About() {
           {whyWorkWithMeItems.map((item) => (
             <motion.div
               key={item.title}
-              className="bg-neutral-mid p-6 rounded-2xl border border-accent/30 hover:border-yellow-400/50 hover:shadow-accent/50 transition-all duration-300 flex flex-col items-center text-center"
+              className="bg-neutral-mid p-6 rounded-2xl ring-1 ring-white/10 hover:ring-white/20 shadow-[0_8px_24px_rgba(0,0,0,0.25)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-0.5 flex flex-col items-center text-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -272,7 +272,7 @@ export default function About() {
         <div className="text-center flex flex-col sm:flex-row justify-center gap-4">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-xl font-semibold bg-gradient-cta text-neutral-dark hover:shadow-accent/50 hover:scale-105 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-xl font-semibold bg-gradient-cta text-neutral-900 hover:shadow-accent/50 hover:scale-105 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label="Get in touch with Nyxtrael"
           >
             Get in Touch
@@ -280,7 +280,7 @@ export default function About() {
           </Link>
           <Link
             href="https://www.linkedin.com/in/nyxtrael-nyxtrael-928670368/"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-xl font-semibold bg-transparent border-2 border-accent text-text-base hover:bg-accent hover:text-neutral-dark transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg text-xl font-semibold bg-transparent border-2 border-accent text-text-base hover:bg-accent hover:text-neutral-900 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label="View Nyxtrael's LinkedIn profile"
           >
             View LinkedIn

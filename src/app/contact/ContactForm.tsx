@@ -104,7 +104,7 @@ export default function ContactForm() {
                 id="name"
                 type="text"
                 {...register('name', { required: 'Name is required' })}
-                className="w-full p-3 rounded-lg border border-accent/30 bg-neutral-mid text-text-base placeholder-text-muted-secondary focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
+                className="w-full p-3 rounded-lg ring-1 ring-white/10 bg-neutral-mid text-text-base placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
                 placeholder="Your name"
                 aria-invalid={errors.name ? 'true' : 'false'}
               />
@@ -124,11 +124,11 @@ export default function ContactForm() {
                 {...register('email', {
                   required: 'Email is required',
                   pattern: {
-                    value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                    value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$/i,
                     message: 'Invalid email address',
                   },
                 })}
-                className="w-full p-3 rounded-lg border border-accent/30 bg-neutral-mid text-text-base placeholder-text-muted-secondary focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
+                className="w-full p-3 rounded-lg ring-1 ring-white/10 bg-neutral-mid text-text-base placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300"
                 placeholder="your.email@example.com"
                 aria-invalid={errors.email ? 'true' : 'false'}
               />
@@ -150,12 +150,12 @@ export default function ContactForm() {
                 minLength: { value: 20, message: 'Message should be at least 20 characters' },
                 maxLength: { value: 1000, message: 'Message is too long (max 1000 characters)' },
               })}
-              className="w-full p-3 rounded-lg border border-accent/30 bg-neutral-mid text-text-base placeholder-text-muted-secondary focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300 resize-none"
+              className="w-full p-3 rounded-lg ring-1 ring-white/10 bg-neutral-mid text-text-base placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300 resize-none"
               rows={6}
               placeholder="Describe your project (e.g., industry, goals, features, timeline)"
               aria-invalid={errors.message ? 'true' : 'false'}
             />
-            <p className="mt-1 text-sm text-text-muted-secondary">
+            <p className="mt-1 text-sm text-text-muted">
               Tip: Include your industry, goals, desired features, and timeline for a faster quote.
             </p>
             {errors.message && (
@@ -164,7 +164,7 @@ export default function ContactForm() {
               </p>
             )}
           </div>
-          <p className="text-sm text-text-muted-secondary">
+          <p className="text-sm text-text-muted">
             By submitting, you consent to processing your data for responding to your inquiry. See my{' '}
             <Link href="/privacy" className="underline hover:text-accent">
               Privacy Policy
@@ -173,13 +173,13 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={submitStatus === 'loading'}
-            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-cta text-neutral-dark py-4 px-8 rounded-lg text-xl font-semibold shadow-accent/50 hover:shadow-accent/70 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-neutral-bg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full inline-flex items-center justify-center gap-2 bg-gradient-cta text-neutral-900 py-4 px-8 rounded-lg text-xl font-semibold shadow-[0_8px_24px_rgba(56,189,248,0.25)] hover:shadow-[0_12px_28px_rgba(56,189,248,0.35)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-neutral-bg disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label={submitStatus === 'loading' ? 'Submitting form...' : 'Send message'}
           >
             {submitStatus === 'loading' ? (
               <span className="flex items-center justify-center">
                 <svg
-                  className="animate-spin h-5 w-5 mr-2 text-neutral-dark"
+                  className="animate-spin h-5 w-5 mr-2 text-neutral-900"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"

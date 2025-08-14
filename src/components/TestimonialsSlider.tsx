@@ -35,6 +35,7 @@ const TestimonialsSlider: React.FC<TestimonialsSliderProps> = ({ testimonials })
           spaceBetween={30}
           slidesPerView={1}
           className="max-w-2xl mx-auto"
+          aria-label="Client testimonials"
         >
           {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index}>

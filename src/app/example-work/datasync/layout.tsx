@@ -3,15 +3,29 @@ import Link from 'next/link';
 export default function DataLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="bg-gradient-to-r from-[#ff6b6b] to-[#ff8e53] text-[#1f2937] p-4 shadow-md">
-        <nav className="flex justify-between items-center max-w-5xl mx-auto">
-          <Link href="/" className="text-xl font-bold">Portfolio</Link>
-          <Link href="/example-work/data" className="text-lg font-semibold">DataSync</Link>
+      {/* Local subheader sits below global navbar */}
+      <header className="sticky top-16 z-20 bg-neutral-bg/90 backdrop-blur border-b border-white/10">
+        <nav className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Link href="/portfolio" className="text-sm underline text-text-muted hover:text-accent">← Back to Portfolio</Link>
+            <Link href="/example-work/data" className="text-lg font-serif font-bold text-text-base hover:text-accent transition-colors">
+              DataSync
+            </Link>
+          </div>
+          <div className="hidden md:flex items-center gap-4 text-text-muted">
+            <a href="#features" className="hover:text-accent">Features</a>
+            <a href="#dashboard" className="hover:text-accent">Dashboard</a>
+            <a href="#integrations" className="hover:text-accent">Integrations</a>
+            <a href="#security" className="hover:text-accent">Security</a>
+            <a href="#pricing" className="hover:text-accent">Pricing</a>
+          </div>
         </nav>
       </header>
-      <main>{children}</main>
-      <footer className="bg-gradient-to-r from-[#ff6b6b] to-[#ff8e53] text-[#1f2937] p-4 text-center">
-        <p className="text-sm">© {new Date().getFullYear()} DataSync Demo</p>
+
+      <main className="min-h-[60vh]">{children}</main>
+
+      <footer className="border-t border-white/10 py-8 text-center text-text-muted">
+        © {new Date().getFullYear()} DataSync Demo
       </footer>
     </>
   );

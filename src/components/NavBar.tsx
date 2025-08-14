@@ -32,7 +32,7 @@ const NavBar: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="text-3xl font-bold text-text-base bg-gradient-to-r from-accent to-yellow-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-bg"
+          className="text-3xl font-bold text-text-base hover:text-accent transition-colors hover:scale-105 transition-transform duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-bg"
         >
           Nyxtrael
         </Link>
@@ -65,7 +65,7 @@ const NavBar: React.FC = () => {
           ))}
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-lg px-4 py-2 bg-gradient-cta text-neutral-dark hover:shadow-accent/50 hover:scale-105 transition-all duration-300 font-inter font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-bg shadow-md"
+            className="inline-flex items-center gap-2 rounded-lg px-4 py-2 bg-gradient-cta text-neutral-900 hover:shadow-[0_12px_28px_rgba(56,189,248,0.35)] hover:scale-105 transition-all duration-300 font-inter font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-bg shadow-md"
           >
             Contact
             <ArrowRight className="w-5 h-5" />
@@ -95,7 +95,7 @@ const NavBar: React.FC = () => {
           ))}
           <Link
             href="/contact"
-            className="w-full text-center inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 bg-gradient-cta text-neutral-dark hover:shadow-accent/50 hover:scale-105 transition-all duration-300 font-inter font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-bg shadow-md"
+            className="w-full text-center inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 bg-gradient-cta text-neutral-900 hover:shadow-[0_12px_28px_rgba(56,189,248,0.35)] hover:scale-105 transition-all duration-300 font-inter font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-bg shadow-md"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Contact

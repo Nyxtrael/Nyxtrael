@@ -43,7 +43,7 @@ const Hero: React.FC = () => {
             alt="Nyxtrael - Front-end Developer specializing in React and Next.js"
             width={200}
             height={200}
-            className="rounded-full border-4 border-accent/50 hover:border-yellow-400/50 transition-all"
+            className="rounded-full ring-2 ring-white/80 shadow-[0_0_0_6px_rgba(11,15,20,0.85)] transition-all"
             priority
           />
         </motion.div>
@@ -74,7 +74,7 @@ const Hero: React.FC = () => {
           >
             <Link
               href="/contact"
-              className="bg-gradient-cta text-neutral-dark px-6 py-3 rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300"
+              className="bg-gradient-cta text-neutral-900 px-6 py-3 rounded-lg font-semibold hover:shadow-accent/50 transition-all duration-300"
               aria-label="Start your project with Nyxtrael"
             >
               Let’s Start Your Project
