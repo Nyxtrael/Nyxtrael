@@ -1,17 +1,15 @@
-export default function StatsCards({ posts, users, media }:{ posts:number; users:number; media:number; }) {
-  const cards = [
-    { title:'Posts', value:String(posts), delta:'+2 this week' },
-    { title:'Users', value:String(users), delta:'+1 today' },
-    { title:'Media items', value:String(media), delta:'+5 this month' },
-    { title:'Uptime', value:'99.98%', delta:'+0.01%' },
+export default function StatsCards({ posts, users, media }:{ posts:number; users:number; media:number }) {
+  const items = [
+    { t:'Posts', v: posts },
+    { t:'Users', v: users },
+    { t:'Media', v: media },
   ];
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-      {cards.map(c => (
-        <div key={c.title} className="p-4 bg-neutral-mid rounded-xl ring-1 ring-white/10">
-          <div className="text-sm text-text-muted">{c.title}</div>
-          <div className="mt-1 text-2xl font-bold text-text-base">{c.value}</div>
-          <div className="text-xs text-accent">{c.delta}</div>
+    <div className="grid sm:grid-cols-3 gap-4">
+      {items.map(i => (
+        <div key={i.t} className="p-4 rounded-lg ring-1 ring-white/10 bg-neutral-mid text-center">
+          <div className="text-3xl font-bold text-text-base">{i.v}</div>
+          <div className="text-sm text-text-muted">{i.t}</div>
         </div>
       ))}
     </div>

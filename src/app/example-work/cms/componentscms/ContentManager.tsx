@@ -11,7 +11,7 @@ export default function ContentManager({
   onDelete: (id: number) => void;
 }) {
   const [q, setQ] = useState('');
-  const [status, setStatus] = useState<'all'|'draft'|'published'>('all');
+  const [status, setStatus] = useState<'all'|'draft'|'scheduled'|'published'>('all');
   const [title, setTitle] = useState('');
 
   const filtered = useMemo(()=>{
@@ -35,6 +35,7 @@ export default function ContentManager({
         <select value={status} onChange={e=>setStatus(e.target.value as any)} className="px-3 py-2 rounded-md bg-neutral-bg text-text-base ring-1 ring-white/10 focus:ring-2 focus:ring-accent">
           <option value="all">All</option>
           <option value="draft">Draft</option>
+          <option value="scheduled">Scheduled</option>
           <option value="published">Published</option>
         </select>
       </div>
@@ -57,17 +58,13 @@ export default function ContentManager({
                 <td className="py-2 pr-3 text-text-base">
                   <input defaultValue={p.title} onBlur={e=>onUpdate(p.id, { title: e.target.value })} className="w-full bg-transparent ring-1 ring-transparent focus:ring-white/10 rounded px-1" />
                 </td>
-                <td className="py-2 pr-3">
-                  <select defaultValue={p.status} onChange={e=>onUpdate(p.id, { status: e.target.value as any })} className="bg-neutral-bg text-text-base rounded px-2 py-1 ring-1 ring-white/10">
-                    <option value="draft">draft</option>
-                    <option value="published">published</option>
-                  </select>
-                </td>
+                <td className="py-2 pr-3 capitalize">{p.status}</td>
                 <td className="py-2 pr-3 text-text-muted">{p.author}</td>
                 <td className="py-2 pr-3 text-text-muted">{p.date}</td>
                 <td className="py-2 pr-3">
                   <div className="flex gap-2">
-                    <button onClick={()=>onUpdate(p.id, { status: p.status==='draft'?'published':'draft' })} className="px-3 py-1 rounded ring-1 ring-white/10">{p.status==='draft'?'Publish':'Unpublish'}</button>
+                    {p.status!=='published' && <button onClick={()=>onUpdate(p.id, { status: 'published', date: new Date().toISOString() })} className="px-3 py-1 rounded ring-1 ring-white/10">Publish</button>}
+                    {p.status==='published' && <button onClick={()=>onUpdate(p.id, { status: 'draft' })} className="px-3 py-1 rounded ring-1 ring-white/10">Unpublish</button>}
                     <button onClick={()=>onDelete(p.id)} className="px-3 py-1 rounded text-red-300 hover:text-red-200">Delete</button>
                   </div>
                 </td>

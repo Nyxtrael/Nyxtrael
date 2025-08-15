@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export type Plan = {
   id: 'starter'|'pro'|'enterprise';
@@ -15,9 +15,18 @@ const PLANS: Plan[] = [
   { id:'enterprise', name:'Enterprise', monthly:99, yearly:990, features:['SLA & SSO','Audit logs','Dedicated manager'] },
 ];
 
-export default function Plans({ selected, onSelect }:{ selected: Plan | null; onSelect: (p: Plan)=>void }) {
+export default function Plans({
+  selected, onSelect, onPrice,
+}:{ selected: Plan | null; onSelect: (p: Plan)=>void; onPrice?:(price:number, interval:'mo'|'yr', plan:Plan|null)=>void }) {
   const [interval, setInterval] = useState<'mo'|'yr'>('mo');
   const plans = useMemo(()=>PLANS, []);
+
+  useEffect(()=>{
+    if (onPrice) {
+      const price = selected ? (interval==='mo' ? selected.monthly : selected.yearly) : 0;
+      onPrice(price, interval, selected);
+    }
+  }, [interval, selected, onPrice]);
 
   return (
     <div className="max-w-7xl mx-auto px-4">
